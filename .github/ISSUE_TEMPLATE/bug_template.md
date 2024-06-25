@@ -2,7 +2,7 @@
 name: Bug template
 about: "버그 관련 사항에 대해 작성해주세요."
 title: "[BUG]"
-labels: "//U0001F41B BUG"
+labels: "\U0001F41B BUG"
 assignees: ''
 
 ---
