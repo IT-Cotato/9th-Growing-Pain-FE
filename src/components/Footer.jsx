@@ -5,9 +5,9 @@ const Footer = () => {
 	return (
 		<footer className="flex flex-col w-full p-4">
 			{/* 첫번째 섹션: 구분선 위 -> 3개의 div(프로필 , 성장통 소개, 소셜) */}
-			<section className="relative flex w-full items-center justify-between pb-3 mb-6">
+			<section className="relative flex w-full items-center justify-between pb-3 mb-6 ">
 				{/* 1-1. 프로필 */}
-				<div className="flex items-center gap-3 text-xl ml-10">
+				<div className="flex items-center gap-3 text-[24px] font-normal ml-10">
 					<img className="w-16 h-16" src={profile} alt="Profile" />
 					Yongari345
 				</div>
@@ -82,8 +82,8 @@ const Footer = () => {
 			</section>
 			{/* 2번째 섹션: 문구 */}
 			<section className="w-full text-center border-t border-gray-light pt-6">
-				<Typography className="font-normal text-gray-dark text-lg">
-					&copy; Copyright 2024 GROWTH PAIN | All Rights Reserved
+				<Typography className="font-normal text-gray-dark text-[18px] font-pretendard">
+					Copyright 2024 GROWTH PAIN | All Rights Reserved
 				</Typography>
 			</section>
 		</footer>

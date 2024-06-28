@@ -16,7 +16,7 @@ const Button = ({ type, text }) => {
 			break;
 		// 메인 화면에 '자소서 관리 시작하기' 버튼
 		case 'main':
-			buttonClasses += ' bg-navy-light text-white rounded-full'; // 올바른 클래스 이름 사용
+			buttonClasses += ' bg-navy-light text-white rounded-full';
 			break;
 		// 정보 수정, 회원가입에 쓰이는 회색 버튼
 		default:
