@@ -13,6 +13,7 @@ import FreeCommunity from "../pages/FreeCommunity";
 import MemberCommunity from "../pages/MemberCommunity";
 import PortfolioCommunity from "../pages/PortfolioCommunity";
 import MyPage from "../pages/MyPage";
+import About from "../pages/About";
 
 // 부모 컴포넌트로부터 로그인 여부에 대한 값 받아와서 사용
 const Router = ({userInfo}) => {
@@ -20,6 +21,10 @@ const Router = ({userInfo}) => {
     {
     path: "/",
     element: <Main />       // 메인홈
+    },
+    {
+      path: "about",
+      element: <About />,   // 성장통 소개
     },
     {
       path: "login", 

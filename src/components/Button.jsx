@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Button = ({ type, text }) => {
+// 페이지 라우팅을 위해 onClick 추가 (06.28_은솔)
+const Button = ({ type, text, onClick }) => {
 	let buttonClasses = 'py-3 px-9 rounded-[10px] h-11 flex items-center justify-center';
 	// 디자인 더 나오면 버튼 추가&수정해야할듯
 
@@ -24,7 +25,7 @@ const Button = ({ type, text }) => {
 			break;
 	}
 
-	return <button className={buttonClasses}>{text}</button>;
+	return <button className={buttonClasses} onClick={onClick} >{text}</button>;
 };
 
 export default Button;
