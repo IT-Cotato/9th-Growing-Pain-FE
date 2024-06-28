@@ -1,8 +1,7 @@
 import React from 'react';
 
 const Button = ({ type, text }) => {
-	let buttonClasses = 'py-3 px-9 rounded-lg h-11 flex items-center justify-center';
-	// radius가 10px이 없어서 8px과 12px중에 골라야할듯요...
+	let buttonClasses = 'py-3 px-9 rounded-[10px] h-11 flex items-center justify-center';
 	// 디자인 더 나오면 버튼 추가&수정해야할듯
 
 	// 타입에 따라 클래스를 추가
