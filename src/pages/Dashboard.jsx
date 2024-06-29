@@ -1,6 +1,10 @@
+import Sidebar from '../components/Sidebar';
+
 const Dashboard = () => {
   return (
-    <div>Dashboard 페이지입니다.</div>
+    <div className="dashboard-container">
+      Dashboard 페이지입니다.
+    </div>
   );
 }
 

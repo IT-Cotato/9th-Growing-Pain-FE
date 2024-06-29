@@ -14,6 +14,8 @@ import MemberCommunity from "../pages/MemberCommunity";
 import PortfolioCommunity from "../pages/PortfolioCommunity";
 import MyPage from "../pages/MyPage";
 import About from "../pages/About";
+import Notification from "../pages/Notification";
+import Message from "../pages/Message";
 
 // 부모 컴포넌트로부터 로그인 여부에 대한 값 받아와서 사용
 const Router = ({userInfo}) => {
@@ -37,27 +39,20 @@ const Router = ({userInfo}) => {
     {
       path: "user",     // 로그인 이후 이동 가능 페이지
       element: <ProtectedRoute userInfo={userInfo} />,
+      // 자식 컴포넌트를 더 만들었지만 Protected에서 Outlet으로 지원현황 등의 하위 페이지를 렌더링 하지 못해 아래와 같이 구현
       children: [
         { path: "dashboard", element: <Dashboard /> },          // 대시보드
-        {
-          path: "growth",                                       // 성장기록
-          element: <GrowthRecord />,
-          children: [
-            { path: "apply", element: <ApplyRecord /> },        // 지원현황
-            { path: "activity", element: <ActivityRecord /> },  // 활동기록
-          ],
-        },
-        {
-          path: "community",                                    // 커뮤니티
-          element: <Community /> ,
-          children: [
-            { path: "total", element: <TotalCommunity /> },         // 전체 게시판
-            { path: "free", element: <FreeCommunity /> },           // 자유 게시판
-            { path: "member", element: <MemberCommunity /> },       // 팀원모집 게시판
-            { path: "portfolio", element: <PortfolioCommunity /> }, // 포트폴리오 게시판
-          ],
-        },
+        { path: "growth",element: <GrowthRecord /> },           // 성장기록
+        { path: "growth/apply", element: <ApplyRecord /> },         // 지원현황
+        { path: "growth/activity", element: <ActivityRecord /> },   // 활동기록
+        { path: "community", element: <Community /> },              // 커뮤니티
+        { path: "community/total", element: <TotalCommunity /> },         // 전체 게시판
+        { path: "community/free", element: <FreeCommunity /> },           // 자유 게시판
+        { path: "community/member", element: <MemberCommunity /> },       // 팀원모집 게시판
+        { path: "community/portfolio", element: <PortfolioCommunity /> }, // 포트폴리오 게시판
         { path: "mypage", element: <MyPage /> },                // 마이페이지
+        { path: "mypage/notification", element: <Notification /> },  // 알림
+        { path: "mypage/message", element: <Message /> },            // 쪽지
       ],
     },
   ];

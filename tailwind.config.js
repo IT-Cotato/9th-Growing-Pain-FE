@@ -13,12 +13,16 @@ export default {
 					light: '#D1D1D1',
 					// Footer - 글자들
 					dark: '#6F6F6F',
+					// 사이드바 메뉴 호버 색
+					lightSide: '#E4E7F4',
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
 					dark: '#26408B',
 					// 자소서 관리 시작 버튼 색
 					light: '#5D5A88',
+					// 사이드바 배경 색
+					lightSide: '#F1F2F7',
 				},
 			},
 		},
