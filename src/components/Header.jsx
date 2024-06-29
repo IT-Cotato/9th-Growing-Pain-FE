@@ -8,8 +8,8 @@ const Header = () => {
   return (
     // bg-slate-200: 헤더 확인을 위해 임시로 색상 설정 (06.28)
     <div className="header-component h-[90px] flex w-full">
-      {/* 헤더 로고 및 서비스 이름 */}
-      <div className="header-logo flex relative w-1/6 text-[20px] gap-1 items-center">
+      {/* 헤더 로고 및 서비스 이름 -> 클릭하면 홈으로 라우팅 */}
+      <div className="header-logo p-5 flex relative w-1/6 text-[20px] gap-3 items-center cursor-pointer" onClick={() => nav('/')}>
         <img className='header-logo-img w-14 h-14' src={logo} alt="Logo" />
         Growth Pain
       </div>
@@ -21,7 +21,7 @@ const Header = () => {
         <div className='cursor-pointer' onClick={() => nav('/user/community')}>커뮤니티</div>
       </div>
       {/* 헤더 버튼 - 로그인, 회원가입 */}
-      <div className="header-button flex relative items-center justify-end gap-3 w-2/6">
+      <div className="header-button pr-[10px] flex relative items-center justify-end gap-3 w-2/6">
         <Button type='login' text='로그인' onClick={() => nav('/login')} />
         <Button type='application' text='회원가입' onClick={() => nav('/signup')} />
       </div>
