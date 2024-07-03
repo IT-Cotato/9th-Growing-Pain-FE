@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+
 	const [userId, setUserId] = useState(''); // 아이디 저장
 	const [password, setPassword] = useState(''); // 비밀번호 저장
 	const [confirmPassword, setConfirmPassword] = useState(''); // 비밀번호 확인 저장
@@ -166,3 +167,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

@@ -1,6 +1,10 @@
-const Detail = ({type}) => {
+import { useParams } from 'react-router-dom';
+
+const Detail = () => {
+  const params = useParams();
+
   return (
-    <div>${type} Detail 페이지입니다.</div>
+    <div>{params.id}번 Detail 페이지입니다.</div>
   );
 }
 

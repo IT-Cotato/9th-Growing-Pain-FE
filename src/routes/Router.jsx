@@ -1,44 +1,48 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ProtectedRoute from '../components/ProtectedRoutes';
-import Main from '../pages/Main';
-import Login from '../pages/Login';
-import Signup from '../pages/Signup';
-import Dashboard from '../pages/Dashboard';
-import GrowthRecord from '../pages/GrowthRecord';
-import ApplyRecord from '../pages/ApplyRecord';
-import ActivityRecord from '../pages/ActivityRecord';
-import Community from '../pages/Community';
-import TotalCommunity from '../pages/TotalCommunity';
-import FreeCommunity from '../pages/FreeCommunity';
-import MemberCommunity from '../pages/MemberCommunity';
-import PortfolioCommunity from '../pages/PortfolioCommunity';
-import MyPage from '../pages/MyPage';
-import About from '../pages/About';
-import Notification from '../pages/Notification';
-import Message from '../pages/Message';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ProtectedRoute from "../components/ProtectedRoutes";
+import Main from "../pages/Main";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import Dashboard from "../pages/Dashboard";
+import GrowthRecord from "../pages/GrowthRecord";
+import ApplyRecord from "../pages/ApplyRecord";
+import ActivityRecord from "../pages/ActivityRecord";
+import Community from "../pages/Community";
+import TotalCommunity from "../pages/TotalCommunity"
+import FreeCommunity from "../pages/FreeCommunity";
+import MemberCommunity from "../pages/MemberCommunity";
+import PortfolioCommunity from "../pages/PortfolioCommunity";
+import MyPage from "../pages/MyPage";
+import About from "../pages/About";
+import Notification from "../pages/Notification";
+import Message from "../pages/Message";
+import Layout from "../components/Layout";
+import Record from "../pages/Record";
+import Detail from "../pages/Detail";
 import FindID from '../pages/FindID';
 import FindPassword from '../pages/FindPassword';
 
+
 // 부모 컴포넌트로부터 로그인 여부에 대한 값 받아와서 사용
-const Router = ({ userInfo }) => {
-	const routes = [
-		{
-			path: '/',
-			element: <Main />, // 메인홈
-		},
-		{
-			path: 'about',
-			element: <About />, // 성장통 소개
-		},
-		{
-			path: 'login',
-			element: <Login />, // 로그인
-		},
-		{
-			path: 'signup',
-			element: <Signup />, // 회원가입
-		},
-		{
+const Router = ({userInfo}) => {
+  const routes = [
+    {
+    path: "/",
+    element: <Main />       // 메인홈
+    },
+    {
+      path: "about",
+      element: <About />,   // 성장통 소개
+    },
+    {
+      path: "login", 
+      element: <Login />,   // 로그인
+    },
+    {
+      path: "signup",
+      element: <Signup />,  // 회원가입
+    },
+    {
 			path: 'FindID',
 			element: <FindID />, // 아이디 찾기
 		},
@@ -46,26 +50,52 @@ const Router = ({ userInfo }) => {
 			path: 'FindPassword',
 			element: <FindPassword />, // 비밀번호 찾기
 		},
-		{
-			path: 'user', // 로그인 이후 이동 가능 페이지
-			element: <ProtectedRoute userInfo={userInfo} />,
-			// 자식 컴포넌트를 더 만들었지만 Protected에서 Outlet으로 지원현황 등의 하위 페이지를 렌더링 하지 못해 아래와 같이 구현
-			children: [
-				{ path: 'dashboard', element: <Dashboard /> }, // 대시보드
-				{ path: 'growth', element: <GrowthRecord /> }, // 성장기록
-				{ path: 'growth/apply', element: <ApplyRecord /> }, // 지원현황
-				{ path: 'growth/activity', element: <ActivityRecord /> }, // 활동기록
-				{ path: 'community', element: <Community /> }, // 커뮤니티
-				{ path: 'community/total', element: <TotalCommunity /> }, // 전체 게시판
-				{ path: 'community/free', element: <FreeCommunity /> }, // 자유 게시판
-				{ path: 'community/member', element: <MemberCommunity /> }, // 팀원모집 게시판
-				{ path: 'community/portfolio', element: <PortfolioCommunity /> }, // 포트폴리오 게시판
-				{ path: 'mypage', element: <MyPage /> }, // 마이페이지
-				{ path: 'mypage/notification', element: <Notification /> }, // 알림
-				{ path: 'mypage/message', element: <Message /> }, // 쪽지
-			],
-		},
-	];
+    {
+      path: "user",     // 로그인 이후 이동 가능 페이지
+      element: <ProtectedRoute userInfo={userInfo} />,
+      children: [
+        { path: "dashboard", element: <Dashboard /> },          // 대시보드
+        { path: "growth",
+          element: <Layout />,
+          children: [
+            { path: "", element: <GrowthRecord /> },             // 성장기록
+            { path: "apply",
+              children: [
+                { path: "", element: <ApplyRecord />},             // 지원현황 - 상세 페이지
+                { path: ":id", element: <Detail />},             // 지원현황 - 상세 페이지
+                { path: "record", element: <Record type="지원현황" /> }          // 지원현황 - 기록하기
+              ]
+            },
+            { path: "activity",
+              element: <ActivityRecord />,                       // 활동기록
+              children: [
+                { path: ":id", element: <Detail />},             // 활동기록 - 상세 페이지
+                { path: "record", element: <Record type="활동기록" /> }          // 활동기록 - 기록하기
+              ]
+            },
+          ],
+        },
+        { path: "community",
+          element: <Layout />,
+          children: [
+            { path: "", element: <Community /> },                   // 커뮤니티
+            { path: "total", element: <TotalCommunity /> },         // 전체 게시판
+            { path: "free", element: <FreeCommunity /> },           // 자유 게시판
+            { path: "member", element: <MemberCommunity /> },       // 팀원모집 게시판
+            { path: "portfolio", element: <PortfolioCommunity /> }, // 포트폴리오 게시판
+          ]
+        },
+        { path: "mypage",
+          element: <Layout />,
+          children: [
+            { path: "", element: <MyPage /> },                    // 마이페이지
+            { path: "notification", element: <Notification /> },  // 알림
+            { path: "message", element: <Message /> },            // 쪽지
+          ]
+        },
+      ],
+    },
+  ];
 
 	const router = createBrowserRouter([...routes]);
 
