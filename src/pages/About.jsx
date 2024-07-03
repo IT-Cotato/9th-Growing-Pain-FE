@@ -7,10 +7,7 @@ const About = () => {
       <div className="header-container">
         <Header />
       </div>
-      <div className="main-content h-[700px]">Login 페이지입니다</div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+      <div className="main-content h-[700px]">성장통 소개 페이지입니다</div>
     </div>
   );
 }

@@ -8,9 +8,6 @@ const Signup = () => {
         <Header />
       </div>
       <div className="main-content h-[700px]">Signup 페이지입니다</div>
-      <div className="footer-container">
-        <Footer />
-      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import logo from '../assets/images/logo.png';
 
 // heroicons에서 아이콘 불러와서 사용 (채운 아이콘은 solid로 불러오기)
@@ -12,6 +12,7 @@ import {
 
 const Sidebar = () => {
   const nav = useNavigate();
+  const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
 
   const toggleMenu = (menu) => {
@@ -26,6 +27,9 @@ const Sidebar = () => {
   // 아이콘 스타일
   const iconClass = "size-6 stroke-1";
 
+  // 현재 페이지에 해당하는 메뉴바의 색상 유지
+  const isActive = (path) => location.pathname === path ? "bg-gray-lightSide" : "";
+
   return (
     <div className="sidebar-container p-5 bg-navy-lightSide w-[280px] h-[1080px]">
       {/* 사이드바 로고 */}
@@ -38,7 +42,7 @@ const Sidebar = () => {
       {/* '기록하기' 버튼 */}
       <div className="sidebar-button flex relative items-center justify-center gap-3 w-full">
         {/* 기록하기 버튼: 사이드바에서만 사용 + 아이콘 사용을 위해 버튼 컴포넌트가 아니라 div 태그로 구현 */}
-        <div className="button mt-[50px] bg-white text-gray shadow-md py-3 px-9 rounded-[10px] h-11 w-full flex items-center justify-center gap-2" onClick={() => nav('/')}>
+        <div className="button mt-[50px] bg-white text-navy-sideText shadow-md py-3 px-9 rounded-[10px] h-11 w-full flex items-center justify-center gap-2" onClick={() => nav('/user/growth/apply/record')}>
           <PencilIcon className={iconClass} />
           기록하기
         </div>
@@ -48,14 +52,14 @@ const Sidebar = () => {
       {/* 메뉴바 */}
       <div className="sidebar-menu mt-[30px]">
         <div onClick={() => nav('/user/dashboard')}>
-          <div className={menuItemClass}>
+          <div className={`${menuItemClass} ${isActive('/user/dashboard')}`}>
             <HomeIcon className={iconClass} />
             대쉬보드
           </div>
         </div>
 
         <div onClick={() => toggleMenu('growth')}>
-          <div className={menuItemClass}>
+          <div className={`${menuItemClass} ${isActive('/user/growth')}`}>
             <MapIcon className={iconClass} />
             <div className={menuItemTextClass}>성장기록</div>
             {openMenu === 'growth' ? <ChevronDownIcon className={iconClass} /> : <ChevronRightIcon className={iconClass} />}
@@ -63,11 +67,11 @@ const Sidebar = () => {
         </div>
         {openMenu === 'growth' && (
             <div className="submenu pl-5">
-              <div className={menuItemClass} onClick={() => nav('/user/growth/apply')}>
+              <div className={`${menuItemClass} ${isActive('/user/growth/apply')}`} onClick={() => nav('/user/growth/apply')}>
                 <PresentationChartLineIcon className={iconClass} />
                 지원현황
               </div>
-              <div className={menuItemClass} onClick={() => nav('/user/growth/activity')}>
+              <div className={`${menuItemClass} ${isActive('/user/growth/activity')}`} onClick={() => nav('/user/growth/activity')}>
                 <DocumentIcon className={iconClass} />
                 활동기록
               </div>
@@ -75,7 +79,7 @@ const Sidebar = () => {
           )}
         
         <div className="menu-item" onClick={() => toggleMenu('community')}>
-          <div className={menuItemClass}>
+          <div className={`${menuItemClass} ${isActive('/user/community')}`}>
             <UsersIcon className={iconClass} />
             <div className={menuItemTextClass}>커뮤니티</div>
             {openMenu === 'community' ? <ChevronDownIcon className={iconClass} /> : <ChevronRightIcon className={iconClass} />}
@@ -83,19 +87,19 @@ const Sidebar = () => {
         </div>
         {openMenu === 'community' && (
             <div className="submenu pl-5">
-              <div className={menuItemClass} onClick={() => nav('/user/community/total')}>
+              <div className={`${menuItemClass} ${isActive('/user/community/total')}`} onClick={() => nav('/user/community/total')}>
                 <FolderOpenIcon className={iconClass} />
                 전체
               </div>
-              <div className={menuItemClass} onClick={() => nav('/user/community/free')}>
+              <div className={`${menuItemClass} ${isActive('/user/community/free')}`} onClick={() => nav('/user/community/free')}>
                 <ChatBubbleLeftEllipsisIcon className={iconClass} />
                 자유게시판
               </div>
-              <div className={menuItemClass} onClick={() => nav('/user/community/member')}>
+              <div className={`${menuItemClass} ${isActive('/user/community/member')}`} onClick={() => nav('/user/community/member')}>
                 <UserPlusIcon className={iconClass} />
                 팀원모집
               </div>
-              <div className={menuItemClass} onClick={() => nav('/user/community/portfolio')}>
+              <div className={`${menuItemClass} ${isActive('/user/community/portfolio')}`} onClick={() => nav('/user/community/portfolio')}>
                 <ClipboardDocumentIcon className={iconClass} />
                 포트폴리오
               </div>
@@ -103,7 +107,7 @@ const Sidebar = () => {
           )}
         
         <div className="menu-item" onClick={() => toggleMenu('mypage')}>
-          <div className={menuItemClass}>
+          <div className={`${menuItemClass} ${isActive('/user/mypage')}`}>
             <UserIcon className={iconClass} />
             <div className={menuItemTextClass}>마이페이지</div>
             {openMenu === 'mypage' ? <ChevronDownIcon className={iconClass} /> : <ChevronRightIcon className={iconClass} />}
@@ -111,11 +115,11 @@ const Sidebar = () => {
         </div>
         {openMenu === 'mypage' && (
             <div className="submenu pl-2 pr-2">
-              <div className={menuItemClass} onClick={() => nav('/user/mypage/notification')}>
+              <div className={`${menuItemClass} ${isActive('/user/mypage/notification')}`} onClick={() => nav('/user/mypage/notification')}>
                 <BellAlertIcon className={iconClass} />
                 알림
               </div>
-              <div className={menuItemClass} onClick={() => nav('/user/mypage/message')}>
+              <div className={`${menuItemClass} ${isActive('/user/mypage/message')}`} onClick={() => nav('/user/mypage/message')}>
                 <EnvelopeIcon className={iconClass} />
                 쪽지
               </div>
