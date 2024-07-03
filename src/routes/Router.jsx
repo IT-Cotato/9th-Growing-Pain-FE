@@ -19,6 +19,9 @@ import Message from "../pages/Message";
 import Layout from "../components/Layout";
 import Record from "../pages/Record";
 import Detail from "../pages/Detail";
+import FindID from '../pages/FindID';
+import FindPassword from '../pages/FindPassword';
+
 
 // 부모 컴포넌트로부터 로그인 여부에 대한 값 받아와서 사용
 const Router = ({userInfo}) => {
@@ -39,6 +42,14 @@ const Router = ({userInfo}) => {
       path: "signup",
       element: <Signup />,  // 회원가입
     },
+    {
+			path: 'FindID',
+			element: <FindID />, // 아이디 찾기
+		},
+		{
+			path: 'FindPassword',
+			element: <FindPassword />, // 비밀번호 찾기
+		},
     {
       path: "user",     // 로그인 이후 이동 가능 페이지
       element: <ProtectedRoute userInfo={userInfo} />,
@@ -86,10 +97,10 @@ const Router = ({userInfo}) => {
     },
   ];
 
-  const router = createBrowserRouter([...routes]);
+	const router = createBrowserRouter([...routes]);
 
-  // 구성요소 전달 및 활성화 -> App.jsx로 빼도 괜찮음
-  return <RouterProvider router={router} />;
+	// 구성요소 전달 및 활성화 -> App.jsx로 빼도 괜찮음
+	return <RouterProvider router={router} />;
 };
 
 export default Router;

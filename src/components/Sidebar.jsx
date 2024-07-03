@@ -1,31 +1,49 @@
+
+
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+
 import logo from '../assets/images/logo.png';
 
 // heroicons에서 아이콘 불러와서 사용 (채운 아이콘은 solid로 불러오기)
-import { 
-  PencilIcon, HomeIcon, MapIcon, PresentationChartLineIcon, 
-  DocumentIcon, UsersIcon, FolderOpenIcon, ChatBubbleLeftEllipsisIcon,
-  UserPlusIcon, ClipboardDocumentIcon, UserIcon, BellAlertIcon, EnvelopeIcon,
-  ChevronRightIcon, ChevronDownIcon
-} from '@heroicons/react/24/outline'
+import {
+	PencilIcon,
+	HomeIcon,
+	MapIcon,
+	PresentationChartLineIcon,
+	DocumentIcon,
+	UsersIcon,
+	FolderOpenIcon,
+	ChatBubbleLeftEllipsisIcon,
+	UserPlusIcon,
+	ClipboardDocumentIcon,
+	UserIcon,
+	BellAlertIcon,
+	EnvelopeIcon,
+	ChevronRightIcon,
+	ChevronDownIcon,
+} from '@heroicons/react/24/outline';
 
 const Sidebar = () => {
+
   const nav = useNavigate();
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(null);
 
-  const toggleMenu = (menu) => {
-    setOpenMenu(openMenu === menu ? null : menu);
-    nav(`/user/${menu}`);       // 선택한 메뉴의 페이지로 이동
-  }
 
-  // 사이드바 메뉴 스타일 (중복되는 스타일이라 따로 설정함)
-  const menuItemClass = "cursor-pointer p-4 rounded-[10px] hover:bg-gray-lightSide flex items-center justify-left gap-2";
-  // 사이드바 메뉴(상위) 텍스트 스타일
-  const menuItemTextClass = "menu-item-text w-1/2 text-left";
-  // 아이콘 스타일
-  const iconClass = "size-6 stroke-1";
+	const toggleMenu = (menu) => {
+		setOpenMenu(openMenu === menu ? null : menu);
+		nav(`/user/${menu}`); // 선택한 메뉴의 페이지로 이동
+	};
+
+	// 사이드바 메뉴 스타일 (중복되는 스타일이라 따로 설정함)
+	const menuItemClass =
+		'cursor-pointer p-4 rounded-[10px] hover:bg-gray-lightSide flex items-center justify-left gap-2';
+	// 사이드바 메뉴(상위) 텍스트 스타일
+	const menuItemTextClass = 'menu-item-text w-1/2 text-left';
+	// 아이콘 스타일
+	const iconClass = 'size-6 stroke-1';
+
 
   // 현재 페이지에 해당하는 메뉴바의 색상 유지
   const isActive = (path) => location.pathname === path ? "bg-gray-lightSide" : "";
@@ -47,6 +65,16 @@ const Sidebar = () => {
           기록하기
         </div>
       </div>
+
+
+			{/* 메뉴바 */}
+			<div className="sidebar-menu mt-[30px]">
+				<div onClick={() => nav('/user/dashboard')}>
+					<div className={menuItemClass}>
+						<HomeIcon className={iconClass} />
+						대쉬보드
+					</div>
+				</div>
 
 
       {/* 메뉴바 */}
@@ -129,5 +157,33 @@ const Sidebar = () => {
     </div>
   );
 }
+
+				<div className="menu-item" onClick={() => toggleMenu('mypage')}>
+					<div className={menuItemClass}>
+						<UserIcon className={iconClass} />
+						<div className={menuItemTextClass}>마이페이지</div>
+						{openMenu === 'mypage' ? (
+							<ChevronDownIcon className={iconClass} />
+						) : (
+							<ChevronRightIcon className={iconClass} />
+						)}
+					</div>
+				</div>
+				{openMenu === 'mypage' && (
+					<div className="submenu pl-2 pr-2">
+						<div className={menuItemClass} onClick={() => nav('/user/mypage/notification')}>
+							<BellAlertIcon className={iconClass} />
+							알림
+						</div>
+						<div className={menuItemClass} onClick={() => nav('/user/mypage/message')}>
+							<EnvelopeIcon className={iconClass} />
+							쪽지
+						</div>
+					</div>
+				)}
+			</div>
+		</div>
+	);
+};
 
 export default Sidebar;
