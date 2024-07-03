@@ -23,6 +23,8 @@ export default {
 					light: '#5D5A88',
 					// 사이드바 배경 색
 					lightSide: '#F1F2F7',
+					// 사이드바 기록하기 버튼 텍스트 색
+					sideText: "#5D5FEF",
 				},
 			},
 		},
