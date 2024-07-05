@@ -60,22 +60,11 @@ const Sidebar = () => {
       {/* '기록하기' 버튼 */}
       <div className="sidebar-button flex relative items-center justify-center gap-3 w-full">
         {/* 기록하기 버튼: 사이드바에서만 사용 + 아이콘 사용을 위해 버튼 컴포넌트가 아니라 div 태그로 구현 */}
-        <div className="button mt-[50px] bg-white text-navy-sideText shadow-md py-3 px-9 rounded-[10px] h-11 w-full flex items-center justify-center gap-2" onClick={() => nav('/user/growth/apply/record')}>
+        <div className="button cursor-pointer mt-[50px] bg-white text-navy-sideText shadow-md py-3 px-9 rounded-[10px] h-11 w-full flex items-center justify-center gap-2" onClick={() => nav('/user/growth/apply/record')}>
           <PencilIcon className={iconClass} />
           기록하기
         </div>
       </div>
-
-
-			{/* 메뉴바 */}
-			<div className="sidebar-menu mt-[30px]">
-				<div onClick={() => nav('/user/dashboard')}>
-					<div className={menuItemClass}>
-						<HomeIcon className={iconClass} />
-						대쉬보드
-					</div>
-				</div>
-
 
       {/* 메뉴바 */}
       <div className="sidebar-menu mt-[30px]">
@@ -156,34 +145,7 @@ const Sidebar = () => {
       </div>
     </div>
   );
-}
-
-				<div className="menu-item" onClick={() => toggleMenu('mypage')}>
-					<div className={menuItemClass}>
-						<UserIcon className={iconClass} />
-						<div className={menuItemTextClass}>마이페이지</div>
-						{openMenu === 'mypage' ? (
-							<ChevronDownIcon className={iconClass} />
-						) : (
-							<ChevronRightIcon className={iconClass} />
-						)}
-					</div>
-				</div>
-				{openMenu === 'mypage' && (
-					<div className="submenu pl-2 pr-2">
-						<div className={menuItemClass} onClick={() => nav('/user/mypage/notification')}>
-							<BellAlertIcon className={iconClass} />
-							알림
-						</div>
-						<div className={menuItemClass} onClick={() => nav('/user/mypage/message')}>
-							<EnvelopeIcon className={iconClass} />
-							쪽지
-						</div>
-					</div>
-				)}
-			</div>
-		</div>
-	);
 };
+
 
 export default Sidebar;

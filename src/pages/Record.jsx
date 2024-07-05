@@ -1,6 +1,6 @@
-const Record = ({type}) => {
+const Record = () => {
   return (
-    <div>{type} Record 페이지입니다.</div>
+    <div>지원현황 기록하기 페이지입니다.</div>
   );
 }
 

@@ -21,6 +21,8 @@ import Record from "../pages/Record";
 import Detail from "../pages/Detail";
 import FindID from '../pages/FindID';
 import FindPassword from '../pages/FindPassword';
+import EditActivity from "../pages/EditActivity";
+import AddInfo from "../pages/AddInfo";
 
 
 // 부모 컴포넌트로부터 로그인 여부에 대한 값 받아와서 사용
@@ -31,15 +33,15 @@ const Router = ({userInfo}) => {
     element: <Main />       // 메인홈
     },
     {
-      path: "about",
+      path: "About",
       element: <About />,   // 성장통 소개
     },
     {
-      path: "login", 
+      path: "Login", 
       element: <Login />,   // 로그인
     },
     {
-      path: "signup",
+      path: "Signup",
       element: <Signup />,  // 회원가입
     },
     {
@@ -51,46 +53,49 @@ const Router = ({userInfo}) => {
 			element: <FindPassword />, // 비밀번호 찾기
 		},
     {
-      path: "user",     // 로그인 이후 이동 가능 페이지
+			path: 'AddInfo',
+			element: <AddInfo />, // 비밀번호 찾기
+		},
+    {
+      path: ":userId",     // 로그인 이후 이동 가능 페이지
       element: <ProtectedRoute userInfo={userInfo} />,
       children: [
-        { path: "dashboard", element: <Dashboard /> },          // 대시보드
-        { path: "growth",
+        { path: "Dashboard", element: <Dashboard /> },          // 대시보드
+        { path: "Growth",
           element: <Layout />,
           children: [
             { path: "", element: <GrowthRecord /> },             // 성장기록
-            { path: "apply",
+            { path: "Apply",
               children: [
-                { path: "", element: <ApplyRecord />},             // 지원현황 - 상세 페이지
-                { path: ":id", element: <Detail />},             // 지원현황 - 상세 페이지
-                { path: "record", element: <Record type="지원현황" /> }          // 지원현황 - 기록하기
+                { path: "", element: <ApplyRecord />},           // 지원현황
+                { path: ":id", element: <Detail />},             // 지원현황 - 상세 페이지(편집하기)
+                { path: "Record", element: <Record /> }          // 지원현황 - 기록하기
               ]
             },
-            { path: "activity",
-              element: <ActivityRecord />,                       // 활동기록
+            { path: "Activity",
               children: [
-                { path: ":id", element: <Detail />},             // 활동기록 - 상세 페이지
-                { path: "record", element: <Record type="활동기록" /> }          // 활동기록 - 기록하기
+                { path: "", element: <ActivityRecord />},       // 활동기록 - 상세 페이지(편집하기)
+                { path: ":id", element: <EditActivity />},       // 활동기록 - 상세 페이지(편집하기)
               ]
             },
           ],
         },
-        { path: "community",
+        { path: "Community",
           element: <Layout />,
           children: [
             { path: "", element: <Community /> },                   // 커뮤니티
-            { path: "total", element: <TotalCommunity /> },         // 전체 게시판
-            { path: "free", element: <FreeCommunity /> },           // 자유 게시판
-            { path: "member", element: <MemberCommunity /> },       // 팀원모집 게시판
-            { path: "portfolio", element: <PortfolioCommunity /> }, // 포트폴리오 게시판
+            { path: "Total", element: <TotalCommunity /> },         // 전체 게시판
+            { path: "Free", element: <FreeCommunity /> },           // 자유 게시판
+            { path: "Member", element: <MemberCommunity /> },       // 팀원모집 게시판
+            { path: "Portfolio", element: <PortfolioCommunity /> }, // 포트폴리오 게시판
           ]
         },
-        { path: "mypage",
+        { path: "Mypage",
           element: <Layout />,
           children: [
             { path: "", element: <MyPage /> },                    // 마이페이지
-            { path: "notification", element: <Notification /> },  // 알림
-            { path: "message", element: <Message /> },            // 쪽지
+            { path: "Notification", element: <Notification /> },  // 알림
+            { path: "Message", element: <Message /> },            // 쪽지
           ]
         },
       ],
