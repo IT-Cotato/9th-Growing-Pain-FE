@@ -6,27 +6,27 @@ const Footer = () => {
 	return (
 		<footer className="flex flex-col w-full p-4">
 			{/* 첫번째 섹션: 구분선 위 -> 3개의 div(프로필 , 성장통 소개, 소셜) */}
-			<section className="relative flex w-full items-center justify-between pb-3 mb-6 ">
+			<section className="relative flex items-center justify-between pb-3 mb-6 ">
 				{/* 1-1. 프로필 */}
-				<div className="flex items-center gap-5 ml-10">
+				<div className="flex items-center gap-5 ml-10 font-normal text-[24px]">
 					<img className="w-16 h-16" src={profile} alt="Profile" />
-					<text className="font-normal text-[24px]">{userName}</text>
+					<p>{userName}</p>
 				</div>
 				{/* 1-2. 성장통 소개 / 성장기록 / 커뮤니티 */}
-				<div className="absolute left-1/2 transform -translate-x-1/2">
-					<ul className="flex items-center gap-x-4 text-gray-dark text-lg">
+				<div className="footer-menu flex items-center text-gray-dark text-lg w-1/8">
+					<ul className="flex gap-[33px]">
 						<li>
-							<Typography as="a" href="#" className="font-normal hover:underline">
+							<Typography as="a" href="#" className="font-normal">
 								성장통 소개
 							</Typography>
 						</li>
 						<li>
-							<Typography as="a" href="#" className="font-normal hover:underline">
+							<Typography as="a" href="#" className="font-normal">
 								성장기록
 							</Typography>
 						</li>
 						<li>
-							<Typography as="a" href="#" className="font-normal hover:underline">
+							<Typography as="a" href="#" className="font-normal">
 								커뮤니티
 							</Typography>
 						</li>

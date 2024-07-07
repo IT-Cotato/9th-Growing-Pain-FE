@@ -30,7 +30,7 @@ const Header = () => {
 				</div>
 			</div>
 			{/* 헤더 버튼 - 로그인, 회원가입 */}
-			<div className="header-button pr-[10px] flex relative items-center justify-end gap-3 w-2/6">
+			<div className="header-button pr-[10px] flex relative items-center justify-center gap-[20px] w-2/6">
 				<Button type="login" text="로그인" onClick={() => nav('/login')} />
 				<Button type="signup" text="회원가입" onClick={() => nav('/signup')} />
 			</div>

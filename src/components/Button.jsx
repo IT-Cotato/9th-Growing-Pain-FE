@@ -1,3 +1,4 @@
+import { button } from '@material-tailwind/react';
 import React from 'react';
 
 // 페이지 라우팅을 위해 onClick 추가 (06.28_은솔)
@@ -9,11 +10,11 @@ const Button = ({ type, text, onClick }) => {
 	switch (type) {
 		// 헤더의 '회원가입' 버튼
 		case 'signup':
-			buttonClasses += ' bg-white border-2 border-navy-dark text-black';
+			buttonClasses = 'w-[102px] h-[36px] bg-white rounded-[10px] border-2 border-navy-dark text-black';
 			break;
-		// '로그인' 버튼
+		// 헤더의 '로그인' 버튼
 		case 'login':
-			buttonClasses += ' bg-navy-dark text-white';
+			buttonClasses = 'w-[92px] h-[36px] bg-navy-dark text-white w-[100px] h-[36px] rounded-[10px]';
 			break;
 		// 메인 화면에 '자소서 관리 시작하기' 버튼
 		case 'main':
@@ -21,15 +22,19 @@ const Button = ({ type, text, onClick }) => {
 			break;
 		// login 페이지의 '로그인' 버튼
 		case 'loginPage':
-			buttonClasses = 'w-[131px] h-[129px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
+			buttonClasses = 'w-[131px] h-[113px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
 			break;
 		// 회원가입 페이지의 '회원가입' 버튼
 		case 'signupPage':
-			buttonClasses = 'w-[192px] h-[56px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
+			buttonClasses = 'w-[128px] h-[48px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
+			break;
+		// 회원가입 완료 페이지 '시작하기' 버튼
+		case 'signupSuccess':
+			buttonClasses = 'w-[276px] h-[48px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
 			break;
 		// 정보 수정, 회원가입에 쓰이는 회색 버튼
 		default:
-			buttonClasses = 'h-14 rounded-[10px] py-3 px-9 w-[135px] bg-[#CDCDCD] text-black text-[18px]';
+			buttonClasses = 'rounded-[10px] py-3 px-9 w-[135px] h-[48px] bg-[#E3EAFF] text-[#1F1F1F] text-[16px] font-medium';
 			break;
 	}
 
