@@ -1,0 +1,132 @@
+.react-calendar {
+  background-color: white;
+  border: none;
+}
+
+/* 년-월 */
+.react-calendar__navigation__label > span {
+  color: black;
+  font-family: SUIT Variable;
+  font-size: 19px;
+  font-weight: medium;
+  line-height: 140%;
+}
+
+.react-calendar__year-view__months {
+  display: flex;
+  justify-content: center;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  height: 26px;
+  margin-bottom: 27px;
+  font-size: 19px;
+}
+
+.react-calendar__navigation__arrow {
+  flex-grow: 1;
+}
+
+.react-calendar__navigation__prev-button {
+  padding-left: 20px;
+}
+
+.react-calendar__navigation__next-button {
+  padding-right: 20px;
+  display: flex;
+  justify-content: end;
+}
+
+/* 요일 */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font: inherit;
+  font-size: 20px;
+  font-size: medium;
+}
+
+.react-calendar__month-view__weekdays__weekday * {
+  text-decoration-line: none;
+}
+
+/* 요일 */
+.react-calendar__month-view__weekdays__weekday{
+  color: black;
+  font-size: 18px;
+  font-weight: medium;
+  margin-bottom: 10px;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: black;
+  font-size: 18px;
+  width: 44px;
+  height: 44px;
+  font-weight: medium;
+  text-align: center;
+}
+
+/* 이번 달 일자 */
+.react-calendar__tile {
+  color: black;
+  font-size: 18px;
+  font-weight: medium;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  margin-inline-end: 9px !important;
+  margin: 20px 9px 18px 9px;
+  flex: 0 0 auto !important;
+}
+
+/* 저번 달 & 다음 달 일자 */
+.react-calendar__month-view__days__day--neighboringMonth{
+  color: #5F5F5F;
+  font-size: 18px;
+  font-weight: medium;
+}
+
+/* 오늘 날짜 */
+.react-calendar__tile--now{
+  background-color: #26408B;
+  color: white;
+  font-size: 18px;
+  font-weight: medium;
+  border-radius: 50px;
+}
+
+/* 오늘 날짜 도트 */
+.react-calendar__tile--now .not-dot {
+  display: none;
+}
+
+/* 일정 있는 날 표시 점 */
+.dot {
+  height: 7px;
+  width: 7px;
+  background-color: red;
+  border-radius: 50%;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* 일정 없는 날 표시 점 */
+.not-dot {
+  height: 7px;
+  width: 7px;
+  background-color: none;
+  border-radius: 50%;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* 월 선택 */
+.react-calendar__year-view__months__month {
+  width: 70px;
+}
