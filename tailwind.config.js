@@ -15,6 +15,10 @@ export default {
 					dark: '#6F6F6F',
 					// 사이드바 메뉴 호버 색
 					lightSide: '#E4E7F4',
+					// 활동기록 컨테이너 라인 색
+					line: "#F1F1F1",
+					// 활동기록 텍스트 색상
+					content: "#A8A8A8",
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
@@ -25,6 +29,8 @@ export default {
 					lightSide: '#F1F2F7',
 					// 사이드바 기록하기 버튼 텍스트 색
 					sideText: "#5D5FEF",
+					// 활동기록 페이지 기록 숫자
+					activityNum: "#C7D5FF",
 				},
 				red: {
 					// 일반 빨간색
@@ -36,6 +42,7 @@ export default {
 			'regular': ['Pretendard-Regular'],
 			'medium': ['Pretendard-Medium'],
 			'bold': ['Pretendard-Bold'],
+			'seimbold': ['Pretendard-SemiBold'],
 		},
 		plugins: [],
 	},
