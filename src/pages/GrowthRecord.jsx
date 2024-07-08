@@ -15,7 +15,7 @@ const GrowthRecord = () => {
   // 지원 현황 데이터를 마감일이 짧게 남은 순서대로 정렬
   const sortedApplicationData = [...applicationData].sort((a, b) => {
     return getDDay(a.job_post_dead_line) - getDDay(b.job_post_dead_line);
-  });
+  }).slice(0, 6);     // 가장 짧은 6개만 노출
 
   return (
     <div>

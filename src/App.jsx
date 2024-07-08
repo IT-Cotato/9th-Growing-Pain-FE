@@ -125,6 +125,22 @@ const applicationData = [
 		job_post_start_date: new Date("2024-07-02").getTime(),
 		job_post_dead_line: new Date("2024-07-13").getTime(),
 	},
+	{
+		Application: 7,
+		application_type: "DOCUMENT",
+		created_at: new Date().getTime(),
+		updated_at: new Date().getTime(),
+		place: "의정부시",
+		result: "PASSED",
+		content: "이제는 더이상 미룰 수 없다 나의 취업",
+		submission_status: true,
+		interview_submission_status: false,
+		company_name: "(주) 의정부시청",
+		job_part: "백엔드",
+		job_post_link: "http://www.chippo.com",
+		job_post_start_date: new Date("2024-07-05").getTime(),
+		job_post_dead_line: new Date("2024-07-26").getTime(),
+	},
 ];
 
 export const GrowthStateContext = createContext();

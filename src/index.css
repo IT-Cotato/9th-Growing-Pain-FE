@@ -20,6 +20,12 @@
     font-weight: bold;
     src: url("./fonts/Pretendard-Bold.otf") format("truetype");
   }
+
+  @font-face {
+    font-family: "Pretendard-SemiBold";
+    font-weight: bold;
+    src: url("./fonts/Pretendard-SemiBold.otf") format("truetype");
+  }
 }
 
 body {

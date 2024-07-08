@@ -74,8 +74,8 @@ const Router = ({userInfo}) => {
             },
             { path: "Activity",
               children: [
-                { path: "", element: <ActivityRecord />},       // 활동기록 - 상세 페이지(편집하기)
-                { path: ":id", element: <EditActivity />},       // 활동기록 - 상세 페이지(편집하기)
+                { path: ":category", element: <ActivityRecord />},       // 활동기록 - 상세 페이지(편집하기)
+                { path: ":category/:id", element: <EditActivity />},       // 활동기록 - 상세 페이지(편집하기)
               ]
             },
           ],

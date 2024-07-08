@@ -86,7 +86,7 @@ const Sidebar = () => {
                 <PresentationChartLineIcon className={iconClass} />
                 지원현황
               </div>
-              <div className={`${menuItemClass} ${isActive('/user/growth/activity')}`} onClick={() => nav('/user/growth/activity')}>
+              <div className={`${menuItemClass} ${isActive('/user/growth/activity/extracurricular')}`} onClick={() => nav('/user/growth/activity/extracurricular')}>
                 <DocumentIcon className={iconClass} />
                 활동기록
               </div>
