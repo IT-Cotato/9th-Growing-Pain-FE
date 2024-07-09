@@ -8,9 +8,9 @@ import { getDDay } from '../utils/getDDay';
 
 import { ChevronRightIcon,	ChevronLeftIcon } from '@heroicons/react/24/outline';
 
-const UseCalendar = (dead_line) =>{
+const UseCalendar = () =>{
   const [date, setDate] = useState(new Date());         // 선택한 날짜
-  const [, applicationData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
+  const [, , applicationData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
 
   const onChange = date => {
     setDate(date);

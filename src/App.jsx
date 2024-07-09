@@ -27,119 +27,192 @@ const memberData = [
 	},
 ];
 
+const jobPostData = [
+	{
+		job_post_id: 0,
+		member_id: "greatsounds613@gmail.com",
+		company_name: "(주) 회사이름",
+		job_part: "프론트엔드",
+	},
+	{
+		job_post_id: 1,
+		member_id: "greatsounds613@gmail.com",
+		company_name: "(주) 종로 어쩌구",
+		job_part: "AE",
+	},
+	{
+		job_post_id: 2,
+		member_id: "greatsounds613@gmail.com",
+		company_name: "(주) 도봉 어쩌구",
+		job_part: "PM",
+	},
+	{
+		job_post_id: 3,
+		member_id: "greatsounds613@gmail.com",
+		company_name: "(주) 강남구 어쩌구",
+		job_part: "UI/UX 디자이너",
+	},
+	{
+		job_post_id: 4,
+		member_id: "greatsounds613@gmail.com",
+		company_name: "(주) 강북구청",
+		job_part: "프론트엔드",
+	},
+	{
+		job_post_id: 5,
+		member_id: "greatsounds613@gmail.com",
+		company_name: "(주) 양주시청",
+		job_part: "AE",
+	},
+	{
+		job_post_id: 6,
+		member_id: "greatsounds613@gmail.com",
+		company_name: "(주) 의정부시청",
+		job_part: "백엔드",
+	}
+];
+
 const applicationData = [
 	{
-		Application: 1,															// 지원현황 id	
+		job_post_id: 0,															// 공고 id
+		job_application_id: 0,											// 지원현황 id (공고로 먼저 구분)
 		application_type: "DOCUMENT",								// 지원현황 타입
 		created_at: new Date().getTime(),						// 작성날짜
 		updated_at: new Date().getTime(),						// 수정날짜
 		place: "서초구",														// 장소
 		result: "PENDING",													// 결과
-		content: "서초구 (주) 회사이름 서류 제출",	// 내용
-		submission_status: false,										// 제출여부(서류)
-		interview_submission_status: false,					// 제출여부(면접)
-		company_name: "(주) 회사이름",							// 회사명
-		job_part: "프론트엔드",											// 직무
-		job_post_link: "http://www.frontend.com",		// 공고링크
+		submission_status: false,										// 제출여부(지원현황 타입에 따라 다름)
 		job_post_start_date: new Date("2024-07-06").getTime(),	// 공고 시작 날짜
 		job_post_dead_line: new Date("2024-10-23").getTime(),		// 공고 마감 날짜
 	},
 	{
-		Application: 2,
+		job_post_id: 0,
+		job_application_id: 1,	
+		application_type: "INTERVIEW",
+		created_at: new Date().getTime(),
+		updated_at: new Date().getTime(),
+		place: "서초구",
+		result: "PENDING",
+		submission_status: false,
+		job_post_start_date: new Date("2024-07-06").getTime(),
+		job_post_dead_line: new Date("2024-10-23").getTime(),
+	},
+	{
+		job_post_id: 1,
+		job_application_id: 0,
+		application_type: "DOCUMENT",
+		created_at: new Date().getTime(),
+		updated_at: new Date().getTime(),
+		place: "종로구",
+		result: "PASSED",
+		submission_status: true,
+		job_post_start_date: new Date("2024-07-06").getTime(),
+		job_post_dead_line: new Date("2024-09-19").getTime(),
+	},
+	{
+		job_post_id: 1,
+		job_application_id: 1,
 		application_type: "INTERVIEW",
 		created_at: new Date().getTime(),
 		updated_at: new Date().getTime(),
 		place: "종로구",
 		result: "PASSED",
-		content: "종로구에서 면접 진행",
 		submission_status: true,
-		interview_submission_status: true,
-		company_name: "(주) 종로 어쩌구",
-		job_part: "AE",
-		job_post_link: "http://www.applicationEngineer.com",
 		job_post_start_date: new Date("2024-07-06").getTime(),
 		job_post_dead_line: new Date("2024-09-19").getTime(),
 	},
 	{
-		Application: 3,
+		job_post_id: 2,
+		job_application_id: 0,
 		application_type: "INTERVIEW",
 		created_at: new Date().getTime(),
 		updated_at: new Date().getTime(),
 		place: "도봉구",
 		result: "FAILED",
-		content: "도봉구에서 면접 진행",
 		submission_status: true,
-		interview_submission_status: true,
-		company_name: "(주) 도봉 어쩌구",
-		job_part: "PM",
-		job_post_link: "http://www.productManager.com",
 		job_post_start_date: new Date("2024-07-04").getTime(),
 		job_post_dead_line: new Date("2024-07-14").getTime(),
 	},
-	
 	{
-		Application: 4,
+		job_post_id: 3,
+		job_application_id: 0,
 		application_type: "INTERVIEW",
 		created_at: new Date().getTime(),
 		updated_at: new Date().getTime(),
 		place: "강남구",
 		result: "PASSED",
-		content: "강남구에서 면접 진행",
 		submission_status: true,
-		interview_submission_status: true,
-		company_name: "(주) 강남구 어쩌구",
-		job_part: "UI/UX 디자이너",
-		job_post_link: "http://www.uiuxDesigner.com",
 		job_post_start_date: new Date("2024-07-05").getTime(),
 		job_post_dead_line: new Date("2024-08-15").getTime(),
 	},
 	{
-		Application: 5,
+		job_post_id: 4,
+		job_application_id: 0,
 		application_type: "DOCUMENT",
 		created_at: new Date().getTime(),
 		updated_at: new Date().getTime(),
 		place: "강북구",
 		result: "PENDING",
-		content: "강북구 서류 제출",
 		submission_status: true,
-		interview_submission_status: false,
-		company_name: "(주) 강북구청",
-		job_part: "프론트엔드",
-		job_post_link: "http://www.frontend.com",
 		job_post_start_date: new Date("2024-07-06").getTime(),
 		job_post_dead_line: new Date("2024-09-17").getTime(),
 	},
 	{
-		Application: 6,
+		job_post_id: 5,
+		job_application_id: 0,
 		application_type: "DOCUMENT",
 		created_at: new Date().getTime(),
 		updated_at: new Date().getTime(),
 		place: "양주시",
 		result: "PASSED",
-		content: "이제는 더이상 미룰 수 없다 나의 취업",
 		submission_status: true,
-		interview_submission_status: false,
-		company_name: "(주) 양주시청",
-		job_part: "AE",
-		job_post_link: "http://www.help.com",
 		job_post_start_date: new Date("2024-07-02").getTime(),
 		job_post_dead_line: new Date("2024-07-13").getTime(),
 	},
 	{
-		Application: 7,
+		job_post_id: 6,
+		job_application_id: 0,
 		application_type: "DOCUMENT",
 		created_at: new Date().getTime(),
 		updated_at: new Date().getTime(),
 		place: "의정부시",
 		result: "PASSED",
-		content: "이제는 더이상 미룰 수 없다 나의 취업",
 		submission_status: true,
-		interview_submission_status: false,
-		company_name: "(주) 의정부시청",
-		job_part: "백엔드",
-		job_post_link: "http://www.chippo.com",
 		job_post_start_date: new Date("2024-07-05").getTime(),
 		job_post_dead_line: new Date("2024-07-26").getTime(),
+	},
+];
+
+const applicaionDetailData = [
+	{
+		job_post_id: 0,
+		application_detail_id: 0,
+		title: "1번 지원서 서류 1",
+		content: "1번 지원서 서류 1입니다",
+	},
+	{
+		job_post_id: 0,
+		application_detail_id: 0,
+		title: "1번 지원서 서류 2",
+		content: "1번 지원서 서류 2입니다",
+	},
+	{
+		job_post_id: 0,
+		application_detail_id: 1,
+		title: "1번 지원서 면접 1",
+		content: "1번 지원서 면접 1입니다",
+	},
+	{
+		job_post_id: 1,
+		application_detail_id: 0,
+		title: "2번 지원서 서류 1",
+		content: "2번 지원서 서류 1입니다",
+	},
+	{
+		job_post_id: 1,
+		application_detail_id: 1,
+		title: "2번 지원서 면접 1",
+		content: "2번 지원서 면접 1입니다",
 	},
 ];
 
@@ -150,7 +223,7 @@ function App() {
 
 	return (
 		<>
-			<GrowthStateContext.Provider value={[memberData, applicationData]}>
+			<GrowthStateContext.Provider value={[memberData, jobPostData, applicationData, applicaionDetailData]}>
 				<Router userInfo={userInfo} />
 			</GrowthStateContext.Provider>
 		</>
