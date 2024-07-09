@@ -10,7 +10,7 @@ import { activityInfo } from "../utils/activity-info";
 
 const GrowthRecord = () => {
   const nav = useNavigate();
-  const [, applicationData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
+  const [memberData, jobPostData, applicationData, applicaionDetailData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
 
   // 지원 현황 데이터를 마감일이 짧게 남은 순서대로 정렬
   const sortedApplicationData = [...applicationData].sort((a, b) => {
@@ -27,20 +27,28 @@ const GrowthRecord = () => {
           </div>
           <div className="application-item w-[1010px] h-[508px] flex gap-[37px] gap-y-[30px] flex-wrap justify-center">
             {sortedApplicationData.map((application)=> {
+              const jobPost = jobPostData.find(post => post.job_post_id === application.job_post_id);
+
+              if (!jobPost) {
+                return null; // 공고 데이터를 찾을 수 없는 경우 렌더링하지 않음
+              }
+
               // 아이템 순회하면서 렌더링
               return (
                 <GrowthApplyItem
-                  key={application.Application}
-                  company={application.company_name}
-                  position={application.job_part}
-                  submitDocument={application.submission_status}
-                  submitInterview={application.interview_submission_status}
+                  key={application.job_post_id}
+                  id={application.job_post_id}
+                  company={jobPost.company_name}
+                  position={jobPost.job_part}
+                  submitDocument={application.application_type === 'DOCUMENT' ? application.submission_status : undefined}
+                  submitInterview={application.application_type === 'INTERVIEW' ? application.submission_status : undefined}
                   deadline={getDDay(application.job_post_dead_line)}
                 />
               );
             })}
           </div>
         </div>
+        {/* 캘린더 사용 */}
         <div className="calendar-container w-[500px] h-[540px] mr-[72px] mt-[42px]">
           <UseCalendar />
         </div>
