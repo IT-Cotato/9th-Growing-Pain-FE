@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Pretendard-Regular";
+    font-weight: normal;
+    src: url("./fonts/Pretendard-Regular.otf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "Pretendard-Medium";
+    font-weight: medium;
+    src: url("./fonts/Pretendard-Medium.otf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "Pretendard-Bold";
+    font-weight: bold;
+    src: url("./fonts/Pretendard-Bold.otf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "Pretendard-SemiBold";
+    font-weight: bold;
+    src: url("./fonts/Pretendard-SemiBold.otf") format("truetype");
+  }
+}
+
+body {
+  font-family: "Pretendard-Regular";
+}

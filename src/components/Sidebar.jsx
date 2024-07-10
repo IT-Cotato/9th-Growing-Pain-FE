@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -49,7 +47,7 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path ? "bg-gray-lightSide" : "";
 
   return (
-    <div className="sidebar-container p-5 bg-navy-lightSide w-[280px] h-[1080px]">
+    <div className="sidebar-container p-5 bg-navy-lightSide w-[288px] h-[1080px]">
       {/* 사이드바 로고 */}
       {/* 라우팅 수정 필요 */}
       <div className="sidebar-logo p-5 flex relative text-[20px] gap-3 items-center cursor-pointer" onClick={() => nav('/')}>
@@ -58,7 +56,7 @@ const Sidebar = () => {
       </div>
 
       {/* '기록하기' 버튼 */}
-      <div className="sidebar-button flex relative items-center justify-center gap-3 w-full">
+      <div className="sidebar-button flex relative items-center justify-center gap-3 w-[244px]">
         {/* 기록하기 버튼: 사이드바에서만 사용 + 아이콘 사용을 위해 버튼 컴포넌트가 아니라 div 태그로 구현 */}
         <div className="button cursor-pointer mt-[50px] bg-white text-navy-sideText shadow-md py-3 px-9 rounded-[10px] h-11 w-full flex items-center justify-center gap-2" onClick={() => nav('/user/growth/apply/record')}>
           <PencilIcon className={iconClass} />
@@ -88,7 +86,7 @@ const Sidebar = () => {
                 <PresentationChartLineIcon className={iconClass} />
                 지원현황
               </div>
-              <div className={`${menuItemClass} ${isActive('/user/growth/activity')}`} onClick={() => nav('/user/growth/activity')}>
+              <div className={`${menuItemClass} ${isActive('/user/growth/activity/extracurricular')}`} onClick={() => nav('/user/growth/activity/extracurricular')}>
                 <DocumentIcon className={iconClass} />
                 활동기록
               </div>
