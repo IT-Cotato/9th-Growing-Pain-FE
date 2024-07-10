@@ -16,8 +16,8 @@ const ApplicationStatus = ({ id, company, position, submitDocument, submitInterv
 		<div onClick={()=>nav(`/user/growth/apply/${id}`)} className="apply-item-container cursor-pointer relative flex-col text-[17px] w-[312px] h-[239px] px-[39px] pt-[36px] pb-[35px] bg-white border rounded-[10px] box-border shadow-[0px_2px_2px_rgba(0,0,0,0.1)]">
       {/* 경계선 기준 위의 내용 - 회사명, 직무 */}
       <div className="top-container h-[89px] flex-col text-left">
-        <div className="font-medium text-[20px] mb-[15px]">{company}</div>
-        <div className="font-ragular">{position}</div>
+        <div className="font-medium text-[20px] mb-[10px]">{company}</div>
+        <div className="font-ragular text-[18px]">{position}</div>
       </div>
       {/* 경계선 기준 아래의 내용 - 제출여부, 디데이 */}
       <div className="bottom-container h-[75px] border-t flex place-content-between relative">
