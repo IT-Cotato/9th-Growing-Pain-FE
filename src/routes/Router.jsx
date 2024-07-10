@@ -61,8 +61,6 @@ const Router = ({ userInfo }) => {
 			path: 'AddInfo',
 			element: <AddInfo />, // 추가 정보 페이지 (소셜로그인)
 		},
-	
-	];
     {
       path: ":userId",     // 로그인 이후 이동 가능 페이지
       element: <ProtectedRoute userInfo={userInfo} />,

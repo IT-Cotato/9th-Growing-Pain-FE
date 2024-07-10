@@ -21,6 +21,15 @@ const activityData = [
     contribution: 70,
     activity_url: "https://www.sub.com",
   },
+  {
+    activity_id: 2,
+    activity_name: "지하철 봉사활동",
+    activity_period: "2024.09-2024.12",
+    role: ["어른신 돕기"],
+    activity_type: "교육 봉사",
+    contribution: 100,
+    activity_url: "https://www.sub.com",
+  },
 ];
 
 const ActivityRecord = () => {
@@ -37,7 +46,7 @@ const ActivityRecord = () => {
 
   return (
     <div className="activity-container flex-col">
-      <div className="category-bar bg-navy-lightSide flex w-[1492px] h-[61px] mx-[70px] mt-[84px] rounded-[10px]">
+      <div className="category-bar bg-navy-lightSide flex w-[1492px] h-[50px] mx-[70px] mt-[84px] rounded-[10px]">
         <div onClick={() => nav('/user/growth/activity/extracurricular')} className={`${isActive("/user/growth/activity/extracurricular")} rounded-l-[10px]`}>대외활동</div>
         <div onClick={() => nav('/user/growth/activity/service')} className={`${isActive("/user/growth/activity/service")}`}>봉사활동</div>
         <div onClick={() => nav('/user/growth/activity/project')} className={`${isActive("/user/growth/activity/project")}`}>프로젝트</div>
@@ -52,7 +61,7 @@ const ActivityRecord = () => {
         </div>
       </div>
       {/* "활동 추가하기" 버튼과 일단 안 겹치게 구현하고 나중에 겹치게 수정 */}
-      <div className="activity-record-content w-[1492px] h-[895px] mx-[70px] flex gap-[35px]">
+      <div className="activity-record-content w-[1492px] h-[895px] mx-[70px] flex flex-wrap gap-[35px]">
         {activityData.map((item)=>{
           return (
             <ActivityItem
