@@ -47,7 +47,7 @@ const Sidebar = () => {
   const isActive = (path) => location.pathname === path ? "bg-gray-lightSide" : "";
 
   return (
-    <div className="sidebar-container p-5 bg-navy-lightSide w-[288px] h-[1080px]">
+    <div className="sidebar-container p-5 bg-navy-lightSide w-[288px] h-100%">
       {/* 사이드바 로고 */}
       {/* 라우팅 수정 필요 */}
       <div className="sidebar-logo p-5 flex relative text-[20px] gap-3 items-center cursor-pointer" onClick={() => nav('/')}>
@@ -122,7 +122,7 @@ const Sidebar = () => {
           )}
         
         <div className="menu-item" onClick={() => toggleMenu('mypage')}>
-          <div className={`${menuItemClass} ${isActive('/user/mypage')}`}>
+          <div className={`${menuItemClass} ${isActive('/user/mypage')} ${isActive('/user/mypage/mycommunity')} ${isActive('/user/mypage/setting')} ${isActive('/user/mypage/support')}`}>
             <UserIcon className={iconClass} />
             <div className={menuItemTextClass}>마이페이지</div>
             {openMenu === 'mypage' ? <ChevronDownIcon className={iconClass} /> : <ChevronRightIcon className={iconClass} />}

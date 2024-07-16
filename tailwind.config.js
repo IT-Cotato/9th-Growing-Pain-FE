@@ -19,6 +19,10 @@ export default {
 					line: "#F1F1F1",
 					// 활동기록 텍스트 색상
 					content: "#A8A8A8",
+					// 배경색
+					background: "#F6F9FC",
+					// 마이페이지(커뮤니티 활동) 삭제 버튼
+					deleteBtn: "#9A9A9A",
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
@@ -31,6 +35,8 @@ export default {
 					sideText: "#5D5FEF",
 					// 활동기록 페이지 기록 숫자
 					activityNum: "#C7D5FF",
+					// 마이페이지(커뮤니티) 토글 색상
+					mypageToggle: "#EDF6FF",
 				},
 				red: {
 					// 일반 빨간색
