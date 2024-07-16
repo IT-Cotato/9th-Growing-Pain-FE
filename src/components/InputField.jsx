@@ -26,6 +26,20 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 		case 'findPassword':
 			inputStyle = 'bg-[#EDEDED] rounded-[10px] w-[502px] h-[48px] pl-[20px] placeholder:text-[16px]';
 			break;
+		// 마이페이지 페이지에서 사용하는 입력창
+		case 'belongInfo':
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px]';
+			break;
+		case 'abilityInfo':
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[1392px] h-[128px] pl-[20px] placeholder:text-[17px]';
+			break;
+		case 'awardInfo':
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[1392px] h-[90px] pl-[20px] placeholder:text-[17px]';
+			break;
+		case 'setting':
+			inputStyle =
+				'bg-[#F5F5F5] rounded-[10px] w-[612px] h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
+			break;
 		default:
 			break;
 	}

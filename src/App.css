@@ -1,6 +1,6 @@
 #root {
   max-width: 1920px;  /* 전체 넓이 꽉채우도록 재설정 */
-  max-height: 100vh;
+  max-height: 100%;
   margin: 0 auto;
   /* padding: 2rem; */
   padding: 0;         /* 컨텐츠가 빈틈없이 렌더링되도록 재설정 */

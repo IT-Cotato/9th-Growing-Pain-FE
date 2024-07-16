@@ -216,6 +216,19 @@ const applicaionDetailData = [
 	},
 ];
 
+const infoData = {
+  name: "김수윤",
+  company: "숙명여자대학교 영어영문학과",
+  belong: "숙명여자대학교 영어영문학과 재학생",
+  education: "숙명여자대학교 영어영문학과",
+  skill: "퍼블릭 스피킹",
+  activity: "IT동아리 코테이토 8기 활동",
+  award: "해커톤 1등",
+  toefl: "120",
+  career: "5년간의 UX 리서치 경험을 바탕으로 사용자 인터뷰와 설문조사를 기획하고 실행하며, 사용성 테스트와 데이터 분석을 통해 사용자 경험을 개선하는 데 주력해왔습니다. 다양한 디자인 툴과 프로토타입 툴을 사용하여 여러 부서와 협업하며, 사용자 중심의 제품 디자인 및 개발을 진행했습니다. 모바일 앱 리디자인 프로젝트에서는 사용자 피드백을 반영하여 인터페이스를 개선하고, 웹사이트 리뉴얼 프로젝트에서는 사용자의 행동 데이터를 분석하여 정보 구조를 재설계하는 등의 성과를 이루었습니다.",
+  about: "저는 창의적이고 분석적인 사고를 바탕으로 사용자 경험(UX) 리서치 분야에서 5년간 일해왔습니다. 대학에서 UX 디자인을 전공한 후, 다양한 워크숍과 온라인 강좌를 통해 최신 UX 리서치 기법과 도구를 익히며 지속적으로 역량을 강화해왔습니다. 제 주요 업무는 사용자 인터뷰와 설문조사를 기획하고 실행하는 것이며, 이를 통해 얻은 데이터를 분석하여 사용자 경험을 개선하는 데 주력하고 있습니다. 또한, 사용성 테스트를 통해 제품의 문제점을 파악하고 해결책을 제안하는 역할을 맡고 있습니다.",
+}
+
 export const GrowthStateContext = createContext();
 
 function App() {
@@ -223,7 +236,7 @@ function App() {
 
 	return (
 		<>
-			<GrowthStateContext.Provider value={[memberData, jobPostData, applicationData, applicaionDetailData]}>
+			<GrowthStateContext.Provider value={[memberData, jobPostData, applicationData, applicaionDetailData, infoData]}>
 				<Router userInfo={userInfo} />
 			</GrowthStateContext.Provider>
 		</>
