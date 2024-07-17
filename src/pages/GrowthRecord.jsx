@@ -10,7 +10,7 @@ import { activityInfo } from "../utils/activity-info";
 
 const GrowthRecord = () => {
   const nav = useNavigate();
-  const [memberData, jobPostData, applicationData, applicaionDetailData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
+  const [memberData, jobPostData, applicationData, applicaionDetailData, infoData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
 
   // 지원 현황 데이터를 마감일이 짧게 남은 순서대로 정렬
   const sortedApplicationData = [...applicationData].sort((a, b) => {

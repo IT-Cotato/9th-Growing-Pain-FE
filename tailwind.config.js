@@ -23,6 +23,11 @@ export default {
 					commuPosition: '#5B5B5B',
 					// 커뮤니티 시간 색상
 					commuTime: '#8C8C8C',
+					content: "#A8A8A8",
+					// 배경색
+					background: "#F6F9FC",
+					// 마이페이지(커뮤니티 활동) 삭제 버튼
+					deleteBtn: "#9A9A9A",
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
@@ -37,6 +42,9 @@ export default {
 					activityNum: '#C7D5FF',
 					// 커뮤니티 배경 색
 					communityBg: '#F6F9FC',
+					activityNum: "#C7D5FF",
+					// 마이페이지(커뮤니티) 토글 색상
+					mypageToggle: "#EDF6FF",
 				},
 				red: {
 					// 일반 빨간색
