@@ -85,7 +85,7 @@ const Signup = () => {
 			return false;
 		}
 		try {
-			const response = await fetch('http://3.35.80.178:8080/api/path/join/name', {
+			const response = await fetch('/api/path/join/name', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

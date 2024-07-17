@@ -32,6 +32,9 @@ const Button = ({ type, text, onClick }) => {
 		case 'signupSuccess':
 			buttonClasses = 'w-[276px] h-[48px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
 			break;
+		// 커뮤니티 페이지 '저장하기' 버튼
+		case 'communitySave':
+			buttonClasses = 'w-[124px] h-[38px] rounded-[10px] bg-[#26408B] text-white text-[15px] font-normal';
 		// login 페이지의 '로그인' 버튼
 		case 'saveMyInfo':
 			buttonClasses = 'w-[131px] h-[45px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
