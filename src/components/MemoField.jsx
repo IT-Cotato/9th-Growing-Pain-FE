@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MemoField = ({ placeholderText, onChange, type }) => {
-	let inputStyle = 'rounded-[10px]';
+	let inputStyle = 'rounded-[10px] resize-none';
 
 	switch (type) {
 		// 지원현황 - 질문
@@ -15,28 +15,29 @@ const MemoField = ({ placeholderText, onChange, type }) => {
 			break;
 		// 커뮤니티 - 제목
 		case 'communityTitle':
-			inputStyle += 'w-[1065px] h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal text-[#888888]';
+			inputStyle =
+				'resize-none w-[950px] h-[47px] pl-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] rounded-[10px] pt-[14px]';
 			break;
 		// 커뮤니티 - 본문
 		case 'communityMainText':
 			inputStyle =
-				'w-[1065px] h-[126px] pl-[27px] bg-[#F6F6F6] text-[16px] font-normal text-[#888888] leading-[19.09px]';
+				'resize-none w-[950px] h-[126px] pl-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] rounded-[10px] pt-[24px]';
 			break;
 		// 커뮤니티 - 댓글
 		case 'communityComment':
 			inputStyle =
-				'w-[1342px] h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal text-[#888888] leading-[19.09px]';
+				'resize-none w-[1295px] h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[13.5px] rounded-[10px]';
 			break;
 		// 커뮤니티 - 대댓글
 		case 'communityCocoment':
 			inputStyle =
-				'w-[1258px] h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal text-[#888888] leading-[19.09px]';
+				'w-[1258px] h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px]';
 			break;
 		default:
 			break;
 	}
 
-	return <input type={type} placeholder={placeholderText} className={inputStyle} onChange={onChange} />;
+	return <textarea type={type} placeholder={placeholderText} className={inputStyle} onChange={onChange} />;
 };
 
 export default MemoField;

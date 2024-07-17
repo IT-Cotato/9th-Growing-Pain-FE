@@ -32,6 +32,10 @@ const Button = ({ type, text, onClick }) => {
 		case 'signupSuccess':
 			buttonClasses = 'w-[276px] h-[48px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
 			break;
+		// 커뮤니티 페이지 '저장하기' 버튼
+		case 'communitySave':
+			buttonClasses = 'w-[124px] h-[38px] rounded-[10px] bg-[#26408B] text-white text-[15px] font-normal';
+			break;
 		// 정보 수정, 회원가입에 쓰이는 회색 버튼
 		default:
 			buttonClasses = 'rounded-[10px] py-3 px-9 w-[135px] h-[48px] bg-[#E3EAFF] text-[#1F1F1F] text-[16px] font-medium';

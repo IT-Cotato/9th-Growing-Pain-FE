@@ -8,6 +8,36 @@ const FindPassword = () => {
 	const nav = useNavigate();
 	const [email, setEmail] = useState('');
 
+	const sendEmail = async () => {
+		if (!email) {
+			return alert('이메일을 입력하세요.');
+		}
+
+		const payload = { email: email };
+
+		try {
+			const response = await fetch('http://3.35.80.178:8080/api/path/join', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(payload),
+			});
+
+			const data = await response.json();
+
+			if (response.status === 200) {
+				console.log('성공!');
+				nav('/FindPassword2'); // 성공시 페이지 이동
+			} else {
+				alert(data.message || '이메일 전송 중 오류가 발생했습니다.');
+			}
+		} catch (error) {
+			console.error('Error:', error);
+			alert('이메일 전송 중 오류가 발생했습니다.');
+		}
+	};
+
 	return (
 		<div>
 			<div className="header-container">
@@ -47,9 +77,7 @@ const FindPassword = () => {
 						</button>
 						<button
 							className="w-[102px] h-[40px] rounded-[10px] bg-[#26408B] text-[16px] text-white"
-							onClick={() => {
-								nav('/FindPassword2');
-							}}
+							onClick={sendEmail}
 						>
 							다음
 						</button>
