@@ -44,7 +44,7 @@ const Sidebar = () => {
 	const isActive = (path) => (location.pathname === path ? 'bg-gray-lightSide' : '');
 
 	return (
-		<div className="sidebar-container p-5 bg-navy-lightSide w-[288px] h-100%">
+		<div className="sidebar-container p-5 bg-navy-lightSide h-100%">
 			{/* 사이드바 로고 */}
 			{/* 라우팅 수정 필요 */}
 			<div

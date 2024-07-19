@@ -8,9 +8,6 @@ import GrowthRecord from '../pages/GrowthRecord';
 import ApplyRecord from '../pages/ApplyRecord';
 import ActivityRecord from '../pages/ActivityRecord';
 import TotalCommunity from '../pages/TotalCommunity';
-import FreeCommunity from '../pages/FreeCommunity';
-import MemberCommunity from '../pages/MemberCommunity';
-import PortfolioCommunity from '../pages/PortfolioCommunity';
 import MyPage from '../pages/MyPage';
 import About from '../pages/About';
 import Notification from '../pages/Notification';
@@ -66,57 +63,60 @@ const Router = ({ userInfo }) => {
 			element: <AddInfo />, // 추가 정보 페이지 (소셜로그인)
 		},
 
-    {
-      path: ":userId",     // 로그인 이후 이동 가능 페이지
-      element: <ProtectedRoute userInfo={userInfo} />,
-      children: [
-        { path: "Dashboard", element: <Dashboard /> },          // 대시보드
-        { path: "Growth",
-          element: <Layout />,
-          children: [
-            { path: "", element: <GrowthRecord /> },             // 성장기록
-            { path: "Apply",
-              children: [
-                { path: "", element: <ApplyRecord />},           // 지원현황
-                { path: ":id", element: <Detail />},             // 지원현황 - 상세 페이지(편집하기)
-                { path: "Record", element: <Record /> }          // 지원현황 - 기록하기
-              ]
-            },
-            { path: "Activity",
-              children: [
-                { path: ":category", element: <ActivityRecord />},       // 활동기록 - 상세 페이지(편집하기)
-                { path: ":category/:id", element: <EditActivity />},       // 활동기록 - 상세 페이지(편집하기)
-              ]
-            },
-          ],
-        },
-        {
+		{
+			path: ':userId', // 로그인 이후 이동 가능 페이지
+			element: <ProtectedRoute userInfo={userInfo} />,
+			children: [
+				{ path: 'Dashboard', element: <Dashboard /> }, // 대시보드
+				{
+					path: 'Growth',
+					element: <Layout />,
+					children: [
+						{ path: '', element: <GrowthRecord /> }, // 성장기록
+						{
+							path: 'Apply',
+							children: [
+								{ path: '', element: <ApplyRecord /> }, // 지원현황
+								{ path: ':id', element: <Detail /> }, // 지원현황 - 상세 페이지(편집하기)
+								{ path: 'Record', element: <Record /> }, // 지원현황 - 기록하기
+							],
+						},
+						{
+							path: 'Activity',
+							children: [
+								{ path: ':category', element: <ActivityRecord /> }, // 활동기록 - 상세 페이지(편집하기)
+								{ path: ':category/:id', element: <EditActivity /> }, // 활동기록 - 상세 페이지(편집하기)
+							],
+						},
+					],
+				},
+				{
 					path: 'Community',
 					element: <Layout />,
 					children: [
 						{ path: 'Total', element: <TotalCommunity /> }, // 전체 게시판
-						{ path: 'Free', element: <FreeCommunity /> }, // 자유 게시판
-						{ path: 'Member', element: <MemberCommunity /> }, // 팀원모집 게시판
-						{ path: 'Portfolio', element: <PortfolioCommunity /> }, // 포트폴리오 게시판
+						{ path: 'Free', element: <TotalCommunity category={'free'} /> }, // 자유 게시판
+						{ path: 'Member', element: <TotalCommunity category={'member'} /> }, // 팀원모집 게시판
+						{ path: 'Portfolio', element: <TotalCommunity category={'portfolio'} /> }, // 포트폴리오 게시판
 					],
 				},
-        { path: "Mypage",
-          element: <Layout />,
-          children: [
-            { path: "", element: <MyPage /> },                    // 마이페이지
-            { path: "EditInfo", element: <EditMyInfo /> },        // 기본 정보 편집
-            { path: "EditAbout", element: <EditMyAbout /> },      // 자기 소개 편집
-            { path: "MyCommunity", element: <MyCommunity /> },    // 커뮤니티 활동
-            { path: "Setting", element: <Setting /> },            // 설정
-            { path: "Support", element: <Support /> },            // 문의 및 지원
-            { path: "Notification", element: <Notification /> },  // 알림
-            { path: "Message", element: <Message /> },            // 쪽지
-          ]
-        },
-      ],
-    },
-  ];
-
+				{
+					path: 'Mypage',
+					element: <Layout />,
+					children: [
+						{ path: '', element: <MyPage /> }, // 마이페이지
+						{ path: 'EditInfo', element: <EditMyInfo /> }, // 기본 정보 편집
+						{ path: 'EditAbout', element: <EditMyAbout /> }, // 자기 소개 편집
+						{ path: 'MyCommunity', element: <MyCommunity /> }, // 커뮤니티 활동
+						{ path: 'Setting', element: <Setting /> }, // 설정
+						{ path: 'Support', element: <Support /> }, // 문의 및 지원
+						{ path: 'Notification', element: <Notification /> }, // 알림
+						{ path: 'Message', element: <Message /> }, // 쪽지
+					],
+				},
+			],
+		},
+	];
 
 	const router = createBrowserRouter([...routes]);
 

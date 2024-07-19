@@ -25,9 +25,9 @@ const PostItem = ({
 	};
 
 	return (
-		<div className="bg-white mr-[32px] h-[429px] rounded-[10px]">
+		<div className="bg-white mr-[36px] h-[320px] rounded-[10px]">
 			{/* 프로필 */}
-			<div className="flex pt-[36px] px-[36px] items-center justify-between">
+			<div className="flex pt-[36px] pl-[50px] mr-[36px] items-center justify-between">
 				<div className="flex items-center">
 					{/* 프사 */}
 					<span>
@@ -42,29 +42,25 @@ const PostItem = ({
 						<h1 className="flex text-[14px] text-gray-commuPosition">{createdTime}</h1>
 					</div>
 				</div>
-				{/* 북마크 */}
-				<span className="flex w-[20px] h-[20px] cursor-pointer">
-					<FaRegBookmark />
-				</span>
+				{/* 좋아요, 댓글, 북마크 */}
+				<div className="flex items-center gap-6">
+					<span className="flex items-center text-[14px] gap-[10px] font-medium cursor-pointer">
+						<FaRegHeart className="w-[20px] h-[20px]" />
+						{heart}
+					</span>
+					<span className="flex items-center gap-[10px] text-[14px] font-medium cursor-pointer" onClick={ModalOpen}>
+						<FaRegCommentAlt className="w-[20px] h-[20px]" />
+						{comment}
+					</span>
+					<span className="flex  cursor-pointer">
+						<FaRegBookmark className="w-[20px] h-[20px]" />
+					</span>
+				</div>
 			</div>
 			{/* 글 본문 */}
-			<div className="flex flex-col gap-6 bg-blue-commuBg mx-[36px] mt-[25px] h-[213px] rounded-[10px] place-items-start p-[24px]">
-				<h1 className="text-[17px] font-medium">{postTitle}</h1>
-				<h1 className="flex text-[16px] leading-[31px] whitespace-pre-line text-left">{content}</h1>
-			</div>
-			{/* 좋아요, 댓글 */}
-			<div className="flex gap-2 ml-[36px] mt-[24px] items-center">
-				<span className="flex items-center gap-[10px] text-[14px] font-medium cursor-pointer">
-					<FaRegHeart className="w-[21px] h-[21px]" />
-					{heart}
-				</span>
-				<span
-					className="flex items-center gap-[10px] text-[14px] ml-[20px] font-medium cursor-pointer"
-					onClick={ModalOpen}
-				>
-					<FaRegCommentAlt className="w-[20px] h-[20px]" />
-					{comment}
-				</span>
+			<div className="flex flex-col gap-4 mx-[50px] mt-[36px] rounded-[10px] place-items-start">
+				<h1 className="text-[19px] font-medium">{postTitle}</h1>
+				<h1 className="flex text-[17px] leading-[31px] whitespace-pre-line text-left">{content}</h1>
 			</div>
 			<CommentModal
 				isOpen={isModalOpen}
