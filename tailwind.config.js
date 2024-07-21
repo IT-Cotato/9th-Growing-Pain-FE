@@ -27,6 +27,8 @@ export default {
 					background: '#F6F9FC',
 					// 마이페이지(커뮤니티 활동) 삭제 버튼
 					deleteBtn: '#9A9A9A',
+					// 지원현황 디데이 배경
+					dday: "#F4F6FA"
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색

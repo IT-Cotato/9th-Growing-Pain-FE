@@ -19,7 +19,7 @@ const Setting = () => {
         <div className="menubar">
           <MenubarMyPage />
         </div>
-        <div className="mypage-setting-content w-[1492px] h-[692px] bg-white flex flex-col ml-[70px] mt-[28px] mb-[153px] rounded-[10px]">
+        <div className="mypage-setting-content h-[692px] bg-white flex flex-col mx-[70px] mt-[28px] mb-[153px] rounded-[10px]">
           <div className="h-[41px] flex mx-[50px] mt-[50px] border-b">
             <div>개인 정보</div>
           </div>

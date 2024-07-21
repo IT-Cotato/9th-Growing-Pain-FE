@@ -6,12 +6,12 @@ const MyCommunityItem = ({ id, category, title, writer, date }) => {
   const nav = useNavigate();
 
   return (
-    <div className="apply-item-container h-[88px] my-[5px] text-[15px] border rounded-[10px] flex bg-white items-center">
-      <div className="w-[249px] pl-[40px] cursor-pointer text-left font-medium">{category}</div>
-      <div className="w-[650px] cursor-pointer text-left">{title}</div>
-      <div className="w-[214px] cursor-pointer text-left">{writer}</div>
-      <div className="w-[190px] text-left">{`${format(new Date(date), 'yyyy.MM.dd')}`}</div>
-      <div onClick={()=>nav('/user/mypage/editinfo')} className="cursor-pointer inline text-[15px] text-gray-deleteBtn">삭제</div>
+    <div className="apply-item-container h-[88px] my-[5px] text-[15px] border rounded-[10px] flex gap-[50px] flex bg-white items-center">
+      <div className="w-1/12 pl-[40px] cursor-pointer text-left font-medium">{category}</div>
+      <div className="w-6/12 pl-[100px] cursor-pointer text-left">{title}</div>
+      <div className="w-1/12 cursor-pointer">{writer}</div>
+      <div className="w-1/12">{`${format(new Date(date), 'yyyy.MM.dd')}`}</div>
+      <div onClick={()=>nav('/user/mypage/editinfo')} className="cursor-pointer inline text-[15px] text-gray-deleteBtn text-right">삭제</div>
     </div>
   );
 };

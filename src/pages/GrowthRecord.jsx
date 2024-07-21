@@ -17,19 +17,16 @@ const GrowthRecord = () => {
 		.sort((a, b) => {
 			return getDDay(a.job_post_dead_line) - getDDay(b.job_post_dead_line);
 		})
-		.slice(0, 6); // 가장 짧은 6개만 노출
+		.slice(0, 9); // 가장 짧은 6개만 노출
 
 	return (
 		<div>
-			<div className="top-container flex w-[1632px] h-full">
-				<div className="applicaion-list-container flex-column w-[1010px] ml-[70px] mr-[50px] mt-[42px]">
+			<div className="top-container flex justify-between ml-[70px] mr-[70px] h-full">
+				<div className="applicaion-list-container flex-column mt-[42px]">
 					<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">
 						지원현황
-						<div className="plus-text cursor-pointer" onClick={() => nav('/user/growth/apply')}>
-							더보기
-						</div>
 					</div>
-					<div className="application-item w-[1010px] h-[508px] flex gap-[37px] gap-y-[30px] flex-wrap justify-center">
+					<div className="application-item mx-auto h-[508px] flex gap-[35px] gap-y-[36px] flex flex-wrap place-content-start">
 						{sortedApplicationData.map((application) => {
 							const jobPost = jobPostData.find((post) => post.job_post_id === application.job_post_id);
 
@@ -44,24 +41,25 @@ const GrowthRecord = () => {
 									id={application.job_post_id}
 									company={jobPost.company_name}
 									position={jobPost.job_part}
-									submitDocument={
-										application.application_type === 'DOCUMENT' ? application.submission_status : undefined
-									}
-									submitInterview={
-										application.application_type === 'INTERVIEW' ? application.submission_status : undefined
-									}
 									deadline={getDDay(application.job_post_dead_line)}
+									date={application.job_post_dead_line}
 								/>
 							);
 						})}
 					</div>
 				</div>
-				{/* 캘린더 사용 */}
-				<div className="calendar-container w-[500px] h-[540px] mr-[72px] mt-[42px]">
-					<UseCalendar />
+				<div className='w-[430px] flex-col mt-[42px]'>
+					{/* 캘린더 사용 */}
+					<div className="calendar-container flex-1 mx-[13px] mt-[42px] content-between">
+						<UseCalendar />
+					</div>
+					{/* 광고 */}
+					<div className='ad-container h-[151px]'>
+						<img src="/images/지원현황_광고.png" className="activity-image rounded-t-[10px]" />
+					</div>
 				</div>
 			</div>
-			<div className="activity-container h-[350px] ml-[70px] mr-[70px] mt-[54px]">
+			<div className="activity-container h-[350px] ml-[70px] mr-[71px] mt-[54px]">
 				<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">활동기록</div>
 				<div className="activity-item h-[340px] flex gap-[21px]">
 					{activityInfo.map((info) => {

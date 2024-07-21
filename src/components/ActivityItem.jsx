@@ -6,11 +6,11 @@ const ActivityItem = ({id, name, period, role, type, contribution, url}) => {
   const contentClass = "text-[15px] font-regular text-gray-content";
 
   return (
-    <div className="activity-item flex-col w-[727px] h-[452px]">
+    <div className="activity-item flex-1 flex-col h-[394px] max-w-[49%]">
       <div className="activity-number-container flex justify-end">
         <div className="activity-number bg-navy-activityNum rounded-t-[10px] w-[43px] h-[36px] font-medium flex justify-center items-center">{id+1}</div>
       </div>
-      <div className="activity-item-container w-[727px] h-[416px] flex rounded-[10px] rounded-tr-[0px] border-2 border-gray-line">
+      <div className="activity-item-container h-[394px] flex rounded-[10px] rounded-tr-[0px] border-2 border-gray-line">
         <div className="left w-[344px] h-[416px] pl-[50px] pt-[50px] pb-[50px] text-left">
           <div className="h-[117px] border-r-2">
             <div className={titleClass}>활동명</div>

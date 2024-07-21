@@ -11,7 +11,6 @@ import TotalCommunity from '../pages/TotalCommunity';
 import MyPage from '../pages/MyPage';
 import About from '../pages/About';
 import Notification from '../pages/Notification';
-import Message from '../pages/Message';
 import Layout from '../components/Layout';
 import Record from '../pages/Record';
 import Detail from '../pages/Detail';
@@ -111,7 +110,6 @@ const Router = ({ userInfo }) => {
 						{ path: 'Setting', element: <Setting /> }, // 설정
 						{ path: 'Support', element: <Support /> }, // 문의 및 지원
 						{ path: 'Notification', element: <Notification /> }, // 알림
-						{ path: 'Message', element: <Message /> }, // 쪽지
 					],
 				},
 			],
