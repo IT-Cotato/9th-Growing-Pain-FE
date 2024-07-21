@@ -1,6 +1,9 @@
 .react-calendar {
-  background-color: white;
+  background-color: #F6F9FC;
   border: none;
+  width: 404px;
+  height: 374px;
+  overflow: hidden;
 }
 
 /* 년-월 */
@@ -20,7 +23,7 @@
 .react-calendar__navigation {
   display: flex;
   height: 26px;
-  margin-bottom: 27px;
+  margin-bottom: 10px;
   font-size: 19px;
 }
 
@@ -43,8 +46,9 @@
   text-align: center;
   text-transform: uppercase;
   font: inherit;
-  font-size: 20px;
+  font-size: 16px;
   font-size: medium;
+  margin-bottom: 5px;
 }
 
 .react-calendar__month-view__weekdays__weekday * {
@@ -54,9 +58,9 @@
 /* 요일 */
 .react-calendar__month-view__weekdays__weekday{
   color: black;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: medium;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .react-calendar__month-view__days__day--weekend {
@@ -68,10 +72,25 @@
   text-align: center;
 }
 
+/* 일자들 */
+.react-calendar__month-view__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7일로 나누기 */
+  grid-gap: 6.5px; /* 줄여서 전체 높이에 맞춤 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+}
+
+.react-calendar__month-view__days__day {
+  width: auto; /* 자동으로 너비 조정 */
+  height: auto; /* 자동으로 높이 조정 */
+  padding: 5px; /* 여백 줄임 */
+  box-sizing: border-box; /* 박스 크기 조정 */
+}
+
 /* 이번 달 일자 */
 .react-calendar__tile {
   color: black;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: medium;
   display: flex;
   flex-direction: column;
@@ -81,7 +100,7 @@
   width: 43px;
   height: 43px;
   margin-inline-end: 9px !important;
-  margin: 20px 9px 18px 9px;
+  margin: 0px 0px 5px 0px;
   flex: 0 0 auto !important;
 }
 

@@ -24,12 +24,12 @@ const MyPage = () => {
         <div className="menubar">
           <MenubarMyPage />
         </div>
-        <div className="mypage-content w-[1492px] h-[766px] flex gap-[24px] ml-[70px] mt-[27px]">
-          <div className="mypage-left bg-white w-[535px] rounded-[10px] flex-col">
+        <div className="mypage-content h-[766px] flex gap-[24px] mx-[70px] mt-[27px]">
+          <div className="mypage-left w-1/3 bg-white rounded-[10px] flex-col">
             <div className="text-right items-end h-[17px] mt-[33px] mr-[28px]">
               <div onClick={()=>nav('/user/mypage/editinfo')} className="cursor-pointer inline text-[14px] text-navy-dark">편집</div>
             </div>
-            <div className="w-[428px] h-[220px] flex-col ml-[50px] mr-[47px] flex border-b">
+            <div className="h-[220px] flex-col ml-[50px] mr-[47px] flex border-b">
               <div className={textClass}>
                 <div className={textCategoryClass}>소속</div>
                 <div className={textContentClass}>{infoData.belong}</div>
@@ -39,7 +39,7 @@ const MyPage = () => {
                 <div className={textContentClass}>{infoData.education}</div>
               </div>
             </div>
-            <div className="w-[428px] h-[387px] flex-col mt-[55px] ml-[50px] mr-[47px]">
+            <div className="h-[387px] flex-col mt-[55px] ml-[50px] mr-[47px]">
               <div className={textClass}>
                 <div className={textCategoryClass}>스킬</div>
                 <div className={textContentClass}>{infoData.skill}</div>
@@ -58,17 +58,17 @@ const MyPage = () => {
               </div>
             </div>
           </div>
-          <div className="mypage-right bg-white w-[943px] rounded-[10px]">
+          <div className="mypage-right w-2/3 bg-white w-[943px] rounded-[10px]">
             <div className="text-right items-end h-[17px] mt-[33px] mr-[28px]">
               <div onClick={()=>nav('/user/mypage/editabout')} className="cursor-pointer inline text-[14px] text-navy-dark">편집</div>
             </div>
-            <div className="w-[843px] h-[282px] flex-col ml-[50px] mr-[47px] flex border-b">
+            <div className="h-[282px] flex-col ml-[50px] mr-[47px] flex border-b">
               <div className={textClass}>
                 <div className={textCategoryClass}>경력</div>
                 <div className={textContentClass}>{infoData.career}</div>
               </div>
             </div>
-            <div className="w-[843px] h-[387px] flex-col mt-[107px] ml-[50px] mr-[47px]">
+            <div className="h-[387px] flex-col mt-[107px] ml-[50px] mr-[47px]">
               <div className={textClass}>
                 <div className={textCategoryClass}>나에 대해서</div>
                 <div className={textContentClass}>{infoData.about}</div>

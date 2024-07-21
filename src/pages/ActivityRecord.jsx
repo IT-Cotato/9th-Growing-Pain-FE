@@ -47,7 +47,7 @@ const ActivityRecord = () => {
 
 	return (
 		<div className="activity-container flex-col">
-			<div className="category-bar bg-navy-lightSide flex w-[1492px] h-[50px] mx-[70px] mt-[84px] rounded-[10px]">
+			<div className="category-bar bg-navy-lightSide flex h-[50px] mx-[70px] mt-[50px] rounded-[10px]">
 				<div
 					onClick={() => nav('/user/growth/activity/extracurricular')}
 					className={`${isActive('/user/growth/activity/extracurricular')} rounded-l-[10px]`}
@@ -89,7 +89,7 @@ const ActivityRecord = () => {
 				</div>
 			</div>
 			{/* "활동 추가하기" 버튼과 일단 안 겹치게 구현하고 나중에 겹치게 수정 */}
-			<div className="activity-record-content w-[1492px] h-[895px] mx-[70px] flex flex-wrap gap-[35px]">
+			<div className="activity-record-content h-[895px] mx-[70px] flex flex-wrap gap-[40px] gap-x-[40px]">
 				{activityData.map((item) => {
 					return (
 						<ActivityItem

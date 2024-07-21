@@ -171,13 +171,6 @@ const Sidebar = () => {
 							<BellAlertIcon className={iconClass} />
 							알림
 						</div>
-						<div
-							className={`${menuItemClass} ${isActive('/user/mypage/message')}`}
-							onClick={() => nav('/user/mypage/message')}
-						>
-							<EnvelopeIcon className={iconClass} />
-							쪽지
-						</div>
 					</div>
 				)}
 			</div>
