@@ -54,52 +54,54 @@ const MyCommunity = () => {
 
   return (
     <div>
-      <div className="ml-[70px] mt-[53px]">
-        <HeaderMyPage name={infoData.name} company={infoData.company} />
-      </div>
-      <div className="mypage-content-container flex-col">
-        <div className="menubar">
-          <MenubarMyPage />
+      <div className="mx-[70px] mt-[53px]">
+        <div>
+          <HeaderMyPage name={infoData.name} company={infoData.company} />
         </div>
-        <div className="mypage-content h-[692px] bg-white flex flex-col mx-[70px] mt-[28px] mb-[153px] rounded-[10px]">
-          <div className="mypage-toggle h-[112px] flex justify-end relative">
-            <div ref={inSection} onClick={clickToggle} className="w-[202px] h-[42px] mt-[42px] mb-[28px] mr-[41px] px-[20px] flex justify-between items-center bg-navy-mypageToggle rounded-[10px] cursor-pointer">
-              <div>작성한 글</div>
-              <ChevronDownIcon className={iconClass} />
-            </div>
-            {isOpen === true && (
-            <div className="submenu absolute top-[96px] right-[41px] w-[202px] bg-white border rounded-[10px] shadow-lg">
-              <div className={menuItemClass}>
-                작성한 글
-              </div>
-              <div className={menuItemClass}>
-                작성한 댓글
-              </div>
-              <div className={menuItemClass}>
-                저장한 글
-              </div>
-            </div>
-          )}
+        <div className="mypage-content-container flex-col">
+          <div className="menubar">
+            <MenubarMyPage />
           </div>
-          <div className="mypage-list">
-            <div className="my-community-category flex gap-[50px] h-[61px] pt-[20px] pb-[21px] ml-[59px] mr-[50px] text-[16px] border-t-2 border-b">
-              <div className='w-1/12 pl-[40px] h-[19px]'>카테고리</div>
-              <div className='w-6/12 h-[19px]'>제목</div>
-              <div className='w-1/12 h-[19px]'>작성자</div>
-              <div className='w-1/12 h-[19px]'>작성일</div>
+          <div className="mypage-content h-[692px] bg-white flex flex-col mt-[28px] mb-[153px] rounded-[10px]">
+            <div className="mypage-toggle h-[112px] flex justify-end relative">
+              <div ref={inSection} onClick={clickToggle} className="w-[202px] h-[42px] mt-[42px] mb-[28px] mr-[41px] px-[20px] flex justify-between items-center bg-navy-mypageToggle rounded-[10px] cursor-pointer">
+                <div>작성한 글</div>
+                <ChevronDownIcon className={iconClass} />
+              </div>
+              {isOpen === true && (
+              <div className="submenu absolute top-[96px] right-[41px] w-[202px] bg-white border rounded-[10px] shadow-lg">
+                <div className={menuItemClass}>
+                  작성한 글
+                </div>
+                <div className={menuItemClass}>
+                  작성한 댓글
+                </div>
+                <div className={menuItemClass}>
+                  저장한 글
+                </div>
+              </div>
+            )}
             </div>
-            <div className="my-community-content h-[477px] ml-[61px] mr-[50px] my-[21px] flex-col">
-              {communityData.map((data)=>{// 아이템 순회하면서 렌더링
-                return (
-                  <MyCommunityItem
-                    key={data.id}
-                    category={data.category}
-                    title={data.title}
-                    writer={data.writer}
-                    date={data.date}
-                  />
-                );
-              })}
+            <div className="mypage-list">
+              <div className="my-community-category flex gap-[50px] h-[61px] pt-[20px] pb-[21px] ml-[59px] mr-[50px] text-[16px] border-t-2 border-b">
+                <div className='w-1/12 pl-[40px] h-[19px]'>카테고리</div>
+                <div className='w-6/12 h-[19px]'>제목</div>
+                <div className='w-1/12 h-[19px]'>작성자</div>
+                <div className='w-1/12 h-[19px]'>작성일</div>
+              </div>
+              <div className="my-community-content h-[477px] ml-[61px] mr-[50px] my-[21px] flex-col">
+                {communityData.map((data)=>{// 아이템 순회하면서 렌더링
+                  return (
+                    <MyCommunityItem
+                      key={data.id}
+                      category={data.category}
+                      title={data.title}
+                      writer={data.writer}
+                      date={data.date}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 const HeaderMyPage = ({name, company}) => {
   return (
     <div>
-      <div className="mypage-header-component w-[1492px] h-[80px] flex">
+      <div className="mypage-header-component h-[80px] flex">
         <div className="profile-photo">
           <img className="header-profile-img w-[80px] h-[80px]" src="/images/profile.png" alt="Profile" />
         </div>

@@ -12,8 +12,8 @@ const EditMyInfo = () => {
   const textCategoryClass = 'font-semibold h-[21px] text-[18px] mb-[24px]';
 
   return (
-    <div className="mypage-edit-info w-[1492px] h-[1352px] flex flex-col ml-[70px] my-[50px] bg-navy-lightSide rounded-[10px]">
-      <div className="w-[1395px] h-[258px] mt-[50px] ml-[50px] border-b border-gray-300 text-left">
+    <div className="mypage-edit-info flex flex-col mx-[70px] my-[50px] bg-navy-lightSide rounded-[10px]">
+      <div className="h-[258px] mt-[50px] mx-[50px] border-b border-gray-300 text-left">
         <div className="mb-[20px]">
           <div className={textCategoryClass}>소속</div>
           <div>
@@ -27,7 +27,7 @@ const EditMyInfo = () => {
           </div>
         </div>
       </div>
-      <div className="w-[1395px] h-[891px] mt-[36px] ml-[50px] text-left">
+      <div className="h-[891px] mt-[36px] mx-[50px] text-left">
         <div className="mb-[36px]">
           <div className={textCategoryClass}>스킬</div>
           <div>
@@ -53,7 +53,7 @@ const EditMyInfo = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[36px] mr-[50px] text-right">
+      <div className="my-[36px] mr-[50px] text-right">
         <Button type="saveMyInfo" text="저장하기" onClick={()=>nav("/user/mypage")} />   {/* onClick 수정해야 함 */}
       </div>
     </div>
