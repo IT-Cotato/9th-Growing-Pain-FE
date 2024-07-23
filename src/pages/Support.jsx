@@ -8,12 +8,14 @@ const Support = () => {
 
   return (
     <div>
-      <div className="ml-[70px] mt-[53px]">
-        <HeaderMyPage name={infoData.name} company={infoData.company} />
-      </div>
-      <div className="mypage-content-container flex-col">
-        <div className="menubar">
-          <MenubarMyPage />
+      <div className="mx-[70px] mt-[53px]">
+        <div>
+          <HeaderMyPage name={infoData.name} company={infoData.company} />
+        </div>
+        <div className="mypage-content-container flex-col">
+          <div className="menubar">
+            <MenubarMyPage />
+          </div>
         </div>
       </div>
     </div>

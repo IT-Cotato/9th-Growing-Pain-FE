@@ -31,15 +31,21 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px]';
 			break;
 		case 'abilityInfo':
-			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[1392px] h-[128px] pl-[20px] placeholder:text-[17px]';
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[128px] pl-[20px] placeholder:text-[17px]';
 			break;
 		case 'awardInfo':
-			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[1392px] h-[90px] pl-[20px] placeholder:text-[17px]';
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[90px] pl-[20px] placeholder:text-[17px]';
 			break;
 		case 'setting':
 			inputStyle =
 				'bg-[#F5F5F5] rounded-[10px] w-[612px] h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
 			break;
+		case 'careerInfo':
+		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[350px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
+		break;
+		case 'aboutInfo':
+		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[325px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
+		break;
 		default:
 			break;
 	}

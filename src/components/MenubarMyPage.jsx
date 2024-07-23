@@ -15,7 +15,7 @@ const MenubarMyPage = () => {
 
   return (
     <div>
-      <div className="category-bar flex w-[466px] h-[29px] ml-[71px] mt-[45px] rounded-[10px] justify-items-center gap-[69px]">
+      <div className="category-bar flex h-[29px] mt-[45px] rounded-[10px] justify-items-center gap-[69px]">
         <div onClick={() => nav('/user/mypage')} className={menubarClass}>
           <p className={`${isActive('/user/mypage')} w-[65px]`}>프로필</p>
         </div>
