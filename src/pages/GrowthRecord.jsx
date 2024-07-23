@@ -20,42 +20,46 @@ const GrowthRecord = () => {
 		.slice(0, 9); // 가장 짧은 6개만 노출
 
 	return (
-		<div>
-			<div className="top-container flex justify-between ml-[70px] mr-[70px] h-full">
-				<div className="applicaion-list-container flex-column mt-[42px]">
-					<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">
-						지원현황
-					</div>
-					<div className="application-item mx-auto h-[508px] flex gap-[35px] gap-y-[36px] flex flex-wrap place-content-start">
-						{sortedApplicationData.map((application) => {
-							const jobPost = jobPostData.find((post) => post.job_post_id === application.job_post_id);
+		<div className='flex-grow flex flex-col'>
+			<div className='mx-[70px]'>
+				<div className="top-container flex justify-between h-full">
+					<div className="applicaion-list-container w-[75%] pr-[40px] flex-column mt-[42px]">
+						<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">
+							지원현황
+						</div>
+						<div className="application-item mx-1/12 h-[508px] flex gap-[3%] gap-y-[3%] flex flex-wrap place-content-between">
+							{sortedApplicationData.map((application) => {
+								const jobPost = jobPostData.find((post) => post.job_post_id === application.job_post_id);
 
-							if (!jobPost) {
-								return null; // 공고 데이터를 찾을 수 없는 경우 렌더링하지 않음
-							}
+								if (!jobPost) {
+									return null; // 공고 데이터를 찾을 수 없는 경우 렌더링하지 않음
+								}
 
-							// 아이템 순회하면서 렌더링
-							return (
-								<GrowthApplyItem
-									key={application.job_post_id}
-									id={application.job_post_id}
-									company={jobPost.company_name}
-									position={jobPost.job_part}
-									deadline={getDDay(application.job_post_dead_line)}
-									date={application.job_post_dead_line}
-								/>
-							);
-						})}
+								// 아이템 순회하면서 렌더링
+								return (
+									<GrowthApplyItem
+										key={application.job_post_id}
+										id={application.job_post_id}
+										company={jobPost.company_name}
+										position={jobPost.job_part}
+										deadline={getDDay(application.job_post_dead_line)}
+										date={application.job_post_dead_line}
+									/>
+								);
+							})}
+						</div>
 					</div>
-				</div>
-				<div className='w-[430px] flex-col mt-[42px]'>
-					{/* 캘린더 사용 */}
-					<div className="calendar-container flex-1 mx-[13px] mt-[42px] content-between">
-						<UseCalendar />
-					</div>
-					{/* 광고 */}
-					<div className='ad-container h-[151px]'>
-						<img src="/images/지원현황_광고.png" className="activity-image rounded-t-[10px]" />
+					<div className='w-[35%] flex-col mt-[42px]'>
+						{/* 캘린더 사용 */}
+						<div className="calendar-container flex-1 h-[60%] mx-[13px] mt-[42px] content-between">
+							<UseCalendar />
+						</div>
+						{/* 광고 */}
+						<div className='ad-container h-[30%] flex'>
+							<div className='activity-image rounded-t-[10px] mb-[0px] content-end'>
+								<img src="/images/지원현황_광고.png" />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

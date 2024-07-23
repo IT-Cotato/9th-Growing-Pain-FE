@@ -82,14 +82,14 @@ const ActivityRecord = () => {
 					여분통
 				</div>
 			</div>
-			<div className="plus-container w-[1492px] h-[49px] mx-[70px] content-end top-[-21px] z-100 relative">
+			<div className="plus-container h-[49px] mx-[70px] content-end top-[-21px] z-100 relative">
 				<div className="plus-button w-[115px] flex gap-1 absolute cursor-pointer">
 					<PlusCircleIcon className="w-[24px] h-[24px] text-navy-dark" />
 					활동 추가하기
 				</div>
 			</div>
 			{/* "활동 추가하기" 버튼과 일단 안 겹치게 구현하고 나중에 겹치게 수정 */}
-			<div className="activity-record-content h-[895px] mx-[70px] flex flex-wrap gap-[40px] gap-x-[40px]">
+			<div className="activity-record-content h-[895px] mx-[70px] grid grid-cols-2 gap-x-[2%] gap-y-[1%]">
 				{activityData.map((item) => {
 					return (
 						<ActivityItem

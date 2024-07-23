@@ -1,8 +1,8 @@
 .react-calendar {
   background-color: #F6F9FC;
   border: none;
-  width: 404px;
-  height: 374px;
+  width: auto;
+  height: auto;
   overflow: hidden;
 }
 
@@ -72,34 +72,19 @@
   text-align: center;
 }
 
-/* 일자들 */
-.react-calendar__month-view__days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7일로 나누기 */
-  grid-gap: 6.5px; /* 줄여서 전체 높이에 맞춤 */
-  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
-}
-
-.react-calendar__month-view__days__day {
-  width: auto; /* 자동으로 너비 조정 */
-  height: auto; /* 자동으로 높이 조정 */
-  padding: 5px; /* 여백 줄임 */
-  box-sizing: border-box; /* 박스 크기 조정 */
-}
-
 /* 이번 달 일자 */
 .react-calendar__tile {
   color: black;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: medium;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
-  width: 43px;
-  height: 43px;
-  margin-inline-end: 9px !important;
+  width: 40px;
+  height: 40px;
+  margin-inline-end: 5px !important;
   margin: 0px 0px 5px 0px;
   flex: 0 0 auto !important;
 }
