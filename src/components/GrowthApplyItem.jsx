@@ -14,7 +14,7 @@ const ApplicationStatus = ({ id, company, position, deadline, date }) => {
 
 	return (
     // 지원현황 컴포넌트 - 클릭하면 해당 공모의 상세 페이지로 이동
-		<div onClick={()=>nav(`/user/growth/apply/${id}`)} className="apply-item-container cursor-pointer relative flex-col text-[17px] w-[314px] h-[151px] p-[24px] bg-white border rounded-[10px] box-border shadow-[0px_2px_2px_rgba(0,0,0,0.1)]">
+		<div onClick={()=>nav(`/user/growth/apply/${id}`)} className="apply-item-container cursor-pointer relative flex-col text-[17px] w-[30%] h-[151px] p-[24px] bg-white border rounded-[10px] box-border shadow-[0px_2px_2px_rgba(0,0,0,0.1)]">
       <div className={deadlineColor}>     {/* 디데이에 따라 스타일 다르게 적용 */}
         <div className="rounded-[10px] bg-gray-dday px-[10px] font-medium text-[14px]">D-{deadline}</div>
       </div>
