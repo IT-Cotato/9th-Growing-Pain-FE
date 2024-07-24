@@ -46,6 +46,9 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 		case 'aboutInfo':
 		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[325px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
 		break;
+		case 'applyTitle':
+		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[56px] pl-[40px] placeholder:text-[18px] placeholder:text-wrap ';
+		break;
 		default:
 			break;
 	}

@@ -28,7 +28,7 @@ export default {
 					// 마이페이지(커뮤니티 활동) 삭제 버튼
 					deleteBtn: '#9A9A9A',
 					// 지원현황 디데이 배경
-					dday: "#F4F6FA"
+					dday: "#F4F6FA",
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
@@ -45,6 +45,8 @@ export default {
 					communityBg: '#F6F9FC',
 					// 마이페이지(커뮤니티) 토글 색상
 					mypageToggle: '#EDF6FF',
+					// 면접 추가 버튼
+					interviewBtn: "#C5D2F7",
 				},
 				red: {
 					// 일반 빨간색
