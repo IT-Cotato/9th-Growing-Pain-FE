@@ -27,7 +27,13 @@ const FindPassword2 = () => {
 							<h1 className="font-medium">임시 비밀번호:</h1>
 							<h1 className="font-normal text-[#606060]">{pw}</h1>
 						</div>
-						<Button type={'findPw'} text={'비밀번호 바로 변경하기'} />
+						<Button
+							type={'findPw'}
+							text={'로그인 화면으로 바로가기'}
+							onClick={() => {
+								nav('/login');
+							}}
+						/>
 					</div>
 					<h1 className="mt-[24px] whitespace-pre-line text-[16px] text-[#818181]">{msg}</h1>
 				</div>

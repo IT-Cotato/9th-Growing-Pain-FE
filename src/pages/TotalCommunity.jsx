@@ -27,8 +27,8 @@ const TotalCommunity = ({ category }) => {
 			nickname: 'greatSound',
 			createdTime: '10분전',
 			position: '디자이너',
-			postTitle: '면접관이 너무 무섭게 생겼어요',
-			content: '너무 무섭게 생겨서 한마디도 못했네요...',
+			postTitle: '진짜 너무너무 퇴사하고싶다',
+			content: '근데 다음주 월요일 월급날이네 ^^',
 			heart: 3,
 			comment: 5,
 			bookmartk: false,
@@ -40,8 +40,9 @@ const TotalCommunity = ({ category }) => {
 			nickname: 'yongari',
 			createdTime: '19분전',
 			position: 'PM',
-			postTitle: '집에 가고싶어요...',
-			content: '오늘 정말 너무 졸려요...🥹 \n 하... 집에 너무 가고싶다',
+			postTitle: '일주일 퇴사 문자 통보 해도 될까요?',
+			content:
+				'이번주 월요일 첫 출근 했는데 사람들도 진짜 안 맞고 일 하는게 제가 원하던 직종이 아니라 이게 맞나 생각하고 있었는데 동시기에\n면접 봤던 곳에서 합격연락이 와서 월요일부터 출근 하라는데 혹시 금요일에 퇴근하고 문자로 퇴사 말씀드려도될까요? 문제라도 뭐\n생기거나 그러진 않겠죠? 얼굴 보고는 도저히 말씀드리기싫네요',
 			heart: 3,
 			comment: 5,
 			bookmartk: false,
@@ -59,7 +60,7 @@ const TotalCommunity = ({ category }) => {
 				</div>
 				<div className="flex">
 					<div className="post_wrapper mt-[40px] w-3/4">
-						<PostForm />
+						<PostForm category={category} />
 						<PostList posts={filteredPosts} />
 					</div>
 					<div className="board_wrapper w-1/4">

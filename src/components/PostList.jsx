@@ -3,7 +3,7 @@ import PostItem from './PostItem';
 
 const PostList = ({ posts }) => {
 	return (
-		<div className="my-[36px] space-y-[36px]">
+		<div className="my-[20px] space-y-[20px]">
 			{posts.map((data, index) => (
 				<PostItem
 					key={index}

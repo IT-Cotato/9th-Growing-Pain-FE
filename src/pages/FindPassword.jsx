@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import InputField from '../components/InputField';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 
 const FindPassword = () => {
 	const nav = useNavigate();
@@ -16,21 +17,17 @@ const FindPassword = () => {
 		const payload = { email: email };
 
 		try {
-			const response = await fetch('http://3.35.80.178:8080/api/path/join', {
-				method: 'POST',
+			const response = await axios.post('http://3.35.80.178:8080/api/path/join', payload, {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(payload),
 			});
-
-			const data = await response.json();
 
 			if (response.status === 200) {
 				console.log('성공!');
 				nav('/FindPassword2'); // 성공시 페이지 이동
 			} else {
-				alert(data.message || '이메일 전송 중 오류가 발생했습니다.');
+				alert(response.data.message || '이메일 전송 중 오류가 발생했습니다.');
 			}
 		} catch (error) {
 			console.error('Error:', error);

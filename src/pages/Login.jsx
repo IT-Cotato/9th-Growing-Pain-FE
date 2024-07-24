@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
+import axios from 'axios';
 
 import kakaoLogin from '../assets/images/kakaoLogin.png';
 import googleLogin from '../assets/images/googleLogin.png';
@@ -14,8 +15,8 @@ const Login = () => {
 	const [pw, setPw] = useState('');
 	const [isLogin, setIsLogin] = useState(false); // 로그인 상태 체크
 
-	const REST_API_KEY = '백엔드에게 달라하자...';
-	const REDIRECT_URI = '백엔드에게 달라하자...';
+	const REST_API_KEY = '5300e959ca05bc1379b8c96fedc5723c';
+	const REDIRECT_URI = 'http://localhost:5173/oauth';
 	const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 	const kakaoLoginHandler = () => {
@@ -38,32 +39,43 @@ const Login = () => {
 		};
 
 		try {
-			const response = await fetch('http://3.35.80.178:8080/api/path/join', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+			const response = await axios.post(
+				'https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/path/login',
+				payload,
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
 				},
-				body: JSON.stringify(payload),
-			});
-
-			const data = await response.json();
+			);
 
 			if (response.status === 200) {
 				console.log('성공!');
-				console.log(data);
+				console.log(response.data);
 				// 로그인 상태 업데이트
 				setIsLogin(true);
-				navigate('/signupSuccess'); // 회원가입 성공시 페이지 이동
-			} else if (response.status === 401) {
-				alert('존재하지 않는 이메일입니다.');
-			} else if (response.status === 402) {
-				alert('비밀번호가 틀립니다.');
-			} else {
-				alert('로그인 중 오류가 발생했습니다.');
+				navigate('/user/growth'); // 회원가입 성공시 페이지 이동
 			}
 		} catch (error) {
-			console.error('Error:', error);
-			alert('로그인 중 오류가 발생했습니다.');
+			if (error.response) {
+				// 서버가 응답을 보냈지만 2xx 범위를 벗어나는 상태 코드
+				console.error('Error response:', error.response);
+				if (error.response.status === 401) {
+					alert('존재하지 않는 이메일입니다.');
+				} else if (error.response.status === 402) {
+					alert('비밀번호가 틀립니다.');
+				} else {
+					alert('로그인 중 오류가 발생했습니다.');
+				}
+			} else if (error.request) {
+				// 요청이 만들어졌으나 응답을 받지 못함
+				console.error('Error request:', error.request);
+				alert('서버와의 통신 중 오류가 발생했습니다.');
+			} else {
+				// 오류를 발생시킨 요청 설정 중에 문제가 발생
+				console.error('Error:', error.message);
+				alert('로그인 중 오류가 발생했습니다.');
+			}
 		}
 	};
 
