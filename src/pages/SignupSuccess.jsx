@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import Button from '../components/Button';
 import { FaCheck } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 const SignupSuccess = () => {
 	const nav = useNavigate();

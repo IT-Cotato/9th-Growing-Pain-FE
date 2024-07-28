@@ -1,6 +1,7 @@
 import { FaRegCommentAlt, FaRegHeart, FaHeart, FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import { useState } from 'react';
 import CommentModal from '../components/CommentModal';
+import CategoryTag from './CategoryTag';
 
 const PostItem = ({
 	id,
@@ -12,6 +13,7 @@ const PostItem = ({
 	userProfile,
 	heart,
 	comment,
+	category,
 	bookmark,
 }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,10 +60,15 @@ const PostItem = ({
 						</span>
 					</div>
 				</div>
-				{/* 글 본문 */}
-				<div className="flex flex-col gap-4 mt-[36px] rounded-[10px] place-items-start">
-					<h1 className="text-[18px] font-medium">{postTitle}</h1>
-					<h1 className="flex text-[16px] leading-[31px] whitespace-pre-line text-left">{content}</h1>
+				{/* 글 본문, 카테고리 태그*/}
+				<div className="flex justify-between gap-[36px]">
+					<div className="flex flex-col gap-4 mt-[36px] rounded-[10px] place-items-start">
+						<h1 className="text-[18px] font-medium">{postTitle}</h1>
+						<h1 className="flex text-[16px] leading-[31px] whitespace-pre-line text-left">{content}</h1>
+					</div>
+					<div className="self-end">
+						<CategoryTag category={category} />
+					</div>
 				</div>
 				<CommentModal
 					isOpen={isModalOpen}
