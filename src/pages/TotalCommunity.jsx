@@ -6,6 +6,7 @@ import 프사 from '/images/공모전.png';
 import MenuBar from '../components/MenuBar';
 
 const TotalCommunity = ({ category }) => {
+	// Mock Data인데 이걸 서버에서 가져와도 useState에 저장하는게 맞겠지...?
 	const [posts, setPosts] = useState([
 		{
 			post_id: 1,
@@ -32,7 +33,7 @@ const TotalCommunity = ({ category }) => {
 			heart: 3,
 			comment: 5,
 			bookmartk: false,
-			category: 'member',
+			category: 'study',
 		},
 		{
 			profile: 프사,
@@ -48,9 +49,45 @@ const TotalCommunity = ({ category }) => {
 			bookmartk: false,
 			category: 'portfolio',
 		},
+		{
+			profile: 프사,
+			post_id: 4,
+			nickname: 'hahaha',
+			createdTime: '10분전',
+			position: '디자이너',
+			postTitle: '청소를하자...',
+			content: '청소를하자 청소를하자',
+			heart: 3,
+			comment: 5,
+			bookmartk: false,
+			category: 'contest',
+		},
+		{
+			profile: 프사,
+			post_id: 5,
+			nickname: 'omg',
+			createdTime: '10분전',
+			position: '디자이너',
+			postTitle: '하...',
+			content: '하..........',
+			heart: 3,
+			comment: 5,
+			bookmartk: false,
+			category: 'project',
+		},
 	]);
 
-	const filteredPosts = category ? posts.filter((post) => post.category === category) : posts;
+	// const filteredPosts = category ? posts.filter((post) => post.category === category) : posts;
+
+	// 카테고리(props)가 없으면 전체 포스트를 반환(전체 게시판).
+	// 카테고리가 있으면 카테고리가 배열인지 확인(팀원모집 게시판) 후 배열이 아니라면 post의 카테고리 이름과 props 카테고리 이름이 같은 게시글만 반환
+	// 카테고리가 배열이라면, 해당 배열에 포함된 카테고리의 post들만 반환
+
+	const filteredPosts = category
+		? Array.isArray(category)
+			? posts.filter((post) => category.includes(post.category))
+			: posts.filter((post) => post.category === category)
+		: posts;
 
 	return (
 		<div className="main flex-grow flex flex-col bg-navy-communityBg">

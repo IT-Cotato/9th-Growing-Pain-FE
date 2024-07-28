@@ -24,6 +24,7 @@ import Setting from '../pages/Setting';
 import Support from '../pages/Support';
 import EditMyInfo from '../pages/EditMyInfo';
 import EditMyAbout from '../pages/EditMyAbout';
+import React from 'react';
 
 // 부모 컴포넌트로부터 로그인 여부에 대한 값 받아와서 사용
 const Router = ({ userInfo }) => {
@@ -95,7 +96,7 @@ const Router = ({ userInfo }) => {
 					children: [
 						{ path: 'Total', element: <TotalCommunity /> }, // 전체 게시판
 						{ path: 'Free', element: <TotalCommunity category={'free'} /> }, // 자유 게시판
-						{ path: 'Member', element: <TotalCommunity category={'member'} /> }, // 팀원모집 게시판
+						{ path: 'Member', element: <TotalCommunity category={['project', 'contest', 'study']} /> }, // 팀원모집 게시판
 						{ path: 'Portfolio', element: <TotalCommunity category={'portfolio'} /> }, // 포트폴리오 게시판
 					],
 				},

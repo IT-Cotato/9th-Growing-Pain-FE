@@ -12,7 +12,9 @@ const PostForm = ({ category }) => {
 
 	const categoryOptions = {
 		free: '자유',
-		member: '팀원모집',
+		study: '팀원모집',
+		contest: '팀원모집',
+		project: '팀원모집',
 		portfolio: '포트폴리오',
 	};
 
