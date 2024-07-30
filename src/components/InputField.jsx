@@ -38,7 +38,7 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			break;
 		case 'setting':
 			inputStyle =
-				'bg-[#F5F5F5] rounded-[10px] w-3/4 h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
+				'bg-[#F5F5F5] rounded-[10px] w-[60%] h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
 			break;
 		case 'careerInfo':
 		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[350px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
