@@ -44,12 +44,13 @@ const MyCommunity = () => {
             <div className="mypage-toggle h-[112px] mt-[42px] mb-[28px] mr-[41px] flex justify-end relative">
               <Toggle menuItems={["작성한 글", "작성한 댓글", "저장한 글"]} bg={'bg-navy-mypageToggle'} />
             </div>
-            <div className="mypage-list">
+            <div className="mypage-list w-[100%]">
               <div className="my-community-category flex gap-[50px] h-[61px] pt-[20px] pb-[21px] ml-[59px] mr-[50px] text-[16px] border-t-2 border-b">
-                <div className='w-1/12 pl-[40px] h-[19px]'>카테고리</div>
+                <div className='w-2/12 pl-[40px] h-[19px] text-left'>카테고리</div>
                 <div className='w-6/12 h-[19px]'>제목</div>
                 <div className='w-1/12 h-[19px]'>작성자</div>
-                <div className='w-1/12 h-[19px]'>작성일</div>
+                <div className='w-2/12 h-[19px]'>작성일</div>
+                <div className="w-1/12 h-[19px]"></div>
               </div>
               <div className="my-community-content h-[477px] ml-[61px] mr-[50px] my-[21px] flex-col">
                 {communityData.map((data)=>{// 아이템 순회하면서 렌더링
