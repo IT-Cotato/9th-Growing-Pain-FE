@@ -48,8 +48,7 @@ const Sidebar = () => {
 			{/* 사이드바 로고 */}
 			{/* 라우팅 수정 필요 */}
 			<div
-				className="sidebar-logo p-5 flex relative text-[20px] gap-3 items-center cursor-pointer"
-				onClick={() => nav('/')}
+				className="sidebar-logo p-5 flex relative text-[20px] gap-3 items-center"
 			>
 				<img className="sidebar-logo-img w-14 h-14" src={logo} alt="Logo" />
 				Growth Pain

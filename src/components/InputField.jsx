@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputField = ({ placeholderText, className, icon: Icon, onChange, type, onKeyDown, place }) => {
+const InputField = ({ placeholderText, className, icon: Icon, onChange, type, onKeyDown, place, value }) => {
 	let inputStyle = 'border border-[#26408B] rounded-[10px] w-[336px] h-14 pl-[65px] placeholder:text-[17px]';
 
 	switch (place) {
@@ -38,7 +38,7 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			break;
 		case 'setting':
 			inputStyle =
-				'bg-[#F5F5F5] rounded-[10px] w-[612px] h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
+				'bg-[#F5F5F5] rounded-[10px] w-3/4 h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
 			break;
 		case 'careerInfo':
 		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[350px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
@@ -62,6 +62,7 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 				className={inputStyle}
 				onChange={onChange}
 				onKeyDown={onKeyDown}
+				value={value}
 			/>
 		</div>
 	);

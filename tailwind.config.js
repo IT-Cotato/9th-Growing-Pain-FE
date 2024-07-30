@@ -29,6 +29,8 @@ export default {
 					deleteBtn: '#9A9A9A',
 					// 지원현황 디데이 배경
 					dday: "#F4F6FA",
+					// gray-300
+					300: "#f0f0f0",
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
@@ -47,6 +49,10 @@ export default {
 					mypageToggle: '#EDF6FF',
 					// 면접 추가 버튼
 					interviewBtn: "#C5D2F7",
+					// 지원현황 + 버튼
+					applyPlusButton: "#C9D3FF",
+					// 지원현황 - 버튼
+					applyMinusButton: "#DEE3FA",
 				},
 				red: {
 					// 일반 빨간색
