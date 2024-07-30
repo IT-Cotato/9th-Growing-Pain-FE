@@ -16,7 +16,7 @@ import Record from '../pages/Record';
 import Detail from '../pages/Detail';
 import FindPassword from '../pages/FindPassword';
 import FindPassword2 from '../pages/FindPassword2';
-import EditActivity from '../pages/EditActivity';
+import DetailActivity from '../pages/DetailActivity';
 import AddInfo from '../pages/AddInfo';
 import SignupSuccess from '../pages/SignupSuccess';
 import MyCommunity from '../pages/MyCommunity';
@@ -25,6 +25,7 @@ import Support from '../pages/Support';
 import EditMyInfo from '../pages/EditMyInfo';
 import EditMyAbout from '../pages/EditMyAbout';
 import React from 'react';
+import NewActivity from '../pages/NewActivity';
 
 // 부모 컴포넌트로부터 로그인 여부에 대한 값 받아와서 사용
 const Router = ({ userInfo }) => {
@@ -84,8 +85,9 @@ const Router = ({ userInfo }) => {
 						{
 							path: 'Activity',
 							children: [
-								{ path: ':category', element: <ActivityRecord /> }, // 활동기록 - 상세 페이지(편집하기)
-								{ path: ':category/:id', element: <EditActivity /> }, // 활동기록 - 상세 페이지(편집하기)
+								{ path: 'category/:category', element: <ActivityRecord /> }, // 활동기록
+								{ path: 'detail/:id', element: <DetailActivity /> }, // 활동기록 - 상세 페이지(편집하기)
+								{ path: 'new/:id', element: <NewActivity /> }, // 활동기록 추가하기
 							],
 						},
 					],
