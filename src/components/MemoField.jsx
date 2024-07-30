@@ -1,17 +1,27 @@
 import React from 'react';
 
-const MemoField = ({ placeholderText, onChange, type }) => {
+const MemoField = ({ placeholderText, onChange, type, value }) => {
 	let inputStyle = 'rounded-[10px] resize-none';
 
 	switch (type) {
 		// 지원현황 - 질문
 		case 'applyRecordQ':
-			inputStyle += 'w-[1180px] h-[56px] border border-white bg-white text-[18px] pl-[40px] font-medium';
+			inputStyle += ' w-[1180px] h-[56px] border border-white bg-white text-[18px] pl-[40px] font-medium';
 			break;
 		// 지원현황 - 답변
 		case 'applyRecordA':
 			inputStyle +=
 				' w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-medium leading-[21.48px]';
+			break;
+		// 활동기록 편집-기본 정보
+		case 'activityInfo':
+			inputStyle +=
+				' w-[60%] h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%] pt-[4%]';
+			break;
+		// 활동기록 편집-성과 및 활동내용
+		case 'activityContent':
+			inputStyle +=
+				' w-full h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%]';
 			break;
 		// 커뮤니티 - 제목
 		case 'communityTitle':
@@ -37,7 +47,7 @@ const MemoField = ({ placeholderText, onChange, type }) => {
 			break;
 	}
 
-	return <textarea type={type} placeholder={placeholderText} className={inputStyle} onChange={onChange} />;
+	return <textarea value={value} type={type} placeholder={placeholderText} className={inputStyle} onChange={onChange} />;
 };
 
 export default MemoField;

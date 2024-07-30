@@ -98,8 +98,8 @@ const Sidebar = () => {
 							지원현황
 						</div>
 						<div
-							className={`${menuItemClass} ${isActive('/user/growth/activity/extracurricular')}`}
-							onClick={() => nav('/user/growth/activity/extracurricular')}
+							className={`${menuItemClass} ${isActive('/user/growth/activity/category/extracurricular')}`}
+							onClick={() => nav('/user/growth/activity/category/extracurricular')}
 						>
 							<DocumentIcon className={iconClass} />
 							활동기록
