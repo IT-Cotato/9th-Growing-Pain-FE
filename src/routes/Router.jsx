@@ -108,7 +108,6 @@ const Router = ({ userInfo }) => {
 						{ path: 'EditAbout', element: <EditMyAbout /> }, // 자기 소개 편집
 						{ path: 'MyCommunity', element: <MyCommunity /> }, // 커뮤니티 활동
 						{ path: 'Setting', element: <Setting /> }, // 설정
-						{ path: 'Support', element: <Support /> }, // 문의 및 지원
 						{ path: 'Notification', element: <Notification /> }, // 알림
 					],
 				},

@@ -1,0 +1,13 @@
+.react-datepicker {
+  position: relative;
+  right: 10%;
+}
+
+.react-datepicker__header {
+  background-color: white;
+  border-bottom: none;
+}
+
+.react-datepicker__current-month {
+  margin-bottom: 15px !important;
+}

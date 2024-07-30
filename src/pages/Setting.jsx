@@ -28,19 +28,19 @@ const Setting = () => {
               <div>이메일</div>
               <div className="mt-[53px] flex items-center">
                 <div className='w-[90px] mr-[50px]'>현재 비밀번호</div>
-                <div>
+                <div className="flex-1">
                   <InputField place={'setting'} placeholderText={'현재 비밀번호를 입력해주세요.'} />
                 </div>
               </div>
               <div className="mt-[39px] flex items-center">
                 <div className='w-[90px] mr-[50px]'>새 비밀번호</div>
-                <div>
+                <div className="flex-1">
                   <InputField place={'setting'} placeholderText={'새 비밀번호를 입력해주세요.'} />
                 </div>
               </div>
               <div className="mt-[37px] flex items-center">
                 <div className='w-[90px] mr-[50px]'>분야</div>
-                <div>
+                <div className="flex-1">
                   <InputField place={'setting'} />
                 </div>
               </div>

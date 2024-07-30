@@ -11,7 +11,7 @@ const MemoField = ({ placeholderText, onChange, type }) => {
 		// 지원현황 - 답변
 		case 'applyRecordA':
 			inputStyle +=
-				' w-full h-full border border-white bg-white text-[18px] rounded-tr-[0px] pl-[40px] pt-[40px] font-medium leading-[21.48px]';
+				' w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-medium leading-[21.48px]';
 			break;
 		// 커뮤니티 - 제목
 		case 'communityTitle':

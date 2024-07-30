@@ -51,10 +51,11 @@ const Login = () => {
 
 			if (response.status === 200) {
 				console.log('성공!');
+				console.log(response);
 				console.log(response.data);
 				// 로그인 상태 업데이트
 				setIsLogin(true);
-				navigate('/user/growth'); // 회원가입 성공시 페이지 이동
+				navigate('/user/dashboard'); // 회원가입 성공시 페이지 이동
 			}
 		} catch (error) {
 			if (error.response) {
