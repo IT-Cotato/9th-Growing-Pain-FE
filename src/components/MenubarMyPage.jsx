@@ -25,8 +25,8 @@ const MenubarMyPage = () => {
         <div onClick={() => nav('/user/mypage/setting')} className={menubarClass}>
           <p className={`${isActive('/user/mypage/setting')} w-[71px]`}>계정관리</p>
         </div>
-        <div onClick={() => nav('/user/mypage/support')} className={menubarClass}>
-          <p className={`${isActive('/user/mypage/support')} w-[100px]`}>문의 및 지원</p>
+        <div className={menubarClass}>
+          <p className='w-[100px] cursor-pointer'>문의 및 지원</p>
         </div>
       </div>
     </div>

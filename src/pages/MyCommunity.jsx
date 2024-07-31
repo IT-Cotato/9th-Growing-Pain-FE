@@ -4,6 +4,7 @@ import HeaderMyPage from "../components/HeaderMyPage";
 import MenubarMyPage from "../components/MenubarMyPage";
 import MyCommunityItem from "../components/MyCommunityItem";
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import Toggle from "../components/Toggle";
 
 const communityData = [
   {
@@ -24,29 +25,6 @@ const communityData = [
 
 const MyCommunity = () => {
   const [memberData, jobPostData, applicationData, applicaionDetailData, infoData] = useContext(GrowthStateContext);
-  const [isOpen, setIsOpen] = useState(false);
-  const inSection = useRef();
-
-  const clickToggle = () => {
-		setIsOpen(!isOpen);
-	};
-
-  useEffect(() => {
-    const clickOutside = (e) => {
-      if (
-        isOpen &&
-        !inSection.current.contains(e.target)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", clickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", clickOutside);
-    };
-  }, [isOpen]);
 
   // 아이콘 스타일
 	const iconClass = 'size-6 stroke-1';
@@ -63,31 +41,16 @@ const MyCommunity = () => {
             <MenubarMyPage />
           </div>
           <div className="mypage-content h-[692px] bg-white flex flex-col mt-[28px] mb-[153px] rounded-[10px]">
-            <div className="mypage-toggle h-[112px] flex justify-end relative">
-              <div ref={inSection} onClick={clickToggle} className="w-[202px] h-[42px] mt-[42px] mb-[28px] mr-[41px] px-[20px] flex justify-between items-center bg-navy-mypageToggle rounded-[10px] cursor-pointer">
-                <div>작성한 글</div>
-                <ChevronDownIcon className={iconClass} />
-              </div>
-              {isOpen === true && (
-              <div className="submenu absolute top-[96px] right-[41px] w-[202px] bg-white border rounded-[10px] shadow-lg">
-                <div className={menuItemClass}>
-                  작성한 글
-                </div>
-                <div className={menuItemClass}>
-                  작성한 댓글
-                </div>
-                <div className={menuItemClass}>
-                  저장한 글
-                </div>
-              </div>
-            )}
+            <div className="mypage-toggle h-[112px] mt-[42px] mb-[28px] mr-[41px] flex justify-end relative">
+              <Toggle menuItems={["작성한 글", "작성한 댓글", "저장한 글"]} bg={'bg-navy-mypageToggle'} />
             </div>
-            <div className="mypage-list">
+            <div className="mypage-list w-[100%]">
               <div className="my-community-category flex gap-[50px] h-[61px] pt-[20px] pb-[21px] ml-[59px] mr-[50px] text-[16px] border-t-2 border-b">
-                <div className='w-1/12 pl-[40px] h-[19px]'>카테고리</div>
+                <div className='w-2/12 pl-[40px] h-[19px] text-left'>카테고리</div>
                 <div className='w-6/12 h-[19px]'>제목</div>
                 <div className='w-1/12 h-[19px]'>작성자</div>
-                <div className='w-1/12 h-[19px]'>작성일</div>
+                <div className='w-2/12 h-[19px]'>작성일</div>
+                <div className="w-1/12 h-[19px]"></div>
               </div>
               <div className="my-community-content h-[477px] ml-[61px] mr-[50px] my-[21px] flex-col">
                 {communityData.map((data)=>{// 아이템 순회하면서 렌더링

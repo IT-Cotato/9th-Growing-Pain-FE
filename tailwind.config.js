@@ -28,7 +28,10 @@ export default {
 					// 마이페이지(커뮤니티 활동) 삭제 버튼
 					deleteBtn: '#9A9A9A',
 					// 지원현황 디데이 배경
-					dday: '#F4F6FA',
+					dday: "#F4F6FA",
+					// gray-300
+					300: "#f0f0f0",
+
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
@@ -46,9 +49,16 @@ export default {
 					// 마이페이지(커뮤니티) 토글 색상
 					mypageToggle: '#EDF6FF',
 					// 면접 추가 버튼
+
 					interviewBtn: '#C5D2F7',
 					// 커뮤니티 드롭박스 호버 색상
 					commuDropboxHover: '#E7EAF3',
+
+					// 지원현황 + 버튼
+					applyPlusButton: "#C9D3FF",
+					// 지원현황 - 버튼
+					applyMinusButton: "#DEE3FA",
+
 				},
 				red: {
 					// 일반 빨간색
