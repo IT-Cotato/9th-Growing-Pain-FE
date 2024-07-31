@@ -2,6 +2,7 @@ import React from 'react';
 import MemoField from './MemoField';
 import Button from './Button';
 import 프사 from '/images/공모전.png';
+import CustomDropdown from './CustomDropdown';
 
 const PostForm = ({ category }) => {
 	const userData = {
@@ -12,13 +13,11 @@ const PostForm = ({ category }) => {
 
 	const categoryOptions = {
 		free: '자유',
-		study: '팀원모집',
-		contest: '팀원모집',
-		project: '팀원모집',
+		member: ['프로젝트', '공모전', '스터디'],
 		portfolio: '포트폴리오',
 	};
 
-	const selectedCategory = categoryOptions[category];
+	const selectedCategory = category === 'member' ? '팀원모집' : categoryOptions[category];
 
 	return (
 		<div className="h-[378px] bg-white rounded-[10px] mr-[32px] flex-col flex">
@@ -30,14 +29,7 @@ const PostForm = ({ category }) => {
 					<h1 className="ml-[12px] text-[16px] font-medium">{userData.nickname}</h1>
 					<h1 className="text-[14px] ml-[10px] text-gray-commuPosition">{userData.position}</h1>
 				</section>
-				<select className="h-[42px] w-[202px] bg-[#EDF6FF] pl-[20px] rounded-[10px]" value={selectedCategory}>
-					<option value="카테고리" hidden>
-						카테고리
-					</option>
-					<option value="자유">자유</option>
-					<option value="팀원모집">팀원모집</option>
-					<option value="포트폴리오">포트폴리오</option>
-				</select>
+				<CustomDropdown category={category} />
 			</div>
 			<section className="mt-[18px] space-y-[20px] flex-grow flex flex-col mx-[36px]">
 				<MemoField placeholderText={'제목을 입력해주세요'} type={'communityTitle'} />

@@ -15,7 +15,7 @@ const PostList = ({ posts }) => {
 					content={data.content}
 					userProfile={data.profile}
 					heart={data.heart}
-					comment={data.comment}
+					comments={data.comments}
 					bookmart={data.bookmark}
 					category={data.category}
 				/>

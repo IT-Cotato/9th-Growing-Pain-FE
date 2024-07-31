@@ -36,12 +36,12 @@ const MemoField = ({ placeholderText, onChange, type, value }) => {
 		// 커뮤니티 - 댓글
 		case 'communityComment':
 			inputStyle =
-				'resize-none w-[1295px] h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[13.5px] rounded-[10px]';
+				'resize-none h-[125px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[24px] rounded-[10px] w-full';
 			break;
 		// 커뮤니티 - 대댓글
 		case 'communityCocoment':
 			inputStyle =
-				'w-[1258px] h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px]';
+				'resize-none h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[14px] rounded-[10px] w-full';
 			break;
 		default:
 			break;

@@ -12,9 +12,10 @@ const PostItem = ({
 	content,
 	userProfile,
 	heart,
-	comment,
+	comments = [],
 	category,
 	bookmark,
+	replies,
 }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -53,7 +54,7 @@ const PostItem = ({
 						</span>
 						<span className="flex items-center gap-[10px] text-[14px] font-medium cursor-pointer" onClick={ModalOpen}>
 							<FaRegCommentAlt className="w-[20px] h-[20px]" />
-							{comment}
+							{comments.length}
 						</span>
 						<span className="flex  cursor-pointer">
 							<FaRegBookmark className="w-[20px] h-[20px]" />
@@ -67,7 +68,7 @@ const PostItem = ({
 						<h1 className="flex text-[16px] leading-[31px] whitespace-pre-line text-left">{content}</h1>
 					</div>
 					<div className="self-end">
-						<CategoryTag category={category} />
+						<CategoryTag category={Array.isArray(category) ? category[1] : category} />
 					</div>
 				</div>
 				<CommentModal
@@ -81,7 +82,8 @@ const PostItem = ({
 					content={content}
 					userProfile={userProfile}
 					heart={heart}
-					comment={comment}
+					comments={comments}
+					replies={replies}
 				/>
 			</div>
 		</div>

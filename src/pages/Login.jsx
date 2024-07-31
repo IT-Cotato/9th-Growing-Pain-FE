@@ -40,7 +40,7 @@ const Login = () => {
 
 		try {
 			const response = await axios.post(
-				'https://a134126a-ae63-4027-8858-a59993aca8e3.mock.pstmn.io/api/path/login',
+				'https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/path/login',
 				payload,
 				{
 					headers: {
