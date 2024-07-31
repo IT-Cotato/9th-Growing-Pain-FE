@@ -1,4 +1,4 @@
-const categoryTag = ({ category }) => {
+const CategoryTag = ({ category }) => {
 	const categoryNames = {
 		free: '자유',
 		study: '스터디',
@@ -23,4 +23,4 @@ const categoryTag = ({ category }) => {
 	);
 };
 
-export default categoryTag;
+export default CategoryTag;
