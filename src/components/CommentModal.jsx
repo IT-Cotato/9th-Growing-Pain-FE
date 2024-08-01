@@ -4,6 +4,7 @@ import MemoField from './MemoField';
 import { useState, useRef, useEffect } from 'react';
 
 const CommentModal = ({
+	id,
 	isOpen,
 	onClose,
 	nickname,

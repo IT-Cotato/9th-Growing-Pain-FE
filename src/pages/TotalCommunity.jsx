@@ -48,7 +48,7 @@ const TotalCommunity = ({ category }) => {
 							heart: 2,
 						},
 						{
-							id: 3,
+							id: 6,
 							userProfile: 프사,
 							nickname: '김수윤',
 							position: 'Manager',
@@ -93,10 +93,10 @@ const TotalCommunity = ({ category }) => {
 			createdTime: '19분전',
 			position: 'PM',
 			postTitle: '일주일 퇴사 문자 통보 해도 될까요?',
-			contents:
-				'이번주 월요일 첫 출근 했는데 사람들도 진짜 안 맞고 일 하는게 제가 원하던 직종이 아니라 이게 맞나 생각하고 있었는데 동시기에\n면접 봤던 곳에서 합격연락이 와서 월요일부터 출근 하라는데 혹시 금요일에 퇴근하고 문자로 퇴사 말씀드려도될까요? 문제라도 뭐\n생기거나 그러진 않겠죠? 얼굴 보고는 도저히 말씀드리기싫네요',
+			content:
+				'이번주 월요일 첫 출근 했는데 사람들도 진짜 안 맞고 일 하는게 제가 원하던 직종이 아니라 이게 맞나 생각하고 있었는데\n 동시기에 면접 봤던 곳에서 합격연락이 와서 월요일부터 출근 하라는데 혹시 금요일에 퇴근하고 문자로 퇴사 말씀드려도될까요?\n 문제라도 뭐 생기거나 그러진 않겠죠? 얼굴 보고는 도저히 말씀드리기싫네요',
 			heart: 3,
-			comment: [],
+			comments: [],
 			bookmartk: false,
 			category: 'portfolio',
 		},
