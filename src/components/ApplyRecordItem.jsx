@@ -10,8 +10,8 @@ const ApplyRecordItem = ({ id, company, position, submitDocument, submitIntervie
       <div onClick={()=>nav(`/user/growth/apply/${id}`)} className="w-3/12 ml-[67px] cursor-pointer text-left font-medium">{company}</div>
       <div onClick={()=>nav(`/user/growth/apply/${id}`)} className="w-4/12 ml-[30px] cursor-pointer text-left">{position}</div>
       <div className="w-1/12 mr-[20px]">{`${format(new Date(deadline), '~MM/dd')}`}</div>
-      <div className="w-2/12 mr-[20px]">{submitDocument ? '✔️' : '❌'}</div>
-      <div className="w-2/12 mr-[20px]">{submitInterview ? '✔️' : '❌'}</div>
+      <div className="w-2/12 mr-[20px]">{submitDocument === undefined ? '➖' : (submitDocument ? '✅' : '❌')}</div>
+      <div className="w-2/12 mr-[20px]">{submitInterview === undefined ? '➖' : (submitInterview ? '✅' : '❌')}</div>
     </div>
   );
 };

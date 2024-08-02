@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const ActivityCategory = ({key, category, image, content, navLink}) => {
+const ActivityCategory = ({category, image, content, navLink}) => {
   const nav = useNavigate();
 
   return (

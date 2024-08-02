@@ -12,12 +12,28 @@ const GrowthRecord = () => {
 	const nav = useNavigate();
 	const [memberData, jobPostData, applicationData, applicaionDetailData, infoData] = useContext(GrowthStateContext); // 지원현황 데이터 불러오기
 
-	// 지원 현황 데이터를 마감일이 짧게 남은 순서대로 정렬
-	const sortedApplicationData = [...applicationData]
-		.sort((a, b) => {
-			return getDDay(a.job_post_dead_line) - getDDay(b.job_post_dead_line);
-		})
-		.slice(0, 9); // 가장 짧은 6개만 노출
+	// applicationData를 job_post_id를 기준으로 그룹화
+	const groupedData = applicationData.reduce((acc, application) => {
+		if (!acc[application.job_post_id]) {
+			acc[application.job_post_id] = {
+				...application,
+				submitDocument: undefined,
+				submitInterview: undefined,
+			};
+		}
+		if (application.application_type === 'DOCUMENT') {
+			acc[application.job_post_id].submitDocument = application.submission_status;
+		} else if (application.application_type === 'INTERVIEW') {
+			acc[application.job_post_id].submitInterview = application.submission_status;
+		}
+		return acc;
+	}, {});
+
+	// 객체를 배열로 변환 후 마감일이 짧게 남은 순서대로 정렬
+	const combinedData = Object.values(groupedData)
+		.filter(application => getDDay(application.job_post_dead_line) >= 0) // 마감일이 지나지 않은 것만 필터링
+		.sort((a, b) => getDDay(a.job_post_dead_line) - getDDay(b.job_post_dead_line))
+		.slice(0, 9); // 가장 짧은 9개만 노출
 
 	return (
 		<div className='flex-grow flex flex-col'>
@@ -27,8 +43,8 @@ const GrowthRecord = () => {
 						<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">
 							지원현황
 						</div>
-						<div className="application-item mx-1/12 h-[508px] flex gap-[3%] gap-y-[3%] flex flex-wrap place-content-between">
-							{sortedApplicationData.map((application) => {
+						<div className="application-item mx-1/12 h-[508px] flex gap-[3%] gap-y-[3%] flex flex-wrap place-content-start">
+							{combinedData.map((application) => {
 								const jobPost = jobPostData.find((post) => post.job_post_id === application.job_post_id);
 
 								if (!jobPost) {
@@ -38,7 +54,7 @@ const GrowthRecord = () => {
 								// 아이템 순회하면서 렌더링
 								return (
 									<GrowthApplyItem
-										key={application.job_post_id}
+										key={application.job_application_id}
 										id={application.job_post_id}
 										company={jobPost.company_name}
 										position={jobPost.job_part}
@@ -69,7 +85,7 @@ const GrowthRecord = () => {
 					{activityInfo.map((info) => {
 						return (
 							<ActivityCategory
-								key={info.key}
+								key={info.id}
 								category={info.category}
 								image={info.image}
 								content={info.content}
