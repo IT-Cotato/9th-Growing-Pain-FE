@@ -4,15 +4,35 @@ import { useNavigate } from 'react-router-dom';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import ApplyRecordItem from '../components/ApplyRecordItem';
 
+import { getDDay } from '../utils/getDDay';
+
 const ApplyRecord = () => {
   const [memberData, jobPostData, applicationData, applicaionDetailData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
   const ref = useRef(0);
   const nav = useNavigate();
 
+  // applicationData를 job_post_id를 기준으로 그룹화
+  const groupedData = applicationData.reduce((acc, application) => {
+    if (!acc[application.job_post_id]) {
+      acc[application.job_post_id] = {
+        ...application,
+        submitDocument: undefined,
+        submitInterview: undefined,
+      };
+    }
+    if (application.application_type === 'DOCUMENT') {
+      acc[application.job_post_id].submitDocument = application.submission_status;
+    } else if (application.application_type === 'INTERVIEW') {
+      acc[application.job_post_id].submitInterview = application.submission_status;
+    }
+    return acc;
+  }, {});
+
+  // 객체를 배열로 변환
   // 지원 현황 데이터를 마감일이 짧게 남은 순서대로 정렬
-  const sortedApplicationData = [...applicationData].sort((a, b) => {
-    return a.job_post_dead_line - b.job_post_dead_line;
-  })
+  const combinedData = Object.values(groupedData).sort((a, b) => {
+		return getDDay(a.job_post_dead_line) - getDDay(b.job_post_dead_line);
+	});
 
   return (
     <div className='flex-col mx-[70px]'>
@@ -31,7 +51,7 @@ const ApplyRecord = () => {
         <div className='w-2/12 h-[20px] mr-[20px]'>면접 합격 여부</div>
       </div>
       <div className='detail-item-container h-[931px] mt-[13px] flex-col'>
-        {sortedApplicationData.map((application)=>{
+        {combinedData.map((application)=>{
           const jobPost = jobPostData.find(post => post.job_post_id === application.job_post_id);
 
           if (!jobPost) {
@@ -41,12 +61,12 @@ const ApplyRecord = () => {
           // 아이템 순회하면서 렌더링
           return (
             <ApplyRecordItem
-              key={ref.current++}
+              key={application.job_application_id}
               id={application.job_post_id}
               company={jobPost.company_name}
               position={jobPost.job_part}
-              submitDocument={application.application_type === 'DOCUMENT' ? application.submission_status : undefined}
-              submitInterview={application.application_type === 'INTERVIEW' ? application.submission_status : undefined}
+              submitDocument={application.submitDocument}
+              submitInterview={application.submitInterview}
               deadline={application.job_post_dead_line}
             />
           );
