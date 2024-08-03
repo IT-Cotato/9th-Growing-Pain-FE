@@ -4,7 +4,8 @@ import 프사 from '/images/공모전.png';
 
 const replies = [
 	{
-		id: 2,
+		post_id: 1,
+		id: 1,
 		userProfile: 프사,
 		nickname: '김현중',
 		position: 'Designer',
@@ -13,7 +14,8 @@ const replies = [
 		heart: 3,
 	},
 	{
-		id: 3,
+		post_id: 1,
+		id: 2,
 		userProfile: 프사,
 		nickname: '조은솔',
 		position: 'Manager',
@@ -23,7 +25,8 @@ const replies = [
 		heart: 2,
 	},
 	{
-		id: 6,
+		post_id: 1,
+		id: 3,
 		userProfile: 프사,
 		nickname: '김수윤',
 		position: 'Manager',
@@ -79,6 +82,8 @@ const filterApplies = (applies) => {
 		if ([7, 3, 1].includes(daysLeft)) {
 			acc.push({
 				id: apply.job_application_id,
+				job_application_id: apply.job_application_id,
+				job_post_id: apply.job_post_id,
 				content: `등록하신 ${apply.company_name} ${apply.application_type === 'DOCUMENT' ? '서류' : '면접'} 마감 ${daysLeft}일 전이에요!`,
 			});
 		}
@@ -103,7 +108,8 @@ const Notification = () => {
 					<div className='notification-content bg-white flex-1 rounded-[10px] p-[30px]'>
 						{replies.map(reply => (
 							<NotificationItem
-								key={reply.id}
+								key={reply.id+'c'}
+								id={reply.post_id}
 								profile={reply.userProfile}
 								nickname={reply.nickname}
 								time={reply.createdTime}
@@ -118,8 +124,8 @@ const Notification = () => {
 					<div className='notification-content bg-white flex-1 rounded-[10px] p-[30px]'>
 						{applyNotifications.map(apply => (
               <NotificationItem
+								key={apply.job_application_id+'a'}
 								id={apply.job_post_id}
-                key={apply.job_application_id}
                 content={apply.content}
                 type='apply'
               />

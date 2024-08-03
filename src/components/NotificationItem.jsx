@@ -1,22 +1,22 @@
 import React from 'react';
 import logo from '../assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
-import calculateTimeAgo from '../utils/calculateTimeAgo';
+import { calculateTimeAge } from '../utils/calculateTimeAge';
 
 const NotificationItem = ({ id, profile, nickname, time, content, type }) => {
   const nav = useNavigate();
 
   if(type==='community'){
     return (
-      <div className='notification-item mb-[20px] rounded-[10px] border-b-[1px] border-gray-300'>
+      <div className='notification-item mb-[20px] rounded-[10px] border-b-[1px] border-gray-300' onClick={()=>nav(`/user/community/total/#postId=${id}`)} >
         <div className='flex flex-col'>
           <div className='flex items-center gap-[7px]'>
             <img src={profile} alt='Profile' className='w-[30px] h-[30px] rounded-full' />
             <div className='text-[14px] font-medium'>{nickname}</div>
             <div className='text-[14px] text-gray-400'>•</div>
-            <div className='text-[11px] text-gray-400'>{calculateTimeAgo(time)}</div>
+            <div className='text-[11px] text-gray-400'>{calculateTimeAge(time)}</div>
           </div>
-          <p className='my-[15px] text-[13px] text-left'>{content}</p>
+          <p className='my-[15px] text-[13px] text-left cursor-pointer'>{content}</p>
         </div>
       </div>
     );
