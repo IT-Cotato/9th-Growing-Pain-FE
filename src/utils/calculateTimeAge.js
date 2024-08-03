@@ -1,4 +1,4 @@
-const calculateTimeAgo = (createdTime) => {
+export function calculateTimeAge(createdTime) {
   const now = new Date();
   const diffInSeconds = Math.floor((now - createdTime) / 1000);
 
