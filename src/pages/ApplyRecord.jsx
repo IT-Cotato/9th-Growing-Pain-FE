@@ -43,12 +43,13 @@ const ApplyRecord = () => {
           추가하기
         </div>
       </div>
-      <div className='detail-category flex h-[61px] pt-[20px] pb-[21px] gap-[60px] text-[17px] border-t-2 border-b'>
-        <div className='w-3/12 h-[20px] ml-[67px] text-left'>기업명</div>
-        <div className='w-4/12 h-[20px] ml-[35px] text-left'>직무명</div>
+      <div className='detail-category flex h-[61px] pt-[20px] pb-[21px] gap-[60px] text-[16px] border-t-2 border-b'>
+        <div className='w-2/12 h-[20px] ml-[67px] text-left'>기업명</div>
+        <div className='w-3/12 h-[20px] ml-[35px] text-left'>직무명</div>
         <div className='w-1/12 h-[20px] mr-[20px]'>마감일</div>
-        <div className='w-2/12 h-[20px] mr-[20px]'>서류 제출 여부</div>
-        <div className='w-2/12 h-[20px] mr-[20px]'>면접 합격 여부</div>
+        <div className='w-1/12 h-[20px] mr-[20px]'>서류 제출</div>
+        <div className='w-1/12 h-[20px] mr-[20px]'>면접 합격</div>
+        <div className="w-1/12 mr-[20px]"></div>
       </div>
       <div className='detail-item-container h-[931px] mt-[13px] flex-col'>
         {combinedData.map((application)=>{
