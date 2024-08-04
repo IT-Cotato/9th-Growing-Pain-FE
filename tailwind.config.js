@@ -28,10 +28,15 @@ export default {
 					// 마이페이지(커뮤니티 활동) 삭제 버튼
 					deleteBtn: '#9A9A9A',
 					// 지원현황 디데이 배경
-					dday: "#F4F6FA",
+					dday: '#F4F6FA',
 					// gray-300
-					300: "#f0f0f0",
-
+					300: '#f0f0f0',
+					// gray-800
+					700: '#818181',
+					// gray-500
+					500: '#C2C2C2',
+					// gray-800
+					800: '#606060',
 				},
 				navy: {
 					// 로그인 & 회원가입 버튼 색
@@ -55,10 +60,9 @@ export default {
 					commuDropboxHover: '#E7EAF3',
 
 					// 지원현황 + 버튼
-					applyPlusButton: "#C9D3FF",
+					applyPlusButton: '#C9D3FF',
 					// 지원현황 - 버튼
-					applyMinusButton: "#DEE3FA",
-
+					applyMinusButton: '#DEE3FA',
 				},
 				red: {
 					// 일반 빨간색
@@ -69,6 +73,8 @@ export default {
 				blue: {
 					// 커뮤니티 글 배경
 					commuBg: '#F1F5FF',
+					// 커뮤니티 댓글창 댓글쓰기 테두두리
+					commuWriteComment: '#F6F6F6',
 				},
 			},
 		},

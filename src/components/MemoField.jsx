@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiMoreHorizontal, FiNavigation } from 'react-icons/fi';
 
 const MemoField = ({ placeholderText, onChange, type, value }) => {
 	let inputStyle = 'rounded-[10px] resize-none';
@@ -26,17 +27,17 @@ const MemoField = ({ placeholderText, onChange, type, value }) => {
 		// 커뮤니티 - 제목
 		case 'communityTitle':
 			inputStyle =
-				'resize-none h-[47px] pl-[24px] pr-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] rounded-[10px] pt-[14px]';
+				'resize-none h-[47px] pl-[24px] pr-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] rounded-[10px] pt-[14px] w-full';
 			break;
 		// 커뮤니티 - 본문
 		case 'communityMainText':
 			inputStyle =
-				'resize-none h-[126px] px-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] rounded-[10px] pt-[24px]';
+				'resize-none h-[126px] px-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] rounded-[10px] pt-[24px] w-full';
 			break;
 		// 커뮤니티 - 댓글
 		case 'communityComment':
 			inputStyle =
-				'resize-none h-[125px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[24px] rounded-[10px] w-full';
+				'resize-none h-[92px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[24px] rounded-[10px] w-full';
 			break;
 		// 커뮤니티 - 대댓글
 		case 'communityCocoment':
@@ -47,7 +48,14 @@ const MemoField = ({ placeholderText, onChange, type, value }) => {
 			break;
 	}
 
-	return <textarea value={value} type={type} placeholder={placeholderText} className={inputStyle} onChange={onChange} />;
+	return (
+		<div className="relative w-full">
+			<textarea value={value} type={type} placeholder={placeholderText} className={inputStyle} onChange={onChange} />
+			{type === 'communityCocoment' && (
+				<FiNavigation className="absolute right-4 top-[45%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
+			)}
+		</div>
+	);
 };
 
 export default MemoField;
