@@ -23,7 +23,7 @@ const ActivityItem = ({id, name, period, role, type, contribution, url}) => {
             <div className="h-[70px] border-r-2">
               <div className={titleClass}>역할</div>
               <div className={contentClass}>
-                {`${role}%`}
+                {`${role}`}
               </div>
             </div>
             <div className="h-[40px] border-r-2">

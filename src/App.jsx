@@ -203,7 +203,7 @@ const applicationData = [
 		result: 'PASSED',
 		submission_status: true,
 		job_post_start_date: new Date('2024-07-05').getTime(),
-		job_post_dead_line: new Date('2024-08-06').getTime(),
+		job_post_dead_line: new Date('2024-08-08').getTime(),
 	},
 	{
 		job_post_id: 7,
@@ -215,7 +215,7 @@ const applicationData = [
 		result: 'PASSED',
 		submission_status: true,
 		job_post_start_date: new Date('2024-07-05').getTime(),
-		job_post_dead_line: new Date('2024-08-06').getTime(),
+		job_post_dead_line: new Date('2024-08-07').getTime(),
 	},
 	{
 		job_post_id: 8,
