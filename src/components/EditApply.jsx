@@ -147,7 +147,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], applicaionDetailDat
                 <div className='answer-content flex-1 p-[40px] bg-white rounded-[10px] rounded-tr-[0px]'>
                   <textarea 
                     placeholder="내용을 입력하세요"
-                    className='w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-medium leading-[21.48px]'
+                    className='w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-medium leading-[21.48px] outline-none'
                     value = {currentQuestions[currentQuestionIndex]?.content || ''}
                     
                   />
@@ -175,7 +175,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], applicaionDetailDat
                   <p className='font-medium text-[18px] mb-[10px]'>지원기간</p>
                   <div>
                     <DatePicker 
-                      className='max-w-[202px] w-[100%] h-[42px] text-center rounded-[10px]'
+                      className='max-w-[202px] w-[100%] h-[42px] text-center rounded-[10px] outline-none'
                       placeholderText='지원기간을 선택하세요.'
                       showPopperArrow={false}
                       selected={applyDate} 

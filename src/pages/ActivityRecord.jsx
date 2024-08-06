@@ -155,13 +155,13 @@ const ActivityRecord = () => {
 					여분통
 				</div>
 			</div>
-			<div className="plus-container h-[49px] mx-[70px] content-end z-10">
+			<div className="plus-container h-[40px] mx-[70px] content-end z-10">
 				<div className="plus-button w-[115px] flex gap-1 cursor-pointer" onClick={()=>nav(`/user/growth/activity/new/${ref.current}`)}>
 					<PlusCircleIcon className="w-[24px] h-[24px] text-navy-dark" />
 					활동 추가하기
 				</div>
 			</div>
-			<div className="activity-record-content h-[30%] mx-[70px] mt-[-10px] grid grid-cols-2 gap-x-[2%] gap-y-[5%]">
+			<div className="activity-record-content h-[30%] mx-[70px] mt-[-10px] grid grid-cols-2 gap-x-[2%] gap-y-[3%]">
 				{filteredActivities.map((item) => {
 					return (
 						<ActivityItem
