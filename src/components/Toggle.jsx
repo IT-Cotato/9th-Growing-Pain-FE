@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
-const Toggle = ({ menuItems, bg, placeholder }) => {
+const Toggle = ({ menuItems, bg, placeholder, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(placeholder || menuItems[0]);
   const inSection = useRef();
@@ -14,6 +14,9 @@ const Toggle = ({ menuItems, bg, placeholder }) => {
   const handleItemClick = (item) => {
     setSelectedItem(item);
     setIsOpen(false);
+    if (onChange) {
+      onChange(item); // 부모 컴포넌트로 선택된 값 전달
+    }
   };
 
   useEffect(() => {
