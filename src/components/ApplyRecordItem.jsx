@@ -12,7 +12,7 @@ const ApplyRecordItem = ({ id, company, position, submitDocument, submitIntervie
       <div className="w-1/12 mr-[20px]">{`${format(new Date(deadline), '~MM/dd')}`}</div>
       <div className="w-1/12 mr-[20px]">{submitDocument === undefined ? '➖' : (submitDocument ? '✅' : '❌')}</div>
       <div className="w-1/12 mr-[20px]">{submitInterview === undefined ? '➖' : (submitInterview ? '✅' : '❌')}</div>
-      <div className="w-1/12 mr-[20px]">삭제</div>
+      <div className="w-1/12 mr-[20px] cursor-pointer">삭제</div>
     </div>
   );
 };

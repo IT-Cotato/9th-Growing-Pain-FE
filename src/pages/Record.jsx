@@ -5,15 +5,17 @@ import { GrowthStateContext } from "../App";
 const Record = () => {
   const [memberData, jobPostData, applicationData, applicaionDetailData, infoData] = useContext(GrowthStateContext);
 
+  // 지원현황 데이터 생성
+  const handleSave = (savedData) => {
+    // 저장 로직 구현
+    console.log('저장된 데이터:', savedData);
+  };
+
   return (
     <div>
-      {jobPostData.map((jobPost) => {
-        const filteredPostData = jobPostData.filter(app => app.job_post_id === jobPost.job_post_id);
-        const filteredApplicationData = applicationData.filter(app => app.job_post_id === jobPost.job_post_id);
-        const filteredApplicationDetailData = applicaionDetailData.filter(detail => detail.job_post_id === jobPost.job_post_id);
-
-        <EditApply key={jobPost.job_post_id} jobPostData={filteredPostData} applicationData={filteredApplicationData} applicaionDetailData={filteredApplicationDetailData} />
-      })}
+      <EditApply
+        onSave={handleSave}
+      />
     </div>
   );
 }
