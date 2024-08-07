@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiMoreHorizontal, FiNavigation } from 'react-icons/fi';
 
-const MemoField = ({ placeholderText, onChange, type, value }) => {
+const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 	let inputStyle = 'rounded-[10px] resize-none';
 
 	switch (type) {
@@ -37,7 +37,7 @@ const MemoField = ({ placeholderText, onChange, type, value }) => {
 		// 커뮤니티 - 댓글
 		case 'communityComment':
 			inputStyle =
-				'resize-none h-[92px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[24px] rounded-[10px] w-full';
+				'resize-none h-[92px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[24px] rounded-tl-[10px] rounded-tr-[10px] w-full';
 			break;
 		// 커뮤니티 - 대댓글
 		case 'communityCocoment':
@@ -50,9 +50,16 @@ const MemoField = ({ placeholderText, onChange, type, value }) => {
 
 	return (
 		<div className="relative w-full h-[70%]">
-			<textarea value={value} type={type} placeholder={placeholderText} className={inputStyle} onChange={(e) => onChange(e.target.value)} />
+			<textarea
+				value={value}
+				type={type}
+				placeholder={placeholderText}
+				className={inputStyle}
+				onChange={(e) => onChange(e.target.value)}
+				maxLength={maxLength}
+			/>
 			{type === 'communityCocoment' && (
-				<FiNavigation className="absolute right-4 top-[45%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
+				<FiNavigation className="absolute right-4 top-[64%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
 			)}
 		</div>
 	);

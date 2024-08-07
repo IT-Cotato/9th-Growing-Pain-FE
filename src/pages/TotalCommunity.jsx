@@ -127,16 +127,22 @@ const TotalCommunity = ({ category }) => {
 			category: ['member', 'project'],
 		},
 	]);
+	const [search, setSearch] = useState('');
 
-	const filteredPosts = category
-		? posts.filter(
-				// 카테고리(props)가 없으면 전체 포스트를 반환(전체 게시판).
+	const filteredPosts = posts.filter((post) => post.postTitle.toLowerCase().includes(search.toLowerCase()));
+
+	const filteredCategoryPosts = category
+		? filteredPosts.filter(
 				(post) =>
 					Array.isArray(post.category)
 						? post.category.includes(category) // post.category 배열에 category(props)가 포함되어 있는지 확인
 						: post.category === category, // post.category가 단일 값인 경우 category(props)와 일치하는지 확인
 			)
-		: posts;
+		: filteredPosts; // 카테고리(props)가 없으면 전체 포스트를 반환(전체 게시판).
+
+	const onSearchChange = (e) => {
+		setSearch(e.target.value);
+	};
 
 	return (
 		<div className="main flex-grow flex flex-col bg-navy-communityBg">
@@ -147,13 +153,15 @@ const TotalCommunity = ({ category }) => {
 				<div className="flex">
 					<div className="post_wrapper mt-[40px] w-3/4">
 						<PostForm category={category} />
-						<PostList posts={filteredPosts} />
+						<PostList posts={filteredCategoryPosts} />
 					</div>
 					<div className="board_wrapper w-1/4">
 						<div className="relative w-full mt-[40px]">
 							<input
 								placeholder="검색어를 입력해주세요"
 								className="bg-[#EDEDED] w-full h-[48px] rounded-[10px] px-[20px] pr-[50px]"
+								onChange={onSearchChange}
+								value={search}
 							/>
 							<LuSearch className="absolute right-[20px] top-[12px] w-[24px] h-[24px] text-[#888888]" />
 						</div>

@@ -3,6 +3,7 @@ import { FaRegCommentAlt, FaRegHeart } from 'react-icons/fa';
 import MemoField from './MemoField';
 import { useState, useEffect } from 'react';
 import { FiMoreHorizontal, FiNavigation } from 'react-icons/fi';
+import CustomDropdown from './CustomDropdown';
 
 const CommentModal = ({
 	id,
@@ -18,6 +19,8 @@ const CommentModal = ({
 	comments = [],
 }) => {
 	const [openReplies, setOpenReplies] = useState({});
+	const [isHamburgerOpen, setIsHamburgerOpen] = useState({});
+	const [wordCount, setWordCount] = useState(0);
 
 	// 모달창 켜져있으면 뒷 배경 스크롤 막기
 	useEffect(() => {
@@ -38,6 +41,17 @@ const CommentModal = ({
 			...prevState,
 			[commentId]: !prevState[commentId],
 		}));
+	};
+
+	const openHamburger = (commentId) => {
+		setIsHamburgerOpen((prevState) => ({
+			...prevState,
+			[commentId]: !prevState[commentId],
+		}));
+	};
+
+	const onInputHandler = (e) => {
+		setWordCount(e.target.value.length);
 	};
 
 	return (
@@ -79,11 +93,16 @@ const CommentModal = ({
 					<span>
 						<img src={userProfile} alt={`${nickname} profile`} className="rounded-full w-9 h-9" />
 					</span>
-					<div className="h-[132px] w-full rounded-[10px] border solid border-blue-commuWriteComment flex flex-col">
-						<MemoField type={'communityComment'} placeholderText={'댓글을 남기세요'} />
-						<div className="flex items-center justify-end gap-7">
-							<h1 className="text-gray-700">0/300자</h1>
-							<button className="h-[41px] w-1/7 bg-navy-dark rounded-br-[10px] w-[128px] text-[15px] text-white">
+					<div className="h-[132px] w-full rounded-[10px] border-[1.5px] border-solid border-blue-commuWriteComment flex flex-col">
+						<MemoField
+							type={'communityComment'}
+							placeholderText={'댓글을 남기세요'}
+							onChange={onInputHandler}
+							maxLength="300"
+						/>
+						<div className="flex items-center justify-end gap-7 ">
+							<h1 className="text-gray-700">{wordCount}/300자</h1>
+							<button className="h-[41px] bg-navy-dark rounded-br-[10px] w-[128px] text-[15px] text-white">
 								댓글등록
 							</button>
 						</div>
@@ -108,7 +127,15 @@ const CommentModal = ({
 									<div className="flex flex-col mr-[2px] rounded-[10px] mb-[14px] place-items-start ml-[50px] w-[1084px]">
 										<h1 className="flex text-[16px] leading-[31px] whitespace-pre-line text-left">{com.content}</h1>
 									</div>
-									<FiMoreHorizontal className="w-6 h-6" />
+									<FiMoreHorizontal className="w-6 h-6 cursor-pointer" onClick={() => openHamburger(com.id)} />
+
+									{isHamburgerOpen[com.id] && (
+										<div className="absolute right-[71px] mt-[29px] w-[201px] h-[50px] rounded-[10px] border border-[#C5D2F7] hover:bg-navy-commuDropboxHover z-50">
+											<ul>
+												<li className="px-[19px] py-[14px] text-[17px] text-left cursor-pointer">삭제</li>
+											</ul>
+										</div>
+									)}
 								</div>
 								<div className="flex gap-6 items-center">
 									<span className="flex items-center gap-[10px] text-[14px] font-medium cursor-pointer ml-[50px]">
