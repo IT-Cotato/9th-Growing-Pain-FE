@@ -27,12 +27,12 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 		// 커뮤니티 - 제목
 		case 'communityTitle':
 			inputStyle =
-				'resize-none h-[47px] pl-[24px] pr-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] rounded-[10px] pt-[14px] w-full';
+				'resize-none h-[70%] pl-[24px] pr-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] rounded-[10px] pt-[14px] w-full';
 			break;
 		// 커뮤니티 - 본문
 		case 'communityMainText':
 			inputStyle =
-				'resize-none h-[126px] px-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] rounded-[10px] pt-[24px] w-full';
+				'resize-none h-[100%] px-[24px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] rounded-[10px] pt-[24px] w-full';
 			break;
 		// 커뮤니티 - 댓글
 		case 'communityComment':
@@ -49,13 +49,13 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 	}
 
 	return (
-		<div className="relative w-full h-[70%]">
+		<div className="relative w-full h-full">
 			<textarea
 				value={value}
 				type={type}
 				placeholder={placeholderText}
 				className={inputStyle}
-				onChange={(e) => onChange(e.target.value)}
+				onChange={onChange}
 				maxLength={maxLength}
 			/>
 			{type === 'communityCocoment' && (

@@ -31,13 +31,17 @@ const PostForm = ({ category }) => {
 				</section>
 				<CustomDropdown category={category} />
 			</div>
-			<section className="mt-[18px] space-y-[20px] flex-grow flex flex-col mx-[36px]">
-				<MemoField placeholderText={'제목을 입력해주세요'} type={'communityTitle'} />
-				<MemoField placeholderText={'자유롭게 글을 남겨보세요 '} type={'communityMainText'} />
-				<div className="flex justify-end mt-auto">
+			<div className="mt-[18px] flex-grow flex flex-col mx-[36px]">
+				<div className="h-1/4">
+					<MemoField placeholderText={'제목을 입력해주세요'} type={'communityTitle'} />
+				</div>
+				<div className="h-2/4">
+					<MemoField placeholderText={'자유롭게 글을 남겨보세요 '} type={'communityMainText'} />
+				</div>
+				<div className="flex justify-end h-1/4 mt-[18px]">
 					<Button type={'communitySave'} text={'글쓰기'} />
 				</div>
-			</section>
+			</div>
 		</div>
 	);
 };
