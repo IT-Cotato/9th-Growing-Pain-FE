@@ -100,7 +100,7 @@ const CommentModal = ({
 							onChange={onInputHandler}
 							maxLength="300"
 						/>
-						<div className="flex items-center justify-end gap-7 ">
+						<div className="flex items-center justify-end gap-7 mt-[-9px]">
 							<h1 className="text-gray-700">{wordCount}/300자</h1>
 							<button className="h-[41px] bg-navy-dark rounded-br-[10px] w-[128px] text-[15px] text-white">
 								댓글등록
