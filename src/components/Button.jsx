@@ -36,6 +36,9 @@ const Button = ({ type, text, onClick }) => {
 		case 'communitySave':
 			buttonClasses = 'w-[111px] h-[38px] rounded-[10px] bg-[#26408B] text-white text-[15px] font-normal';
 			break;
+		case 'applySave':
+			buttonClasses = 'max-w-[202px] w-[100%] h-[38px] rounded-[10px] bg-[#26408B] text-white text-[15px] font-normal';
+			break;
 		// login 페이지의 '로그인' 버튼
 		case 'saveMyInfo':
 			buttonClasses = 'w-[131px] h-[45px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';

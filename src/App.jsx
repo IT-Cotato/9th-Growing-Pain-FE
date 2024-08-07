@@ -110,6 +110,18 @@ const applicationData = [
 		job_post_dead_line: new Date('2024-10-23').getTime(),
 	},
 	{
+		job_post_id: 0,
+		job_application_id: 2,
+		application_type: 'INTERVIEW',
+		created_at: new Date().getTime(),
+		updated_at: new Date().getTime(),
+		place: '서초구',
+		result: 'PENDING',
+		submission_status: false,
+		job_post_start_date: new Date('2024-07-06').getTime(),
+		job_post_dead_line: new Date('2024-10-23').getTime(),
+	},
+	{
 		job_post_id: 1,
 		job_application_id: 2,
 		application_type: 'DOCUMENT',
@@ -191,7 +203,7 @@ const applicationData = [
 		result: 'PASSED',
 		submission_status: true,
 		job_post_start_date: new Date('2024-07-05').getTime(),
-		job_post_dead_line: new Date('2024-08-06').getTime(),
+		job_post_dead_line: new Date('2024-08-08').getTime(),
 	},
 	{
 		job_post_id: 7,
@@ -203,7 +215,7 @@ const applicationData = [
 		result: 'PASSED',
 		submission_status: true,
 		job_post_start_date: new Date('2024-07-05').getTime(),
-		job_post_dead_line: new Date('2024-08-06').getTime(),
+		job_post_dead_line: new Date('2024-08-07').getTime(),
 	},
 	{
 		job_post_id: 8,

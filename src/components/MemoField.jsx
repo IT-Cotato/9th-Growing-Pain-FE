@@ -7,22 +7,22 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 	switch (type) {
 		// 지원현황 - 질문
 		case 'applyRecordQ':
-			inputStyle += ' w-[1180px] h-[56px] border border-white bg-white text-[18px] pl-[40px] font-medium';
+			inputStyle += ' w-[1180px] h-[56px] border border-white bg-white text-[18px] pl-[40px] font-medium outline-none';
 			break;
 		// 지원현황 - 답변
 		case 'applyRecordA':
 			inputStyle +=
-				' w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-medium leading-[21.48px]';
+				' w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-medium leading-[21.48px] outline-none';
 			break;
 		// 활동기록 편집-기본 정보
 		case 'activityInfo':
 			inputStyle +=
-				' w-[60%] h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%] pt-[4%]';
+				' w-[60%] h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%] outline-none';
 			break;
 		// 활동기록 편집-성과 및 활동내용
 		case 'activityContent':
 			inputStyle +=
-				' w-full h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%]';
+				' w-full h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%] outline-none';
 			break;
 		// 커뮤니티 - 제목
 		case 'communityTitle':
@@ -49,15 +49,9 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 	}
 
 	return (
-		<div className="relative w-full">
-			<textarea
-				value={value}
-				type={type}
-				placeholder={placeholderText}
-				className={inputStyle}
-				onChange={onChange}
-				maxLength={maxLength}
-			/>
+
+		<div className="relative w-full h-[70%]">
+			<textarea value={value} type={type} placeholder={placeholderText} className={inputStyle} onChange={(e) => onChange(e.target.value)} maxLength={maxLength}/>
 			{type === 'communityCocoment' && (
 				<FiNavigation className="absolute right-4 top-[45%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
 			)}

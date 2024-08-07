@@ -43,7 +43,7 @@ const applies = [
 		job_application_id: 1,
 		company_name: '토스',
 		application_type: "DOCUMENT",
-		job_post_dead_line: new Date('2024-08-06').getTime(),
+		job_post_dead_line: new Date('2024-08-09').getTime(),
 	},
 	{
 		job_post_id: 0,
@@ -78,7 +78,7 @@ const applies = [
 const filterApplies = (applies) => {
 	const now = Date.now();
 	const notifications = applies.reduce((acc, apply) => {
-		const daysLeft = Math.ceil((apply.job_post_dead_line - now) / (1000 * 60 * 60 * 24));
+		const daysLeft = Math.ceil((apply.job_post_dead_line - now) / (1000 * 60 * 60 * 24)) - 1;
 		if ([7, 3, 1].includes(daysLeft)) {
 			acc.push({
 				id: apply.job_application_id,
