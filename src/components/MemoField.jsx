@@ -49,11 +49,17 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 	}
 
 	return (
-
 		<div className="relative w-full h-[70%]">
-			<textarea value={value} type={type} placeholder={placeholderText} className={inputStyle} onChange={(e) => onChange(e.target.value)} maxLength={maxLength}/>
+			<textarea
+				value={value}
+				type={type}
+				placeholder={placeholderText}
+				className={inputStyle}
+				onChange={(e) => onChange(e.target.value)}
+				maxLength={maxLength}
+			/>
 			{type === 'communityCocoment' && (
-				<FiNavigation className="absolute right-4 top-[45%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
+				<FiNavigation className="absolute right-4 top-[64%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
 			)}
 		</div>
 	);
