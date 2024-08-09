@@ -47,6 +47,10 @@ const Button = ({ type, text, onClick }) => {
 		case 'findPw':
 			buttonClasses = 'w-[276px] h-[40px] rounded-[10px] bg-[#26408B] text-white text-[17px] font-medium';
 			break;
+		// 대쉬보드 '보내기'
+		case 'dashToday':
+			buttonClasses = 'w-[20%] h-[35px] rounded-[10px] bg-[#26408B] text-white text-[13px] font-regular';
+			break;
 		// 정보 수정, 회원가입에 쓰이는 회색 버튼
 		default:
 			buttonClasses = 'rounded-[10px] py-3 px-9 w-[135px] h-[48px] bg-[#E3EAFF] text-[#1F1F1F] text-[16px] font-medium';

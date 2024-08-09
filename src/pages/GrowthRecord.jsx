@@ -43,7 +43,7 @@ const GrowthRecord = () => {
 						<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">
 							지원현황
 						</div>
-						<div className="application-item mx-1/12 h-[508px] flex gap-[3%] gap-y-[3%] flex flex-wrap place-content-start">
+						<div className="application-item mx-1/12 h-[450px] flex gap-[3%] gap-y-[1%] flex flex-wrap place-content-start">
 							{combinedData.map((application) => {
 								const jobPost = jobPostData.find((post) => post.job_post_id === application.job_post_id);
 
@@ -65,13 +65,13 @@ const GrowthRecord = () => {
 							})}
 						</div>
 					</div>
-					<div className='w-[35%] flex-col mt-[42px]'>
+					<div className='w-[35%] flex-col mt-[30px]'>
 						{/* 캘린더 사용 */}
-						<div className="calendar-container flex-1 h-[60%] mx-[13px] mt-[42px] content-between">
+						<div className="calendar-container flex-1 h-[55%] mx-[13px] mt-[42px] content-between">
 							<UseCalendar />
 						</div>
 						{/* 광고 */}
-						<div className='ad-container h-[30%] flex'>
+						<div className='ad-container h-[25%] flex'>
 							<div className='activity-image rounded-t-[10px] mb-[0px] content-end'>
 								<img src="/images/지원현황_광고.png" />
 							</div>
@@ -79,9 +79,9 @@ const GrowthRecord = () => {
 					</div>
 				</div>
 			</div>
-			<div className="activity-container h-[350px] ml-[70px] mr-[71px] mt-[54px]">
+			<div className="activity-container h-[350px] ml-[70px] mr-[71px] ">
 				<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">활동기록</div>
-				<div className="activity-item h-[340px] flex gap-[21px]">
+				<div className="activity-item h-[280px] flex gap-[21px]">
 					{activityInfo.map((info) => {
 						return (
 							<ActivityCategory

@@ -82,11 +82,15 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   margin-inline-end: 5px !important;
-  margin: 0px 0px 5px 0px;
+  margin: 0% 2% 2% 1%;
   flex: 0 0 auto !important;
+}
+
+.react-calendar__month-view__days {
+  justify-content: space-between;
 }
 
 /* 저번 달 & 다음 달 일자 */
