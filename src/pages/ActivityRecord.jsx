@@ -161,7 +161,7 @@ const ActivityRecord = () => {
 					활동 추가하기
 				</div>
 			</div>
-			<div className="activity-record-content h-[30%] mx-[70px] mt-[-10px] grid grid-cols-2 gap-x-[2%] gap-y-[3%]">
+			<div className="activity-record-content h-[3zzz0%] mx-[70px] mt-[-10px] grid grid-cols-2 gap-x-[2%] gap-y-[3%]">
 				{filteredActivities.map((item) => {
 					return (
 						<ActivityItem

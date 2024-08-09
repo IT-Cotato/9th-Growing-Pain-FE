@@ -4,7 +4,7 @@ const ActivityCategory = ({category, image, content, navLink}) => {
   const nav = useNavigate();
 
   return (
-    <div onClick={() => nav(`${navLink}`)} className="activity-container cursor-pointer h-[304px] rounded-[10px] bg-navy-lightSide box-border shadow-[0px_2px_2px_rgba(0,0,0,0.1)]">
+    <div onClick={() => nav(`${navLink}`)} className="activity-container cursor-pointer h-[280px] rounded-[10px] bg-navy-lightSide box-border shadow-[0px_2px_2px_rgba(0,0,0,0.1)]">
       <div className="activity-img-container">
         <img src={image} className="activity-image rounded-t-[10px]" />
       </div>

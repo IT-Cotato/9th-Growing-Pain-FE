@@ -22,10 +22,10 @@ const EditActivity = ({ editData, onSubmit }) => {
     }
   }, [editData]);
 
-  const handleChange = (field, value) => {
+  const handleChange = (field, e) => {
     setInputData({
       ...inputData,
-      [field]: value,
+      [field]: e.target.value,
     });
   };
 
@@ -46,7 +46,7 @@ const EditActivity = ({ editData, onSubmit }) => {
                   type={'activityInfo'}
                   placeholderText={'활동명을 입력하세요'}
                   value={inputData.activity_name}
-                  onChange={(value) => handleChange('activity_name', value)}
+                  onChange={(e) => handleChange('activity_name', e)}
                 />
               </div>
               <div className="w-[100%] h-[30%] flex gap-[4%] items-center mb-[2%]">
@@ -55,7 +55,7 @@ const EditActivity = ({ editData, onSubmit }) => {
                   type={'activityInfo'}
                   placeholderText={'역할을 입력하세요'}
                   value={inputData.role}
-                  onChange={(value) => handleChange('role', value)}
+                  onChange={(e) => handleChange('role', e)}
                 />
               </div>
               <div className="w-[100%] h-[30%] flex gap-[4%] items-center">
@@ -64,7 +64,7 @@ const EditActivity = ({ editData, onSubmit }) => {
                   type={'activityInfo'}
                   placeholderText={'기여도를 입력하세요'}
                   value={inputData.contribution}
-                  onChange={(value) => handleChange('contribution', value)}
+                  onChange={(e) => handleChange('contribution', e)}
                 />
               </div>
             </div>
@@ -75,7 +75,7 @@ const EditActivity = ({ editData, onSubmit }) => {
                   type={'activityInfo'}
                   placeholderText={'활동기간을 입력하세요'}
                   value={inputData.activity_period}
-                  onChange={(value) => handleChange('activity_period', value)}
+                  onChange={(e) => handleChange('activity_period', e)}
                 />
               </div>
               <div className="w-[100%] h-[30%] flex gap-[4%] items-center mb-[2%]">
@@ -84,7 +84,7 @@ const EditActivity = ({ editData, onSubmit }) => {
                   type={'activityInfo'}
                   placeholderText={'활동유형을 입력하세요'}
                   value={inputData.activity_type}
-                  onChange={(value) => handleChange('activity_type', value)}
+                  onChange={(e) => handleChange('activity_type', e)}
                 />
               </div>
               <div className="w-[100%] h-[30%] flex gap-[4%] items-center">
@@ -93,7 +93,7 @@ const EditActivity = ({ editData, onSubmit }) => {
                   type={'activityInfo'}
                   placeholderText={'URL을 입력하세요'}
                   value={inputData.activity_url}
-                  onChange={(value) => handleChange('activity_url', value)}
+                  onChange={(e) => handleChange('activity_url', e)}
                 />
               </div>
             </div>
