@@ -1,51 +1,65 @@
 import { useParams } from 'react-router-dom';
-import { useContext } from "react";
-import { GrowthStateContext } from "../App";
 import EditApply from "../components/EditApply";
 
 const data = [
   {
     "companyName": "토스",
     "jobPart": "프론트엔드",
-    "memberId": 1,
+    "memberId": "greatsounds613@gmail.com",
     "jobApplications": [
       {
         "applicationType": "DOCUMENT",
-        "place": "Office",
-        "result": "PENDING",
-        "submissionStatus": true,
-        "applicationStartDate": "2024-08-01",
-        "applicationCloseDate": "2024-08-15",
-        "memberId": 1,
+        "place": "서초구",
+        "result": "PASSED",
+        "submissionStatus": "FAILED",
+        "applicationStartDate": "2024-07-06",
+        "applicationCloseDate": "2024-10-23",
+        "memberId": "greatsounds613@gmail.com",
         "jobPostId": 0,
         "applicationDetails": [
           {
-            "title": "자기를 소개해보세요.",
-            "content": "저는 신짱구 5살입니다."
+            "title": "1번 지원서 서류 1",
+            "content": "1번 지원서 서류 1입니다"
           },
           {
-            "title": "Resume",
-            "content": "This is the content of the resume."
+            "title": "1번 지원서 서류 2",
+            "content": "1번 지원서 서류 2입니다"
+          },
+          {
+            "title": "1번 지원서 서류 3",
+            "content": "1번 지원서 서류 3입니다"
           }
         ]
       },
       {
         "applicationType": "INTERVIEW",
-        "place": "Online",
+        "place": "서초구",
         "result": "PENDING",
-        "submissionStatus": true,
-        "applicationStartDate": "2024-08-01",
-        "applicationCloseDate": "2024-08-15",
-        "memberId": 1,
+        "submissionStatus": "FAILED",
+        "applicationStartDate": "2024-07-06",
+        "applicationCloseDate": "2024-10-25",
+        "memberId": "greatsounds613@gmail.com",
         "jobPostId": 0,
         "applicationDetails": [
           {
-            "title": "자기를 소개해보세요.",
-            "content": "저는 신짱구 5살입니다."
-          },
+            "title": "1번 지원서 면접 1",
+            "content": "1번 지원서 면접 1입니다"
+          }
+        ]
+      },
+      {
+        "applicationType": "PEEDBACK",
+        "place": "서초구",
+        "result": "PENDING",
+        "submissionStatus": "PASSED",
+        "applicationStartDate": "2024-07-06",
+        "applicationCloseDate": "2024-10-30",
+        "memberId": "greatsounds613@gmail.com",
+        "jobPostId": 0,
+        "applicationDetails": [
           {
-            "title": "Portfolio",
-            "content": "This is the content of the portfolio."
+            "title": "1번 지원서 피드백 1",
+            "content": "1번 지원서 피드백 1입니다"
           }
         ]
       }
@@ -54,76 +68,159 @@ const data = [
   {
     "companyName": "네이버",
     "jobPart": "AE",
-    "memberId": 1,
+    "memberId": "greatsounds613@gmail.com",
     "jobApplications": [
       {
         "applicationType": "DOCUMENT",
-        "place": "Office",
-        "result": "PENDING",
-        "submissionStatus": true,
-        "applicationStartDate": "2024-08-01",
-        "applicationCloseDate": "2024-08-15",
-        "memberId": 1,
+        "place": "종로구",
+        "result": "PASSED",
+        "submissionStatus": "PASSED",
+        "applicationStartDate": "2024-07-06",
+        "applicationCloseDate": "2024-09-19",
+        "memberId": "greatsounds613@gmail.com",
         "jobPostId": 1,
         "applicationDetails": [
           {
-            "title": "자기를 소개해보세요.",
-            "content": "저는 신짱구 5살입니다."
-          },
-          {
-            "title": "네이버",
-            "content": "주니어 네이버 재밌엇는데,,,"
+            "title": "2번 지원서 서류 1",
+            "content": "2번 지원서 서류 1입니다."
           }
         ]
       },
       {
         "applicationType": "INTERVIEW",
-        "place": "Online",
-        "result": "PENDING",
-        "submissionStatus": true,
-        "applicationStartDate": "2024-08-01",
-        "applicationCloseDate": "2024-08-15",
-        "memberId": 1,
+        "place": "종로구",
+        "result": "PASSED",
+        "submissionStatus": "PENDING",
+        "applicationStartDate": "2024-07-06",
+        "applicationCloseDate": "2024-09-19",
+        "memberId": "greatsounds613@gmail.com",
         "jobPostId": 1,
         "applicationDetails": [
           {
-            "title": "자기를 소개해보세요.",
-            "content": "저는 신짱구 5살입니다."
-          },
-          {
-            "title": "Portfolio",
-            "content": "This is the content of the portfolio."
+            "title": "2번 지원서 면접 1",
+            "content": "2번 지원서 면접 1입니다"
           }
         ]
       }
     ]
   },
-]
+  {
+    "companyName": "카카오",
+    "jobPart": "PM",
+    "memberId": "greatsounds613@gmail.com",
+    "jobApplications": [
+      {
+        "applicationType": "INTERVIEW",
+        "place": "도봉구",
+        "result": "FAILED",
+        "submissionStatus": "PASSED",
+        "applicationStartDate": "2024-07-04",
+        "applicationCloseDate": "2024-08-17",
+        "memberId": "greatsounds613@gmail.com",
+        "jobPostId": 2,
+        "applicationDetails": []
+      }
+    ]
+  },
+  {
+    "companyName": "당근",
+    "jobPart": "UI/UX 디자이너",
+    "memberId": "greatsounds613@gmail.com",
+    "jobApplications": [
+      {
+        "applicationType": "INTERVIEW",
+        "place": "강남구",
+        "result": "PASSED",
+        "submissionStatus": "PASSED",
+        "applicationStartDate": "2024-07-05",
+        "applicationCloseDate": "2024-08-15",
+        "memberId": "greatsounds613@gmail.com",
+        "jobPostId": 3,
+        "applicationDetails": []
+      }
+    ]
+  },
+  {
+    "companyName": "배달의민족",
+    "jobPart": "백엔드",
+    "memberId": "greatsounds613@gmail.com",
+    "jobApplications": [
+      {
+        "applicationType": "DOCUMENT",
+        "place": "마포구",
+        "result": "FAILED",
+        "submissionStatus": "PASSED",
+        "applicationStartDate": "2024-07-06",
+        "applicationCloseDate": "2024-09-02",
+        "memberId": "greatsounds613@gmail.com",
+        "jobPostId": 4,
+        "applicationDetails": []
+      }
+    ]
+  },
+  {
+    "companyName": "쿠팡",
+    "jobPart": "디자이너",
+    "memberId": "greatsounds613@gmail.com",
+    "jobApplications": [
+      {
+        "applicationType": "DOCUMENT",
+        "place": "영등포구",
+        "result": "PENDING",
+        "submissionStatus": "FAILED",
+        "applicationStartDate": "2024-07-02",
+        "applicationCloseDate": "2024-09-25",
+        "memberId": "greatsounds613@gmail.com",
+        "jobPostId": 5,
+        "applicationDetails": []
+      },
+      {
+        "applicationType": "INTERVIEW",
+        "place": "영등포구",
+        "result": "PENDING",
+        "submissionStatus": "FAILED",
+        "applicationStartDate": "2024-07-02",
+        "applicationCloseDate": "2024-09-25",
+        "memberId": "greatsounds613@gmail.com",
+        "jobPostId": 5,
+        "applicationDetails": []
+      }
+    ]
+  }
+];
+
 
 const Detail = () => {
   const params = useParams();
-  const [memberData, jobPostData, applicationData, applicaionDetailData, infoData] = useContext(GrowthStateContext);
 
   const currentId = Number(params.id)
 
   // 현재 페이지에 해당하는 정보만 필터링
-  const filteredPostData = jobPostData.filter(post => post.job_post_id === currentId);
-  const filteredApplicationData = applicationData.filter(app => app.job_post_id === currentId);
-  const filteredApplicationDetailData = applicaionDetailData.filter(detail => detail.job_post_id === currentId);
+  const filteredCompanyData = data.find(company =>
+    company.jobApplications.some(application => application.jobPostId === currentId)
+  );
+  
+  const filteredPostData = {
+    companyName: filteredCompanyData.companyName,
+    jobPart: filteredCompanyData.jobPart,
+  };
 
-  // 지원현황 데이터 생성
-  const handleSave = (savedData) => {
-    // 저장 로직 구현
-    console.log('저장된 데이터:', savedData);
+  const filteredApplicationData = filteredCompanyData.jobApplications.filter(
+    app => app.jobPostId === currentId
+  );
+
+  // 지원현황 데이터 업데이트
+  const handleUpdate = (savedData) => {
+    console.log(savedData);
+    // 업데이트 코드
   };
 
   return (
     <div>
       <EditApply 
-        jobPostData={filteredPostData[0]} 
+        jobPostData={filteredPostData} 
         applicationData={filteredApplicationData}
-        applicaionDetailData={filteredApplicationDetailData}
-        onSave={handleSave}
+        onSave={handleUpdate}
       />
     </div>
   );

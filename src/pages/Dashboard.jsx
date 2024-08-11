@@ -46,15 +46,21 @@ const Dashboard = () => {
     return shuffled.slice(0, 5);
   };
 
+	// 오늘의 다짐 state
   const [randomTalks, setRandomTalks] = useState(getRandomTalks());
+	const [fadeClass, setFadeClass] = useState('fade-in');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRandomTalks(getRandomTalks());
-    }, 10000); // 10초마다 업데이트
+		const interval = setInterval(() => {
+			setFadeClass('animate-pulse'); // 애니메이션 클래스 적용
+			setTimeout(() => {
+				setRandomTalks(getRandomTalks());
+				setFadeClass('');
+			}, 1000); // 애니메이션이 끝날 시간 (1초)
+		}, 10000);
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
-  }, []);
+		return () => clearInterval(interval);
+	}, []);
 
 	return (
 		<div className="layout flex min-h-screen bg-gray-background">
@@ -139,7 +145,7 @@ const Dashboard = () => {
 									<p className='text-[16px] font-medium'>오늘의 다짐</p>
 									<p className='text-[14px] font-medium text-navy-dark my-[10px]'>총 200,304명이 오늘의 다짐을 남겼어요!</p>
 								</div>
-								<div className='content-area h-[65%]'>
+								<div className={`content-area h-[65%] ${fadeClass}`}>
 									{randomTalks.map((talk, index) => (
                     <DashToday key={index} member={talk.member} content={talk.content} last={index === randomTalks.length - 1} />
                   ))}

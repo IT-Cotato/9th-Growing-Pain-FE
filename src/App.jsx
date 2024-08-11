@@ -111,8 +111,8 @@ const applicationData = [
 	},
 	{
 		job_post_id: 0,
-		job_application_id: 2,
-		application_type: 'INTERVIEW',
+		job_application_id: 11,
+		application_type: 'PEEDBACK',
 		created_at: new Date().getTime(),
 		updated_at: new Date().getTime(),
 		place: '서초구',
@@ -259,6 +259,13 @@ const applicaionDetailData = [
 		id: 0,
 		title: '1번 지원서 면접 1',
 		content: '1번 지원서 면접 1입니다',
+	},
+	{
+		job_post_id: 0,
+		application_detail_id: 2,
+		id: 0,
+		title: '1번 지원서 피드백 1',
+		content: '1번 지원서 피드백 1입니다',
 	},
 	{
 		job_post_id: 1,
