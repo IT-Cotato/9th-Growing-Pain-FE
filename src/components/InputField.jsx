@@ -53,6 +53,12 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 		case 'dashToday':
 			inputStyle = 'bg-[#EDEDED] rounded-[10px] w-[100%] h-[35px] pl-[10px] font-normal text-[13px] placeholder:text-[13px] outline-none';
 			break;
+		case 'applyCompany':
+			inputStyle = ' bg-gray-background outline-none font-medium text-[22px] text-left mb-[5px] justify-start';
+			break;
+		case 'applyPart':
+			inputStyle = ' bg-gray-background outline-none font-medium text-[16px] justify-start';
+			break;
 		default:
 			break;
 	}
