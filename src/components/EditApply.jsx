@@ -24,12 +24,17 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   const toggleRef = useRef(null); // 토글 참조용
   const submissionRef = useRef(null); // 제출 여부 드롭다운 참조
   const resultRef = useRef(null); // 결과 드롭다운 참조
+  const appIdRef = useRef(0);
+  const detailIdRef = useRef(0);
+
+  const handleSaveRef = useRef();   // 언마운트시 데이터 실시간 참조를 위한 Ref
 
   const currentQStyle = 'bg-white h-[40px] content-center cursor-pointer';
   const otherQstyle = 'bg-gray-300 h-[40px] content-center cursor-pointer';
   const currentPStyle = 'bg-navy-lightSide cursor-pointer rounded-tl-[10px]';
   const otherPstyle = 'bg-white cursor-pointer rounded-tl-[10px]';
 
+  // 문서 페이지별 토글 내용 렌더링
   useEffect(() => {
     if (applicationDataState.length > 0) {
       const currentPage = applicationDataState[currentPageIndex];
@@ -50,6 +55,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     setCurrentQuestionIndex(0);
   }, [currentPageIndex, applicationDataState]);
 
+  // 토글 핸들러
   const handleToggleClick = () => {
     setIsToggleOpen(prevState => !prevState);
   };
@@ -75,6 +81,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     };
   }, []);
 
+  // 질문 추가 (+ 버튼 클릭)
   const addQuestion = () => {
     const newQuestion = {
       title: '새로운 질문 제목',
@@ -85,6 +92,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     setApplicationData(updatedApplicationData);
   };
 
+  // 질문 삭제 (- 버튼 클릭)
   const removeQuestion = (index) => {
     const updatedApplicationData = [...applicationDataState];
     updatedApplicationData[currentPageIndex].applicationDetails = 
@@ -95,6 +103,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     }
   };
 
+  // 문서 페이지 추가 (면접 추가 버튼 클릭-문서 타입 선택)
   const handleAddPage = (type) => {
     const newPage = {
       applicationType: type,
@@ -111,12 +120,14 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     setIsToggleOpen(false); // 토글 닫기
   };
 
+  // 데이터 저장 (Record-생성, Detail-업데이트)
   const handleSave = () => {
     const savedData = {
       companyName: companyName, // 수정된 회사명
       jobPart: jobPart, // 수정된 직무명
       memberId: jobPostData.memberId,
       jobApplications: applicationDataState.map((app) => ({
+        id: appIdRef.current++,
         applicationType: app.applicationType,
         place: app.place,
         result: app.result,
@@ -126,23 +137,39 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
         memberId: jobPostData.memberId,
         jobPostId: jobPostData.jobPostId,
         applicationDetails: app.applicationDetails.map(question => ({
+          id: detailIdRef.current++,
           title: question.title,
           content: question.content,
         })),
       })),
     };
-    console.log('저장된 데이터:', savedData);
     onSave(savedData); // 부모 컴포넌트로 저장된 데이터 전달
   };
 
+  useEffect(() => {
+    handleSaveRef.current = handleSave;
+  }, [companyName, jobPart, applyDate, currentQuestionIndex, currentPageIndex, applicationDataState, submissionStatus, resultStatus]);
+
+  useEffect(() => {
+    // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
+    return () => {
+      if (handleSaveRef.current) {
+        handleSaveRef.current();
+      }
+    };
+  }, [])
+
+  // 현재 보여져야 하는 질문
   const currentQuestions = applicationDataState[currentPageIndex]?.applicationDetails || [];
 
+  // 질문 내용 수정 핸들러
   const handleQuestionChange = (index, field, value) => {
     const updatedApplicationData = [...applicationDataState];
     updatedApplicationData[currentPageIndex].applicationDetails[index][field] = value;
     setApplicationData(updatedApplicationData);
   };
 
+  // 지원기간 수정 핸들러
   const handleApplyDateChange = (date) => {
     const updatedApplicationData = [...applicationDataState];
     updatedApplicationData[currentPageIndex].applicationCloseDate = date ? date.getTime() : null;
