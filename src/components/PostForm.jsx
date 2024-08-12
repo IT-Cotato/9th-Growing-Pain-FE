@@ -29,10 +29,10 @@ const PostForm = ({ category }) => {
 					<h1 className="ml-[12px] text-[16px] font-medium">{userData.nickname}</h1>
 					<h1 className="text-[14px] ml-[10px] text-gray-commuPosition">{userData.position}</h1>
 				</section>
-				<CustomDropdown category={category} />
+				<CustomDropdown category={category} className="z-50" />
 			</div>
 			<div className="mt-[18px] flex-grow flex flex-col mx-[36px]">
-				<div className="h-1/4">
+				<div className="h-1/4 z-10">
 					<MemoField placeholderText={'제목을 입력해주세요'} type={'communityTitle'} />
 				</div>
 				<div className="h-2/4">

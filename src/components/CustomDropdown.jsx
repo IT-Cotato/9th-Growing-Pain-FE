@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 
 const categoryOptions = {
@@ -12,6 +13,8 @@ const CustomDropdown = ({ category }) => {
 	const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState('');
 	const [selectedSubCategory, setSelectedSubCategory] = useState('');
+
+	const location = useLocation();
 
 	useEffect(() => {
 		if (category) {
@@ -46,21 +49,23 @@ const CustomDropdown = ({ category }) => {
 
 	return (
 		<div className="relative inline-block">
-			<button
-				onClick={toggleMenu}
-				className="flex h-[42px] w-[202px] items-center justify-between bg-navy-mypageToggle rounded-[10px] text-[15px] px-5 text-[#606060]"
-			>
-				{selectedSubCategory
-					? selectedSubCategory
-					: selectedCategory
-						? selectedCategory === 'member'
-							? '팀원모집'
-							: categoryOptions[selectedCategory]
-						: '카테고리'}
-				<FaAngleDown />
-			</button>
-			{isMenuOpen && (
-				<div className="absolute bg-white border border-[#C5D2F7] rounded-[10px] mt-3 w-[202px]">
+			{location.pathname === '/user/community/total' && (
+				<button
+					onClick={toggleMenu}
+					className="flex h-[42px] w-[202px] items-center justify-between bg-navy-mypageToggle rounded-[10px] text-[15px] px-5 text-[#606060]"
+				>
+					{selectedSubCategory
+						? selectedSubCategory
+						: selectedCategory
+							? selectedCategory === 'member'
+								? '팀원모집'
+								: categoryOptions[selectedCategory]
+							: '카테고리'}
+					<FaAngleDown />
+				</button>
+			)}
+			{location.pathname === '/user/community/total' && isMenuOpen && (
+				<div className="absolute bg-white border border-[#C5D2F7] rounded-[10px] mt-3 w-[202px] z-50">
 					<ul>
 						{Object.keys(categoryOptions).map((category) => (
 							<li
@@ -96,6 +101,33 @@ const CustomDropdown = ({ category }) => {
 										</ul>
 									</div>
 								)}
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
+			{location.pathname === '/user/community/member' && (
+				<button
+					onClick={toggleMenu}
+					className="flex h-[42px] w-[202px] items-center justify-between bg-navy-mypageToggle rounded-[10px] text-[15px] px-5 text-[#606060]"
+				>
+					{selectedSubCategory ||
+						(selectedCategory === 'member' ? '카테고리' : categoryOptions[selectedCategory]) ||
+						'카테고리'}
+					<FaAngleDown />
+				</button>
+			)}
+			{location.pathname === '/user/community/member' && isMenuOpen && (
+				<div className="absolute bg-white border border-[#C5D2F7] rounded-[10px] mt-3 w-[202px] z-50">
+					<ul>
+						{categoryOptions.member.map((subCategory) => (
+							<li key={subCategory} className="relative">
+								<button
+									className="w-full text-left px-4 py-2 h-[50px] hover:bg-navy-commuDropboxHover flex justify-between items-center"
+									onClick={() => handleSubCategorySelect(subCategory)}
+								>
+									{subCategory}
+								</button>
 							</li>
 						))}
 					</ul>
