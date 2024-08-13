@@ -1,126 +1,145 @@
 import { GrowthStateContext } from '../App';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import ApplyRecordItem from '../components/ApplyRecordItem';
 import { getDDay } from '../utils/getDDay';
+import axios from 'axios';
 
 // 서버에서 받은 새로운 데이터 형식
-const applyData = [
-  {
-		"companyName": "토스",
-		"jobPart": "프론트엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PENDING",
-						"endDate": new Date('2024-08-27').getTime()
-				},
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PENDING",
-						"endDate": new Date('2024-08-30').getTime()
-				}
-		]
-	},
-  {
-		"companyName": "네이버",
-		"jobPart": "AE",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-09-19').getTime()
-				},
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PASSED",
-						"endDate": new Date('2024-09-19').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "카카오",
-		"jobPart": "PM",
-		"jobApplications": [
-				{
-						"applicationType": "INTERVIEW",
-						"status": "FAILED",
-						"endDate": new Date('2024-08-17').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "당근",
-		"jobPart": "UI/UX 디자이너",
-		"jobApplications": [
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-15').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "라인",
-		"jobPart": "프론트엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PENDING",
-						"endDate": new Date('2024-08-17').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "기업은행",
-		"jobPart": "AE",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-14').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "배민",
-		"jobPart": "백엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-20').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "쿠팡",
-		"jobPart": "프론트엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-10').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "Google",
-		"jobPart": "PM",
-		"jobApplications": [
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-10').getTime()
-				}
-		]
-  }
-];
+// const applyData = [
+//   {
+// 		"companyName": "토스",
+// 		"jobPart": "프론트엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PENDING",
+// 						"endDate": new Date('2024-08-27').getTime()
+// 				},
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PENDING",
+// 						"endDate": new Date('2024-08-30').getTime()
+// 				}
+// 		]
+// 	},
+//   {
+// 		"companyName": "네이버",
+// 		"jobPart": "AE",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-09-19').getTime()
+// 				},
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-09-19').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "카카오",
+// 		"jobPart": "PM",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "FAILED",
+// 						"endDate": new Date('2024-08-17').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "당근",
+// 		"jobPart": "UI/UX 디자이너",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-15').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "라인",
+// 		"jobPart": "프론트엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PENDING",
+// 						"endDate": new Date('2024-08-17').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "기업은행",
+// 		"jobPart": "AE",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-14').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "배민",
+// 		"jobPart": "백엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-20').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "쿠팡",
+// 		"jobPart": "프론트엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-10').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "Google",
+// 		"jobPart": "PM",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-10').getTime()
+// 				}
+// 		]
+//   }
+// ];
 
 const ApplyRecord = () => {
   const [memberData] = useContext(GrowthStateContext);
+  const [applyData, setApplyData] = useState([]);  // 서버에서 받아올 데이터를 위한 상태 선언
   const nav = useNavigate();
+
+  // 서버로부터 데이터 GET
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
+        console.log(response);
+        if (response.data && response.data.status === 'success') {
+          setApplyData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
+        }
+      } catch (error) {
+        console.error('Error fetching apply data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // 데이터에 인덱스 추가
   const dataWithIndex = applyData.map((item, index) => ({
