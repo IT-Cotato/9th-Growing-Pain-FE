@@ -152,17 +152,17 @@ const data = [
     ]
   },
   {
-    "companyName": "배달의민족",
-    "jobPart": "백엔드",
+    "companyName": "라인",
+    "jobPart": "프론트엔드",
     "jobApplications": [
       {
         "id": 0,
         "applicationType": "DOCUMENT",
-        "place": "마포구",
-        "result": "FAILED",
-        "submissionStatus": "PASSED",
-        "applicationStartDate": "2024-07-06",
-        "applicationCloseDate": "2024-09-02",
+        "place": "Unknown",
+        "result": "PENDING",
+        "submissionStatus": "PENDING",
+        "applicationStartDate": "2024-07-01",
+        "applicationCloseDate": "2024-08-17",
         "memberId": 4,
         "jobPostId": 4,
         "applicationDetails": []
@@ -170,37 +170,78 @@ const data = [
     ]
   },
   {
-    "companyName": "쿠팡",
-    "jobPart": "디자이너",
+    "companyName": "기업은행",
+    "jobPart": "AE",
     "jobApplications": [
       {
         "id": 0,
         "applicationType": "DOCUMENT",
-        "place": "영등포구",
-        "result": "PENDING",
-        "submissionStatus": "FAILED",
-        "applicationStartDate": "2024-07-02",
-        "applicationCloseDate": "2024-09-25",
-        "memberId": 5,
-        "jobPostId": 5,
-        "applicationDetails": []
-      },
-      {
-        "id": 1,
-        "applicationType": "INTERVIEW",
-        "place": "영등포구",
-        "result": "PENDING",
-        "submissionStatus": "FAILED",
-        "applicationStartDate": "2024-07-02",
-        "applicationCloseDate": "2024-09-25",
+        "place": "Unknown",
+        "result": "PASSED",
+        "submissionStatus": "PENDING",
+        "applicationStartDate": "2024-07-01",
+        "applicationCloseDate": "2024-08-14",
         "memberId": 5,
         "jobPostId": 5,
         "applicationDetails": []
       }
     ]
+  },
+  {
+    "companyName": "배민",
+    "jobPart": "백엔드",
+    "jobApplications": [
+      {
+        "id": 0,
+        "applicationType": "DOCUMENT",
+        "place": "Unknown",
+        "result": "PASSED",
+        "submissionStatus": "PENDING",
+        "applicationStartDate": "2024-07-01",
+        "applicationCloseDate": "2024-08-20",
+        "memberId": 6,
+        "jobPostId": 6,
+        "applicationDetails": []
+      }
+    ]
+  },
+  {
+    "companyName": "쿠팡",
+    "jobPart": "프론트엔드",
+    "jobApplications": [
+      {
+        "id": 0,
+        "applicationType": "DOCUMENT",
+        "place": "Unknown",
+        "result": "PENDING",
+        "submissionStatus": "PASSED",
+        "applicationStartDate": "2024-07-01",
+        "applicationCloseDate": "2024-08-10",
+        "memberId": 7,
+        "jobPostId": 7,
+        "applicationDetails": []
+      }
+    ]
+  },
+  {
+    "companyName": "Google",
+    "jobPart": "PM",
+    "jobApplications": [
+      {
+        "id": 0,
+        "applicationType": "INTERVIEW",
+        "place": "Unknown",
+        "result": "PASSED",
+        "submissionStatus": "PASSED",
+        "applicationStartDate": "2024-07-01",
+        "applicationCloseDate": "2024-08-10",
+        "memberId": 8,
+        "jobPostId": 8,
+        "applicationDetails": []
+      }
+    ]
   }
 ]
-
 
 const Detail = () => {
   const params = useParams();
