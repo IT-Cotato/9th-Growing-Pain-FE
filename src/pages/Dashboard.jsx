@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Sidebar from '../components/Sidebar';
 import GrowthApplyItem from '../components/GrowthApplyItem';
@@ -12,144 +13,167 @@ import { getDDay } from '../utils/getDDay';
 import { todayTalk } from '../utils/today-talk';
 
 // 새로운 데이터 형식
-const applyData = [
-  {
-		"companyName": "토스",
-		"jobPart": "프론트엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PENDING",
-						"endDate": new Date('2024-08-27').getTime()
-				},
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PENDING",
-						"endDate": new Date('2024-08-30').getTime()
-				}
-		]
-	},
-  {
-		"companyName": "네이버",
-		"jobPart": "AE",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-09-19').getTime()
-				},
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PASSED",
-						"endDate": new Date('2024-09-19').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "카카오",
-		"jobPart": "PM",
-		"jobApplications": [
-				{
-						"applicationType": "INTERVIEW",
-						"status": "FAILED",
-						"endDate": new Date('2024-08-17').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "당근",
-		"jobPart": "UI/UX 디자이너",
-		"jobApplications": [
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-15').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "라인",
-		"jobPart": "프론트엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PENDING",
-						"endDate": new Date('2024-08-17').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "기업은행",
-		"jobPart": "AE",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-14').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "배민",
-		"jobPart": "백엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-20').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "쿠팡",
-		"jobPart": "프론트엔드",
-		"jobApplications": [
-				{
-						"applicationType": "DOCUMENT",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-10').getTime()
-				}
-		]
-  },
-  {
-		"companyName": "Google",
-		"jobPart": "PM",
-		"jobApplications": [
-				{
-						"applicationType": "INTERVIEW",
-						"status": "PASSED",
-						"endDate": new Date('2024-08-10').getTime()
-				}
-		]
-  }
-];
+// const applyData = [
+//   {
+// 		"companyName": "토스",
+// 		"jobPart": "프론트엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PENDING",
+// 						"endDate": new Date('2024-08-27').getTime()
+// 				},
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PENDING",
+// 						"endDate": new Date('2024-08-30').getTime()
+// 				}
+// 		]
+// 	},
+//   {
+// 		"companyName": "네이버",
+// 		"jobPart": "AE",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-09-19').getTime()
+// 				},
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-09-19').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "카카오",
+// 		"jobPart": "PM",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "FAILED",
+// 						"endDate": new Date('2024-08-17').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "당근",
+// 		"jobPart": "UI/UX 디자이너",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-15').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "라인",
+// 		"jobPart": "프론트엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PENDING",
+// 						"endDate": new Date('2024-08-17').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "기업은행",
+// 		"jobPart": "AE",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-14').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "배민",
+// 		"jobPart": "백엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-20').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "쿠팡",
+// 		"jobPart": "프론트엔드",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "DOCUMENT",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-10').getTime()
+// 				}
+// 		]
+//   },
+//   {
+// 		"companyName": "Google",
+// 		"jobPart": "PM",
+// 		"jobApplications": [
+// 				{
+// 						"applicationType": "INTERVIEW",
+// 						"status": "PASSED",
+// 						"endDate": new Date('2024-08-10').getTime()
+// 				}
+// 		]
+//   }
+// ];
 
 // 대쉬보드만 Layout 따로 적용 (라우팅 중첩 해결)
 const Dashboard = () => {
   const nav = useNavigate();
+  const [applyData, setApplyData] = useState([]);
 
-  // 원본 데이터에 인덱스를 추가하여 관리
-  const [dataWithIndex, setDataWithIndex] = useState(() => {
-    return applyData.map((item, index) => ({
-      ...item,
-      index
-    }));
-  });
+	// 서버로부터 데이터 GET
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
+        console.log(response);
+        if (response.data && response.data.status === 'success') {
+          const fetchedData = response.data.data;
+          
+          // 타임스탬프를 Date 객체로 변환
+          const formattedData = fetchedData.map(company => {
+            return {
+              ...company,
+              jobApplications: company.jobApplications.map(application => ({
+                ...application,
+                endDate: new Date(application.endDate) // 타임스탬프를 Date 객체로 변환
+              }))
+            };
+          });
+
+          setApplyData(formattedData); // 변환된 데이터를 상태에 저장
+        }
+      } catch (error) {
+        console.error('Error fetching apply data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   // 서류와 면접 데이터 합치기
-  const combinedData = dataWithIndex.map(company => {
+  const combinedData = applyData.map((company, index) => {
     const submitDocument = company.jobApplications.find(app => app.applicationType === 'DOCUMENT');
     const submitInterview = company.jobApplications.find(app => app.applicationType === 'INTERVIEW');
 
     return {
-      index: company.index,
+      index,
       companyName: company.companyName,
       jobPart: company.jobPart,
       submitDocument: submitDocument ? submitDocument.status === 'PASSED' : false,
       submitInterview: submitInterview ? submitInterview.status === 'PASSED' : false,
       deadline: Math.min(
-        submitDocument?.endDate || Infinity,
-        submitInterview?.endDate || Infinity
+        submitDocument?.endDate.getTime() || Infinity,  // getTime()을 사용하여 비교
+        submitInterview?.endDate.getTime() || Infinity  // getTime()을 사용하여 비교
       )
     };
   }).filter(application => getDDay(application.deadline) >= 0) // 마감일이 지나지 않은 것만 필터링
