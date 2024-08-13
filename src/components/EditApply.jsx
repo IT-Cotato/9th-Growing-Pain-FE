@@ -21,18 +21,33 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   const [isToggleOpen, setIsToggleOpen] = useState(false); // 페이지 추가 토글
   const [isSubmissionDropdownOpen, setIsSubmissionDropdownOpen] = useState(false); // 제출 여부 드롭다운
   const [isResultDropdownOpen, setIsResultDropdownOpen] = useState(false); // 결과 드롭다운
+
   const toggleRef = useRef(null); // 토글 참조용
   const submissionRef = useRef(null); // 제출 여부 드롭다운 참조
   const resultRef = useRef(null); // 결과 드롭다운 참조
   const appIdRef = useRef(0);
   const detailIdRef = useRef(0);
-
   const handleSaveRef = useRef();   // 언마운트시 데이터 실시간 참조를 위한 Ref
 
   const currentQStyle = 'bg-white h-[40px] content-center cursor-pointer';
   const otherQstyle = 'bg-gray-300 h-[40px] content-center cursor-pointer';
   const currentPStyle = 'bg-navy-lightSide cursor-pointer rounded-tl-[10px]';
   const otherPstyle = 'bg-white cursor-pointer rounded-tl-[10px]';
+
+  useEffect(() => {
+    setCompanyName(jobPostData.companyName || ''); // 초기값 설정
+    setJobPart(jobPostData.jobPart || ''); // 초기값 설정
+    setApplicationData(applicationData || []); // 초기값 설정
+  
+    if (applicationData.length > 0) {
+      const initialPage = applicationData[0];
+      setApplyDate(initialPage.applicationCloseDate ? new Date(initialPage.applicationCloseDate) : null);
+      setSubmissionStatus(initialPage.submissionStatus || 'PENDING');
+      setResultStatus(initialPage.result || 'PENDING');
+    }
+    setCurrentPageIndex(0);
+    setCurrentQuestionIndex(0);
+  }, [jobPostData, applicationData]);
 
   // 문서 페이지별 토글 내용 렌더링
   useEffect(() => {
@@ -53,7 +68,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       }
     }
     setCurrentQuestionIndex(0);
-  }, [currentPageIndex, applicationDataState]);
+  }, [currentPageIndex]);
 
   // 토글 핸들러
   const handleToggleClick = () => {
@@ -156,6 +171,18 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       if (handleSaveRef.current) {
         handleSaveRef.current();
       }
+
+      // EditApply 컴포넌트가 언마운트될 때 데이터를 초기화
+      setCompanyName('');
+      setJobPart('');
+      setApplyDate(null);
+      setCurrentQuestionIndex(0);
+      setCurrentPageIndex(0);
+      setApplicationData([]);
+      setSubmissionStatus('PENDING');
+      setResultStatus('PENDING');
+      setCurrentSubmissionIcon('➖');
+      setCurrentResultIcon('➖');
     };
   }, [])
 

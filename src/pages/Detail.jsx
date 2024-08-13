@@ -224,9 +224,9 @@ const Detail = () => {
   // 지원현황 데이터 업데이트
   const handleUpdate = async (savedData) => {
     try {
-      // axios를 사용하여 POST 요청을 보냄
-      const response = await axios.post(
-        'https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/currentId', 
+      // axios를 사용하여 PUT 요청을 보냄
+      const response = await axios.put(
+        `https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/${currentId}`, 
         savedData, // 전송할 데이터
         {
           headers: {
