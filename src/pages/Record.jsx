@@ -2,35 +2,6 @@ import EditApply from "../components/EditApply";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-// // 초기 데이터
-// const initialData = [
-//   {
-//     companyName: "",
-//     jobPart: "",
-//     memberId: "greatsounds613@gmail.com",
-//     jobApplications: [
-//       {
-//         id: 0,
-//         applicationType: "DOCUMENT",
-//         place: "",
-//         result: "PENDING",
-//         submissionStatus: "PENDING",
-//         applicationStartDate: "",
-//         applicationCloseDate: "",
-//         memberId: "greatsounds613@gmail.com",
-//         jobPostId: 0,
-//         applicationDetails: [
-//           {
-//             id: 0,
-//             title: "",
-//             content: ""
-//           }
-//         ]
-//       }
-//     ]
-//   }
-// ];
-
 const Record = () => {
   // 초기 데이터
   const initialData = [
@@ -75,13 +46,6 @@ const Record = () => {
       }
     };
   }, [])
-  
-  // useEffect(() => {
-  //   if (shouldReset) {
-  //     setData(JSON.parse(JSON.stringify(initialData))); // 상태를 새로운 객체로 복사하여 초기화
-  //     setShouldReset(false);
-  //   }
-  // }, [shouldReset]);
 
   // 데이터 생성
   const handleSave = async (savedData) => {
