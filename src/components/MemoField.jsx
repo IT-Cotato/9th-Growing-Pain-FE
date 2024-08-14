@@ -59,7 +59,7 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 				maxLength={maxLength}
 			/>
 			{type === 'communityCocoment' && (
-				<FiNavigation className="absolute right-4 top-[64%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
+				<FiNavigation className="absolute right-4 top-[45%] transform -translate-y-1/2 w-6 h-6 text-gray-700 cursor-pointer" />
 			)}
 		</div>
 	);

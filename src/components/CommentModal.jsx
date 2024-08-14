@@ -184,7 +184,11 @@ const CommentModal = ({
 												<span>
 													<img src={userProfile} className="rounded-full w-9 h-9" />
 												</span>
-												<MemoField type={'communityCocoment'} placeholderText={'댓글을 남기세요'} />
+												<MemoField
+													type={'communityCocoment'}
+													placeholderText={'댓글을 남기세요'}
+													onChange={(e) => {}}
+												/>
 											</div>
 										</div>
 									</div>

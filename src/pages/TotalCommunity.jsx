@@ -151,7 +151,7 @@ const TotalCommunity = ({ category }) => {
 					<MenuBar />
 				</div>
 				<div className="flex">
-					<div className="post_wrapper mt-[40px] w-3/4">
+					<div className="post_wrapper mt-[40px] w-3/4 relatvie">
 						<PostForm category={category} />
 						<PostList posts={filteredCategoryPosts} />
 					</div>
