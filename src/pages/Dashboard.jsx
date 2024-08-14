@@ -135,7 +135,6 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
-        console.log(response);
         if (response.data && response.data.status === 'success') {
           const fetchedData = response.data.data;
           
@@ -172,8 +171,8 @@ const Dashboard = () => {
       submitDocument: submitDocument ? submitDocument.status === 'PASSED' : false,
       submitInterview: submitInterview ? submitInterview.status === 'PASSED' : false,
       deadline: Math.min(
-        submitDocument?.endDate.getTime() || Infinity,  // getTime()을 사용하여 비교
-        submitInterview?.endDate.getTime() || Infinity  // getTime()을 사용하여 비교
+        submitDocument?.endDate || Infinity,  // getTime()을 사용하여 비교
+        submitInterview?.endDate || Infinity  // getTime()을 사용하여 비교
       )
     };
   }).filter(application => getDDay(application.deadline) >= 0) // 마감일이 지나지 않은 것만 필터링
@@ -261,7 +260,7 @@ const Dashboard = () => {
           <div className='right-container w-[35%] flex-col mt-[30px] h-full'>
             {/* 캘린더 사용 */}
             <div className="calendar-container flex-1 h-[45%] mx-[13px] mt-[10px] content-between">
-              <UseCalendar />
+              <UseCalendar applicationData={combinedData} />
             </div>
             {/* 광고 */}
             <div className='ad-container h-[15%] flex'>

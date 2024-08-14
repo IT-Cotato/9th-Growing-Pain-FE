@@ -129,7 +129,6 @@ const ApplyRecord = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
-        console.log(response);
         if (response.data && response.data.status === 'success') {
           setApplyData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
         }
