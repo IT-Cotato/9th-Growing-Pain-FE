@@ -5,8 +5,11 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePicker.css';
 import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
+  const nav = useNavigate();
+
   // 상태 정의
   const [companyName, setCompanyName] = useState(jobPostData.companyName); // 회사명 상태
   const [jobPart, setJobPart] = useState(jobPostData.jobPart); // 직무 상태
@@ -159,6 +162,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       })),
     };
     onSave(savedData); // 부모 컴포넌트로 저장된 데이터 전달
+    console.log(savedData);
   };
 
   useEffect(() => {
@@ -171,18 +175,6 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       if (handleSaveRef.current) {
         handleSaveRef.current();
       }
-
-      // EditApply 컴포넌트가 언마운트될 때 데이터를 초기화
-      setCompanyName('');
-      setJobPart('');
-      setApplyDate(null);
-      setCurrentQuestionIndex(0);
-      setCurrentPageIndex(0);
-      setApplicationData([]);
-      setSubmissionStatus('PENDING');
-      setResultStatus('PENDING');
-      setCurrentSubmissionIcon('➖');
-      setCurrentResultIcon('➖');
     };
   }, [])
 
@@ -204,6 +196,22 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     setApplyDate(date); // DatePicker의 선택된 날짜 상태를 업데이트
   };
 
+  // 제출 여부 수정 핸들러
+const handleApplySubmissionStatus = (icon) => {
+  const updatedApplicationData = [...applicationDataState];
+  updatedApplicationData[currentPageIndex].submissionStatus = getIconStatus(icon);
+  setApplicationData(updatedApplicationData);
+  setSubmissionStatus(getIconStatus(icon));
+};
+
+// 결과 수정 핸들러
+const handleApplyResult = (icon) => {
+  const updatedApplicationData = [...applicationDataState];
+  updatedApplicationData[currentPageIndex].result = getIconStatus(icon);
+  setApplicationData(updatedApplicationData);
+  setResultStatus(getIconStatus(icon));
+};
+
   // 아이콘 상태에 따른 반환 함수
   const getStatusIcon = (status) => {
     switch (status) {
@@ -214,6 +222,19 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       case 'PENDING':
       default:
         return '➖';
+    }
+  };
+
+  // 아이콘 상태에 따른 반환 함수
+  const getIconStatus = (icon) => {
+    switch (icon) {
+      case '✔️':
+        return 'PASSED';
+      case '❌':
+        return 'FAILED';
+      case '➖':
+      default:
+        return 'PENDING';
     }
   };
 
@@ -324,7 +345,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
                     {isSubmissionDropdownOpen && (
                       <div className='absolute top-full left-0 w-full bg-white border rounded-[10px] shadow-lg mt-[5px] z-50'>
                         {['➖', '✔️', '❌'].map((icon, index) => (
-                          <div key={index} className='cursor-pointer p-[10px] hover:bg-gray-lightSide flex items-center text-center justify-center' onClick={() => { setSubmissionStatus(icon); setCurrentSubmissionIcon(icon); setIsSubmissionDropdownOpen(false); }}>
+                          <div key={index} className='cursor-pointer p-[10px] hover:bg-gray-lightSide flex items-center text-center justify-center' onClick={() => { handleApplySubmissionStatus(icon), setSubmissionStatus(icon); setCurrentSubmissionIcon(icon); setIsSubmissionDropdownOpen(false); }}>
                             {icon}
                           </div>
                         ))}
@@ -342,7 +363,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
                     {isResultDropdownOpen && (
                       <div className='absolute top-full left-0 w-full bg-white border rounded-[10px] shadow-lg mt-[5px] z-50'>
                         {['➖', '✔️', '❌'].map((icon, index) => (
-                          <div key={index} className='cursor-pointer p-[10px] hover:bg-gray-lightSide flex items-center text-center justify-center' onClick={() => { setResultStatus(icon); setCurrentResultIcon(icon); setIsResultDropdownOpen(false); }}>
+                          <div key={index} className='cursor-pointer p-[10px] hover:bg-gray-lightSide flex items-center text-center justify-center' onClick={() => { handleApplyResult(icon), setResultStatus(icon); setCurrentResultIcon(icon); setIsResultDropdownOpen(false); }}>
                             {icon}
                           </div>
                         ))}
@@ -351,7 +372,14 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
                   </div>
                 </div>
                 <div className='save-button w-[100%] mt-[260px] flex justify-start'>
-                  <Button type={'applySave'} text={'저장하기'} onClick={handleSave} />
+                  <Button
+                    type={'applySave'}
+                    text={'저장하기'}
+                    onClick={()=>{
+                      handleSave();
+                      nav('/user/growth/apply', { replace: true });
+                    }}
+                  />
                 </div>
               </div>
             </div>

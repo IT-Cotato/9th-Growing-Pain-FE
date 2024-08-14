@@ -1,18 +1,15 @@
 import './UseCalendar.css';
 import Calendar from 'react-calendar';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import moment from 'moment';
 
-import { GrowthStateContext } from "../App";
 import { getDDay } from '../utils/getDDay';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 
-import { ChevronRightIcon,	ChevronLeftIcon } from '@heroicons/react/24/outline';
+const UseCalendar = ({ applicationData }) => {
+  const [date, setDate] = useState(new Date()); // 선택한 날짜
 
-const UseCalendar = () =>{
-  const [date, setDate] = useState(new Date());         // 선택한 날짜
-  const [, , applicationData] = useContext(GrowthStateContext);   // 지원현황 데이터 불러오기
-
-  const onChange = date => {
+  const onChange = (date) => {
     setDate(date);
   };
 
@@ -20,11 +17,19 @@ const UseCalendar = () =>{
   const dotTileContent = ({ date }) => {
     const html = [];
     const formattedDate = moment(date).format('YYYY-MM-DD');
-    if (applicationData.some(application => getDDay(application.job_post_dead_line) <= 7 && moment(application.job_post_dead_line).format('YYYY-MM-DD') === formattedDate)) {
+
+    if (
+      applicationData.some((application) => {
+        const applicationDeadline = new Date(application.deadline);
+        const formattedDeadline = moment(applicationDeadline).format('YYYY-MM-DD');
+        return getDDay(application.deadline) <= 7 && formattedDeadline === formattedDate;
+      })
+    ) {
       html.push(<div className="dot" key={formattedDate}></div>);
     } else {
       html.push(<div className="not-dot" key={formattedDate}></div>);
     }
+
     return (
       <div className="flex justify-center items-center absoluteDiv">
         {html}
@@ -35,22 +40,22 @@ const UseCalendar = () =>{
   return (
     <div className='calendar-container bg-white'>
       <div className='react-calendar__use'>
-      <Calendar 
-        onChange={onChange}
-        value={date}
-        calendarType="gregory"
-        minDetail="year"
-        locale="en-US" // 영어로 설정
-        formatDay={(local, date) => moment(date).format("D")}
-        nextLabel={<ChevronRightIcon className='size-6 stroke-1' />}
-        prevLabel={<ChevronLeftIcon className='size-6 stroke-1' />}
-        next2Label={null}
-        prev2Label={null}
-        tileContent={dotTileContent}
-      />
+        <Calendar
+          onChange={onChange}
+          value={date}
+          calendarType="gregory"
+          minDetail="year"
+          locale="en-US" // 영어로 설정
+          formatDay={(local, date) => moment(date).format("D")}
+          nextLabel={<ChevronRightIcon className='size-6 stroke-1' />}
+          prevLabel={<ChevronLeftIcon className='size-6 stroke-1' />}
+          next2Label={null}
+          prev2Label={null}
+          tileContent={dotTileContent}
+        />
       </div>
     </div>
   );
-}
+};
 
 export default UseCalendar;

@@ -93,7 +93,7 @@ const GrowthRecord = () => {
 					<div className='w-[35%] flex-col mt-[30px]'>
 						{/* 캘린더 사용 */}
 						<div className="calendar-container flex-1 h-[55%] mx-[13px] mt-[42px] content-between">
-							<UseCalendar />
+							<UseCalendar applicationData={combinedData} />
 						</div>
 						{/* 광고 */}
 						<div className='ad-container h-[25%] flex'>

@@ -4,8 +4,6 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const Record = () => {
-  const nav = useNavigate();
-
   // 초기 데이터
   const initialData = [
     {
@@ -40,16 +38,6 @@ const Record = () => {
   // 저장 후 데이터 초기화를 위한 상태
   const [shouldReset, setShouldReset] = useState(false);
 
-  useEffect(() => {
-    // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
-    return () => {
-      if (shouldReset) {
-        setData(JSON.parse(JSON.stringify(initialData))); // 상태를 새로운 객체로 복사하여 초기화
-        setShouldReset(false);
-      }
-    };
-  }, [])
-
   // 데이터 생성
   const handleSave = async (savedData) => {
     try {
@@ -69,7 +57,6 @@ const Record = () => {
 
       // 데이터를 저장한 후에 초기화 플래그 설정
       setShouldReset(true);
-      nav('/user/growth/apply');
 
     } catch (error) {
       // 에러 처리

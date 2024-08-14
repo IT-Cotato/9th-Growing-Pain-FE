@@ -45,12 +45,10 @@ const Signup = () => {
 
 		try {
 			const response = await axios.post(
-				`http://43.201.210.211:8080/api/auth/login/general`,
+				'http://43.201.210.211:8080/api/auth/login/general',
 				{
-					params: {
-						id: userEmail,
-						password: '',
-					},
+					email: userEmail,
+					password: password,
 				},
 				{
 					headers: {
@@ -58,6 +56,8 @@ const Signup = () => {
 					},
 				},
 			);
+
+			console.log(response);
 
 			if (response.data.available) {
 				setEmailError('사용 가능한 이메일입니다.');
