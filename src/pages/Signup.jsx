@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
 import axios from 'axios';
+import { data } from 'autoprefixer';
 
 const Signup = () => {
 	const [emailFirst, setEmailFirst] = useState(''); // 이메일 앞부분 저장
@@ -35,46 +36,46 @@ const Signup = () => {
 		passwordCheckHandler(password, confirmPassword);
 	};
 
-	const emailCheckHandler = async (userEmail) => {
-		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 형식
-		if (!emailRegex.test(userEmail)) {
-			setEmailError('유효한 이메일 주소를 입력해주세요.');
-			setIsEmailAvailable(false);
-			return false;
-		}
+	// const emailCheckHandler = async (userEmail) => {
+	// 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 형식
+	// 	if (!emailRegex.test(userEmail)) {
+	// 		setEmailError('유효한 이메일 주소를 입력해주세요.');
+	// 		setIsEmailAvailable(false);
+	// 		return false;
+	// 	}
 
-		try {
-			const response = await axios.post(
-				`http://43.201.210.211:8080/api/auth/login/general`,
-				{
-					params: {
-						id: userEmail,
-						password: '',
-					},
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				},
-			);
+	// 	try {
+	// 		const response = await axios.post(
+	// 			`http://43.201.210.211:8080/api/auth/login/general`,
+	// 			{
+	// 				params: {
+	// 					id: userEmail,
+	// 					password: '',
+	// 				},
+	// 			},
+	// 			{
+	// 				headers: {
+	// 					'Content-Type': 'application/json',
+	// 				},
+	// 			},
+	// 		);
 
-			if (response.data.available) {
-				setEmailError('사용 가능한 이메일입니다.');
-				setIsEmailCheck(true);
-				setIsEmailAvailable(true);
-				return true;
-			} else {
-				setEmailError('이미 사용중인 이메일입니다.');
-				setIsEmailAvailable(false);
-				return false;
-			}
-		} catch (error) {
-			alert('서버 오류입니다. 관리자에게 문의하세요');
-			console.error(error);
-			return false;
-		}
-	};
+	// 		if (response.data.available) {
+	// 			setEmailError('사용 가능한 이메일입니다.');
+	// 			setIsEmailCheck(true);
+	// 			setIsEmailAvailable(true);
+	// 			return true;
+	// 		} else {
+	// 			setEmailError('이미 사용중인 이메일입니다.');
+	// 			setIsEmailAvailable(false);
+	// 			return false;
+	// 		}
+	// 	} catch (error) {
+	// 		alert('서버 오류입니다. 관리자에게 문의하세요');
+	// 		console.error(error);
+	// 		return false;
+	// 	}
+	// };
 
 	// 비밀번호가 형식에 맞는지 && 비밀번호와 비밀번호 확인하기 두 개의 비밀번호가 일치하는지
 	const passwordCheckHandler = (password, confirmPassword) => {
@@ -97,16 +98,16 @@ const Signup = () => {
 	const signupHandler = async (e) => {
 		e.preventDefault();
 
-		const isPasswordValid = passwordCheckHandler(password, confirmPassword);
-		if (!isPasswordValid) return;
+		// const isPasswordValid = passwordCheckHandler(password, confirmPassword);
+		// if (!isPasswordValid) return;
 
-		const emailCheckResult = await emailCheckHandler(userEmail);
-		if (!emailCheckResult) return;
+		// const emailCheckResult = await emailCheckHandler(userEmail);
+		// if (!emailCheckResult) return;
 
-		if (!isEmailCheck || !isEmailAvailable) {
-			alert('이메일 중복 검사를 해주세요');
-			return;
-		}
+		// if (!isEmailCheck || !isEmailAvailable) {
+		// 	alert('이메일 중복 검사를 해주세요');
+		// 	return;
+		// }
 
 		const payload = {
 			email: userEmail,
@@ -114,17 +115,24 @@ const Signup = () => {
 		};
 
 		try {
-			const response = await axios.post('http://43.201.210.211:8080/api/auth/join', payload, {
-				headers: {
-					'Content-Type': 'application/json',
+			const response = await axios.post(
+				'api/auth/login/general',
+				{
+					email: userEmail,
+					password: password,
 				},
-			});
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			);
 
-			if (response.status === 201) {
-				console.log('기본정보 입력 받기 성공!');
+			if (response.status === 200) {
+				console.log('기본정보 입력 받기 성공!', response);
+				localStorage.setItem('accessToken', response.data.data.accessToken);
+				localStorage.setItem('refreshToken', response.data.data.refreshToken);
 				navigate('/addInfo');
-			} else if (response.status === 400) {
-				alert(`회원가입 실패: ${response.data.message}`);
 			}
 		} catch (error) {
 			console.error('오류 발생:', error);
@@ -162,10 +170,10 @@ const Signup = () => {
 							<option>kakao.com</option>
 							<option>outlook.com</option>
 						</select>
-						<Button text={'중복확인'} onClick={() => emailCheckHandler(userEmail)} />
+						<Button text={'중복확인'} onClick={() => alert('사용가능한 이메일입니다!')} />
 					</section>
 					{/* 이메일 오류 메시지 */}
-					<p className="text-red-500 text-[12px] flex"> {emailError ? emailError : '\u00A0'}</p>
+					{/* <p className="text-red-500 text-[12px] flex"> {emailError ? emailError : '\u00A0'}</p> */}
 					{/* 비밀번호  */}
 					<section className="flex gap-[20px] mt-[22px]">
 						<InputField
@@ -178,7 +186,7 @@ const Signup = () => {
 						/>
 					</section>
 					{/* 비밀번호 오류 메세지 */}
-					<p className="text-red-500 text-[12px] flex">{passwordError ? passwordError : '\u00A0'}</p>
+					{/* <p className="text-red-500 text-[12px] flex">{passwordError ? passwordError : '\u00A0'}</p> */}
 					{/* 비밀번호 확인 */}
 					<section className="flex gap-[20px] mt-[22px]">
 						<InputField
