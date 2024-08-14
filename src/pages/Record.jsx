@@ -1,8 +1,11 @@
 import EditApply from "../components/EditApply";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Record = () => {
+  const nav = useNavigate();
+
   // 초기 데이터
   const initialData = [
     {
@@ -66,6 +69,7 @@ const Record = () => {
 
       // 데이터를 저장한 후에 초기화 플래그 설정
       setShouldReset(true);
+      nav('/user/growth/apply');
 
     } catch (error) {
       // 에러 처리
