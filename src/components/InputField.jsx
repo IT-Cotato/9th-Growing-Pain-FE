@@ -1,6 +1,7 @@
 import React from 'react';
+import { FiAlertTriangle } from 'react-icons/fi';
 
-const InputField = ({ placeholderText, className, icon: Icon, onChange, type, onKeyDown, place, value }) => {
+const InputField = ({ placeholderText, className, icon: Icon, onChange, type, onKeyDown, place, value, showError }) => {
 	let inputStyle = 'border border-[#26408B] rounded-[10px] w-[336px] h-14 pl-[65px] placeholder:text-[17px]';
 
 	switch (place) {
@@ -37,18 +38,20 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[90px] pl-[20px] placeholder:text-[17px]';
 			break;
 		case 'setting':
-			inputStyle =
-				'bg-[#F5F5F5] rounded-[10px] w-[60%] h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
+			inputStyle = 'bg-[#F5F5F5] rounded-[10px] w-[60%] h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
 			break;
 		case 'careerInfo':
-		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[350px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
-		break;
+			inputStyle =
+				'bg-[#FFFFFF] rounded-[10px] w-full h-[350px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
+			break;
 		case 'aboutInfo':
-		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[325px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
-		break;
+			inputStyle =
+				'bg-[#FFFFFF] rounded-[10px] w-full h-[325px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
+			break;
 		case 'applyTitle':
-		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[56px] pl-[40px] placeholder:text-[18px] placeholder:text-wrap outline-none';
-		break;
+			inputStyle =
+				'bg-[#FFFFFF] rounded-[10px] w-full h-[56px] pl-[40px] placeholder:text-[18px] placeholder:text-wrap outline-none';
+			break;
 		default:
 			break;
 	}
@@ -59,11 +62,17 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			<input
 				type={type}
 				placeholder={placeholderText}
-				className={inputStyle}
+				className={`${inputStyle} ${className}`}
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				value={value}
 			/>
+			{showError && (
+				<FiAlertTriangle
+					className="absolute right-[20px] top-1/2 transform -translate-y-1/2 text-[#ED1516]"
+					size={20}
+				/>
+			)}
 		</div>
 	);
 };

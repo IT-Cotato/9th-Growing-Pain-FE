@@ -3,8 +3,13 @@ import MemoField from './MemoField';
 import Button from './Button';
 import 프사 from '/images/공모전.png';
 import CustomDropdown from './CustomDropdown';
+import { useState } from 'react';
+import axios from 'axios';
 
 const PostForm = ({ category }) => {
+	const [title, setTitle] = useState('');
+	const [content, setContent] = useState('');
+
 	const userData = {
 		nickname: 'yongaricode',
 		position: '프론트엔드',
@@ -15,6 +20,31 @@ const PostForm = ({ category }) => {
 		free: '자유',
 		member: ['프로젝트', '공모전', '스터디'],
 		portfolio: '포트폴리오',
+	};
+
+	const handleSubmit = async () => {
+		if (!title || !content) {
+			alert('제목과 내용을 모두 입력해 주세요.');
+			return;
+		}
+
+		const postData = {
+			title,
+			content,
+			category: selectedCategory,
+		};
+
+		try {
+			const response = await axios.post(`/api/post`, postData, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			console.log('포스트 작성 성공:', response.data);
+		} catch (error) {
+			console.error('포스트 작성 오류:', error);
+			alert('포스트 작성에 실패했습니다. 다시 시도해 주세요.');
+		}
 	};
 
 	const selectedCategory = category === 'member' ? '팀원모집' : categoryOptions[category];
@@ -33,12 +63,22 @@ const PostForm = ({ category }) => {
 			</div>
 			<div className="mt-[18px] flex-grow flex flex-col mx-[36px]">
 				<div className="h-1/4 z-10">
-					<MemoField placeholderText={'제목을 입력해주세요'} type={'communityTitle'} />
+					<MemoField
+						placeholderText={'제목을 입력해주세요'}
+						type={'communityTitle'}
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+					/>
 				</div>
 				<div className="h-2/4">
-					<MemoField placeholderText={'자유롭게 글을 남겨보세요 '} type={'communityMainText'} />
+					<MemoField
+						placeholderText={'자유롭게 글을 남겨보세요 '}
+						type={'communityMainText'}
+						value={content}
+						onChange={(e) => setContent(e.target.value)}
+					/>
 				</div>
-				<div className="flex justify-end h-1/4 mt-[18px]">
+				<div className="flex justify-end h-1/4 mt-[18px]" onClick={handleSubmit}>
 					<Button type={'communitySave'} text={'글쓰기'} />
 				</div>
 			</div>
