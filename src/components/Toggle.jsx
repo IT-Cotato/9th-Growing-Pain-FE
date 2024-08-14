@@ -33,6 +33,11 @@ const Toggle = ({ menuItems, bg, placeholder, onChange }) => {
     };
   }, [isOpen]);
 
+  // 동기화: placeholder가 변경될 때 selectedItem을 업데이트
+  useEffect(() => {
+    setSelectedItem(placeholder);
+  }, [placeholder]);
+
   // 아이콘 스타일
   const iconClass = 'size-6 stroke-1';
   const menuItemClass = 'cursor-pointer p-4 rounded-[10px] hover:bg-gray-lightSide flex items-center text-center justify-center gap-2';

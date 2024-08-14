@@ -75,6 +75,10 @@ export default {
 					commuBg: '#F1F5FF',
 					// 커뮤니티 댓글창 댓글쓰기 테두두리
 					commuWriteComment: '#F6F6F6',
+					// 대쉬보드 커뮤니티 인기글 배경색
+					dashCommunity: "#EEF0FF",
+					// 대쉬보드 커뮤니티 공지 배경색
+					dashInfo: "#EFF5FF",
 				},
 			},
 		},
