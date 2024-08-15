@@ -7,7 +7,7 @@ import './DatePicker.css';
 import Button from './Button';
 import { useNavigate } from 'react-router-dom';
 
-const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
+const NewApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   const nav = useNavigate();
 
   // 상태 정의
@@ -168,15 +168,6 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   useEffect(() => {
     handleSaveRef.current = handleSave;
   }, [companyName, jobPart, applyDate, currentQuestionIndex, currentPageIndex, applicationDataState, submissionStatus, resultStatus]);
-
-  useEffect(() => {
-    // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
-    return () => {
-      if (handleSaveRef.current) {
-        handleSaveRef.current();
-      }
-    };
-  }, [])
 
   // 현재 보여져야 하는 질문
   const currentQuestions = applicationDataState[currentPageIndex]?.applicationDetails || [];
@@ -390,4 +381,4 @@ const handleApplyResult = (icon) => {
   );
 };
 
-export default EditApply;
+export default NewApply;
