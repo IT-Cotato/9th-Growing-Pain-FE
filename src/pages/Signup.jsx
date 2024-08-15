@@ -36,6 +36,7 @@ const Signup = () => {
 		passwordCheckHandler(password, confirmPassword);
 	};
 
+
 	// const emailCheckHandler = async (userEmail) => {
 	// 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 형식
 	// 	if (!emailRegex.test(userEmail)) {
@@ -76,6 +77,7 @@ const Signup = () => {
 	// 		return false;
 	// 	}
 	// };
+
 
 	// 비밀번호가 형식에 맞는지 && 비밀번호와 비밀번호 확인하기 두 개의 비밀번호가 일치하는지
 	const passwordCheckHandler = (password, confirmPassword) => {

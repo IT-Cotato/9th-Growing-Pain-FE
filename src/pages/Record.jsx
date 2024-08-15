@@ -1,6 +1,7 @@
 import EditApply from "../components/EditApply";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Record = () => {
   // 초기 데이터
@@ -36,16 +37,6 @@ const Record = () => {
 
   // 저장 후 데이터 초기화를 위한 상태
   const [shouldReset, setShouldReset] = useState(false);
-
-  useEffect(() => {
-    // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
-    return () => {
-      if (shouldReset) {
-        setData(JSON.parse(JSON.stringify(initialData))); // 상태를 새로운 객체로 복사하여 초기화
-        setShouldReset(false);
-      }
-    };
-  }, [])
 
   // 데이터 생성
   const handleSave = async (savedData) => {
