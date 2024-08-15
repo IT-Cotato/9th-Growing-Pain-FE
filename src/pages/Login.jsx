@@ -34,8 +34,8 @@ const Login = () => {
 		}
 
 		const payload = {
-			id: id,
-			pw: pw,
+			email: id,
+			password: pw,
 		};
 
 		try {
@@ -49,7 +49,9 @@ const Login = () => {
 				console.log('성공!');
 				console.log(response);
 				console.log(response.data);
-				axios.defaults.headers.common['Authorization'] = `Bearer ${response.payload.accessToken}`;
+				localStorage.setItem('accessToken', response.data.data.accessToken);
+				localStorage.setItem('refreshToken', response.data.data.refreshToken);
+				axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.data.accessToken}`;
 				// 로그인 상태 업데이트
 				setIsLogin(true);
 				navigate('/user/dashboard'); // 회원가입 성공시 페이지 이동
