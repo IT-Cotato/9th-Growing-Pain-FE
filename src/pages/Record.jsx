@@ -1,7 +1,6 @@
 import NewApply from "../components/NewApply";
 import { useState, useEffect } from "react";
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { instance } from "../utils/instance";
 
 const Record = () => {
   // 초기 데이터
@@ -9,7 +8,6 @@ const Record = () => {
     {
       companyName: "",
       jobPart: "",
-      memberId: localStorage.getItem('nickname'),
       jobApplications: [
         {
           id: 0,
@@ -19,7 +17,7 @@ const Record = () => {
           submissionStatus: "PENDING",
           applicationStartDate: "",
           applicationCloseDate: "",
-          memberId: localStorage.getItem('nickname'),
+          memberId: 0,
           jobPostId: 0,
           applicationDetails: [
             {
@@ -37,28 +35,12 @@ const Record = () => {
 
   // 데이터 생성
   const handleSave = async (savedData) => {
-		const accessToken = localStorage.getItem('accessToken');
+    console.log("저장할 데이터:", savedData);
     try {
-      // axios를 사용하여 POST 요청을 보냄
-      const response = await axios.post(
-        'api/job-posts', 
-        savedData, // 전송할 데이터
-        {
-          headers: {
-            'Content-Type': 'application/json', // JSON 형식으로 데이터를 전송
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-
-      // 서버 응답을 처리
+      const response = await instance.post('/api/job-posts', savedData);
       console.log('서버 응답:', response.data);
-
-      alert('저장 완료!');
-
     } catch (error) {
-      // 에러 처리
-      console.error('데이터 전송 중 오류 발생:', error);
+      console.error('에러 발생:', error);
     }
   };
 
