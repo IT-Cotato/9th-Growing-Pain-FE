@@ -4,6 +4,8 @@ import PostList from '../components/PostList';
 import PostForm from '../components/PostForm';
 import 프사 from '/images/공모전.png';
 import MenuBar from '../components/MenuBar';
+import 배너 from '/images/커뮤니티_배너.png';
+import 배너2 from '/images/커뮤니티_배너2.png';
 
 const TotalCommunity = ({ category }) => {
 	// Mock Data인데 이걸 서버에서 가져와도 useState에 저장하는게 맞겠지...?
@@ -165,11 +167,11 @@ const TotalCommunity = ({ category }) => {
 							/>
 							<LuSearch className="absolute right-[20px] top-[12px] w-[24px] h-[24px] text-[#888888]" />
 						</div>
-						<section className="hot_board mb-[36px] h-[431px] bg-white rounded-[10px] mt-[36px]">
-							<h2>핫한 게시판</h2>
+						<section className="hot_board mb-[36px] h-[431px] bg-white rounded-[10px] mt-[36px] flex items-center justify-center">
+							<img className="object-cover w-full h-full cursor-pointer rounded-[10px]" src={배너2} alt="Banner" />
 						</section>
-						<section className="tip_board h-[342px] mb-[40px] bg-white rounded-[10px]">
-							<h2>Hot Tip</h2>
+						<section className="tip_board h-[400px] mb-[40px] bg-white rounded-[10px]">
+							<img className="object-cover w-full h-full cursor-pointer rounded-[10px]" src={배너} alt="Banner" />
 						</section>
 					</div>
 				</div>

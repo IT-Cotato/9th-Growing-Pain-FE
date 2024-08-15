@@ -66,13 +66,13 @@ const AddInfo = () => {
 	const signupHandler = async (e) => {
 		e.preventDefault();
 
-		const nicknameCheckResult = await nicknameCheckHandler(nickname);
-		if (!nicknameCheckResult) return;
+		// const nicknameCheckResult = await nicknameCheckHandler(nickname);
+		// if (!nicknameCheckResult) return;
 
-		if (!isNicknameCheck || !isNicknameAvailable) {
-			alert('닉네임 중복 검사를 해주세요');
-			return;
-		}
+		// if (!isNicknameCheck || !isNicknameAvailable) {
+		// 	alert('닉네임 중복 검사를 해주세요');
+		// 	return;
+		// }
 
 		const payload = {
 			name: nickname,
@@ -81,20 +81,21 @@ const AddInfo = () => {
 			belong: department,
 		};
 
+		const accessToken = localStorage.getItem('accessToken');
+
 		try {
-			const response = await axios.post('http://3.35.80.178:8080/api/path/join', payload, {
+			const response = await axios.post('/api/auth/complete-signup', payload, {
 				headers: {
 					'Content-Type': 'application/json',
+					Authorization: `Bearer ${accessToken}`,
 				},
 			});
 
-			if (response.status === 201) {
+			if (response.status === 200) {
 				console.log('성공!');
-				localStorage.setItem('nickname', nickname); // 유저 닉네임 저장
+				localStorage.setItem('nickname', nickname);
 				setIsLogin(true);
 				navigate('/signupSuccess'); // 회원가입 성공시 페이지 이동
-			} else if (response.status === 400) {
-				alert(`회원가입 실패: ${response.data.message}`);
 			}
 		} catch (error) {
 			console.error('오류 발생:', error);
@@ -139,10 +140,10 @@ const AddInfo = () => {
 							<option value="" hidden>
 								직업
 							</option>
-							<option>대학생</option>
-							<option>졸업생</option>
-							<option>취준생</option>
-							<option>이직 준비중</option>
+							<option value={'COLLEGE_STUDENT'}>대학생</option>
+							<option value={'GRADUATE'}>졸업생</option>
+							<option value={'JOB_SEEKER'}>취준생</option>
+							<option value={'PREPARING_FOR_JOB_CHANGE'}>이직 준비중</option>
 						</select>
 						{/* 소속 */}
 						<InputField

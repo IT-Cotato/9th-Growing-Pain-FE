@@ -39,20 +39,17 @@ const Login = () => {
 		};
 
 		try {
-			const response = await axios.post(
-				'https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/path/login',
-				payload,
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
+			const response = await axios.post('/api/auth/login/general', payload, {
+				headers: {
+					'Content-Type': 'application/json',
 				},
-			);
+			});
 
 			if (response.status === 200) {
 				console.log('성공!');
 				console.log(response);
 				console.log(response.data);
+				axios.defaults.headers.common['Authorization'] = `Bearer ${response.payload.accessToken}`;
 				// 로그인 상태 업데이트
 				setIsLogin(true);
 				navigate('/user/dashboard'); // 회원가입 성공시 페이지 이동
