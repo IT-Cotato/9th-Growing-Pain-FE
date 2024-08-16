@@ -134,7 +134,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
+        const response = await axios.get('http://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
         if (response.data && response.data.status === 'success') {
           const fetchedData = response.data.data;
           

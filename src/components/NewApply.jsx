@@ -7,7 +7,7 @@ import './DatePicker.css';
 import Button from './Button';
 import { useNavigate } from 'react-router-dom';
 
-const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
+const NewApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   const nav = useNavigate();
 
   // 상태 정의
@@ -143,7 +143,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     const savedData = {
       companyName: companyName, // 수정된 회사명
       jobPart: jobPart, // 수정된 직무명
-      memberId: jobPostData.memberId,
+      // memberId: jobPostData.memberId,
       jobApplications: applicationDataState.map((app) => ({
         id: appIdRef.current++,
         applicationType: app.applicationType,
@@ -151,7 +151,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
         result: app.result,
         submissionStatus: app.submissionStatus,
         applicationStartDate: app.applicationStartDate,
-        applicationCloseDate: new Date(applyDate).getTime(),
+        applicationCloseDate: formatDate(new Date(applyDate).getTime()),
         memberId: jobPostData.memberId,
         jobPostId: jobPostData.jobPostId,
         applicationDetails: app.applicationDetails.map(question => ({
@@ -162,21 +162,11 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       })),
     };
     onSave(savedData); // 부모 컴포넌트로 저장된 데이터 전달
-    console.log(savedData);
   };
 
   useEffect(() => {
     handleSaveRef.current = handleSave;
   }, [companyName, jobPart, applyDate, currentQuestionIndex, currentPageIndex, applicationDataState, submissionStatus, resultStatus]);
-
-  useEffect(() => {
-    // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
-    return () => {
-      if (handleSaveRef.current) {
-        handleSaveRef.current();
-      }
-    };
-  }, [])
 
   // 현재 보여져야 하는 질문
   const currentQuestions = applicationDataState[currentPageIndex]?.applicationDetails || [];
@@ -194,6 +184,15 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     updatedApplicationData[currentPageIndex].applicationCloseDate = date ? date.getTime() : null;
     setApplicationData(updatedApplicationData);
     setApplyDate(date); // DatePicker의 선택된 날짜 상태를 업데이트
+  };
+
+  // 타임스탬프를 'yy-mm-dd' 형식으로 변환하는 함수
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const year = date.getFullYear().toString(); // 'yy' 형식
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 'mm' 형식
+    const day = String(date.getDate()).padStart(2, '0'); // 'dd' 형식
+    return `${year}-${month}-${day}`;
   };
 
   // 제출 여부 수정 핸들러
@@ -390,4 +389,4 @@ const handleApplyResult = (icon) => {
   );
 };
 
-export default EditApply;
+export default NewApply;
