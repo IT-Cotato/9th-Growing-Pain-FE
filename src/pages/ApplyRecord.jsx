@@ -4,120 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import ApplyRecordItem from '../components/ApplyRecordItem';
 import { getDDay } from '../utils/getDDay';
-import axios from 'axios';
-
-// 서버에서 받은 새로운 데이터 형식
-// const applyData = [
-//   {
-// 		"companyName": "토스",
-// 		"jobPart": "프론트엔드",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "DOCUMENT",
-// 						"status": "PENDING",
-// 						"endDate": new Date('2024-08-27').getTime()
-// 				},
-// 				{
-// 						"applicationType": "INTERVIEW",
-// 						"status": "PENDING",
-// 						"endDate": new Date('2024-08-30').getTime()
-// 				}
-// 		]
-// 	},
-//   {
-// 		"companyName": "네이버",
-// 		"jobPart": "AE",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "DOCUMENT",
-// 						"status": "PASSED",
-// 						"endDate": new Date('2024-09-19').getTime()
-// 				},
-// 				{
-// 						"applicationType": "INTERVIEW",
-// 						"status": "PASSED",
-// 						"endDate": new Date('2024-09-19').getTime()
-// 				}
-// 		]
-//   },
-//   {
-// 		"companyName": "카카오",
-// 		"jobPart": "PM",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "INTERVIEW",
-// 						"status": "FAILED",
-// 						"endDate": new Date('2024-08-17').getTime()
-// 				}
-// 		]
-//   },
-//   {
-// 		"companyName": "당근",
-// 		"jobPart": "UI/UX 디자이너",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "INTERVIEW",
-// 						"status": "PASSED",
-// 						"endDate": new Date('2024-08-15').getTime()
-// 				}
-// 		]
-//   },
-//   {
-// 		"companyName": "라인",
-// 		"jobPart": "프론트엔드",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "DOCUMENT",
-// 						"status": "PENDING",
-// 						"endDate": new Date('2024-08-17').getTime()
-// 				}
-// 		]
-//   },
-//   {
-// 		"companyName": "기업은행",
-// 		"jobPart": "AE",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "DOCUMENT",
-// 						"status": "PASSED",
-// 						"endDate": new Date('2024-08-14').getTime()
-// 				}
-// 		]
-//   },
-//   {
-// 		"companyName": "배민",
-// 		"jobPart": "백엔드",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "DOCUMENT",
-// 						"status": "PASSED",
-// 						"endDate": new Date('2024-08-20').getTime()
-// 				}
-// 		]
-//   },
-//   {
-// 		"companyName": "쿠팡",
-// 		"jobPart": "프론트엔드",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "DOCUMENT",
-// 						"status": "PASSED",
-// 						"endDate": new Date('2024-08-10').getTime()
-// 				}
-// 		]
-//   },
-//   {
-// 		"companyName": "Google",
-// 		"jobPart": "PM",
-// 		"jobApplications": [
-// 				{
-// 						"applicationType": "INTERVIEW",
-// 						"status": "PASSED",
-// 						"endDate": new Date('2024-08-10').getTime()
-// 				}
-// 		]
-//   }
-// ];
+import instance from '../api/instance';
 
 const ApplyRecord = () => {
   const [memberData] = useContext(GrowthStateContext);
@@ -128,8 +15,9 @@ const ApplyRecord = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
+        const response = await instance.get('/api/job-posts');
         if (response.data && response.data.status === 'success') {
+          console.log(response.data.data);
           setApplyData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
         }
       } catch (error) {
@@ -155,11 +43,11 @@ const ApplyRecord = () => {
       index: company.index,  // 인덱스 추가
       companyName: company.companyName,
       jobPart: company.jobPart,
-      submitDocument: submitDocument ? submitDocument.status === 'PASSED' : false,
-      submitInterview: submitInterview ? submitInterview.status === 'PASSED' : false,
+      submitDocument: submitDocument ? submitDocument.status : 'PENDING',
+      submitInterview: submitInterview ? submitInterview.status : 'PENDING',
       deadline: Math.min(
-        submitDocument?.endDate || Infinity,
-        submitInterview?.endDate || Infinity
+        new Date(submitDocument?.endDate || '9999-12-31').getTime(),
+        new Date(submitInterview?.endDate || '9999-12-31').getTime()
       )
     };
   }).sort((a, b) => getDDay(a.deadline) - getDDay(b.deadline));
@@ -190,7 +78,7 @@ const ApplyRecord = () => {
             position={application.jobPart}
             submitDocument={application.submitDocument}
             submitInterview={application.submitInterview}
-            deadline={application.deadline}
+            deadline={new Date(application.deadline).toISOString().slice(0, 10)}
           />
         ))}
       </div>

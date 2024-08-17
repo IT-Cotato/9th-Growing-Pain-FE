@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import instance from '../api/instance';
 
 import GrowthApplyItem from '../components/GrowthApplyItem';
 import UseCalendar from '../components/UseCalendar';
@@ -13,25 +13,13 @@ const GrowthRecord = () => {
   const [applyData, setApplyData] = useState([]);
 
 	// 서버로부터 데이터 GET
-	useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/');
+        const response = await instance.get('/api/job-posts');
         if (response.data && response.data.status === 'success') {
-          const fetchedData = response.data.data;
-          
-          // 타임스탬프를 Date 객체로 변환
-          const formattedData = fetchedData.map(company => {
-            return {
-              ...company,
-              jobApplications: company.jobApplications.map(application => ({
-                ...application,
-                endDate: new Date(application.endDate) // 타임스탬프를 Date 객체로 변환
-              }))
-            };
-          });
-
-          setApplyData(formattedData); // 변환된 데이터를 상태에 저장
+          console.log(response.data.data);
+          setApplyData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
         }
       } catch (error) {
         console.error('Error fetching apply data:', error);
@@ -41,33 +29,29 @@ const GrowthRecord = () => {
     fetchData();
   }, []);
 
-  // 서류와 면접 데이터 합치기
-  const combinedData = applyData.map((company, index) => {
+	// 데이터에 인덱스 추가
+  const dataWithIndex = applyData.map((item, index) => ({
+    ...item,
+    index
+  }));
+
+  // 새로운 데이터 형식에서 마감일 기준으로 지원현황 정렬
+  const combinedData = dataWithIndex.map(company => {
     const submitDocument = company.jobApplications.find(app => app.applicationType === 'DOCUMENT');
     const submitInterview = company.jobApplications.find(app => app.applicationType === 'INTERVIEW');
 
     return {
-      index,
+      index: company.index,  // 인덱스 추가
       companyName: company.companyName,
       jobPart: company.jobPart,
-      submitDocument: submitDocument ? submitDocument.status === 'PASSED' : false,
-      submitInterview: submitInterview ? submitInterview.status === 'PASSED' : false,
+      submitDocument: submitDocument ? submitDocument.status : 'PENDING',
+      submitInterview: submitInterview ? submitInterview.status : 'PENDING',
       deadline: Math.min(
-        submitDocument?.endDate.getTime() || Infinity,  // getTime()을 사용하여 비교
-        submitInterview?.endDate.getTime() || Infinity  // getTime()을 사용하여 비교
+        new Date(submitDocument?.endDate || '9999-12-31').getTime(),
+        new Date(submitInterview?.endDate || '9999-12-31').getTime()
       )
     };
-  }).filter(application => getDDay(application.deadline) >= 0) // 마감일이 지나지 않은 것만 필터링
-    .sort((a, b) => getDDay(a.deadline) - getDDay(b.deadline))
-    .slice(0, 9); // 가장 짧은 6개만 노출
-
-	// 원본 데이터에 인덱스를 부여하여 관리
-	const [dataWithIndex, setDataWithIndex] = useState(() => {
-		return applyData.map((item, index) => ({
-			...item,
-			index
-		}));
-	});
+  }).sort((a, b) => getDDay(a.deadline) - getDDay(b.deadline)).slice(0, 9);
 
 	return (
 		<div className='flex-grow flex flex-col'>

@@ -13,7 +13,7 @@ const NewApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   // 상태 정의
   const [companyName, setCompanyName] = useState(jobPostData.companyName); // 회사명 상태
   const [jobPart, setJobPart] = useState(jobPostData.jobPart); // 직무 상태
-  const [applyDate, setApplyDate] = useState(null); // 지원 기간
+  const [applyDate, setApplyDate] = useState(Date.now()); // 지원 기간
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 질문과 대답
   const [currentPageIndex, setCurrentPageIndex] = useState(0); // 서류나 면접
   const [applicationDataState, setApplicationData] = useState(applicationData); // 초기값으로 `applicationData` 사용
@@ -299,7 +299,7 @@ const handleApplyResult = (icon) => {
                 <div className='answer-content flex-1 p-[40px] bg-white rounded-[10px] rounded-tr-[0px]'>
                   <textarea 
                     placeholder="내용을 입력하세요"
-                    className='w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-medium leading-[21.48px] outline-none resize-none'
+                    className='w-full h-full border border-white bg-white text-[18px] rounded-[0px] font-regular leading-[21.48px] outline-none resize-none'
                     value={currentQuestions[currentQuestionIndex]?.content || ''}
                     onChange={(e) => handleQuestionChange(currentQuestionIndex, 'content', e.target.value)}
                   />
