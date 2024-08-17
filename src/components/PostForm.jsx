@@ -5,6 +5,7 @@ import 프사 from '/images/공모전.png';
 import CustomDropdown from './CustomDropdown';
 import { useState } from 'react';
 import axios from 'axios';
+import instance from '../api/instance';
 
 const PostForm = ({ category }) => {
 	const [title, setTitle] = useState('');
@@ -29,22 +30,27 @@ const PostForm = ({ category }) => {
 		}
 
 		const postData = {
-			title,
-			content,
-			category: selectedCategory,
+			title: title,
+			content: content,
+			category: Category,
 		};
 
 		try {
-			const response = await axios.post(`/api/post`, postData, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			console.log('포스트 작성 성공:', response.data);
+			const response = await instance.post('/api/post', postData);
+			if (response.status === 201) {
+				console.log('포스트 작성 성공:', response.data);
+			}
 		} catch (error) {
 			console.error('포스트 작성 오류:', error);
 			alert('포스트 작성에 실패했습니다. 다시 시도해 주세요.');
 		}
+	};
+
+	const [Category, setSelectedCategory] = useState('');
+
+	const handleCategoryChange = (category) => {
+		setSelectedCategory(category);
+		console.log('Selected Category:', category); // 선택된 카테고리 값을 부모 컴포넌트에서 처리
 	};
 
 	const selectedCategory = category === 'member' ? '팀원모집' : categoryOptions[category];
@@ -59,7 +65,7 @@ const PostForm = ({ category }) => {
 					<h1 className="ml-[12px] text-[16px] font-medium">{userData.nickname}</h1>
 					<h1 className="text-[14px] ml-[10px] text-gray-commuPosition">{userData.position}</h1>
 				</section>
-				<CustomDropdown category={category} className="z-50" />
+				<CustomDropdown category={category} onCategoryChange={handleCategoryChange} className="z-50" />
 			</div>
 			<div className="mt-[18px] flex-grow flex flex-col mx-[36px]">
 				<div className="h-1/4 z-10">

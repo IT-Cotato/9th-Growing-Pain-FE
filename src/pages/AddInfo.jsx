@@ -94,6 +94,8 @@ const AddInfo = () => {
 			if (response.status === 200) {
 				console.log('성공!');
 				localStorage.setItem('nickname', nickname);
+				localStorage.setItem('accessToken', response.data.data.accessToken);
+				localStorage.setItem('refreshToken', response.data.data.refreshToken);
 				setIsLogin(true);
 				navigate('/signupSuccess'); // 회원가입 성공시 페이지 이동
 			}

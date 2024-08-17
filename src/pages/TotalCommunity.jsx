@@ -73,7 +73,7 @@ const TotalCommunity = ({ category }) => {
 				},
 			],
 			bookmark: true,
-			category: 'free',
+			category: 'FREE',
 		},
 		{
 			profile: 프사,
@@ -86,7 +86,7 @@ const TotalCommunity = ({ category }) => {
 			heart: 3,
 			comments: [],
 			bookmartk: false,
-			category: ['member', 'study'],
+			category: ['TEAM', 'STUDY'],
 		},
 		{
 			profile: 프사,
@@ -100,7 +100,7 @@ const TotalCommunity = ({ category }) => {
 			heart: 3,
 			comments: [],
 			bookmartk: false,
-			category: 'portfolio',
+			category: 'PORTFOLIO',
 		},
 		{
 			profile: 프사,
@@ -113,7 +113,7 @@ const TotalCommunity = ({ category }) => {
 			heart: 3,
 			comments: [],
 			bookmartk: false,
-			category: ['member', 'contest'],
+			category: ['TEAM', 'CONTEST'],
 		},
 		{
 			profile: 프사,
@@ -126,7 +126,7 @@ const TotalCommunity = ({ category }) => {
 			heart: 3,
 			comments: [],
 			bookmartk: false,
-			category: ['member', 'project'],
+			category: ['TEAM', 'PROJECT'],
 		},
 	]);
 	const [search, setSearch] = useState('');
