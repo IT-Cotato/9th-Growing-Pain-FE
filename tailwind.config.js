@@ -87,7 +87,7 @@ export default {
 			regular: ['Pretendard-Regular'],
 			medium: ['Pretendard-Medium'],
 			bold: ['Pretendard-Bold'],
-			seimbold: ['Pretendard-SemiBold'],
+			semibold: ['Pretendard-SemiBold'],
 		},
 		plugins: [],
 	},

@@ -50,8 +50,7 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			break;
 		case 'applyTitle':
 			inputStyle =
-				'bg-[#FFFFFF] rounded-[10px] w-full h-[56px] pl-[40px] placeholder:text-[18px] placeholder:text-wrap outline-none';
-		inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-full h-[56px] pl-[40px] placeholder:text-[18px] placeholder:text-wrap outline-none';
+				'bg-[#FFFFFF] rounded-[10px] w-full h-[56px] font-semibold pl-[40px] placeholder:text-[18px] placeholder:text-wrap outline-none';
 		break;
 		// 대쉬보드 페이지-오늘의 다짐
 		case 'dashToday':
