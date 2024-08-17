@@ -66,7 +66,7 @@ const Router = ({ userInfo }) => {
 
 		{
 			path: 'user', // 로그인 이후 이동 가능 페이지
-			element: <ProtectedRoute userInfo={userInfo} />,
+			element: <ProtectedRoute />,
 			children: [
 				{ path: 'Dashboard', element: <Dashboard /> }, // 대시보드
 				{

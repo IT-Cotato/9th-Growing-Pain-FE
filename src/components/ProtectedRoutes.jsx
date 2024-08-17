@@ -1,9 +1,22 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import Layout from './Layout';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Outlet, useLocation  } from 'react-router-dom';
 
-const ProtectedRoute = ({ userInfo }) => {
-	if (!userInfo) {
+// 로컬스토리지에서 토큰을 가져오는 함수
+const getSessionStorage = (key) => {
+	return sessionStorage.getItem(key);
+};
+
+const ProtectedRoute = () => {
+	const location = useLocation();  // 현재 URL 경로를 가져옴
+	const [userInfo, setUserInfo] = useState(getSessionStorage('role'));
+
+	useEffect(()=>{
+		const role = getSessionStorage('role');
+		setUserInfo(role);
+	},[location]);
+	
+	
+	if (userInfo != 'ROLE_MEMBER') {
 		// 유저 정보가 없다면 로그인페이지로 이동
 		window.alert('로그인이 필요한 서비스입니다.');
 		return <Navigate to="/login" replace={true} />;
