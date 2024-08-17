@@ -247,7 +247,9 @@ instance.interceptors.response.use(
 				const checkAcces = jwtDecode(accessToken);
 				console.log('Decoded Token:', checkAcces); // 디코딩된 토큰 로그 확인
 				removeSessionStorage('accessToken');
+				removeSessionStorage('role');
 				setSessionStorage('accessToken', accessToken);
+				setSessionStorage('role', checkAcces.role);
 			}
 			if (refreshToken) {
 				const checkRefresh = jwtDecode(refreshToken);

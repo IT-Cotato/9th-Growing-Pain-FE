@@ -299,12 +299,11 @@ const infoData = {
 export const GrowthStateContext = createContext();
 
 function App() {
-	const userInfo = true;
 
 	return (
 		<>
 			<GrowthStateContext.Provider value={[memberData, jobPostData, applicationData, applicaionDetailData, infoData]}>
-				<Router userInfo={userInfo} />
+				<Router />
 			</GrowthStateContext.Provider>
 		</>
 	);
