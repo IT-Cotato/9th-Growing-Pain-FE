@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import instance from '../api/instance';
 
 const AddInfo = () => {
 	const location = useLocation();
@@ -81,19 +82,12 @@ const AddInfo = () => {
 			belong: department,
 		};
 
-		const accessToken = localStorage.getItem('accessToken');
-
 		try {
-			const response = await axios.post('/api/auth/complete-signup', payload, {
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${accessToken}`,
-				},
-			});
+			const response = await instance.post('/api/auth/complete-signup', payload, {});
 
 			if (response.status === 200) {
 				console.log('성공!');
-				localStorage.setItem('nickname', nickname);
+				sessionStorage.setItem('nickname', nickname);
 				setIsLogin(true);
 				navigate('/signupSuccess'); // 회원가입 성공시 페이지 이동
 			}

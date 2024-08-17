@@ -97,9 +97,9 @@ const Router = ({ userInfo }) => {
 					element: <Layout />,
 					children: [
 						{ path: 'Total', element: <TotalCommunity /> }, // 전체 게시판
-						{ path: 'Free', element: <TotalCommunity category={'free'} /> }, // 자유 게시판
-						{ path: 'Member', element: <TotalCommunity category={'member'} /> }, // 팀원모집 게시판
-						{ path: 'Portfolio', element: <TotalCommunity category={'portfolio'} /> }, // 포트폴리오 게시판
+						{ path: 'Free', element: <TotalCommunity category={'FREE'} /> }, // 자유 게시판
+						{ path: 'Member', element: <TotalCommunity category={'TEAM'} /> }, // 팀원모집 게시판
+						{ path: 'Portfolio', element: <TotalCommunity category={'PORTFOLIO'} /> }, // 포트폴리오 게시판
 					],
 				},
 				{
