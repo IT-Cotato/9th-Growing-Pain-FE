@@ -15,7 +15,7 @@ const Login = () => {
 	const [pw, setPw] = useState('');
 	const [isLogin, setIsLogin] = useState(false); // 로그인 상태 체크
 
-	const REST_API_KEY = '5300e959ca05bc1379b8c96fedc5723c';
+	const REST_API_KEY = import.meta.env.VITE_KAKAO_KEY;
 	const REDIRECT_URI = 'http://localhost:5173/oauth';
 	const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
@@ -89,6 +89,7 @@ const Login = () => {
 				// localStorage.setItem('refreshToken', response.data.data.refreshToken);
 				// 로그인 상태 업데이트
 				setIsLogin(true);
+				console.log(REST_API_KEY);
 				navigate('/user/dashboard'); // 회원가입 성공시 페이지 이동
 			}
 		} catch (error) {
