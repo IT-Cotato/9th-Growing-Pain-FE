@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import axios from 'axios';
 
 // // 로컬스토리지에서 토큰을 가져오는 함수
@@ -128,42 +127,35 @@
 
 // export default instance;
 
-=======
->>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 // 로컬스토리지에서 토큰을 가져오는 함수
-const getLocalStorage = (key) => {
-	return localStorage.getItem(key);
+const getSessionStorage = (key) => {
+	return sessionStorage.getItem(key);
 };
 
 // 로컬스토리지에 토큰을 저장하는 함수
-const setLocalStorage = (key, value) => {
-	localStorage.setItem(key, value);
+const setSessionStorage = (key, value) => {
+	sessionStorage.setItem(key, value);
 };
 
 // 로컬스토리지에서 토큰을 제거하는 함수
-const removeLocalStorage = (key) => {
-	localStorage.removeItem(key);
+const removeSessionStorage = (key) => {
+	sessionStorage.removeItem(key);
 };
 
 // JWT 만료 여부를 체크하는 함수
-<<<<<<< HEAD
 const CheckJWTExp = (token) => {
-=======
-const CheckJWTExp = () => {
-	const token = localStorage.getItem('accessToken');
-	if (!token) {
-		return 'NO_TOKEN';
-	}
-
->>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
-	const decodedToken = parseJWT(token);
+	// const decodedToken = parseJWT(token);
+	const decodedToken = jwtDecode(token);
+	console.log('Decoded Token:', decodedToken); // 디코딩된 토큰 로그 확인
 	if (!decodedToken || !decodedToken.exp) {
 		return 'INVALID_TOKEN';
 	}
 
 	const currentTime = Math.floor(Date.now() / 1000); // 현재 시간을 초 단위로 얻기
+	console.log('Current Time:', currentTime, 'Token Expiry:', decodedToken.exp); // 현재 시간과 만료 시간 비교
 
 	if (decodedToken.exp < currentTime) {
 		return 'ACCESS_EXP_MESSAGE'; // 토큰이 만료된 경우
@@ -204,10 +196,9 @@ const instance = axios.create({
 
 // 요청 인터셉터 설정
 instance.interceptors.request.use(
-<<<<<<< HEAD
 	async (config) => {
-		let accessToken = getLocalStorage('accessToken');
-		let refreshToken = getLocalStorage('refreshToken');
+		let accessToken = getSessionStorage('accessToken');
+		let refreshToken = getSessionStorage('refreshToken');
 
 		// AccessToken 유효성 검사
 		if (accessToken) {
@@ -224,14 +215,14 @@ instance.interceptors.request.use(
 						// 새로운 토큰을 로컬스토리지에 저장
 						accessToken = response.data.data.accessToken;
 						refreshToken = response.data.data.refreshToken;
-						setLocalStorage('accessToken', accessToken);
-						setLocalStorage('refreshToken', refreshToken);
+						setSessionStorage('accessToken', accessToken);
+						setSessionStorage('refreshToken', refreshToken);
 						console.log('새로운 토큰을 로컬스토리지에 저장 완료!');
 					}
 				} catch (error) {
 					console.error('리이슈 실패:', error);
-					removeLocalStorage('accessToken');
-					removeLocalStorage('refreshToken');
+					removeSessionStorage('accessToken');
+					removeSessionStorage('refreshToken');
 					// 필요 시 로그아웃 처리
 				}
 			} else {
@@ -240,21 +231,6 @@ instance.interceptors.request.use(
 			config.headers.Authorization = `Bearer ${accessToken}`;
 		}
 
-=======
-	(config) => {
-		const accessToken = getLocalStorage('accessToken');
-		const refreshToken = getLocalStorage('refreshToken');
-		if (accessToken) {
-			/** 2. access토큰 있으면 만료됐는지 체크 */
-			if (CheckJWTExp() === 'ACCESS_EXP_MESSAGE') {
-				/** 3. 만료되면 만료된 access, refresh 같이 헤더 담아서 요청 */
-				config.headers.Authorization = `Bearer ${accessToken}`;
-				config.headers.Refresh = refreshToken;
-			} else {
-				config.headers.Authorization = `Bearer ${accessToken}`;
-			}
-		}
->>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 		return config;
 	},
 	(error) => Promise.reject(error),
@@ -263,42 +239,30 @@ instance.interceptors.request.use(
 // 응답 인터셉터 설정
 instance.interceptors.response.use(
 	async (response) => {
-<<<<<<< HEAD
 		// 응답 데이터에서 토큰이 있을 경우
 		if (response.data.data) {
 			const { accessToken, refreshToken } = response.data.data;
 
 			if (accessToken) {
-=======
-		// response.data 및 response.data.data가 존재하는지 확인
-		if (response.data && response.data.data) {
-			const { accessToken, refreshToken } = response.data.data;
-
-			if (accessToken) {
-				// 이전 토큰 삭제 및 새 토큰 저장
->>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
-				removeLocalStorage('accessToken');
-				setLocalStorage('accessToken', accessToken);
+				const checkAcces = jwtDecode(accessToken);
+				console.log('Decoded Token:', checkAcces); // 디코딩된 토큰 로그 확인
+				removeSessionStorage('accessToken');
+				setSessionStorage('accessToken', accessToken);
 			}
 			if (refreshToken) {
-				removeLocalStorage('refreshToken');
-				setLocalStorage('refreshToken', refreshToken);
+				const checkRefresh = jwtDecode(refreshToken);
+				console.log('Decoded Token:', checkRefresh); // 디코딩된 토큰 로그 확인
+				removeSessionStorage('refreshToken');
+				setSessionStorage('refreshToken', refreshToken);
 			}
-<<<<<<< HEAD
-=======
 		} else {
 			console.log(response.data.message);
->>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 		}
 
 		return response;
 	},
 	(error) => {
-<<<<<<< HEAD
 		console.error('Response error:', error);
-=======
-		// 응답 200 아닌 경우 - 디버깅
->>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 		return Promise.reject(error);
 	},
 );

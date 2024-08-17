@@ -6,6 +6,7 @@ import InputField from '../components/InputField';
 import Button from '../components/Button';
 import axios from 'axios';
 import { data } from 'autoprefixer';
+import instance from '../api/instance';
 
 const Signup = () => {
 	const [emailFirst, setEmailFirst] = useState(''); // 이메일 앞부분 저장
@@ -35,7 +36,6 @@ const Signup = () => {
 	const onChangePasswordHandler = () => {
 		passwordCheckHandler(password, confirmPassword);
 	};
-
 
 	// const emailCheckHandler = async (userEmail) => {
 	// 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 형식
@@ -78,7 +78,6 @@ const Signup = () => {
 	// 	}
 	// };
 
-
 	// 비밀번호가 형식에 맞는지 && 비밀번호와 비밀번호 확인하기 두 개의 비밀번호가 일치하는지
 	const passwordCheckHandler = (password, confirmPassword) => {
 		const passwordRegex = /^[a-z0-9]{8,16}$/;
@@ -117,23 +116,13 @@ const Signup = () => {
 		};
 
 		try {
-			const response = await axios.post(
-				'api/auth/login/general',
-				{
-					email: userEmail,
-					password: password,
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				},
-			);
+			const response = await instance.post('api/auth/login/general', {
+				email: userEmail,
+				password: password,
+			});
 
 			if (response.status === 200) {
 				console.log('기본정보 입력 받기 성공!', response);
-				localStorage.setItem('accessToken', response.data.data.accessToken);
-				localStorage.setItem('refreshToken', response.data.data.refreshToken);
 				navigate('/addInfo');
 			}
 		} catch (error) {
