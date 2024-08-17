@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import axios from 'axios';
 
 // // 로컬스토리지에서 토큰을 가져오는 함수
@@ -127,6 +128,8 @@
 
 // export default instance;
 
+=======
+>>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 import axios from 'axios';
 
 // 로컬스토리지에서 토큰을 가져오는 함수
@@ -145,7 +148,16 @@ const removeLocalStorage = (key) => {
 };
 
 // JWT 만료 여부를 체크하는 함수
+<<<<<<< HEAD
 const CheckJWTExp = (token) => {
+=======
+const CheckJWTExp = () => {
+	const token = localStorage.getItem('accessToken');
+	if (!token) {
+		return 'NO_TOKEN';
+	}
+
+>>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 	const decodedToken = parseJWT(token);
 	if (!decodedToken || !decodedToken.exp) {
 		return 'INVALID_TOKEN';
@@ -192,6 +204,7 @@ const instance = axios.create({
 
 // 요청 인터셉터 설정
 instance.interceptors.request.use(
+<<<<<<< HEAD
 	async (config) => {
 		let accessToken = getLocalStorage('accessToken');
 		let refreshToken = getLocalStorage('refreshToken');
@@ -227,6 +240,21 @@ instance.interceptors.request.use(
 			config.headers.Authorization = `Bearer ${accessToken}`;
 		}
 
+=======
+	(config) => {
+		const accessToken = getLocalStorage('accessToken');
+		const refreshToken = getLocalStorage('refreshToken');
+		if (accessToken) {
+			/** 2. access토큰 있으면 만료됐는지 체크 */
+			if (CheckJWTExp() === 'ACCESS_EXP_MESSAGE') {
+				/** 3. 만료되면 만료된 access, refresh 같이 헤더 담아서 요청 */
+				config.headers.Authorization = `Bearer ${accessToken}`;
+				config.headers.Refresh = refreshToken;
+			} else {
+				config.headers.Authorization = `Bearer ${accessToken}`;
+			}
+		}
+>>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 		return config;
 	},
 	(error) => Promise.reject(error),
@@ -235,11 +263,20 @@ instance.interceptors.request.use(
 // 응답 인터셉터 설정
 instance.interceptors.response.use(
 	async (response) => {
+<<<<<<< HEAD
 		// 응답 데이터에서 토큰이 있을 경우
 		if (response.data.data) {
 			const { accessToken, refreshToken } = response.data.data;
 
 			if (accessToken) {
+=======
+		// response.data 및 response.data.data가 존재하는지 확인
+		if (response.data && response.data.data) {
+			const { accessToken, refreshToken } = response.data.data;
+
+			if (accessToken) {
+				// 이전 토큰 삭제 및 새 토큰 저장
+>>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 				removeLocalStorage('accessToken');
 				setLocalStorage('accessToken', accessToken);
 			}
@@ -247,12 +284,21 @@ instance.interceptors.response.use(
 				removeLocalStorage('refreshToken');
 				setLocalStorage('refreshToken', refreshToken);
 			}
+<<<<<<< HEAD
+=======
+		} else {
+			console.log(response.data.message);
+>>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 		}
 
 		return response;
 	},
 	(error) => {
+<<<<<<< HEAD
 		console.error('Response error:', error);
+=======
+		// 응답 200 아닌 경우 - 디버깅
+>>>>>>> d9d344034989ab12ec07ee357fbc16fd9371cf7a
 		return Promise.reject(error);
 	},
 );
