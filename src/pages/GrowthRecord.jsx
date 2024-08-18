@@ -54,7 +54,7 @@ const GrowthRecord = () => {
   }).sort((a, b) => getDDay(a.deadline) - getDDay(b.deadline)).slice(0, 9);
 
 	return (
-		<div className='flex-grow flex flex-col'>
+		<div className='flex-grow flex flex-col mb-[50px]'>
 			<div className='mx-[70px]'>
 				<div className="top-container flex justify-between h-full">
 					<div className="application-list-container w-[75%] pr-[40px] flex-column mt-[42px]">
@@ -90,7 +90,7 @@ const GrowthRecord = () => {
 			</div>
 			<div className="activity-container h-[350px] ml-[70px] mr-[71px] ">
 				<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">활동기록</div>
-				<div className="activity-item h-[280px] flex gap-[21px]">
+				<div className="activity-item h-[300px] flex gap-[21px]">
 					{activityInfo.map((info) => (
 						<ActivityCategory
 							key={info.id}
