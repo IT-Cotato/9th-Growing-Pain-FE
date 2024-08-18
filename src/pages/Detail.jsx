@@ -1,277 +1,76 @@
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import EditApply from "../components/EditApply";
+import instance from '../api/instance';
 import axios from 'axios';
 
-const data = [
-  {
-    "companyName": "토스",
-    "jobPart": "프론트엔드",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "DOCUMENT",
-        "place": "서초구",
-        "result": "PASSED",
-        "submissionStatus": "FAILED",
-        "applicationStartDate": "2024-07-06",
-        "applicationCloseDate": "2024-10-23",
-        "memberId": 0,
-        "jobPostId": 0,
-        "applicationDetails": [
-          {
-            "id": 0,
-            "title": "1번 지원서 서류 1",
-            "content": "1번 지원서 서류 1입니다"
-          },
-          {
-            "id": 1,
-            "title": "1번 지원서 서류 2",
-            "content": "1번 지원서 서류 2입니다"
-          },
-          {
-            "id": 2,
-            "title": "1번 지원서 서류 3",
-            "content": "1번 지원서 서류 3입니다"
-          }
-        ]
-      },
-      {
-        "id": 1,
-        "applicationType": "INTERVIEW",
-        "place": "서초구",
-        "result": "PENDING",
-        "submissionStatus": "FAILED",
-        "applicationStartDate": "2024-07-06",
-        "applicationCloseDate": "2024-10-25",
-        "memberId": 0,
-        "jobPostId": 0,
-        "applicationDetails": [
-          {
-            "id": 0,
-            "title": "1번 지원서 면접 1",
-            "content": "1번 지원서 면접 1입니다"
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "applicationType": "PEEDBACK",
-        "place": "서초구",
-        "result": "PENDING",
-        "submissionStatus": "PASSED",
-        "applicationStartDate": "2024-07-06",
-        "applicationCloseDate": "2024-10-30",
-        "memberId": 0,
-        "jobPostId": 0,
-        "applicationDetails": [
-          {
-            "id": 0,
-            "title": "1번 지원서 피드백 1",
-            "content": "1번 지원서 피드백 1입니다"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "companyName": "네이버",
-    "jobPart": "AE",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "DOCUMENT",
-        "place": "종로구",
-        "result": "PASSED",
-        "submissionStatus": "PASSED",
-        "applicationStartDate": "2024-07-06",
-        "applicationCloseDate": "2024-09-19",
-        "memberId": 1,
-        "jobPostId": 1,
-        "applicationDetails": [
-          {
-            "id": 0,
-            "title": "2번 지원서 서류 1",
-            "content": "2번 지원서 서류 1입니다."
-          }
-        ]
-      },
-      {
-        "id": 1,
-        "applicationType": "INTERVIEW",
-        "place": "종로구",
-        "result": "PASSED",
-        "submissionStatus": "PENDING",
-        "applicationStartDate": "2024-07-06",
-        "applicationCloseDate": "2024-09-19",
-        "memberId": 1,
-        "jobPostId": 1,
-        "applicationDetails": [
-          {
-            "id": 0,
-            "title": "2번 지원서 면접 1",
-            "content": "2번 지원서 면접 1입니다"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "companyName": "카카오",
-    "jobPart": "PM",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "INTERVIEW",
-        "place": "도봉구",
-        "result": "FAILED",
-        "submissionStatus": "PASSED",
-        "applicationStartDate": "2024-07-04",
-        "applicationCloseDate": "2024-08-17",
-        "memberId": 2,
-        "jobPostId": 2,
-        "applicationDetails": []
-      }
-    ]
-  },
-  {
-    "companyName": "당근",
-    "jobPart": "UI/UX 디자이너",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "INTERVIEW",
-        "place": "강남구",
-        "result": "PASSED",
-        "submissionStatus": "PASSED",
-        "applicationStartDate": "2024-07-05",
-        "applicationCloseDate": "2024-08-15",
-        "memberId": 3,
-        "jobPostId": 3,
-        "applicationDetails": []
-      }
-    ]
-  },
-  {
-    "companyName": "라인",
-    "jobPart": "프론트엔드",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "DOCUMENT",
-        "place": "Unknown",
-        "result": "PENDING",
-        "submissionStatus": "PENDING",
-        "applicationStartDate": "2024-07-01",
-        "applicationCloseDate": "2024-08-17",
-        "memberId": 4,
-        "jobPostId": 4,
-        "applicationDetails": []
-      }
-    ]
-  },
-  {
-    "companyName": "기업은행",
-    "jobPart": "AE",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "DOCUMENT",
-        "place": "Unknown",
-        "result": "PASSED",
-        "submissionStatus": "PENDING",
-        "applicationStartDate": "2024-07-01",
-        "applicationCloseDate": "2024-08-14",
-        "memberId": 5,
-        "jobPostId": 5,
-        "applicationDetails": []
-      }
-    ]
-  },
-  {
-    "companyName": "배민",
-    "jobPart": "백엔드",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "DOCUMENT",
-        "place": "Unknown",
-        "result": "PASSED",
-        "submissionStatus": "PENDING",
-        "applicationStartDate": "2024-07-01",
-        "applicationCloseDate": "2024-08-20",
-        "memberId": 6,
-        "jobPostId": 6,
-        "applicationDetails": []
-      }
-    ]
-  },
-  {
-    "companyName": "쿠팡",
-    "jobPart": "프론트엔드",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "DOCUMENT",
-        "place": "Unknown",
-        "result": "PENDING",
-        "submissionStatus": "PASSED",
-        "applicationStartDate": "2024-07-01",
-        "applicationCloseDate": "2024-08-10",
-        "memberId": 7,
-        "jobPostId": 7,
-        "applicationDetails": []
-      }
-    ]
-  },
-  {
-    "companyName": "Google",
-    "jobPart": "PM",
-    "jobApplications": [
-      {
-        "id": 0,
-        "applicationType": "INTERVIEW",
-        "place": "Unknown",
-        "result": "PASSED",
-        "submissionStatus": "PASSED",
-        "applicationStartDate": "2024-07-01",
-        "applicationCloseDate": "2024-08-10",
-        "memberId": 8,
-        "jobPostId": 8,
-        "applicationDetails": []
-      }
-    ]
-  }
-]
+// 초기 데이터
+const initialData = {
+  companyName: '',
+  jobPart: '',
+  jobApplications: [
+    {
+      id: 0,
+      applicationType: 'DOCUMENT',
+      place: '',
+      result: 'PENDING',
+      submissionStatus: 'PENDING',
+      applicationStartDate: '',
+      applicationCloseDate: '',
+      memberId: 0,
+      jobPostId: 0,
+      applicationDetails: [
+        {
+          id: 0,
+          title: '',
+          content: '',
+        },
+      ],
+    },
+  ],
+};
 
 const Detail = () => {
   const params = useParams();
+  const [data, setData] = useState(initialData);
 
   const currentId = Number(params.id)
 
-  // 현재 페이지에 해당하는 정보만 필터링
-  const filteredCompanyData = data.find(company =>
-    company.jobApplications.some(application => application.jobPostId === currentId)
-  );
+  // 서버로부터 데이터 GET
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await instance.get(`/api/job-posts/${currentId}`);
+        if (response.data && response.data.status === 'success') {
+          console.log(response.data.data);
+          setData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
+        }
+      } catch (error) {
+        console.error('Error fetching apply data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   
   const filteredPostData = {
-    companyName: filteredCompanyData.companyName,
-    jobPart: filteredCompanyData.jobPart,
+    companyName: data.companyName,
+    jobPart: data.jobPart,
   };
 
-  const filteredApplicationData = filteredCompanyData.jobApplications.filter(
-    app => app.jobPostId === currentId
-  );
+  const filteredApplicationData = data.jobApplications;
 
   // 지원현황 데이터 업데이트
   const handleUpdate = async (savedData) => {
     try {
       // axios를 사용하여 PUT 요청을 보냄
-      const response = await axios.put(
-        `http://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/${currentId}`, 
+      const response = await axios.patch(
+        `https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/${currentId}`, 
         savedData, // 전송할 데이터
         {
           headers: {
             'Content-Type': 'application/json', // JSON 형식으로 데이터를 전송
+            'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6MSwiZW1haWwiOiJleGFtcGxlVXNlckBuYXZlci5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzIxNzM1NTgxLCJleHAiOjE3MjE3MzczODF9.yKw542QCNfAgPwHd_HsmNKvHjXfmytq2gv8aMVfcgu0',
           },
         }
       );
