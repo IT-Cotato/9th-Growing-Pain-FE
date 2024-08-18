@@ -20,6 +20,7 @@ import {
 	EnvelopeIcon,
 	ChevronRightIcon,
 	ChevronDownIcon,
+	ArrowRightStartOnRectangleIcon
 } from '@heroicons/react/24/outline';
 
 const Sidebar = () => {
@@ -44,7 +45,7 @@ const Sidebar = () => {
 	const isActive = (path) => (location.pathname === path ? 'bg-gray-lightSide' : '');
 
 	return (
-		<div className="sidebar-container p-5 bg-navy-lightSide h-100%">
+		<div className="sidebar-container p-5 bg-navy-lightSide h-[100%] flex flex-col">
 			{/* 사이드바 로고 */}
 			{/* 라우팅 수정 필요 */}
 			<div
@@ -66,112 +67,120 @@ const Sidebar = () => {
 				</div>
 			</div>
 
-			{/* 메뉴바 */}
-			<div className="sidebar-menu mt-[30px]">
-				<div onClick={() => nav('/user/dashboard')}>
-					<div className={`${menuItemClass} ${isActive('/user/dashboard')}`}>
-						<HomeIcon className={iconClass} />
-						대쉬보드
+			<div className='flex flex-col flex-1 justify-between'>
+				{/* 메뉴바 */}
+				<div className="sidebar-menu mt-[30px]">
+					<div onClick={() => nav('/user/dashboard')}>
+						<div className={`${menuItemClass} ${isActive('/user/dashboard')}`}>
+							<HomeIcon className={iconClass} />
+							대쉬보드
+						</div>
 					</div>
-				</div>
 
-				<div className={`${menuItemClass} ${isActive('/user/growth')}`}>
-					<MapIcon className={iconClass} onClick={() => nav('/user/growth')} />
-					<div className={menuItemTextClass} onClick={() => nav('/user/growth')}>
-						성장기록
-					</div>
-					<div onClick={() => toggleMenu('growth')}>
-						{openMenu === 'growth' ? (
-							<ChevronDownIcon className={iconClass} />
-						) : (
-							<ChevronRightIcon className={iconClass} />
-						)}
-					</div>
-				</div>
-				{openMenu === 'growth' && (
-					<div className="submenu pl-5">
-						<div
-							className={`${menuItemClass} ${isActive('/user/growth/apply')}`}
-							onClick={() => nav('/user/growth/apply')}
-						>
-							<PresentationChartLineIcon className={iconClass} />
-							지원현황
+					<div className={`${menuItemClass} ${isActive('/user/growth')}`}>
+						<MapIcon className={iconClass} onClick={() => nav('/user/growth')} />
+						<div className={menuItemTextClass} onClick={() => nav('/user/growth')}>
+							성장기록
 						</div>
-						<div
-							className={`${menuItemClass} ${isActive('/user/growth/activity/category/extracurricular')}`}
-							onClick={() => nav('/user/growth/activity/category/extracurricular')}
-						>
-							<DocumentIcon className={iconClass} />
-							활동기록
+						<div onClick={() => toggleMenu('growth')}>
+							{openMenu === 'growth' ? (
+								<ChevronDownIcon className={iconClass} />
+							) : (
+								<ChevronRightIcon className={iconClass} />
+							)}
 						</div>
 					</div>
-				)}
+					{openMenu === 'growth' && (
+						<div className="submenu pl-5">
+							<div
+								className={`${menuItemClass} ${isActive('/user/growth/apply')}`}
+								onClick={() => nav('/user/growth/apply')}
+							>
+								<PresentationChartLineIcon className={iconClass} />
+								지원현황
+							</div>
+							<div
+								className={`${menuItemClass} ${isActive('/user/growth/activity/category/extracurricular')}`}
+								onClick={() => nav('/user/growth/activity/category/extracurricular')}
+							>
+								<DocumentIcon className={iconClass} />
+								활동기록
+							</div>
+						</div>
+					)}
 
-				<div className={`${menuItemClass} ${isActive('/user/community/total')}`}>
-					<UsersIcon className={iconClass} onClick={() => nav('/user/community/total')} />
-					<div className={menuItemTextClass} onClick={() => nav('/user/community/total')}>
-						커뮤니티
-					</div>
-					<div onClick={() => toggleMenu('community')}>
-						{openMenu === 'community' ? (
-							<ChevronDownIcon className={iconClass} />
-						) : (
-							<ChevronRightIcon className={iconClass} />
-						)}
-					</div>
-				</div>
-				{openMenu === 'community' && (
-					<div className="submenu pl-5">
-						<div
-							className={`${menuItemClass} ${isActive('/user/community/free')}`}
-							onClick={() => nav('/user/community/free')}
-						>
-							<ChatBubbleLeftEllipsisIcon className={iconClass} />
-							자유게시판
+					<div className={`${menuItemClass} ${isActive('/user/community/total')}`}>
+						<UsersIcon className={iconClass} onClick={() => nav('/user/community/total')} />
+						<div className={menuItemTextClass} onClick={() => nav('/user/community/total')}>
+							커뮤니티
 						</div>
-						<div
-							className={`${menuItemClass} ${isActive('/user/community/member')}`}
-							onClick={() => nav('/user/community/member')}
-						>
-							<UserPlusIcon className={iconClass} />
-							팀원모집
-						</div>
-						<div
-							className={`${menuItemClass} ${isActive('/user/community/portfolio')}`}
-							onClick={() => nav('/user/community/portfolio')}
-						>
-							<ClipboardDocumentIcon className={iconClass} />
-							포트폴리오
+						<div onClick={() => toggleMenu('community')}>
+							{openMenu === 'community' ? (
+								<ChevronDownIcon className={iconClass} />
+							) : (
+								<ChevronRightIcon className={iconClass} />
+							)}
 						</div>
 					</div>
-				)}
+					{openMenu === 'community' && (
+						<div className="submenu pl-5">
+							<div
+								className={`${menuItemClass} ${isActive('/user/community/free')}`}
+								onClick={() => nav('/user/community/free')}
+							>
+								<ChatBubbleLeftEllipsisIcon className={iconClass} />
+								자유게시판
+							</div>
+							<div
+								className={`${menuItemClass} ${isActive('/user/community/member')}`}
+								onClick={() => nav('/user/community/member')}
+							>
+								<UserPlusIcon className={iconClass} />
+								팀원모집
+							</div>
+							<div
+								className={`${menuItemClass} ${isActive('/user/community/portfolio')}`}
+								onClick={() => nav('/user/community/portfolio')}
+							>
+								<ClipboardDocumentIcon className={iconClass} />
+								포트폴리오
+							</div>
+						</div>
+					)}
 
-				<div
-					className={`${menuItemClass} ${isActive('/user/mypage')} ${isActive('/user/mypage/mycommunity')} ${isActive('/user/mypage/setting')} ${isActive('/user/mypage/support')}`}
-				>
-					<UserIcon className={iconClass} onClick={() => nav('/user/mypage')} />
-					<div className={menuItemTextClass} onClick={() => nav('/user/mypage')}>
-						마이페이지
-					</div>
-					<div onClick={() => toggleMenu('mypage')}>
-						{openMenu === 'mypage' ? (
-							<ChevronDownIcon className={iconClass} />
-						) : (
-							<ChevronRightIcon className={iconClass} />
-						)}
-					</div>
-				</div>
-				{openMenu === 'mypage' && (
-					<div className="submenu pl-2 pr-2">
-						<div
-							className={`${menuItemClass} ${isActive('/user/mypage/notification')}`}
-							onClick={() => nav('/user/mypage/notification')}
-						>
-							<BellAlertIcon className={iconClass} />
-							알림
+					<div
+						className={`${menuItemClass} ${isActive('/user/mypage')} ${isActive('/user/mypage/mycommunity')} ${isActive('/user/mypage/setting')} ${isActive('/user/mypage/support')}`}
+					>
+						<UserIcon className={iconClass} onClick={() => nav('/user/mypage')} />
+						<div className={menuItemTextClass} onClick={() => nav('/user/mypage')}>
+							마이페이지
+						</div>
+						<div onClick={() => toggleMenu('mypage')}>
+							{openMenu === 'mypage' ? (
+								<ChevronDownIcon className={iconClass} />
+							) : (
+								<ChevronRightIcon className={iconClass} />
+							)}
 						</div>
 					</div>
-				)}
+					{openMenu === 'mypage' && (
+						<div className="submenu pl-2 pr-2">
+							<div
+								className={`${menuItemClass} ${isActive('/user/mypage/notification')}`}
+								onClick={() => nav('/user/mypage/notification')}
+							>
+								<BellAlertIcon className={iconClass} />
+								알림
+							</div>
+						</div>
+					)}
+				</div>
+				<div className='border-t border-gray-500'>
+					<div className={`logout container ${menuItemClass}`}>
+						<ArrowRightStartOnRectangleIcon className={iconClass} />
+						로그아웃
+					</div>
+				</div>
 			</div>
 		</div>
 	);

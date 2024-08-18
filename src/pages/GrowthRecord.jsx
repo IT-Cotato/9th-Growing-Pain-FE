@@ -29,19 +29,13 @@ const GrowthRecord = () => {
     fetchData();
   }, []);
 
-	// 데이터에 인덱스 추가
-  const dataWithIndex = applyData.map((item, index) => ({
-    ...item,
-    index
-  }));
-
   // 새로운 데이터 형식에서 마감일 기준으로 지원현황 정렬
-  const combinedData = dataWithIndex.map(company => {
+  const combinedData = applyData.map(company => {
     const submitDocument = company.jobApplications.find(app => app.applicationType === 'DOCUMENT');
     const submitInterview = company.jobApplications.find(app => app.applicationType === 'INTERVIEW');
 
     return {
-      index: company.index,  // 인덱스 추가
+      id: company.id,
       companyName: company.companyName,
       jobPart: company.jobPart,
       submitDocument: submitDocument ? submitDocument.status : 'PENDING',
@@ -64,8 +58,8 @@ const GrowthRecord = () => {
 						<div className="application-item mx-1/12 h-[450px] flex gap-[3%] gap-y-[1%] flex flex-wrap place-content-start">
 							{combinedData.map((application) => (
 								<GrowthApplyItem
-									key={application.index}  // 인덱스를 key로 사용
-									id={application.index}  // 인덱스를 ID로 사용
+									key={application.id}
+									id={application.id}
 									company={application.companyName}
 									position={application.jobPart}
 									deadline={getDDay(application.deadline)}
