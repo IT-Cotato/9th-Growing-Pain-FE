@@ -87,7 +87,7 @@ const Router = ({ userInfo }) => {
 							children: [
 								{ path: 'category/:category', element: <ActivityRecord /> }, // 활동기록
 								{ path: 'detail/:id', element: <DetailActivity /> }, // 활동기록 - 상세 페이지(편집하기)
-								{ path: 'new/:id', element: <NewActivity /> }, // 활동기록 추가하기
+								{ path: ':category/new', element: <NewActivity /> }, // 활동기록 추가하기
 							],
 						},
 					],

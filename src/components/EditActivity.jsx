@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import MemoField from "./MemoField";
 
-const EditActivity = ({ editData, onSubmit }) => {
+const EditActivity = ({ editData, onSubmit, category }) => {
   const [inputData, setInputData] = useState(
     {
-      activity_name: '',
-      activity_period: '',
-      role: '',
-      activity_type: '',
-      contribution: 0,
-      activity_url: '',
-      result: '',
-      content: '',
+      activityCategory: category,
+      activityName: "",
+      content: "",
+      performance: "",
+      role: "",
+      activityDuration: "",
+      activityType: "",
+      url: "",
+      contribution: 0
     }
-  )
+  );
+
+  const nav = useNavigate();
 
   useEffect(() => {
     if (editData) {
@@ -45,8 +49,8 @@ const EditActivity = ({ editData, onSubmit }) => {
                 <MemoField 
                   type={'activityInfo'}
                   placeholderText={'활동명을 입력하세요'}
-                  value={inputData.activity_name}
-                  onChange={(e) => handleChange('activity_name', e)}
+                  value={inputData.activityName}
+                  onChange={(e) => handleChange('activityName', e)}
                 />
               </div>
               <div className="w-[100%] h-[30%] flex gap-[4%] items-center mb-[2%]">
@@ -74,8 +78,8 @@ const EditActivity = ({ editData, onSubmit }) => {
                 <MemoField
                   type={'activityInfo'}
                   placeholderText={'활동기간을 입력하세요'}
-                  value={inputData.activity_period}
-                  onChange={(e) => handleChange('activity_period', e)}
+                  value={inputData.activityDuration}
+                  onChange={(e) => handleChange('activityDuration', e)}
                 />
               </div>
               <div className="w-[100%] h-[30%] flex gap-[4%] items-center mb-[2%]">
@@ -83,8 +87,8 @@ const EditActivity = ({ editData, onSubmit }) => {
                 <MemoField
                   type={'activityInfo'}
                   placeholderText={'활동유형을 입력하세요'}
-                  value={inputData.activity_type}
-                  onChange={(e) => handleChange('activity_type', e)}
+                  value={inputData.activityType}
+                  onChange={(e) => handleChange('activityType', e)}
                 />
               </div>
               <div className="w-[100%] h-[30%] flex gap-[4%] items-center">
@@ -92,8 +96,8 @@ const EditActivity = ({ editData, onSubmit }) => {
                 <MemoField
                   type={'activityInfo'}
                   placeholderText={'URL을 입력하세요'}
-                  value={inputData.activity_url}
-                  onChange={(e) => handleChange('activity_url', e)}
+                  value={inputData.url}
+                  onChange={(e) => handleChange('url', e)}
                 />
               </div>
             </div>
@@ -105,8 +109,8 @@ const EditActivity = ({ editData, onSubmit }) => {
             <MemoField
               type={'activityContent'}
               placeholderText={'성과를 입력하세요'}
-              value={inputData.result}
-              onChange={(value) => handleChange('result', value)}
+              value={inputData.performance}
+              onChange={(value) => handleChange('performance', value)}
             />
           </div>
         </div>
@@ -122,7 +126,13 @@ const EditActivity = ({ editData, onSubmit }) => {
           </div>
         </div>
         <div className="save-button flex justify-end">
-          <Button type={'communitySave'} text={'저장하기'} onClick={handleSave} />
+          <Button
+            type={'communitySave'} 
+            text={'저장하기'}
+            onClick={()=>{
+              handleSave();
+              nav('/user/growth/activity/category/extracurricular', { replace: true });
+            }} />
         </div>
       </div>
     </div>

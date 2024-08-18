@@ -17,7 +17,7 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength }) => {
 		// 활동기록 편집-기본 정보
 		case 'activityInfo':
 			inputStyle +=
-				' w-[60%] h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%] outline-none';
+				' w-[60%] h-full border border-white bg-white text-[14px] rounded-[0px] font-medium leading-[21.48px] p-[1%] pt-[4%] outline-none';
 			break;
 		// 활동기록 편집-성과 및 활동내용
 		case 'activityContent':
