@@ -4,11 +4,11 @@ import { useLocation } from "react-router-dom";
 
 const categoryMap = {
 	extracurricular: 'EXTRA_ACTIVITY',
-	service: 'SERVICE_ACTIVITY',
-	project: 'PROJECT_ACTIVITY',
-	contest: 'CONTEST_ACTIVITY',
-	club: 'CLUB_ACTIVITY',
-	extra: 'EXTRA_ACTIVITY',
+	service: 'VOLUNTEER_ACTIVITY',
+	project: 'PROJECT',
+	contest: 'COMPETITIONS',
+	club: 'CLUB',
+	extra: 'EXTRA_SPACE',
 };
 
 const NewActivity = () => {
