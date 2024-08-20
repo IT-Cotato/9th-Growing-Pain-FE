@@ -1,17 +1,46 @@
 import { useNavigate } from "react-router-dom";
-import { GrowthStateContext } from "../App";
-import { useContext } from "react";
 import HeaderMyPage from "../components/HeaderMyPage";
 import MenubarMyPage from "../components/MenubarMyPage";
+import { useState, useEffect } from "react";
+import instance from "../api/instance";
+
+const jobMap = {
+  "COLLEGE_STUDENT": "대학생",
+  "GRADUTE": "졸업생",
+  "JOB_SEEKER": "구직자",
+  "PREPARING_FOR_JOB_CHACE": "이직자",
+}
 
 const MyPage = () => {
   const nav = useNavigate();
-  const [memberData, jobPostData, applicationData, applicaionDetailData, infoData] = useContext(GrowthStateContext);
+  const [infoData, setInfoData] = useState();
+
+  // 서버로부터 데이터 GET
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await instance.get('/api/member/info');
+        if (response.data && response.data.status === 'success') {
+          console.log(response.data.data);
+          setInfoData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
+        }
+      } catch (error) {
+        console.error('Error fetching apply data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // infoData가 null일 때 로딩 스피너나 대체 UI를 표시할 수 있음
+  if (!infoData) {
+    return <div>Loading...</div>;  // 데이터를 불러오는 동안 표시될 내용
+  }
 
   // 텍스트 공통 스타일
-  const textClass = 'mypage-text mb-[55px] flex-col text-left';
+  const textClass = 'mypage-text mb-[30px] flex-col text-left';
   // 텍스트 카테고리 스타일 (소속, 교육 ...)
-  const textCategoryClass = 'font-semibold text-[17px] mb-[16px]';
+  const textCategoryClass = 'font-semibold text-[17px] mb-[14px]';
   // 텍스트 내용 스타일
   const textContentClass = 'font-regular text-[16px] text-wrap';
 
@@ -19,7 +48,7 @@ const MyPage = () => {
     <div>
       <div className="mx-[70px] mt-[53px]">
         <div>
-          <HeaderMyPage name={infoData.name} company={infoData.company} />
+          <HeaderMyPage name={name} company={infoData.field} />
         </div>
         <div className="mypage-content-container flex-grow flex flex-col">
           <div className="menubar">
@@ -31,14 +60,18 @@ const MyPage = () => {
                 <div className="text-right h-[15px] relative right-[10px]">
                   <div onClick={()=>nav('/user/mypage/editinfo')} className="cursor-pointer inline text-[14px] text-navy-dark">편집</div>
                 </div>
-                <div className="h-[220px] flex-col border-b">
+                <div className="h-[300px] flex-col border-b">
                   <div className={textClass}>
                     <div className={textCategoryClass}>소속</div>
                     <div className={textContentClass}>{infoData.belong}</div>
                   </div>
                   <div className={textClass}>
-                    <div className={textCategoryClass}>교육</div>
-                    <div className={textContentClass}>{infoData.education}</div>
+                    <div className={textCategoryClass}>직업</div>
+                    <div className={textContentClass}>{jobMap[infoData.job]}</div>
+                  </div>
+                  <div className={textClass}>
+                    <div className={textCategoryClass}>학력</div>
+                    <div className={textContentClass}>{infoData.educationBackground}</div>
                   </div>
                 </div>
               </div>
@@ -49,7 +82,7 @@ const MyPage = () => {
                 </div>
                 <div className={textClass}>
                   <div className={textCategoryClass}>이력 및 활동</div>
-                  <div className={textContentClass}>{infoData.activity}</div>
+                  <div className={textContentClass}>{infoData.activityHistory}</div>
                 </div>
                 <div className={textClass}>
                   <div className={textCategoryClass}>수상내역</div>
@@ -57,7 +90,7 @@ const MyPage = () => {
                 </div>
                 <div className={textClass}>
                   <div className={textCategoryClass}>토플 점수</div>
-                  <div className={textContentClass}>{infoData.toefl}</div>
+                  <div className={textContentClass}>{infoData.languageScore}</div>
                 </div>
               </div>
             </div>
@@ -71,10 +104,10 @@ const MyPage = () => {
                   <div className={textContentClass}>{infoData.career}</div>
                 </div>
               </div>
-              <div className="h-[387px] flex-col pt-[107px]">
+              <div className="h-[387px] flex-col pt-[70px]">
                 <div className={textClass}>
                   <div className={textCategoryClass}>나에 대해서</div>
-                  <div className={textContentClass}>{infoData.about}</div>
+                  <div className={textContentClass}>{infoData.aboutMe}</div>
                 </div>
               </div>
             </div>
