@@ -16,7 +16,6 @@ const PostItem = ({
 	heart,
 	comments = [],
 	category,
-	bookmark,
 	replies,
 }) => {
 	const location = useLocation();
@@ -70,7 +69,7 @@ const PostItem = ({
 
 					<div className="self-end">
 						{(location.pathname === '/user/community/total' || location.pathname === '/user/community/member') && (
-							<CategoryTag category={Array.isArray(category) ? category[1] : category} />
+							<CategoryTag category={category} />
 						)}
 					</div>
 				</div>

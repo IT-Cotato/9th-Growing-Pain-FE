@@ -25,7 +25,7 @@ const SignupSuccess = () => {
 						type={'signupSuccess'}
 						text={'시작하기'}
 						onClick={() => {
-							nav('/user/dashboard');
+							nav('/login');
 						}}
 					/>
 				</div>

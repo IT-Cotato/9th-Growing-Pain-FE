@@ -87,8 +87,10 @@ const AddInfo = () => {
 
 			if (response.status === 200) {
 				console.log('성공!');
-				sessionStorage.setItem('nickname', nickname);
 				setIsLogin(true);
+				sessionStorage.removeItem('accessToken');
+				sessionStorage.removeItem('refreshToken');
+				sessionStorage.removeItem('role');
 				navigate('/signupSuccess'); // 회원가입 성공시 페이지 이동
 			}
 		} catch (error) {
