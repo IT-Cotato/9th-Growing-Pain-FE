@@ -110,7 +110,7 @@ const EditActivity = ({ editData, onSubmit, category }) => {
               type={'activityContent'}
               placeholderText={'성과를 입력하세요'}
               value={inputData.performance}
-              onChange={(value) => handleChange('performance', value)}
+              onChange={(e) => handleChange('performance', e)}
             />
           </div>
         </div>
@@ -121,7 +121,7 @@ const EditActivity = ({ editData, onSubmit, category }) => {
               type={'activityContent'}
               placeholderText={'활동 내용을 입력하세요'}
               value={inputData.content}
-              onChange={(value) => handleChange('content', value)}
+              onChange={(e) => handleChange('content', e)}
             />
           </div>
         </div>

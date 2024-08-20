@@ -199,17 +199,17 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   // 제출 여부 수정 핸들러
 const handleApplySubmissionStatus = (icon) => {
   const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].submissionStatus = getIconStatus(icon);
+  updatedApplicationData[currentPageIndex].submissionStatus = getSubmitIconStatus(icon);
   setApplicationData(updatedApplicationData);
-  setSubmissionStatus(getIconStatus(icon));
+  setSubmissionStatus(getSubmitIconStatus(icon));
 };
 
 // 결과 수정 핸들러
 const handleApplyResult = (icon) => {
   const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].result = getIconStatus(icon);
+  updatedApplicationData[currentPageIndex].result = getResultIconStatus(icon);
   setApplicationData(updatedApplicationData);
-  setResultStatus(getIconStatus(icon));
+  setResultStatus(getResultIconStatus(icon));
 };
 
   // 아이콘 상태에 따른 반환 함수
@@ -217,7 +217,11 @@ const handleApplyResult = (icon) => {
     switch (status) {
       case 'PASSED':
         return '✔️';
+      case 'SUBMITTED':
+        return '✔️';
       case 'FAILED':
+        return '❌';
+      case 'NOT_SUBMITTED':
         return '❌';
       case 'PENDING':
       default:
@@ -225,13 +229,26 @@ const handleApplyResult = (icon) => {
     }
   };
 
-  // 아이콘 상태에 따른 반환 함수
-  const getIconStatus = (icon) => {
+  // 결과 아이콘 상태에 따른 반환 함수
+  const getResultIconStatus = (icon) => {
     switch (icon) {
       case '✔️':
         return 'PASSED';
       case '❌':
         return 'FAILED';
+      case '➖':
+      default:
+        return 'PENDING';
+    }
+  };
+
+  // 제출여부 아이콘 상태에 따른 반환 함수
+  const getSubmitIconStatus = (icon) => {
+    switch (icon) {
+      case '✔️':
+        return 'SUBMITTED';
+      case '❌':
+        return 'NOT_SUBMITTED';
       case '➖':
       default:
         return 'PENDING';

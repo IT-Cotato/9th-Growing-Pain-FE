@@ -61,25 +61,17 @@ const Detail = () => {
   const filteredApplicationData = data.jobApplications;
 
   // 지원현황 데이터 업데이트
-  const handleUpdate = async (savedData) => {
+	const handleUpdate = async (updatedData) => {
     try {
-      // axios를 사용하여 PUT 요청을 보냄
-      const response = await axios.patch(
-        `https://5ecc59c9-4083-4c5b-9271-8a9fca225f08.mock.pstmn.io/api/job-posts/${currentId}`, 
-        savedData, // 전송할 데이터
-        {
-          headers: {
-            'Content-Type': 'application/json', // JSON 형식으로 데이터를 전송
-            'Authorization': 'eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6MSwiZW1haWwiOiJleGFtcGxlVXNlckBuYXZlci5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiaWF0IjoxNzIxNzM1NTgxLCJleHAiOjE3MjE3MzczODF9.yKw542QCNfAgPwHd_HsmNKvHjXfmytq2gv8aMVfcgu0',
-          },
-        }
-      );
-  
-      // 서버 응답을 처리
-      console.log('서버 응답:', response.data);
+      const response = await instance.patch(`/api/job-posts/${currentId}`, updatedData);
+      if (response.data && response.data.status === 'success') {
+        console.log("수정된 데이터:", response.data.data);
+        window.location.reload();
+      } else {
+        console.error('지원현황 수정 중 오류 발생:', response.data.message);
+      }
     } catch (error) {
-      // 에러 처리
-      console.error('데이터 전송 중 오류 발생:', error);
+      console.error('지원현황 수정 중 오류 발생:', error);
     }
   };
 

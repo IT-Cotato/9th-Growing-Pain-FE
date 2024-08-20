@@ -4,97 +4,13 @@ import ActivityItem from '../components/ActivityItem';
 import { useRef, useEffect, useState } from 'react';
 import instance from '../api/instance';
 
-// const activityData = [
-// 	{
-// 		activity_id: 0,
-// 		activity_name: '청소년 봉사활동',
-// 		activity_period: '2024.09-2024.10',
-// 		role: '국어 과목 과외',
-// 		activity_type: '봉사활동',
-// 		contribution: 50,
-// 		activity_url: 'https://www.edu.com',
-// 	},
-// 	{
-// 		activity_id: 1,
-// 		activity_name: '지하철 봉사활동',
-// 		activity_period: '2024.09-2024.12',
-// 		role: '어른신 돕기',
-// 		activity_type: '봉사활동',
-// 		contribution: 70,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// 	{
-// 		activity_id: 2,
-// 		activity_name: '지하철 봉사활동',
-// 		activity_period: '2024.09-2024.12',
-// 		role: '어른신 돕기',
-// 		activity_type: '봉사활동',
-// 		contribution: 100,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// 	{
-// 		activity_id: 3,
-// 		activity_name: '취준기록프로젝트',
-// 		activity_period: '2024.09-2024.12',
-// 		role: '프론트엔드',
-// 		activity_type: '프로젝트',
-// 		contribution: 60,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// 	{
-// 		activity_id: 4,
-// 		activity_name: '브랜딩',
-// 		activity_period: '2024.09-2024.12',
-// 		role: '아이디어',
-// 		activity_type: '공모전',
-// 		contribution: 30,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// 	{
-// 		activity_id: 5,
-// 		activity_name: '공모전',
-// 		activity_period: '2024.09-2024.12',
-// 		role: '아이디어',
-// 		activity_type: '공모전',
-// 		contribution: 80,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// 	{
-// 		activity_id: 6,
-// 		activity_name: '서포터즈',
-// 		activity_period: '2024.09-2024.12',
-// 		role: 'SNS',
-// 		activity_type: '대외활동',
-// 		contribution: 50,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// 	{
-// 		activity_id: 7,
-// 		activity_name: '대외활동',
-// 		activity_period: '2024.09-2024.12',
-// 		role: '아이디어',
-// 		activity_type: '대외활동',
-// 		contribution: 80,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// 	{
-// 		activity_id: 8,
-// 		activity_name: '집가고싶다이미집이지만더강력하게집에가고싶다',
-// 		activity_period: '2024.09-2024.12',
-// 		role: '아이디어',
-// 		activity_type: '여분통',
-// 		contribution: 80,
-// 		activity_url: 'https://www.sub.com',
-// 	},
-// ];
-
 const categoryMap = {
 	extracurricular: 'EXTRA_ACTIVITY',
-	service: 'SERVICE_ACTIVITY',
-	project: 'PROJECT_ACTIVITY',
-	contest: 'CONTEST_ACTIVITY',
-	club: 'CLUB_ACTIVITY',
-	extra: 'EXTRA_ACTIVITY',
+	service: 'VOLUNTEER_ACTIVITY',
+	project: 'PROJECT',
+	contest: 'COMPETITIONS',
+	club: 'CLUB',
+	extra: 'EXTRA_SPACE',
 };
 
 const ActivityRecord = () => {
@@ -103,6 +19,7 @@ const ActivityRecord = () => {
 	const nav = useNavigate();
 
 	const currentCategory = location.pathname.split('/').pop();
+	const currentType = categoryMap[currentCategory];
 
 	// 서버로부터 데이터 GET
   useEffect(() => {
@@ -119,25 +36,11 @@ const ActivityRecord = () => {
     };
 
     fetchData();
-  }, []);
-
-	// 데이터 DELETE
-	const handleDelete = async (deletedData) => {
-		alert('삭제하시겠습니까?');
-		// console.log('저장할 데이터:', deletedData);
-		// const deletedId = deletedData.id;
-
-		// try {
-		// 	const response = await instance.delete(`/api/activity-logs/${deletedId}`, deletedData);
-		// 	console.log('서버 응답:', response.data);
-		// } catch (error) {
-		// 	console.error('에러 발생:', error);
-		// }
-	};
+  }, [currentCategory]);
 
 	// 카테고리별 내용 필터링
 	const filteredActivities = activityData.filter(
-		(item) => item.activityCategory === currentCategory
+		(item) => item.activityCategory === currentType
 	);
 
 	// 기본 카테고리 메뉴 스타일
@@ -192,7 +95,7 @@ const ActivityRecord = () => {
 					활동 추가하기
 				</div>
 			</div>
-			<div className="activity-record-content h-[3zzz0%] mx-[70px] mt-[-10px] grid grid-cols-2 gap-x-[2%] gap-y-[3%]">
+			<div className="activity-record-content h-[30%] mx-[70px] mt-[-10px] grid grid-cols-2 gap-x-[2%] gap-y-[12%]">
 				{filteredActivities.map((item) => {
 					return (
 						<ActivityItem
@@ -204,7 +107,6 @@ const ActivityRecord = () => {
 							type={item.activityType}
 							contribution={item.contribution}
 							url={item.url}
-							onDelete={handleDelete}
 						/>
 					);
 				})}

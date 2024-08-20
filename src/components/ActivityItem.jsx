@@ -1,27 +1,36 @@
 import { React, useRef } from "react";
-import ProgressBar from "./ProgressBar";
+import ProgressBar from "./ProgressBar"; 
 import { useNavigate } from "react-router-dom";
+import instance from "../api/instance";
 
-const ActivityItem = ({id, name, period, role, type, contribution, url, onDelete}) => {
+const ActivityItem = ({id, name, period, role, type, contribution, url }) => {
   const nav = useNavigate();
+
+  // 삭제 함수
+  const deleteActivity = async () => {
+    try {
+      // 삭제 요청
+      const response = await instance.delete(`/api/activity-logs/${id}`);
+      console.log('삭제 성공:', response.data);
+      window.location.reload();
+    } catch (error) {
+      console.error('삭제 중 오류 발생:', error.message);
+    }
+  };
 
   const titleClass = "text-[17px] font-semibold";
   const contentClass = "text-[15px] font-regular text-gray-content";
-
-  const handleDelete = (id) => {
-    onDelete(id);
-  };
 
   return (
     <div className="w-full pb-[20px]">
       <div className="activity-item flex-1 h-[250px]">
         <div className="activity-number-container flex justify-end">
-          <div className="activity-number bg-navy-activityNum rounded-t-[10px] w-[35px] h-[30px] font-medium flex justify-center items-center">{id+1}</div>
+          <div className="activity-number bg-navy-activityNum rounded-t-[10px] w-[35px] h-[30px] font-medium flex justify-center items-center">{id}</div>
         </div>
         <div className="activity-item-container bg-white drop-shadow-sm h-[290px] flex-col rounded-[10px] rounded-tr-[0px] border-2 border-gray-line">
           <div className="activity-edit-button flex mt-[15px] mr-[15px] gap-[15px] justify-end">
             <div className="cursor-pointer text-[15px] text-navy-dark" onClick={()=>nav(`/user/growth/activity/detail/${id}`)}>편집</div>
-            <div className="cursor-pointer text-[15px] text-navy-dark" onClick={handleDelete(id)}>삭제</div>
+            <div className="cursor-pointer text-[15px] text-navy-dark" onClick={deleteActivity}>삭제</div>
           </div>
           <div className="content-container flex">
             <div className="left w-6/12 h-[250px] pl-[50px] pt-[15px] pb-[25px] text-left">
