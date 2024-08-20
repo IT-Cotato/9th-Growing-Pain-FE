@@ -18,7 +18,7 @@ const Login = () => {
 	const REST_API_KEY = import.meta.env.VITE_KAKAO_KEY;
 	const REDIRECT_URI = 'http://localhost:5173/oauth';
 	const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-	console.log(REST_API_KEY);
+	// console.log(REST_API_KEY);
 
 	const kakaoLoginHandler = () => {
 		window.location.href = link;
