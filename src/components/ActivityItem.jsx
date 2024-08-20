@@ -7,14 +7,14 @@ const ActivityItem = ({id, name, period, role, type, contribution, url }) => {
   const nav = useNavigate();
 
   // 삭제 함수
-  const deleteActivity = async () => {
+  const handleDelete = async () => {
     try {
-      // 삭제 요청
-      const response = await instance.delete(`/api/activity-logs/${id}`);
-      console.log('삭제 성공:', response.data);
+      await instance.delete(`/api/activity-logs/${id}`);
+      alert('삭제되었습니다.');
       window.location.reload();
     } catch (error) {
-      console.error('삭제 중 오류 발생:', error.message);
+      console.error('삭제 실패:', error);
+      alert('삭제에 실패했습니다.');
     }
   };
 
@@ -30,7 +30,7 @@ const ActivityItem = ({id, name, period, role, type, contribution, url }) => {
         <div className="activity-item-container bg-white drop-shadow-sm h-[290px] flex-col rounded-[10px] rounded-tr-[0px] border-2 border-gray-line">
           <div className="activity-edit-button flex mt-[15px] mr-[15px] gap-[15px] justify-end">
             <div className="cursor-pointer text-[15px] text-navy-dark" onClick={()=>nav(`/user/growth/activity/detail/${id}`)}>편집</div>
-            <div className="cursor-pointer text-[15px] text-navy-dark" onClick={deleteActivity}>삭제</div>
+            <div className="cursor-pointer text-[15px] text-navy-dark" onClick={handleDelete}>삭제</div>
           </div>
           <div className="content-container flex">
             <div className="left w-6/12 h-[250px] pl-[50px] pt-[15px] pb-[25px] text-left">

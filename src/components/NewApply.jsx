@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { PlusCircleIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { PlusCircleIcon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import InputField from './InputField';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -198,17 +198,17 @@ const NewApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   // 제출 여부 수정 핸들러
 const handleApplySubmissionStatus = (icon) => {
   const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].submissionStatus = getIconStatus(icon);
+  updatedApplicationData[currentPageIndex].submissionStatus = getSubmitIconStatus(icon);
   setApplicationData(updatedApplicationData);
-  setSubmissionStatus(getIconStatus(icon));
+  setSubmissionStatus(getSubmitIconStatus(icon));
 };
 
 // 결과 수정 핸들러
 const handleApplyResult = (icon) => {
   const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].result = getIconStatus(icon);
+  updatedApplicationData[currentPageIndex].result = getResultIconStatus(icon);
   setApplicationData(updatedApplicationData);
-  setResultStatus(getIconStatus(icon));
+  setResultStatus(getResultIconStatus(icon));
 };
 
   // 아이콘 상태에 따른 반환 함수
@@ -216,7 +216,11 @@ const handleApplyResult = (icon) => {
     switch (status) {
       case 'PASSED':
         return '✔️';
+      case 'SUBMITTED':
+        return '✔️';
       case 'FAILED':
+        return '❌';
+      case 'NOT_SUBMITTED':
         return '❌';
       case 'PENDING':
       default:
@@ -224,13 +228,26 @@ const handleApplyResult = (icon) => {
     }
   };
 
-  // 아이콘 상태에 따른 반환 함수
-  const getIconStatus = (icon) => {
+  // 결과 아이콘 상태에 따른 반환 함수
+  const getResultIconStatus = (icon) => {
     switch (icon) {
       case '✔️':
         return 'PASSED';
       case '❌':
         return 'FAILED';
+      case '➖':
+      default:
+        return 'PENDING';
+    }
+  };
+
+  // 제출여부 아이콘 상태에 따른 반환 함수
+  const getSubmitIconStatus = (icon) => {
+    switch (icon) {
+      case '✔️':
+        return 'SUBMITTED';
+      case '❌':
+        return 'NOT_SUBMITTED';
       case '➖':
       default:
         return 'PENDING';
@@ -263,9 +280,14 @@ const handleApplyResult = (icon) => {
         <div className='content-container h-[894px] mt-[24px] mb-[50px] flex flex-col'>
           <div className='select-type flex h-[56px] rounded-tl-[10px]'>
             {applicationDataState.map((page, index) => (
-              <div key={index} className='type-container flex flex-1 items-center justify-center'>
-                <div className={`w-[100%] h-[100%] content-center ${currentPageIndex === index ? currentPStyle : otherPstyle}`} onClick={() => setCurrentPageIndex(index)}>
-                  {page.applicationType === 'DOCUMENT' ? '서류' : page.applicationType === 'INTERVIEW' ? '면접' : '피드백'}
+              <div key={index} className='type-container flex flex-1 justify-center'>
+                <div className={`w-[100%] h-[100%] content-center items-center flex ${currentPageIndex === index ? currentPStyle : otherPstyle}`} onClick={() => setCurrentPageIndex(index)}>
+                  <div className='flex-1'>
+                    {page.applicationType === 'DOCUMENT' ? '서류' : page.applicationType === 'INTERVIEW' ? '면접' : page.applicationType === 'INTERVIEW_FEEDBACK' ? '피드백' : '기업분석'}
+                  </div>
+                  <div>
+                    <XMarkIcon className="w-[24px] h-[24px] mr-[10px] text-navy-dark text-center" />
+                  </div>
                 </div>
               </div>
             ))}
@@ -279,7 +301,8 @@ const handleApplyResult = (icon) => {
                   <div className='flex flex-col'>
                     <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('DOCUMENT')}>서류 추가</div>
                     <div className='p-[10px] cursor-pointer hover:text-navy-sideText border-y' onClick={() => handleAddPage('INTERVIEW')}>면접 추가</div>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('FEEDBACK')}>면접피드백 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('INTERVIEW_FEEDBACK')}>면접피드백 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('BUSINESS_ANALYSIS')}>기업분석 추가</div>
                   </div>
                 </div>
               )}

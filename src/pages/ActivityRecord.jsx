@@ -28,7 +28,7 @@ const ActivityRecord = () => {
         const response = await instance.get('/api/activity-logs');
         if (response.data && response.data.status === 'success') {
           console.log(response.data.data);
-          setActivityData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
+          setActivityData(response.data.data);  // 받아온 데이터를 activityData 상태에 저장
         }
       } catch (error) {
         console.error('Error fetching apply data:', error);
