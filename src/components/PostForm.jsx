@@ -6,15 +6,16 @@ import CustomDropdown from './CustomDropdown';
 import { useState } from 'react';
 import axios from 'axios';
 import instance from '../api/instance';
+import DEFAULT_PROFILE_IMAGE from '/images/기본프로필.png';
 
-const PostForm = ({ category }) => {
-	const [title, setTitle] = useState('');
-	const [content, setContent] = useState('');
+const PostForm = ({ category, onPostCreated }) => {
+	let [title, setTitle] = useState('');
+	let [content, setContent] = useState('');
 
 	const userData = {
-		nickname: 'yongaricode',
-		position: '프론트엔드',
-		profile: 프사,
+		nickname: sessionStorage.getItem('nickname'),
+		position: sessionStorage.getItem('field'),
+		profile: sessionStorage.getItem('profileImage') == null || DEFAULT_PROFILE_IMAGE,
 	};
 
 	const categoryOptions = {
@@ -24,8 +25,8 @@ const PostForm = ({ category }) => {
 	};
 
 	const handleSubmit = async () => {
-		if (!title || !content) {
-			alert('제목과 내용을 모두 입력해 주세요.');
+		if (!title || !content || !Category) {
+			alert('카테고리 선택 후 제목과 내용을 모두 입력해 주세요.');
 			return;
 		}
 
@@ -39,6 +40,10 @@ const PostForm = ({ category }) => {
 			const response = await instance.post('/api/post', postData);
 			if (response.status === 201) {
 				console.log('포스트 작성 성공:', response.data);
+				setTitle('');
+				setContent('');
+				onPostCreated();
+				setSelectedCategory(category);
 			}
 		} catch (error) {
 			console.error('포스트 작성 오류:', error);

@@ -51,10 +51,11 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 		case 'applyTitle':
 			inputStyle =
 				'bg-[#FFFFFF] rounded-[10px] w-full h-[56px] font-semibold pl-[40px] placeholder:text-[18px] placeholder:text-wrap outline-none';
-		break;
+			break;
 		// 대쉬보드 페이지-오늘의 다짐
 		case 'dashToday':
-			inputStyle = 'bg-[#EDEDED] rounded-[10px] w-[100%] h-[35px] pl-[10px] font-normal text-[13px] placeholder:text-[13px] outline-none';
+			inputStyle =
+				'bg-[#EDEDED] rounded-[10px] w-[100%] h-[35px] pl-[10px] font-normal text-[13px] placeholder:text-[13px] outline-none';
 			break;
 		case 'applyCompany':
 			inputStyle = ' bg-gray-background outline-none font-medium text-[22px] text-left mb-[5px] justify-start';
@@ -68,7 +69,7 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 
 	return (
 		<div className={`relative ${className}`}>
-			{Icon && <Icon className="absolute left-[30px] top-1/2 transform -translate-y-1/2" size={24} color="#888888" />}
+			{Icon && <Icon className="absolute left-[20px] top-1/2 transform -translate-y-1/2" size={24} color="#888888" />}
 			<input
 				type={type}
 				placeholder={placeholderText}
