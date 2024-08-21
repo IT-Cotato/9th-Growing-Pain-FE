@@ -31,7 +31,7 @@ const MyCommunity = () => {
         }
 
         case "작성한 댓글": {
-          const response = await instance.get('/api/post');
+          const response = await instance.get('/api/comment');
           if (response.status === 200) {
             console.log(response.data.data);
             responseData = response.data.data.commentList;
@@ -46,7 +46,7 @@ const MyCommunity = () => {
           const response = await instance.get(url);
           if (response.status === 200) {
             console.log(response.data.data);
-            responseData = response.data.data;
+            responseData = response.data.data.posts;
           } else {
             console.log('사용자 저장 글 목록 조회 실패:', response.data.message);
           }
@@ -83,7 +83,7 @@ const MyCommunity = () => {
           <div className="menubar">
             <MenubarMyPage />
           </div>
-          <div className="mypage-content h-[692px] bg-white flex flex-col mt-[28px] mb-[153px] rounded-[10px]">
+          <div className="mypage-content h-[900px] bg-white flex flex-col mt-[28px] mb-[53px] rounded-[10px]">
             <div className="mypage-toggle h-[112px] mt-[42px] mb-[28px] mr-[41px] flex justify-end relative">
               <Toggle
                 menuItems={["작성한 글", "작성한 댓글", "저장한 글"]}
@@ -92,7 +92,7 @@ const MyCommunity = () => {
                 onChange={setSelectedMenu}
               />
             </div>
-            <div className="mypage-list w-[100%]">
+            <div className="mypage-list w-[100%] h-[800px] overflow-y-auto scroll-smooth">
               <div className="my-community-category flex gap-[50px] h-[61px] pt-[20px] pb-[21px] ml-[59px] mr-[50px] text-[16px] border-t-2 border-b">
                 <div className='w-2/12 pl-[40px] h-[19px] text-left'>카테고리</div>
                 <div className='w-6/12 h-[19px]'>제목</div>
@@ -100,7 +100,7 @@ const MyCommunity = () => {
                 <div className='w-2/12 h-[19px]'>작성일</div>
                 <div className="w-1/12 h-[19px]"></div>
               </div>
-              <div className="my-community-content h-[477px] ml-[61px] mr-[50px] my-[21px] flex-col">
+              <div className="my-community-content ml-[61px] mr-[50px] my-[21px] pb-[50px] flex-col">
                 {data && data.length > 0 ? (
                   data.map((item, index) => (
                     <MyCommunityItem
