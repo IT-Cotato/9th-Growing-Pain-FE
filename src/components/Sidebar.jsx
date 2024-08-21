@@ -46,13 +46,9 @@ const Sidebar = () => {
 
 	return (
 		<div className="sidebar-container p-5 bg-navy-lightSide h-[100%] flex flex-col">
-			{/* 사이드바 로고 */}
-			{/* 라우팅 수정 필요 */}
-			<div
-				className="sidebar-logo p-5 flex relative text-[20px] gap-3 items-center"
-			>
-				<img className="sidebar-logo-img w-14 h-14" src={logo} alt="Logo" />
-				Growth Pain
+			<div className="sidebar-logo p-5 flex relative text-[20px] gap-1 items-center justify-center text-navy-dark">
+				<img className="sidebar-logo-img w-10 h-10" src={logo} alt="Logo" />
+				성장통
 			</div>
 
 			{/* '기록하기' 버튼 */}
