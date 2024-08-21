@@ -13,7 +13,6 @@ import googleLogin from '../assets/images/googleLogin.png';
 const Login = () => {
 	const [id, setId] = useState('');
 	const [pw, setPw] = useState('');
-	const [isLogin, setIsLogin] = useState(false); // 로그인 상태 체크
 
 	const REST_API_KEY = import.meta.env.VITE_KAKAO_KEY;
 	const REDIRECT_URI = 'http://localhost:5173/oauth';
@@ -50,6 +49,7 @@ const Login = () => {
 				sessionStorage.setItem('nickname', response.data.data.name);
 				sessionStorage.setItem('field', response.data.data.field);
 				sessionStorage.setItem('profileImage', response.data.data.profileImageUrl);
+				sessionStorage.setItem('memberId', response.data.data.memberId);
 				navigate('/user/dashboard'); // 회원가입 성공시 페이지 이동
 			}
 		} catch (error) {

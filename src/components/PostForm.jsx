@@ -1,10 +1,8 @@
 import React from 'react';
 import MemoField from './MemoField';
 import Button from './Button';
-import 프사 from '/images/공모전.png';
 import CustomDropdown from './CustomDropdown';
 import { useState } from 'react';
-import axios from 'axios';
 import instance from '../api/instance';
 import DEFAULT_PROFILE_IMAGE from '/images/기본프로필.png';
 
