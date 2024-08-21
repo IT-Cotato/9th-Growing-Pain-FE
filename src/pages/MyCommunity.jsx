@@ -5,26 +5,69 @@ import MenubarMyPage from "../components/MenubarMyPage";
 import MyCommunityItem from "../components/MyCommunityItem";
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Toggle from "../components/Toggle";
-
-const communityData = [
-  {
-    id: 0,
-    category: "포트폴리오",
-    title: "프론트엔드 개발자 구하는 방법 물어봅니다.",
-    writer: "김수윤",
-    date: new Date("2024-7-24"),
-  },
-  {
-    id: 1,
-    category: "자유",
-    title: "백엔드 스터디 같이 하실 분 찾아요",
-    writer: "김수윤",
-    date: new Date("2024-7-24"),
-  },
-];
+import instance from "../api/instance";
 
 const MyCommunity = () => {
-  const [memberData, jobPostData, applicationData, applicaionDetailData, infoData] = useContext(GrowthStateContext);
+  const [selectedMenu, setSelectedMenu] = useState("작성한 글");
+  const [data, setData] = useState([]);
+  const memberId = sessionStorage.getItem('memberId');
+
+  // 선택된 메뉴에 따라 데이터를 가져오는 함수
+  const fetchData = async (menu) => {
+    let url = "";
+    let responseData = [];
+
+    try {
+      switch (menu) {
+        case "작성한 글": {
+          const response = await instance.get('/api/post');
+          if (response.status === 200) {
+            console.log(response.data.data);
+            responseData = response.data.data.posts;
+          } else {
+            console.log('사용자 작성 글 목록 조회 실패:', response.data.message);
+          }
+          break;
+        }
+
+        case "작성한 댓글": {
+          const response = await instance.get('/api/post');
+          if (response.status === 200) {
+            console.log(response.data.data);
+            responseData = response.data.data.commentList;
+          } else {
+            console.log('사용자 작성 댓글 목록 조회 실패:', response.data.message);
+          }
+          break;
+        }
+
+        case "저장한 글": {
+          url = `/api/post/saves/${memberId}/list`;
+          const response = await instance.get(url);
+          if (response.status === 200) {
+            console.log(response.data.data);
+            responseData = response.data.data;
+          } else {
+            console.log('사용자 저장 글 목록 조회 실패:', response.data.message);
+          }
+          break;
+        }
+
+        default:
+          console.error('알 수 없는 메뉴:', menu);
+      }
+
+      setData(responseData);
+
+    } catch (error) {
+      console.error('API 요청 에러:', error);
+    }
+  };
+
+  // 토글에서 메뉴 선택이 변경될 때마다 데이터를 요청함
+  useEffect(() => {
+    fetchData(selectedMenu);
+  }, [selectedMenu]);
 
   // 아이콘 스타일
 	const iconClass = 'size-6 stroke-1';
@@ -34,7 +77,7 @@ const MyCommunity = () => {
     <div>
       <div className="mx-[70px] mt-[53px]">
         <div>
-          <HeaderMyPage name={infoData.name} company={infoData.company} />
+          <HeaderMyPage />
         </div>
         <div className="mypage-content-container flex-col">
           <div className="menubar">
@@ -42,7 +85,12 @@ const MyCommunity = () => {
           </div>
           <div className="mypage-content h-[692px] bg-white flex flex-col mt-[28px] mb-[153px] rounded-[10px]">
             <div className="mypage-toggle h-[112px] mt-[42px] mb-[28px] mr-[41px] flex justify-end relative">
-              <Toggle menuItems={["작성한 글", "작성한 댓글", "저장한 글"]} bg={'bg-navy-mypageToggle'} />
+              <Toggle
+                menuItems={["작성한 글", "작성한 댓글", "저장한 글"]}
+                bg={'bg-navy-mypageToggle'}
+                placeholder={"작성한 글"}
+                onChange={setSelectedMenu}
+              />
             </div>
             <div className="mypage-list w-[100%]">
               <div className="my-community-category flex gap-[50px] h-[61px] pt-[20px] pb-[21px] ml-[59px] mr-[50px] text-[16px] border-t-2 border-b">
@@ -53,17 +101,20 @@ const MyCommunity = () => {
                 <div className="w-1/12 h-[19px]"></div>
               </div>
               <div className="my-community-content h-[477px] ml-[61px] mr-[50px] my-[21px] flex-col">
-                {communityData.map((data)=>{// 아이템 순회하면서 렌더링
-                  return (
+                {data && data.length > 0 ? (
+                  data.map((item, index) => (
                     <MyCommunityItem
-                      key={data.id}
-                      category={data.category}
-                      title={data.title}
-                      writer={data.writer}
-                      date={data.date}
+                      key={index}
+                      id={item.postId}
+                      category={item.parentCategory || item.subCategory || "카테고리 없음"}
+                      title={item.title || item.content}
+                      writer={item.memberNickname || "작성자 없음"}
+                      date={item.createdAt ? new Date(item.createdAt) : new Date()}
                     />
-                  );
-                })}
+                  ))
+                ) : (
+                  <div className="text-center py-8">데이터가 없습니다.</div>
+                )}
               </div>
             </div>
           </div>
