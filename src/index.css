@@ -31,3 +31,25 @@
 body {
   font-family: "Pretendard-Regular";
 }
+
+/* 스크롤바 넓이 지정 */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* 스크롤바 트랙 꾸미기 */
+::-webkit-scrollbar-track {
+  background: #F6F9FC;
+  border-radius: 5px;
+}
+
+/* 스크롤바 손잡이 꾸미기 */
+::-webkit-scrollbar-thumb {
+  background: #C2C2C2;
+  border-radius: 5px;
+}
+
+/* 스크롤바 손잡이 호버 시 색 */
+::-webkit-scrollbar-thumb:hover {
+  background: #9A9A9A;
+}
