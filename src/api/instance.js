@@ -72,8 +72,8 @@ instance.interceptors.request.use(
 					}
 				} catch (error) {
 					console.error('리이슈 실패:', error);
-					removeSessionStorage('accessToken');
-					removeSessionStorage('refreshToken');
+					// removeSessionStorage('accessToken');
+					// removeSessionStorage('refreshToken');
 					// 필요 시 로그아웃 처리
 				}
 			} else {
@@ -92,7 +92,7 @@ instance.interceptors.response.use(
 	async (response) => {
 		// 응답 데이터에서 토큰이 있을 경우
 		if (response.data.data) {
-			const { accessToken, refreshToken } = response.data?.data?.token || {}; // 데이터 구조 변경
+			const { accessToken, refreshToken } = response.data.data || {}; // 데이터 구조 변경
 
 			if (accessToken) {
 				const checkAcces = jwtDecode(accessToken);
