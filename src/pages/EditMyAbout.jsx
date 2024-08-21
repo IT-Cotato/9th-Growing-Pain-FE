@@ -6,7 +6,6 @@ import instance from "../api/instance";
 
 const EditMyAbout = () => {
   const nav = useNavigate();
-  const [infoData, setInfoData] = useState();
   const [formData, setFormData] = useState({
     career: "",
     aboutMe: ""
@@ -19,9 +18,11 @@ const EditMyAbout = () => {
         const response = await instance.get('/api/member/info');
         if (response.data && response.data.status === 'success') {
           console.log(response.data.data);
-          setInfoData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
           // 받아온 데이터를 formData에 저장
           setFormData({
+            field: response.data.data.field || "",
+            belong: response.data.data.belong || "",
+            job: response.data.data.job || "",
             educationBackground: response.data.data.educationBackground || "",
             skill: response.data.data.skill || "",
             activityHistory: response.data.data.activityHistory || "",
@@ -40,7 +41,7 @@ const EditMyAbout = () => {
   }, []);
 
   // infoData가 null일 때 로딩 스피너나 대체 UI를 표시할 수 있음
-  if (!infoData) {
+  if (!formData) {
     return <div>Loading...</div>;  // 데이터를 불러오는 동안 표시될 내용
   }
 
@@ -79,7 +80,7 @@ const EditMyAbout = () => {
           <div>
             <InputField
               place={'careerInfo'}
-              placeholderText={infoData.career}
+              placeholderText={formData.career}
               value={formData.career}
               name="career"
               onChange={handleInputChange}
@@ -93,7 +94,7 @@ const EditMyAbout = () => {
           <div>
             <InputField
               place={'aboutInfo'}
-              placeholderText={infoData.aboutMe}
+              placeholderText={formData.aboutMe}
               value={formData.aboutMe}
               name="aboutMe"
               onChange={handleInputChange}

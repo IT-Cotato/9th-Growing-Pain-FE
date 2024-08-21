@@ -62,11 +62,12 @@ const Detail = () => {
 
   // 지원현황 데이터 업데이트
 	const handleUpdate = async (updatedData) => {
+    console.log(updatedData);
     try {
       const response = await instance.patch(`/api/job-posts/${currentId}`, updatedData);
       if (response.data && response.data.status === 'success') {
         console.log("수정된 데이터:", response.data.data);
-        window.location.reload();
+        // window.location.reload();
       } else {
         console.error('지원현황 수정 중 오류 발생:', response.data.message);
       }
