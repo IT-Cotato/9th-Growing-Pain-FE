@@ -10,11 +10,11 @@ const Header = () => {
 		<div className="header-component h-[90px] flex w-full border-b border-[#C7C7C7]">
 			{/* 헤더 로고 및 서비스 이름 -> 클릭하면 홈으로 라우팅 */}
 			<div
-				className="header-logo p-5 flex relative w-1/6 text-[20px] gap-3 items-center cursor-pointer"
+				className="header-logo p-5 flex relative w-1/6 text-[20px] gap-1 items-center cursor-pointer text-navy-dark"
 				onClick={() => nav('/')}
 			>
-				<img className="header-logo-img w-14 h-14" src={logo} alt="Logo" />
-				Growth Pain
+				<img className="header-logo-img w-10 h-10" src={logo} alt="Logo" />
+				성장통
 			</div>
 			{/* 헤더 메뉴바 */}
 			<div className="haeder-menu flex relative items-center gap-5 w-3/6">
