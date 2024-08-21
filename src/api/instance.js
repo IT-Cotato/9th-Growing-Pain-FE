@@ -64,8 +64,8 @@ instance.interceptors.request.use(
 
 					if (response.status === 201) {
 						// 새로운 토큰을 로컬스토리지에 저장
-						accessToken = response.data.data.token.accessToken; // 데이터 구조 변경
-						refreshToken = response.data.data.token.refreshToken; // 데이터 구조 변경
+						accessToken = response.data.data.accessToken; // 데이터 구조 변경
+						refreshToken = response.data.data.refreshToken; // 데이터 구조 변경
 						setSessionStorage('accessToken', accessToken);
 						setSessionStorage('refreshToken', refreshToken);
 						console.log('새로운 토큰을 로컬스토리지에 저장 완료!');
@@ -92,7 +92,7 @@ instance.interceptors.response.use(
 	async (response) => {
 		// 응답 데이터에서 토큰이 있을 경우
 		if (response.data.data) {
-			const { accessToken, refreshToken } = response.data.data || {}; // 데이터 구조 변경
+			const { accessToken, refreshToken } = response.data?.data?.token || {}; // 데이터 구조 변경
 
 			if (accessToken) {
 				const checkAcces = jwtDecode(accessToken);

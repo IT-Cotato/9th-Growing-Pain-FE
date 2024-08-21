@@ -48,7 +48,7 @@ const MyPage = () => {
     <div>
       <div className="mx-[70px] mt-[53px]">
         <div>
-          <HeaderMyPage name={name} company={infoData.field} />
+          <HeaderMyPage />
         </div>
         <div className="mypage-content-container flex-grow flex flex-col">
           <div className="menubar">
