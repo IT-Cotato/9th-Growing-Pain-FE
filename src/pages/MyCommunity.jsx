@@ -7,23 +7,6 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Toggle from "../components/Toggle";
 import instance from "../api/instance";
 
-const communityData = [
-  {
-    id: 0,
-    category: "포트폴리오",
-    title: "프론트엔드 개발자 구하는 방법 물어봅니다.",
-    writer: "김수윤",
-    date: new Date("2024-7-24"),
-  },
-  {
-    id: 1,
-    category: "자유",
-    title: "백엔드 스터디 같이 하실 분 찾아요",
-    writer: "김수윤",
-    date: new Date("2024-7-24"),
-  },
-];
-
 const MyCommunity = () => {
   const [selectedMenu, setSelectedMenu] = useState("작성한 글");
   const [data, setData] = useState([]);
