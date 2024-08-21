@@ -1,5 +1,5 @@
 import { Typography } from '@material-tailwind/react';
-import profile from './../assets/images/defaultProfile.png';
+import profile from './../assets/images/logo.png';
 
 const Footer = () => {
 	const userName = 'Growth Pain';
@@ -8,9 +8,9 @@ const Footer = () => {
 			{/* 첫번째 섹션: 구분선 위 -> 3개의 div(프로필 , 성장통 소개, 소셜) */}
 			<section className="relative flex items-center justify-between pb-3 mb-6 ">
 				{/* 1-1. 프로필 */}
-				<div className="flex items-center gap-5 ml-10 font-normal text-[24px]">
-					<img className="w-16 h-16" src={profile} alt="Profile" />
-					<p>{userName}</p>
+				<div className="flex items-center gap-5 ml-20 font-normal text-[20px] text-navy-dark">
+					<img className="w-10 h-10" src={profile} alt="Profile" />
+					<p>성장통</p>
 				</div>
 				{/* 1-2. 성장통 소개 / 성장기록 / 커뮤니티 */}
 				<div className="footer-menu flex items-center text-gray-dark text-lg w-1/8">

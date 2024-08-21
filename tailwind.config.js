@@ -63,6 +63,8 @@ export default {
 					applyPlusButton: '#C9D3FF',
 					// 지원현황 - 버튼
 					applyMinusButton: '#DEE3FA',
+
+					mainBlue: "#D5E0FF",
 				},
 				red: {
 					// 일반 빨간색

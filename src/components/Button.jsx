@@ -18,7 +18,7 @@ const Button = ({ type, text, onClick }) => {
 			break;
 		// 메인 화면에 '자소서 관리 시작하기' 버튼
 		case 'main':
-			buttonClasses += ' bg-navy-light text-white rounded-full';
+			buttonClasses += ' w-[180px] h-[36px] bg-navy-dark text-white w-[100px] h-[36px] rounded-[10px]';
 			break;
 		// login 페이지의 '로그인' 버튼
 		case 'loginPage':

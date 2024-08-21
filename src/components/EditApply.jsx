@@ -28,8 +28,6 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   const toggleRef = useRef(null); // 토글 참조용
   const submissionRef = useRef(null); // 제출 여부 드롭다운 참조
   const resultRef = useRef(null); // 결과 드롭다운 참조
-  const appIdRef = useRef(0);
-  const detailIdRef = useRef(0);
   const handleSaveRef = useRef();   // 언마운트시 데이터 실시간 참조를 위한 Ref
 
   const currentQStyle = 'bg-white h-[40px] content-center cursor-pointer';
@@ -162,17 +160,17 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       jobPart: jobPart, // 수정된 직무명
       memberId: jobPostData.memberId,
       jobApplications: applicationDataState.map((app) => ({
-        id: app.jobPostId,
+        id: app.id,
         applicationType: app.applicationType,
         place: app.place,
         result: app.result,
         submissionStatus: app.submissionStatus,
         applicationStartDate: app.applicationStartDate,
-        applicationCloseDate: formatDate(new Date(applyDate).getTime()),
+        applicationCloseDate: formatDate(new Date(app.applicationCloseDate).getTime()),
         memberId: jobPostData.memberId,
         jobPostId: jobPostData.jobPostId,
         applicationDetails: app.applicationDetails.map(question => ({
-          id: detailIdRef.current++,
+          id: question.id,
           title: question.title,
           content: question.content,
         })),
@@ -186,14 +184,14 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     handleSaveRef.current = handleSave;
   }, [companyName, jobPart, applyDate, currentQuestionIndex, currentPageIndex, applicationDataState, submissionStatus, resultStatus]);
 
-  // useEffect(() => {
-  //   // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
-  //   return () => {
-  //     if (handleSaveRef.current) {
-  //       handleSaveRef.current();
-  //     }
-  //   };
-  // }, [])
+  useEffect(() => {
+    // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
+    return () => {
+      if (handleSaveRef.current) {
+        handleSaveRef.current();
+      }
+    };
+  }, [])
 
   // 현재 보여져야 하는 질문
   const currentQuestions = applicationDataState[currentPageIndex]?.applicationDetails || [];
