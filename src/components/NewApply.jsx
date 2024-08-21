@@ -196,20 +196,20 @@ const NewApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   };
 
   // 제출 여부 수정 핸들러
-const handleApplySubmissionStatus = (icon) => {
-  const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].submissionStatus = getSubmitIconStatus(icon);
-  setApplicationData(updatedApplicationData);
-  setSubmissionStatus(getSubmitIconStatus(icon));
-};
+  const handleApplySubmissionStatus = (icon) => {
+    const updatedApplicationData = [...applicationDataState];
+    updatedApplicationData[currentPageIndex].submissionStatus = getSubmitIconStatus(icon);
+    setApplicationData(updatedApplicationData);
+    setSubmissionStatus(getSubmitIconStatus(icon));
+  };
 
-// 결과 수정 핸들러
-const handleApplyResult = (icon) => {
-  const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].result = getResultIconStatus(icon);
-  setApplicationData(updatedApplicationData);
-  setResultStatus(getResultIconStatus(icon));
-};
+  // 결과 수정 핸들러
+  const handleApplyResult = (icon) => {
+    const updatedApplicationData = [...applicationDataState];
+    updatedApplicationData[currentPageIndex].result = getResultIconStatus(icon);
+    setApplicationData(updatedApplicationData);
+    setResultStatus(getResultIconStatus(icon));
+  };
 
   // 아이콘 상태에 따른 반환 함수
   const getStatusIcon = (status) => {

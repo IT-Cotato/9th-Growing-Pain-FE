@@ -72,7 +72,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       }
     }
     setCurrentQuestionIndex(0);
-  }, [currentPageIndex, applicationDataState]);
+  }, [currentPageIndex]);
 
   // 토글 핸들러
   const handleToggleClick = () => {
@@ -162,13 +162,13 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       jobPart: jobPart, // 수정된 직무명
       memberId: jobPostData.memberId,
       jobApplications: applicationDataState.map((app) => ({
-        id: appIdRef.current++,
+        id: app.jobPostId,
         applicationType: app.applicationType,
         place: app.place,
         result: app.result,
         submissionStatus: app.submissionStatus,
         applicationStartDate: app.applicationStartDate,
-        applicationCloseDate: new Date(applyDate).getTime(),
+        applicationCloseDate: formatDate(new Date(applyDate).getTime()),
         memberId: jobPostData.memberId,
         jobPostId: jobPostData.jobPostId,
         applicationDetails: app.applicationDetails.map(question => ({
@@ -186,14 +186,14 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     handleSaveRef.current = handleSave;
   }, [companyName, jobPart, applyDate, currentQuestionIndex, currentPageIndex, applicationDataState, submissionStatus, resultStatus]);
 
-  useEffect(() => {
-    // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
-    return () => {
-      if (handleSaveRef.current) {
-        handleSaveRef.current();
-      }
-    };
-  }, [])
+  // useEffect(() => {
+  //   // 언마운트시 데이터 저장(저장 버튼과 같은 기능)
+  //   return () => {
+  //     if (handleSaveRef.current) {
+  //       handleSaveRef.current();
+  //     }
+  //   };
+  // }, [])
 
   // 현재 보여져야 하는 질문
   const currentQuestions = applicationDataState[currentPageIndex]?.applicationDetails || [];
@@ -213,21 +213,30 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     setApplyDate(date); // DatePicker의 선택된 날짜 상태를 업데이트
   };
 
-  // 제출 여부 수정 핸들러
-const handleApplySubmissionStatus = (icon) => {
-  const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].submissionStatus = getSubmitIconStatus(icon);
-  setApplicationData(updatedApplicationData);
-  setSubmissionStatus(getSubmitIconStatus(icon));
-};
+  // 타임스탬프를 'yy-mm-dd' 형식으로 변환하는 함수
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    const year = date.getFullYear().toString(); // 'yy' 형식
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 'mm' 형식
+    const day = String(date.getDate()).padStart(2, '0'); // 'dd' 형식
+    return `${year}-${month}-${day}`;
+  };
 
-// 결과 수정 핸들러
-const handleApplyResult = (icon) => {
-  const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].result = getResultIconStatus(icon);
-  setApplicationData(updatedApplicationData);
-  setResultStatus(getResultIconStatus(icon));
-};
+  // 제출 여부 수정 핸들러
+  const handleApplySubmissionStatus = (icon) => {
+    const updatedApplicationData = [...applicationDataState];
+    updatedApplicationData[currentPageIndex].submissionStatus = getSubmitIconStatus(icon);
+    setApplicationData(updatedApplicationData);
+    setSubmissionStatus(getSubmitIconStatus(icon));
+  };
+
+  // 결과 수정 핸들러
+  const handleApplyResult = (icon) => {
+    const updatedApplicationData = [...applicationDataState];
+    updatedApplicationData[currentPageIndex].result = getResultIconStatus(icon);
+    setApplicationData(updatedApplicationData);
+    setResultStatus(getResultIconStatus(icon));
+  };
 
   // 아이콘 상태에 따른 반환 함수
   const getStatusIcon = (status) => {
@@ -301,7 +310,7 @@ const handleApplyResult = (icon) => {
               <div key={index} className='type-container flex flex-1 justify-center'>
                 <div className={`w-[100%] h-[100%] content-center items-center flex ${currentPageIndex === index ? currentPStyle : otherPstyle}`} onClick={() => setCurrentPageIndex(index)}>
                   <div className='flex-1'>
-                    {page.applicationType === '서류' ? '서류' : page.applicationType === '면접' ? '면접' : page.applicationType === '면접 피드백' ? '면접 피드백' : '기업분석'}
+                    {page.applicationType === 'DOCUMENT' ? '서류' : page.applicationType === 'INTERVIEW' ? '면접' : page.applicationType === 'INTERVIEW_FEEDBACK' ? '면접 피드백' : '기업분석'}
                   </div>
                   <div className='px-[10px]' onClick={() => removePage(index)}>
                     <XMarkIcon className="w-[24px] h-[24px] text-navy-dark text-center cursor-pointer" />
@@ -317,10 +326,10 @@ const handleApplyResult = (icon) => {
               {isToggleOpen && (
                 <div className='absolute top-full left-0 w-full bg-white border border-navy-interviewBtn rounded-[10px] mt-[5px] z-50'>
                   <div className='flex flex-col'>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('서류')}>서류 추가</div>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText border-y' onClick={() => handleAddPage('면접')}>면접 추가</div>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('면접 피드백')}>면접피드백 추가</div>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('기업분석')}>기업분석 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('DOCUMENT')}>서류 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText border-y' onClick={() => handleAddPage('INTERVIEW')}>면접 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('INTERVIEW_FEEDBACK')}>면접피드백 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('BUSINESS_ANALYSIS')}>기업분석 추가</div>
                   </div>
                 </div>
               )}

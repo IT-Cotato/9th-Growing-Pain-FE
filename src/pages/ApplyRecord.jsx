@@ -63,7 +63,7 @@ const ApplyRecord = () => {
         <div className='w-1/12 h-[20px] mr-[20px]'>면접 합격</div>
         <div className="w-1/12 mr-[20px]"></div>
       </div>
-      <div className='detail-item-container h-[931px] mt-[13px] flex-col'>
+      <div className='detail-item-container h-[700px] mt-[13px] flex-col overflow-y-auto scroll-smooth'>
         {combinedData.map((application) => (
           <ApplyRecordItem
             key={application.id}

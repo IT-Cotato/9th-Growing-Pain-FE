@@ -11,10 +11,18 @@ const jobMap = {
   "PREPARING_FOR_JOB_CHACE": "이직자",
 }
 
+const jobMapReverse = {
+  "대학생": "COLLEGE_STUDENT",
+  "졸업생": "GRADUTE",
+  "구직자": "JOB_SEEKER",
+  "이직자": "PREPARING_FOR_JOB_CHACE",
+}
+
 const EditMyInfo = () => {
   const nav = useNavigate();
-  const [infoData, setInfoData] = useState();
   const [formData, setFormData] = useState({
+    belong: "",
+    job: "",
     educationBackground: "",
     skill: "",
     activityHistory: "",
@@ -29,9 +37,11 @@ const EditMyInfo = () => {
         const response = await instance.get('/api/member/info');
         if (response.data && response.data.status === 'success') {
           console.log(response.data.data);
-          setInfoData(response.data.data);  // 받아온 데이터를 applyData 상태에 저장
           // 받아온 데이터를 formData에 저장
           setFormData({
+            field: response.data.data.field || "",
+            belong: response.data.data.belong || "",
+            job: response.data.data.job || "",
             educationBackground: response.data.data.educationBackground || "",
             skill: response.data.data.skill || "",
             activityHistory: response.data.data.activityHistory || "",
@@ -50,7 +60,7 @@ const EditMyInfo = () => {
   }, []);
 
   // infoData가 null일 때 로딩 스피너나 대체 UI를 표시할 수 있음
-  if (!infoData) {
+  if (!formData) {
     return <div>Loading...</div>;  // 데이터를 불러오는 동안 표시될 내용
   }
 
@@ -67,9 +77,9 @@ const EditMyInfo = () => {
   const handleSave = async () => {
     try {
       const payload = {
-        ...formData,
+        ...formData
       };
-      const response = await instance.post('/api/member/additional-info', payload);
+      const response = await instance.post('/api/member/default-info', payload);
       if (response.data.status === 'success') {
         nav("/user/mypage"); // 저장 후 마이페이지로 이동
       }
@@ -87,33 +97,25 @@ const EditMyInfo = () => {
         <div>
           <div className={textCategoryClass}>소속</div>
           <div>
-            <input
-              type="text"
-              placeholder={infoData.belong}
-              className={`rounded-[10px] w-[336px] h-14 placeholder:text-[17px] bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] mb-[15px] outline-none`}
-              readOnly
-            />
-            {/* <InputField
+            <InputField
               place={'belongInfoReadOnly'}
-              placeholderText={infoData.belong}
+              placeholderText={formData.belong}
               value={formData.belong}
-            /> */}
+              name="belong"
+              onChange={handleInputChange}
+            />
           </div>
         </div>
         <div>
           <div className={textCategoryClass}>직업</div>
           <div>
-            <input
-              type="text"
-              placeholder={jobMap[infoData.job]}
-              className={`rounded-[10px] w-[336px] h-14 placeholder:text-[17px] bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] mb-[15px] outline-none`}
-              readOnly
-            />
-            {/* <InputField 
+            <InputField 
               place={'belongInfoReadOnly'}
-              placeholderText={jobMap[infoData.job]}
-              value={formData.job}
-            /> */}
+              placeholderText={jobMap[formData.job]}
+              value={jobMap[formData.job]}
+              name="job"
+              onChange={handleInputChange}
+            />
           </div>
         </div>
         <div className="mb-[40px]">
@@ -121,7 +123,7 @@ const EditMyInfo = () => {
           <div>
             <InputField
               place={'belongInfo'}
-              placeholderText={infoData.educationBackground}
+              placeholderText={formData.educationBackground}
               value={formData.educationBackground}
               name="educationBackground"
               onChange={handleInputChange}
@@ -171,7 +173,7 @@ const EditMyInfo = () => {
           <div>
             <InputField
               place={'belongInfo'}
-              placeholderText={infoData.languageScore}
+              placeholderText={formData.languageScore}
               value={formData.languageScore}
               name="languageScore"
               onChange={handleInputChange}
