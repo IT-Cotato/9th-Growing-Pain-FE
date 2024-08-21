@@ -14,6 +14,7 @@ const ActivityItem = ({id, name, period, role, type, contribution, url }) => {
       window.location.reload();
     } catch (error) {
       console.error('삭제 실패:', error);
+      console.log(id);
       alert('삭제에 실패했습니다.');
     }
   };
