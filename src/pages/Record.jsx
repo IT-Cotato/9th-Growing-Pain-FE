@@ -38,6 +38,7 @@ const Record = () => {
 		console.log('저장할 데이터:', savedData);
 		try {
 			const response = await instance.post('/api/job-posts', savedData);
+      window.location.reload();
 			console.log('서버 응답:', response.data);
 		} catch (error) {
 			console.error('에러 발생:', error);

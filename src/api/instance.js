@@ -99,8 +99,10 @@ instance.interceptors.response.use(
 				console.log('Decoded Token:', checkAcces); // 디코딩된 토큰 로그 확인
 				removeSessionStorage('accessToken');
 				removeSessionStorage('role');
+				removeSessionStorage('memberId');
 				setSessionStorage('accessToken', accessToken);
 				setSessionStorage('role', checkAcces.role);
+				setSessionStorage('memberId', checkAcces.memberId);
 			}
 			if (refreshToken) {
 				const checkRefresh = jwtDecode(refreshToken);

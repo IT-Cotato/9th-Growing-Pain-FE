@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { PlusCircleIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { PlusCircleIcon, ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import InputField from './InputField';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -54,15 +54,16 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
 
   // 문서 페이지별 토글 내용 렌더링
   useEffect(() => {
-    if (applicationDataState.length > 0) {
+    // applicationDataState[currentPageIndex]가 유효한지 확인
+    if (applicationDataState[currentPageIndex]) {
       const currentPage = applicationDataState[currentPageIndex];
       setSubmissionStatus(currentPage.submissionStatus || 'PENDING');
       setResultStatus(currentPage.result || 'PENDING');
-
+  
       // 상태 아이콘 업데이트
       setCurrentSubmissionIcon(getStatusIcon(currentPage?.submissionStatus || 'PENDING'));
       setCurrentResultIcon(getStatusIcon(currentPage?.result || 'PENDING'));
-
+  
       // applyDate 업데이트
       if (currentPage.applicationCloseDate) {
         setApplyDate(new Date(currentPage.applicationCloseDate));
@@ -71,7 +72,7 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
       }
     }
     setCurrentQuestionIndex(0);
-  }, [currentPageIndex]);
+  }, [currentPageIndex, applicationDataState]);
 
   // 토글 핸들러
   const handleToggleClick = () => {
@@ -138,6 +139,22 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
     setIsToggleOpen(false); // 토글 닫기
   };
 
+  // 페이지 삭제 핸들러
+  const removePage = (index) => {
+    if (applicationDataState.length <= 1) return; // 페이지가 하나일 경우 삭제 불가
+  
+    const updatedApplicationData = [...applicationDataState];
+    updatedApplicationData.splice(index, 1); // 해당 페이지 삭제
+    setApplicationData(updatedApplicationData);
+  
+    // 현재 페이지 인덱스 조정
+    if (currentPageIndex >= updatedApplicationData.length) {
+      setCurrentPageIndex(updatedApplicationData.length - 1); // 마지막 페이지로 이동
+    } else {
+      setCurrentPageIndex(currentPageIndex); // 현재 페이지 유지
+    }
+  };
+
   // 데이터 저장 (Record-생성, Detail-업데이트)
   const handleSave = () => {
     const savedData = {
@@ -199,17 +216,17 @@ const EditApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
   // 제출 여부 수정 핸들러
 const handleApplySubmissionStatus = (icon) => {
   const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].submissionStatus = getIconStatus(icon);
+  updatedApplicationData[currentPageIndex].submissionStatus = getSubmitIconStatus(icon);
   setApplicationData(updatedApplicationData);
-  setSubmissionStatus(getIconStatus(icon));
+  setSubmissionStatus(getSubmitIconStatus(icon));
 };
 
 // 결과 수정 핸들러
 const handleApplyResult = (icon) => {
   const updatedApplicationData = [...applicationDataState];
-  updatedApplicationData[currentPageIndex].result = getIconStatus(icon);
+  updatedApplicationData[currentPageIndex].result = getResultIconStatus(icon);
   setApplicationData(updatedApplicationData);
-  setResultStatus(getIconStatus(icon));
+  setResultStatus(getResultIconStatus(icon));
 };
 
   // 아이콘 상태에 따른 반환 함수
@@ -217,7 +234,11 @@ const handleApplyResult = (icon) => {
     switch (status) {
       case 'PASSED':
         return '✔️';
+      case 'SUBMITTED':
+        return '✔️';
       case 'FAILED':
+        return '❌';
+      case 'NOT_SUBMITTED':
         return '❌';
       case 'PENDING':
       default:
@@ -225,13 +246,26 @@ const handleApplyResult = (icon) => {
     }
   };
 
-  // 아이콘 상태에 따른 반환 함수
-  const getIconStatus = (icon) => {
+  // 결과 아이콘 상태에 따른 반환 함수
+  const getResultIconStatus = (icon) => {
     switch (icon) {
       case '✔️':
         return 'PASSED';
       case '❌':
         return 'FAILED';
+      case '➖':
+      default:
+        return 'PENDING';
+    }
+  };
+
+  // 제출여부 아이콘 상태에 따른 반환 함수
+  const getSubmitIconStatus = (icon) => {
+    switch (icon) {
+      case '✔️':
+        return 'SUBMITTED';
+      case '❌':
+        return 'NOT_SUBMITTED';
       case '➖':
       default:
         return 'PENDING';
@@ -264,9 +298,14 @@ const handleApplyResult = (icon) => {
         <div className='content-container h-[894px] mt-[24px] mb-[50px] flex flex-col'>
           <div className='select-type flex h-[56px] rounded-tl-[10px]'>
             {applicationDataState.map((page, index) => (
-              <div key={index} className='type-container flex flex-1 items-center justify-center'>
-                <div className={`w-[100%] h-[100%] content-center ${currentPageIndex === index ? currentPStyle : otherPstyle}`} onClick={() => setCurrentPageIndex(index)}>
-                  {page.applicationType === 'DOCUMENT' ? '서류' : page.applicationType === 'INTERVIEW' ? '면접' : '피드백'}
+              <div key={index} className='type-container flex flex-1 justify-center'>
+                <div className={`w-[100%] h-[100%] content-center items-center flex ${currentPageIndex === index ? currentPStyle : otherPstyle}`} onClick={() => setCurrentPageIndex(index)}>
+                  <div className='flex-1'>
+                    {page.applicationType === '서류' ? '서류' : page.applicationType === '면접' ? '면접' : page.applicationType === '면접 피드백' ? '면접 피드백' : '기업분석'}
+                  </div>
+                  <div className='px-[10px]' onClick={() => removePage(index)}>
+                    <XMarkIcon className="w-[24px] h-[24px] text-navy-dark text-center cursor-pointer" />
+                  </div>
                 </div>
               </div>
             ))}
@@ -278,9 +317,10 @@ const handleApplyResult = (icon) => {
               {isToggleOpen && (
                 <div className='absolute top-full left-0 w-full bg-white border border-navy-interviewBtn rounded-[10px] mt-[5px] z-50'>
                   <div className='flex flex-col'>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('DOCUMENT')}>서류 추가</div>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText border-y' onClick={() => handleAddPage('INTERVIEW')}>면접 추가</div>
-                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('FEEDBACK')}>면접피드백 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('서류')}>서류 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText border-y' onClick={() => handleAddPage('면접')}>면접 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('면접 피드백')}>면접피드백 추가</div>
+                    <div className='p-[10px] cursor-pointer hover:text-navy-sideText' onClick={() => handleAddPage('기업분석')}>기업분석 추가</div>
                   </div>
                 </div>
               )}

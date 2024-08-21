@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiAlertTriangle } from 'react-icons/fi';
 
-const InputField = ({ placeholderText, className, icon: Icon, onChange, type, onKeyDown, place, value, showError }) => {
+const InputField = ({ placeholderText, className, icon: Icon, onChange, type, onKeyDown, place, value, showError, name }) => {
 	let inputStyle = 'border border-[#26408B] rounded-[10px] w-[336px] h-14 pl-[65px] placeholder:text-[17px]';
 
 	switch (place) {
@@ -29,24 +29,27 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			break;
 		// 마이페이지 페이지에서 사용하는 입력창
 		case 'belongInfo':
-			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px]';
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px] mb-[15px] outline-none';
+			break;
+		case 'belongInfoReadOnly':
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px] mb-[15px] outline-none disabled';
 			break;
 		case 'abilityInfo':
-			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[128px] pl-[20px] placeholder:text-[17px]';
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[128px] pl-[20px] placeholder:text-[17px] outline-none';
 			break;
 		case 'awardInfo':
-			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[90px] pl-[20px] placeholder:text-[17px]';
+			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[90px] pl-[20px] placeholder:text-[17px] outline-none';
 			break;
 		case 'setting':
-			inputStyle = 'bg-[#F5F5F5] rounded-[10px] w-[60%] h-[48px] pl-[20px] placeholder:text-[14px] font-normal';
+			inputStyle = 'bg-[#F5F5F5] rounded-[10px] w-[60%] h-[48px] pl-[20px] placeholder:text-[14px] font-normal outline-none';
 			break;
 		case 'careerInfo':
 			inputStyle =
-				'bg-[#FFFFFF] rounded-[10px] w-full h-[350px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
+				'bg-[#FFFFFF] rounded-[10px] w-full h-[350px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap outline-none';
 			break;
 		case 'aboutInfo':
 			inputStyle =
-				'bg-[#FFFFFF] rounded-[10px] w-full h-[325px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap';
+				'bg-[#FFFFFF] rounded-[10px] w-full h-[325px] pl-[20px] placeholder:text-[17px] placeholder:text-wrap outline-none';
 			break;
 		case 'applyTitle':
 			inputStyle =
@@ -77,6 +80,7 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 				onChange={onChange}
 				onKeyDown={onKeyDown}
 				value={value}
+				name={name}
 			/>
 			{showError && (
 				<FiAlertTriangle
