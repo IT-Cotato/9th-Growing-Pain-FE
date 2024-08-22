@@ -36,7 +36,7 @@ const CommentModal = ({
 	const userData = {
 		nickname: sessionStorage.getItem('nickname'),
 		position: sessionStorage.getItem('field'),
-		profile: sessionStorage.getItem('profileImage') == null || DEFAULT_PROFILE_IMAGE,
+		profile: sessionStorage.getItem('profileImage'),
 		memId: sessionStorage.getItem('memberId'),
 	};
 
