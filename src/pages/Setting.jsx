@@ -84,6 +84,7 @@ const Setting = () => {
       if (response.data.status === 'success') {
 				sessionStorage.setItem('field', formData.field)
         alert('분야 정보가 변경되었습니다');
+				console.log(response);
       }
     } catch (error) {
       console.error('Error saving info data:', error);

@@ -1,41 +1,7 @@
 import { useState, useEffect } from 'react';
 import NotificationItem from '../components/NotificationItem';
-import 프사 from '/images/공모전.png';
-
-const replies = [
-	{
-		post_id: 1,
-		id: 1,
-		userProfile: 프사,
-		nickname: '김현중',
-		position: 'Designer',
-		createdTime: new Date('2024-08-01 10:23:34'),
-		content: '이번에 이직 성공한 회사 동료도 고졸인데 연봉 6천받고 쿠팡 lv4로 이직',
-		heart: 3,
-	},
-	{
-		post_id: 1,
-		id: 2,
-		userProfile: 프사,
-		nickname: '조은솔',
-		position: 'Manager',
-		createdTime: new Date('2024-08-02 13:23:34'),
-		content:
-			'오래된 얘기지만, 저도 학점이 낮은데요. 휴학도 1년씩 두번하고요. ‘학점이 왜 이렇게 낮아요?’ 라고 면접관이 물어보길래 ‘원없이 놀아봤습니다.’ 라고 했습니다.',
-		heart: 2,
-	},
-	{
-		post_id: 1,
-		id: 3,
-		userProfile: 프사,
-		nickname: '김수윤',
-		position: 'Manager',
-		createdTime: new Date('2024-08-07 10:23:34'),
-		content:
-			'직종마다 다르기는 하지만 그래도 평균 3점대 이상이라면 완전 나쁜 점수는 아닙니다. 물론 높은 편도 아니지만... 이것 때문에 취업이 불가능한 정도는 아니니까요. 일단 다른 스펙들을 최대한 채우고 사실대로 대학교 때에는 그리 공부에 집중하지 않았다고 대답하는 정도면 되지 않을까요?',
-		heart: 2,
-	},
-];
+import 프사 from '../assets/images/logo.png';
+import instance from '../api/instance';
 
 const applies = [
 	{
@@ -94,11 +60,38 @@ const filterApplies = (applies) => {
 
 const Notification = () => {
 	const [applyNotifications, setApplyNotifications] = useState([]);
+	const [repliesData, setRepliesData] = useState([]);
+
+	// 서버로부터 데이터 GET
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await instance.get('/api/comment/member');
+        if (response.data && response.data.status === 'success') {
+          console.log('댓글 알림 GET 성공: ', response.data.data.commentList);
+          // 받아온 데이터를 replies에 저장하고 시간순으로 정렬
+          const sortedReplies = response.data.data.commentList.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+          setRepliesData(sortedReplies);
+        }
+      } catch (error) {
+        console.error('댓글 알림 GET 실패: ', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 	useEffect(() => {
 		const initialNotifications = filterApplies(applies);
 		setApplyNotifications(initialNotifications);
 	}, []);
+
+	// repliesData가 null일 때 로딩 스피너나 대체 UI를 표시할 수 있음
+  if (!repliesData) {
+    return <div>Loading...</div>;  // 데이터를 불러오는 동안 표시될 내용
+  }
 
 	return (
 		<div className='notification-page mx-[50px] my-[35px] h-[90%]'>
@@ -106,16 +99,18 @@ const Notification = () => {
 				<div className='community-notification w-[50%] h-[100%] flex flex-col'>
 					<p className='text-[19px] font-medium text-left text-navy-dark mb-[17px]'>커뮤니티 알림</p>
 					<div className='notification-content bg-white flex-1 rounded-[10px] p-[30px]'>
-						{replies.map(reply => (
-							<NotificationItem
-								key={reply.id+'c'}
-								id={reply.post_id}
-								profile={reply.userProfile}
-								nickname={reply.nickname}
-								time={reply.createdTime}
-								content={reply.content}
-								type='community'
-							/>
+						{repliesData.map(reply => (
+							reply && (
+								<NotificationItem
+									key={reply.commentId}
+									id={reply.postId}
+									profile={프사}
+									nickname={reply.memberNickname}
+									time={reply.createdAt}
+									content={reply.content}
+									type='community'
+								/>
+							)
 						))}
 					</div>
 				</div>
