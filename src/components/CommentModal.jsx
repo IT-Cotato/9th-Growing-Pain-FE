@@ -538,7 +538,7 @@ const CommentModal = ({
 														<div className="flex items-start">
 															<span>
 																<img
-																	src={com.profileImageUrl || DEFAULT_PROFILE_IMAGE}
+																	src={reply.profileImageUrl || DEFAULT_PROFILE_IMAGE}
 																	alt={`${reply.nickname} profile`}
 																	className="rounded-full w-9 h-9"
 																/>
@@ -588,7 +588,7 @@ const CommentModal = ({
 												))}
 											<div className="gap-[18px] flex items-center">
 												<span>
-													<img src={userProfile} className="rounded-full w-9 h-9" />
+													<img src={userData.profile} className="rounded-full w-9 h-9" />
 												</span>
 												<MemoField
 													type={'communityCocoment'}
