@@ -7,15 +7,15 @@ import instance from "../api/instance";
 const jobMap = {
   "COLLEGE_STUDENT": "대학생",
   "GRADUTE": "졸업생",
-  "JOB_SEEKER": "구직자",
-  "PREPARING_FOR_JOB_CHACE": "이직자",
+  "JOB_SEEKER": "취준생",
+  "PREPARING_FOR_JOB_CHACE": "이직 준비중",
 }
 
 const jobMapReverse = {
   "대학생": "COLLEGE_STUDENT",
   "졸업생": "GRADUTE",
-  "구직자": "JOB_SEEKER",
-  "이직자": "PREPARING_FOR_JOB_CHACE",
+  "취준생": "JOB_SEEKER",
+  "이직 준비중": "PREPARING_FOR_JOB_CHACE",
 }
 
 const EditMyInfo = () => {
