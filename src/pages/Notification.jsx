@@ -80,11 +80,11 @@ const Notification = () => {
   }
 
 	return (
-		<div className='notification-page mx-[50px] my-[35px] h-[90%]'>
+		<div className='notification-page mx-[50px] mt-[35px] h-[90%]'>
 			<div className='notification-container flex gap-[25px] h-[100%]'>
-				<div className='community-notification w-[50%] h-[800px] flex flex-col'>
-					<p className='text-[19px] font-medium text-left text-navy-dark mb-[17px]'>커뮤니티 알림</p>
-					<div className='h-[700px] notification-content bg-white flex-1 rounded-[10px] p-[30px] overflow-y-auto scroll-smooth'>
+				<div className='community-notification w-[50%] h-[100%] flex flex-col'>
+					<p className='h-[5%] text-[19px] font-medium text-left text-navy-dark mb-[10px]'>커뮤니티 알림</p>
+					<div className='h-[100%] notification-content bg-white rounded-[10px] p-[30px] overflow-y-auto scroll-smooth'>
 						{repliesData.map(reply => (
 							reply && (
 								<NotificationItem
@@ -100,9 +100,9 @@ const Notification = () => {
 						))}
 					</div>
 				</div>
-				<div className='apply-notification w-[50%] h-[800px] flex flex-col'>
-					<p className='text-[19px] font-medium text-left text-navy-dark mb-[17px]'>성장 기록 알림</p>
-					<div className='h-[700px] notification-content bg-white flex-1 rounded-[10px] p-[30px] overflow-y-auto scroll-smooth'>
+				<div className='apply-notification w-[50%] h-[100%] flex flex-col'>
+					<p className='h-[5%] text-[19px] font-medium text-left text-navy-dark mb-[10px]'>성장 기록 알림</p>
+					<div className='h-[100%] notification-content bg-white rounded-[10px] p-[30px] pb-[0px] overflow-y-auto scroll-smooth'>
 						{applyData.map(apply => (
               <NotificationItem
 								key={apply.jobApplicationId+'a'}
