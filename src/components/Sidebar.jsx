@@ -20,7 +20,7 @@ import {
 	EnvelopeIcon,
 	ChevronRightIcon,
 	ChevronDownIcon,
-	ArrowRightStartOnRectangleIcon
+	ArrowRightStartOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 
 const Sidebar = () => {
@@ -44,6 +44,11 @@ const Sidebar = () => {
 	// 현재 페이지에 해당하는 메뉴바의 색상 유지
 	const isActive = (path) => (location.pathname === path ? 'bg-gray-lightSide' : '');
 
+	const handleLogout = () => {
+		sessionStorage.clear();
+		nav('/');
+	};
+
 	return (
 		<div className="sidebar-container p-5 bg-navy-lightSide h-[100%] flex flex-col">
 			<div className="sidebar-logo p-5 flex relative text-[20px] gap-1 items-center justify-center text-navy-dark">
@@ -63,7 +68,7 @@ const Sidebar = () => {
 				</div>
 			</div>
 
-			<div className='flex flex-col flex-1 justify-between'>
+			<div className="flex flex-col flex-1 justify-between">
 				{/* 메뉴바 */}
 				<div className="sidebar-menu mt-[30px]">
 					<div onClick={() => nav('/user/dashboard')}>
@@ -171,8 +176,8 @@ const Sidebar = () => {
 						</div>
 					)}
 				</div>
-				<div className='border-t border-gray-500'>
-					<div className={`logout container ${menuItemClass}`}>
+				<div className="border-t border-gray-500">
+					<div className={`logout container ${menuItemClass}`} onClick={handleLogout}>
 						<ArrowRightStartOnRectangleIcon className={iconClass} />
 						로그아웃
 					</div>

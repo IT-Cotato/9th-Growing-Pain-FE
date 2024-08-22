@@ -1,7 +1,18 @@
 import React from 'react';
 import { FiAlertTriangle } from 'react-icons/fi';
 
-const InputField = ({ placeholderText, className, icon: Icon, onChange, type, onKeyDown, place, value, showError, name }) => {
+const InputField = ({
+	placeholderText,
+	className,
+	icon: Icon,
+	onChange,
+	type,
+	onKeyDown,
+	place,
+	value,
+	showError,
+	name,
+}) => {
 	let inputStyle = 'border border-[#26408B] rounded-[10px] w-[336px] h-14 pl-[65px] placeholder:text-[17px]';
 
 	switch (place) {
@@ -29,10 +40,12 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			break;
 		// 마이페이지 페이지에서 사용하는 입력창
 		case 'belongInfo':
-			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px] mb-[15px] outline-none';
+			inputStyle =
+				'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px] mb-[15px] outline-none';
 			break;
 		case 'belongInfoReadOnly':
-			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px] mb-[15px] outline-none disabled';
+			inputStyle =
+				'bg-[#FFFFFF] rounded-[10px] w-[447px] h-[48px] pl-[20px] placeholder:text-[17px] mb-[15px] outline-none disabled';
 			break;
 		case 'abilityInfo':
 			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[128px] pl-[20px] placeholder:text-[17px] outline-none';
@@ -41,7 +54,8 @@ const InputField = ({ placeholderText, className, icon: Icon, onChange, type, on
 			inputStyle = 'bg-[#FFFFFF] rounded-[10px] w-4/5 h-[90px] pl-[20px] placeholder:text-[17px] outline-none';
 			break;
 		case 'setting':
-			inputStyle = 'bg-[#F5F5F5] rounded-[10px] w-[60%] h-[48px] pl-[20px] placeholder:text-[14px] font-normal outline-none';
+			inputStyle =
+				'bg-[#F5F5F5] rounded-[10px] w-[60%] h-[48px] pl-[20px] placeholder:text-[14px] font-normal outline-none';
 			break;
 		case 'careerInfo':
 			inputStyle =
