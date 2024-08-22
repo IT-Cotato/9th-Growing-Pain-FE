@@ -18,7 +18,7 @@ const Button = ({ type, text, onClick }) => {
 			break;
 		// 메인 화면에 '자소서 관리 시작하기' 버튼
 		case 'main':
-			buttonClasses += ' w-[180px] h-[36px] bg-navy-dark text-white w-[100px] h-[36px] rounded-[10px]';
+			buttonClasses += ' w-[180px] h-[36px] text-white w-[100px] h-[36px] rounded-[10px] transition ease-in-out bg-navy-dark hover:-translate-y-1 hover:scale-110 hover:bg-navy-dark duration-700';
 			break;
 		// login 페이지의 '로그인' 버튼
 		case 'loginPage':

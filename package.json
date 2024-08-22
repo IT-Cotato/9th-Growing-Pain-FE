@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.4",
+    "@lasbe/react-scroll-animation": "^2.0.4",
     "@material-tailwind/react": "^2.1.9",
     "@ramonak/react-progress-bar": "^5.2.0",
     "autoprefixer": "^10.4.19",
