@@ -21,6 +21,7 @@ const NewActivity = () => {
 
 		try {
 			const response = await instance.post('/api/activity-logs', savedData);
+      window.location.reload();
 			console.log('서버 응답:', response.data);
 		} catch (error) {
 			console.error('에러 발생:', error);

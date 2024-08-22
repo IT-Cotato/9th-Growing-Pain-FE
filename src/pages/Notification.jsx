@@ -90,7 +90,7 @@ const Notification = () => {
 								<NotificationItem
 									key={reply.commentId}
 									id={reply.postId}
-									profile={프사}
+									profile={reply.profileImageUrl}
 									nickname={reply.memberNickname}
 									time={reply.createdAt}
 									content={reply.content}

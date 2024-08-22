@@ -32,8 +32,8 @@ const DetailActivity = () => {
     try {
       const response = await instance.patch(`/api/activity-logs/${currentId}`, updatedData);
       if (response.data && response.data.status === 'success') {
+        window.location.reload();
         console.log("수정된 데이터:", response.data.data);
-				window.location.reload();
       } else {
         console.error('활동 수정 중 오류 발생:', response.data.message);
       }
