@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiMoreHorizontal, FiNavigation } from 'react-icons/fi';
 
-const MemoField = ({ placeholderText, onChange, type, value, maxLength, onIconClick }) => {
+const MemoField = ({ placeholderText, onChange, type, value, maxLength, onIconClick, name }) => {
 	let inputStyle = 'rounded-[10px] resize-none';
 
 	switch (type) {
@@ -44,6 +44,14 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength, onIconCl
 			inputStyle =
 				'resize-none h-[47px] pl-[26px] bg-[#F6F6F6] text-[16px] font-normal placeholder-[#888888] leading-[19.09px] pt-[14px] rounded-[10px] w-full';
 			break;
+		case 'careerInfo':
+			inputStyle =
+				'resize-none bg-[#FFFFFF] rounded-[10px] w-full h-[300px] p-[20px] placeholder:text-[17px] placeholder:text-wrap outline-none break-all';
+			break;
+		case 'aboutInfo':
+			inputStyle =
+				'resize-none bg-[#FFFFFF] rounded-[10px] w-full h-[325px] p-[20px] placeholder:text-[17px] placeholder:text-wrap outline-none';
+			break;
 		default:
 			break;
 	}
@@ -57,6 +65,7 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength, onIconCl
 				className={inputStyle}
 				onChange={onChange}
 				maxLength={maxLength}
+				name={name}
 			/>
 			{type === 'communityCocoment' && (
 				<FiNavigation

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
+import MemoField from "../components/MemoField";
 import instance from "../api/instance";
 
 const EditMyAbout = () => {
@@ -70,7 +71,7 @@ const EditMyAbout = () => {
   };
 
   // 텍스트 카테고리 스타일 (소속, 교육 ...)
-  const textCategoryClass = 'font-semibold h-[21px] text-[18px] mb-[24px]';
+  const textCategoryClass = 'font-semibold h-[21px] text-[18px] mb-[20px]';
 
   return (
     <div className="mypage-edit-about flex flex-col mx-[70px] my-[50px] bg-navy-lightSide rounded-[10px]">
@@ -78,9 +79,9 @@ const EditMyAbout = () => {
         <div className="mb-[20px]">
           <div className={textCategoryClass}>경력</div>
           <div>
-            <InputField
-              place={'careerInfo'}
-              placeholderText={formData.career}
+            <MemoField
+              type={'careerInfo'}
+              placeholderText='경력을 입력하세요.'
               value={formData.career}
               name="career"
               onChange={handleInputChange}
@@ -92,9 +93,9 @@ const EditMyAbout = () => {
         <div className="mb-[36px]">
           <div className={textCategoryClass}>나에 대해서</div>
           <div>
-            <InputField
-              place={'aboutInfo'}
-              placeholderText={formData.aboutMe}
+            <MemoField
+              type={'aboutInfo'}
+              placeholderText='나에 대해서 소개해보세요.'
               value={formData.aboutMe}
               name="aboutMe"
               onChange={handleInputChange}
