@@ -8,6 +8,7 @@ import main_4 from '/images/main_4.png'
 import main_5 from '/images/main_5.png'
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import { ScrollAnimation } from '@lasbe/react-scroll-animation';
 
 // 06.28 헤더 컴포넌트 및 푸터 컴포넌트 확인을 위해 임시로 작성
 const Main = () => {
@@ -29,14 +30,26 @@ const Main = () => {
           </div>
         </div>
         <div className="image-content flex flex-col gap-y-[70px] items-center">
-          <img className="w-[80%] mt-[120px]" src={main_1} alt="Main" />
-          <img className="w-[80%]" src={main_2} alt="Main" />
-          <img className="w-[80%]" src={main_3} alt="Main" />
-          <img className="w-[80%]" src={main_4} alt="Main" />
-          <img className="w-[80%]" src={main_5} alt="Main" />
-          <div className="start-button mt-[30px]">
-            <Button type={"main"} text={"무료로 시작하기"} onClick={()=>nav('/login')} />
-          </div>
+          <ScrollAnimation startingPoint="bottom" amount="sm" duration={0.5} delay={0} repeat={true}>
+            <img className="w-[80%] mt-[120px]" src={main_1} alt="Main" />
+          </ScrollAnimation>
+          <ScrollAnimation startingPoint="bottom" amount="sm" duration={0.5} delay={0} repeat={true}>
+            <img className="w-[80%]" src={main_2} alt="Main" />
+          </ScrollAnimation>
+          <ScrollAnimation startingPoint="bottom" amount="sm" duration={0.5} delay={0} repeat={true}>
+            <img className="w-[80%]" src={main_3} alt="Main" />
+          </ScrollAnimation>
+          <ScrollAnimation startingPoint="bottom" amount="sm" duration={0.5} delay={0} repeat={true}>
+            <img className="w-[80%]" src={main_4} alt="Main" />
+          </ScrollAnimation>
+          <ScrollAnimation startingPoint="bottom" amount="sm" duration={0.5} delay={0} repeat={true}>
+            <img className="w-[80%]" src={main_5} alt="Main" />
+          </ScrollAnimation>
+          <ScrollAnimation startingPoint="bottom" amount="sm" duration={0.5} delay={0} repeat={true}>
+            <div className="start-button mt-[30px]">
+              <Button type={"main"} text={"무료로 시작하기"} onClick={()=>nav('/login')} />
+            </div>
+          </ScrollAnimation>
         </div>
       </div>
       <div className="footer-container">

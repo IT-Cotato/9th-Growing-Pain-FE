@@ -51,7 +51,7 @@ const GrowthRecord = () => {
 		<div className='flex-grow flex flex-col mb-[50px]'>
 			<div className='mx-[70px]'>
 				<div className="top-container flex justify-between h-full">
-					<div className="application-list-container w-[75%] pr-[40px] flex-column mt-[42px]">
+					<div className="application-list-container w-[80%] pr-[40px] flex-column mt-[42px]">
 						<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">
 							지원현황
 						</div>
@@ -68,9 +68,9 @@ const GrowthRecord = () => {
 							))}
 						</div>
 					</div>
-					<div className='w-[35%] flex-col mt-[30px]'>
+					<div className='w-[30%] flex-col mt-[30px]'>
 						{/* 캘린더 사용 */}
-						<div className="calendar-container flex-1 h-[55%] mx-[13px] mt-[42px] content-between">
+						<div className="calendar-container flex-1 h-[65%] mx-[13px] mt-[32px] content-between">
 							<UseCalendar applicationData={combinedData} />
 						</div>
 						{/* 광고 */}
@@ -84,7 +84,7 @@ const GrowthRecord = () => {
 			</div>
 			<div className="activity-container h-[350px] ml-[70px] mr-[71px] ">
 				<div className="title-bar h-[21px] mb-[26px] text-[18px] flex justify-between font-medium">활동기록</div>
-				<div className="activity-item h-[300px] flex gap-[21px]">
+				<div className="activity-item h-[330px] flex gap-[21px]">
 					{activityInfo.map((info) => (
 						<ActivityCategory
 							key={info.id}

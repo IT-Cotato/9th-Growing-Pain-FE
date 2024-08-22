@@ -81,7 +81,7 @@ const Dashboard = () => {
       </div>
       <div className="dashboard-container flex flex-col h-full">
         <div className='content-container flex justify-between h-full mx-[70px] mb-[40px]'>
-          <div className="left-container w-[75%] pr-[40px] flex-column mt-[42px] h-full">
+          <div className="left-container w-[80%] pr-[40px] flex-column mt-[42px] h-full">
             <div className='banner-container h-[17%] mb-[1%]'>
               <img src="/images/대쉬보드_배너.png" className="activity-image rounded-t-[10px]" />
             </div>
@@ -130,7 +130,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className='right-container w-[35%] flex-col mt-[30px] h-full'>
+          <div className='right-container w-[30%] flex-col mt-[30px] h-full'>
             {/* 캘린더 사용 */}
             <div className="calendar-container flex-1 h-[45%] mx-[13px] mt-[10px] content-between">
               <UseCalendar applicationData={combinedData} />
