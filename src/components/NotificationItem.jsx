@@ -9,8 +9,8 @@ const NotificationItem = ({ id, profile, nickname, time, content, type }) => {
   if(type==='community'){
     return (
       <div className='notification-item mb-[20px] rounded-[10px] border-b-[1px] border-gray-300' onClick={()=>nav(`/user/community/total/#postId=${id}`)} >
-        <div className='flex flex-col'>
-          <div className='flex items-center gap-[7px]'>
+        <div className='flex flex-col cursor-pointer'>
+          <div className='flex items-center gap-[7px] cursor-pointer'>
             <img src={profile} alt='Profile' className='w-[30px] h-[30px] rounded-full' />
             <div className='text-[14px] font-medium'>{nickname}</div>
             <div className='text-[14px] text-gray-400'>•</div>

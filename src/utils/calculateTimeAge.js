@@ -1,6 +1,7 @@
 export function calculateTimeAge(createdTime) {
   const now = new Date();
-  const diffInSeconds = Math.floor((now - createdTime) / 1000);
+  const createdTimeStamp = new Date(createdTime);
+  const diffInSeconds = Math.floor((now - createdTimeStamp) / 1000);
 
   const minutes = Math.floor(diffInSeconds / 60);
   const hours = Math.floor(minutes / 60);

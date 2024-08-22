@@ -62,7 +62,7 @@ instance.interceptors.request.use(
 						refreshToken: refreshToken,
 					});
 
-					if (response.status === 201) {
+					if (response.status === 200) {
 						// 새로운 토큰을 로컬스토리지에 저장
 						accessToken = response.data.data.accessToken; // 데이터 구조 변경
 						refreshToken = response.data.data.refreshToken; // 데이터 구조 변경
