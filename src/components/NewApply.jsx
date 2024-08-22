@@ -151,7 +151,7 @@ const NewApply = ({ jobPostData = {}, applicationData = [], onSave }) => {
         result: app.result,
         submissionStatus: app.submissionStatus,
         applicationStartDate: app.applicationStartDate,
-        applicationCloseDate: formatDate(new Date(applyDate).getTime()),
+        applicationCloseDate: formatDate(new Date(app.applicationCloseDate).getTime()),
         memberId: jobPostData.memberId,
         jobPostId: jobPostData.jobPostId,
         applicationDetails: app.applicationDetails.map(question => ({

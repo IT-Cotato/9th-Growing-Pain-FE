@@ -2,67 +2,20 @@ import { useState, useEffect } from 'react';
 import NotificationItem from '../components/NotificationItem';
 import 프사 from '../assets/images/logo.png';
 import instance from '../api/instance';
+import { getDDay } from '../utils/getDDay';
 
-const applies = [
-	{
-		job_post_id: 0,
-		job_application_id: 1,
-		company_name: '토스',
-		application_type: "DOCUMENT",
-		job_post_dead_line: new Date('2024-08-09').getTime(),
-	},
-	{
-		job_post_id: 0,
-		job_application_id: 2,
-		company_name: '토스',
-		application_type: "INTERVIEW",
-		job_post_dead_line: new Date('2024-08-17').getTime(),
-	},
-	{
-		job_post_id: 1,
-		job_application_id: 3,
-		company_name: '네이버',
-		application_type: "INTERVIEW",
-		job_post_dead_line: new Date('2024-08-10').getTime(),
-	},
-	{
-		job_post_id: 2,
-		job_application_id: 4,
-		company_name: '카카오',
-		application_type: "INTERVIEW",
-		job_post_dead_line: new Date('2024-08-10').getTime(),
-	},
-	{
-		job_post_id: 3,
-		job_application_id: 5,
-		company_name: '당근',
-		application_type: "DOCUMENT",
-		job_post_dead_line: new Date('2024-08-14').getTime(),
-	},
-]
-
-const filterApplies = (applies) => {
-	const now = Date.now();
-	const notifications = applies.reduce((acc, apply) => {
-		const daysLeft = Math.ceil((apply.job_post_dead_line - now) / (1000 * 60 * 60 * 24)) - 1;
-		if ([7, 3, 1].includes(daysLeft)) {
-			acc.push({
-				id: apply.job_application_id,
-				job_application_id: apply.job_application_id,
-				job_post_id: apply.job_post_id,
-				content: `등록하신 ${apply.company_name} ${apply.application_type === 'DOCUMENT' ? '서류' : '면접'} 마감 ${daysLeft}일 전이에요!`,
-			});
-		}
-		return acc;
-	}, []);
-	return notifications;
+const typeMap = {
+	'DOCUMENT': '서류',
+	'INTERVIEW': '면접',
+	'INTERVIEW_FEEDBACK': '면접 피드백',
+	'BUSINESS_ANALYSIS': '기업 분석'
 };
 
 const Notification = () => {
-	const [applyNotifications, setApplyNotifications] = useState([]);
+	const [applyData, setApplyData] = useState([]);
 	const [repliesData, setRepliesData] = useState([]);
 
-	// 서버로부터 데이터 GET
+	// 서버로부터 댓글 데이터 GET
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -83,10 +36,43 @@ const Notification = () => {
     fetchData();
   }, []);
 
-	useEffect(() => {
-		const initialNotifications = filterApplies(applies);
-		setApplyNotifications(initialNotifications);
-	}, []);
+	// 서버로부터 1일, 3일, 7일 남은 공고 데이터 GET 및 병합
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [response1, response3, response7] = await Promise.all([
+          instance.get(`/api/job-posts/days-left/${1}`),
+          instance.get(`/api/job-posts/days-left/${3}`),
+          instance.get(`/api/job-posts/days-left/${7}`)
+        ]);
+
+        const allResponses = [response1, response3, response7];
+
+        let combinedData = [];
+
+        allResponses.forEach(response => {
+          if (response.data && response.data.status === 'success') {
+            console.log(`지원현황 알림 GET 성공: ${response.data.data.jobApplicaionList}`);
+            combinedData = [...combinedData, ...response.data.data.jobApplicaionList];
+          }
+        });
+
+				// 남은 날짜 계산 및 추가
+        combinedData = combinedData.map(item => ({
+          ...item,
+          daysLeft: getDDay(item.applicationCloseDate)
+        }));
+
+        // 남은 날짜 기준으로 정렬
+        const sortedData = combinedData.sort((a, b) => a.daysLeft - b.daysLeft);
+        setApplyData(sortedData);
+      } catch (error) {
+        console.error('지원현황 알림 GET 실패: ', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 	// repliesData가 null일 때 로딩 스피너나 대체 UI를 표시할 수 있음
   if (!repliesData) {
@@ -117,11 +103,11 @@ const Notification = () => {
 				<div className='apply-notification w-[50%] h-[100%] flex flex-col'>
 					<p className='text-[19px] font-medium text-left text-navy-dark mb-[17px]'>성장 기록 알림</p>
 					<div className='notification-content bg-white flex-1 rounded-[10px] p-[30px]'>
-						{applyNotifications.map(apply => (
+						{applyData.map(apply => (
               <NotificationItem
-								key={apply.job_application_id+'a'}
-								id={apply.job_post_id}
-                content={apply.content}
+								key={apply.jobApplicationId+'a'}
+								id={apply.jobPostId}
+                content={`등록하신 ${apply.companyName} 공고의 ${typeMap[apply.applicationType]} 마감 ${apply.daysLeft}일 전이에요!`}
                 type='apply'
               />
             ))}
