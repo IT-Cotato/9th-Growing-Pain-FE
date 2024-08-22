@@ -17,7 +17,7 @@ const PostList = ({ posts }) => {
 						position={data.memberField}
 						postTitle={data.title}
 						content={data.content}
-						userProfile={data.ProfileImage || DEFAULT_PROFILE_IMAGE}
+						userProfile={data.profileImageUrl || DEFAULT_PROFILE_IMAGE}
 						heart={data.likeCount}
 						comments={data.comments}
 						category={data.subCategory}
