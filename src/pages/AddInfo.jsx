@@ -35,25 +35,17 @@ const AddInfo = () => {
 			return false;
 		}
 		try {
-			const response = await axios.post(
-				'/api/path/join/name',
-				{ name: nickname },
-				{
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				},
-			);
+			const response = await instance.get(`/api/auth/validate/nickname?nickName=${nickname}`);
 
-			if (response.data.available) {
-				setNicknameError('사용 가능한 닉네임입니다.');
-				setIsNicknameCheck(true);
-				setIsNicknameAvailable(true);
-				return true;
+			if (response.status === 200) {
+				if (response.data.data.isDuplicate === false) {
+					setIsNicknameCheck(true);
+					setIsNicknameAvailable(true);
+					window.alert('사용 가능한 닉네임입니다.');
+				}
 			} else {
 				setNicknameError('이미 사용중인 닉네임입니다.');
 				setIsNicknameAvailable(false);
-				return false;
 			}
 		} catch (error) {
 			alert('서버 오류입니다. 관리자에게 문의하세요');

@@ -17,7 +17,7 @@ const PostItem = ({
 	content,
 	userProfile,
 	heart,
-	comments = [],
+	comments,
 	category,
 	replies,
 }) => {
@@ -28,9 +28,10 @@ const PostItem = ({
 	const [likeCount, setLikeCount] = useState(heart); // 좋아요 수
 	const [isSaved, setIsSaved] = useState(false); // 저장 상태
 	const memberId = sessionStorage.getItem('memberId');
+	const [commentCount, setCommentCount] = useState(0); // 초기 댓글 수
 
-	const iconStyle = {
-		fill: 'red', // 원하는 색상
+	const handleCommentCountChange = () => {
+		setCommentCount((prevCount) => prevCount + 1); // 댓글 추가 시 호출
 	};
 
 	useEffect(() => {
@@ -65,7 +66,7 @@ const PostItem = ({
 			}
 		};
 		fetchLikePosts();
-	}, [id, memberId]);
+	}, [id, memberId, location.pathname, isLiked]);
 
 	const handleLike = async () => {
 		try {
@@ -144,7 +145,7 @@ const PostItem = ({
 							onClick={() => setmodalId(id)}
 						>
 							<FaRegCommentAlt className="w-[20px] h-[20px]" />
-							{comments.length}
+							{commentCount}
 						</span>
 						<span className={`flex cursor-pointer`} onClick={handleSave}>
 							{/* isSaved 상태에 따라 아이콘 변경 */}
@@ -171,8 +172,9 @@ const PostItem = ({
 				</div>
 				{isModalOpen && (
 					<CommentModal
-						isOpen={modalId}
+						isOpen={isModalOpen}
 						onClose={() => window.history.back()}
+						// onClose={() => setmodalId(null)}
 						id={id}
 						nickname={nickname}
 						createdTime={createdTime}
@@ -183,6 +185,9 @@ const PostItem = ({
 						heart={likeCount}
 						comments={comments}
 						replies={replies}
+						onCommentCountChange={handleCommentCountChange}
+						isLiked={isLiked}
+						setIsLiked={setIsLiked}
 					/>
 				)}
 			</div>

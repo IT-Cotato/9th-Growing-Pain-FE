@@ -17,15 +17,11 @@ const FindPassword = () => {
 		const payload = { email: email };
 
 		try {
-			const response = await axios.post('http://3.35.80.178:8080/api/path/join', payload, {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-
+			const response = await axios.post('/api/auth/reset-password', payload);
 			if (response.status === 200) {
-				console.log('성공!');
-				nav('/FindPassword2'); // 성공시 페이지 이동
+				console.log(response.data.message);
+				console.log(response.data.data.password);
+				nav('/FindPassword2', { state: { password: response.data.data.password } });
 			} else {
 				alert(response.data.message || '이메일 전송 중 오류가 발생했습니다.');
 			}
@@ -41,29 +37,25 @@ const FindPassword = () => {
 				<Header />
 			</div>
 			<div className="main-content h-[700px] flex flex-col items-center">
-				<div className="w-[502px] h-[279px] mt-[210px]">
+				<div className="w-[600px] mt-[210px]">
 					{/* 텍스트 필드 */}
 					<section className="flex flex-col items-center justify-center">
 						<h4 className="text-[21px] font-bold">비밀번호를 잊으셨나요?</h4>
 						<p className="text-[16px] font-normal mt-[20px]">
-							가입된 이메일을 확인 후 비밀번호를 재설정 할 수 있는 링크를 보내드릴게요.
+							가입된 이메일을 확인 후 비밀번호를 재설정 할 수 있는 임시 비밀번호를 알려드리겠습니다.
 						</p>
 					</section>
 					<section>
 						<InputField
 							placeholderText={'이메일 입력하기'}
 							place={'findPassword'}
-							className="mt-[55px]"
-							// setEmail에 저장하고 이메일 전송하는 Handler만들기
+							className="mt-[30px]"
 							onChange={(e) => {
 								setEmail(e.target.value);
 							}}
 						></InputField>
-						<p className="text-[14px] font-normal] text-[#26408B] flex justify-end cursor-pointer hover:underline">
-							재전송
-						</p>
 					</section>
-					<section className="flex justify-center gap-[20px] mt-[26px]">
+					<section className="flex justify-center gap-[20px] mt-[55px]">
 						<button
 							className="w-[102px] h-[40px] rounded-[10px] border-[1px] border-[#26408B]  text-[16px]"
 							onClick={() => {
