@@ -1,5 +1,4 @@
-import { GrowthStateContext } from "../App";
-import { useContext, useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import HeaderMyPage from "../components/HeaderMyPage";
 import MenubarMyPage from "../components/MenubarMyPage";
 import MyCommunityItem from "../components/MyCommunityItem";

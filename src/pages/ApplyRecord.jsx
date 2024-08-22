@@ -1,5 +1,4 @@
-import { GrowthStateContext } from '../App';
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import ApplyRecordItem from '../components/ApplyRecordItem';
@@ -7,7 +6,6 @@ import { getDDay } from '../utils/getDDay';
 import instance from '../api/instance';
 
 const ApplyRecord = () => {
-  const [memberData] = useContext(GrowthStateContext);
   const [applyData, setApplyData] = useState([]);  // 서버에서 받아올 데이터를 위한 상태 선언
   const nav = useNavigate();
 
