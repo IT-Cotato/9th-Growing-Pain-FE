@@ -7,6 +7,7 @@ import CategoryTag from './CategoryTag';
 import { useLocation } from 'react-router-dom';
 import { modalOpenAtom } from '../utils/atoms';
 import instance from '../api/instance';
+import Modal from './Modal';
 
 const PostItem = ({
 	id,
@@ -171,24 +172,26 @@ const PostItem = ({
 					</div>
 				</div>
 				{isModalOpen && (
-					<CommentModal
-						isOpen={isModalOpen}
-						onClose={() => window.history.back()}
-						// onClose={() => setmodalId(null)}
-						id={id}
-						nickname={nickname}
-						createdTime={createdTime}
-						position={position}
-						postTitle={postTitle}
-						content={content}
-						userProfile={userProfile}
-						heart={likeCount}
-						comments={comments}
-						replies={replies}
-						onCommentCountChange={handleCommentCountChange}
-						isLiked={isLiked}
-						setIsLiked={setIsLiked}
-					/>
+					<Modal>
+						<CommentModal
+							isOpen={isModalOpen}
+							onClose={() => window.history.back()}
+							// onClose={() => setmodalId(null)}
+							id={id}
+							nickname={nickname}
+							createdTime={createdTime}
+							position={position}
+							postTitle={postTitle}
+							content={content}
+							userProfile={userProfile}
+							heart={likeCount}
+							comments={comments}
+							replies={replies}
+							onCommentCountChange={handleCommentCountChange}
+							isLiked={isLiked}
+							setIsLiked={setIsLiked}
+						/>
+					</Modal>
 				)}
 			</div>
 		</div>
