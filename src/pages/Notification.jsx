@@ -40,32 +40,20 @@ const Notification = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [response1, response3, response7] = await Promise.all([
-          instance.get(`/api/job-posts/days-left/${1}`),
-          instance.get(`/api/job-posts/days-left/${3}`),
-          instance.get(`/api/job-posts/days-left/${7}`)
-        ]);
+        const response = await instance.get('/api/job-posts/days-left');
+        if (response.data && response.data.status === 'success') {
+          console.log('지원현황 알림 GET 성공: ', response.data.data.jobApplicaionList);
+          // 받아온 데이터를 applyData에 저장하고 조건에 맞게 정렬
+          // 남은 날짜 계산 및 추가
+          const combinedData = response.data.data.jobApplicaionList.map(item => ({
+            ...item,
+            daysLeft: getDDay(item.applicationCloseDate)
+          }));
 
-        const allResponses = [response1, response3, response7];
-
-        let combinedData = [];
-
-        allResponses.forEach(response => {
-          if (response.data && response.data.status === 'success') {
-            console.log(`지원현황 알림 GET 성공: ${response.data.data.jobApplicaionList}`);
-            combinedData = [...combinedData, ...response.data.data.jobApplicaionList];
-          }
-        });
-
-				// 남은 날짜 계산 및 추가
-        combinedData = combinedData.map(item => ({
-          ...item,
-          daysLeft: getDDay(item.applicationCloseDate)
-        }));
-
-        // 남은 날짜 기준으로 정렬
-        const sortedData = combinedData.sort((a, b) => a.daysLeft - b.daysLeft);
-        setApplyData(sortedData);
+          // 남은 날짜 기준으로 정렬
+          const sortedData = combinedData.sort((a, b) => a.daysLeft - b.daysLeft);
+          setApplyData(sortedData);
+        }
       } catch (error) {
         console.error('지원현황 알림 GET 실패: ', error);
       }
