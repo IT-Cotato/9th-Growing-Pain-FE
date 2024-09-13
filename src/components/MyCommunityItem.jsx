@@ -9,15 +9,34 @@ const categoryMap = {
 }
 
 // 지원현황 페이지 - 아이템 컴포넌트
-const MyCommunityItem = ({ id, category, title, writer, date }) => {
+const MyCommunityItem = ({ id, commentId, category, title, writer, date, menu }) => {
   const nav = useNavigate();
 
   // 삭제 함수 추가
   const handleDelete = async () => {
     try {
-      await instance.delete(`/api/post/${id}/delete`);
-      alert('삭제되었습니다.');
-      window.location.reload();
+      switch (menu) {
+        case "작성한 글": {
+          await instance.delete(`/api/post/${id}/delete`);
+          alert('삭제되었습니다.');
+          window.location.reload();
+          break;
+        }
+
+        case "작성한 댓글": {
+          await instance.delete(`/api/comment/${commentId}`);
+          alert('삭제되었습니다.');
+          window.location.reload();
+          break;
+        }
+
+        case "저장한 글": {
+          await instance.delete(`/api/post/saves/${id}`);
+          alert('저장이 취소되었습니다.');
+          window.location.reload();
+          break;
+        }
+      }
     } catch (error) {
       console.error('삭제 실패:', error);
       alert('삭제에 실패했습니다.');
@@ -30,7 +49,9 @@ const MyCommunityItem = ({ id, category, title, writer, date }) => {
       <div onClick={()=>{nav(`/user/community/total#postId=${id}`)}} className='w-6/12 pl-[100px] cursor-pointer text-left'>{title}</div>
       <div onClick={()=>{nav(`/user/community/total#postId=${id}`)}} className='w-1/12 cursor-pointer'>{writer}</div>
       <div onClick={()=>{nav(`/user/community/total#postId=${id}`)}} className='w-2/12'>{`${format(new Date(date), 'yyyy.MM.dd')}`}</div>
-      <div onClick={handleDelete} className='w-1/12 cursor-pointer text-[15px] text-gray-deleteBtn text-center'>삭제</div>
+      <div onClick={handleDelete} className='w-1/12 cursor-pointer text-[15px] text-gray-deleteBtn text-center'>
+        {menu === "작성한 글" || menu === "작성한 댓글" ? "삭제" : menu === "저장한 글" ? "저장 취소" : ""}
+      </div>
     </div>
   );
 };

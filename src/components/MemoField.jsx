@@ -52,6 +52,14 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength, onIconCl
 			inputStyle =
 				'resize-none bg-[#FFFFFF] rounded-[10px] w-full h-[325px] p-[20px] placeholder:text-[17px] placeholder:text-wrap outline-none';
 			break;
+		case 'careerInfoView':
+			inputStyle =
+				'resize-none bg-[#FFFFFF] rounded-[10px] w-full h-[250px] placeholder:text-[17px] placeholder:text-wrap outline-none break-all disabled';
+			break;
+		case 'aboutInfoView':
+			inputStyle =
+				'resize-none bg-[#FFFFFF] rounded-[10px] w-full h-[300px] placeholder:text-[17px] placeholder:text-wrap outline-none disabled';
+			break;
 		default:
 			break;
 	}
@@ -66,6 +74,7 @@ const MemoField = ({ placeholderText, onChange, type, value, maxLength, onIconCl
 				onChange={onChange}
 				maxLength={maxLength}
 				name={name}
+				disabled={type === 'careerInfoView' || type === 'aboutInfoView'}
 			/>
 			{type === 'communityCocoment' && (
 				<FiNavigation
