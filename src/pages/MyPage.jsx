@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import HeaderMyPage from "../components/HeaderMyPage";
 import MenubarMyPage from "../components/MenubarMyPage";
+import MemoField from "../components/MemoField";
 import { useState, useEffect } from "react";
 import instance from "../api/instance";
 
@@ -101,13 +102,23 @@ const MyPage = () => {
               <div className="h-[300px] flex-col flex border-b">
                 <div className={textClass}>
                   <div className={textCategoryClass}>경력</div>
-                  <div className={textContentClass}>{infoData.career}</div>
+                  <MemoField
+                    type={'careerInfoView'}
+                    placeholderText="경력을 입력하세요."
+                    value={infoData.career}
+                    name="career"
+                  />
                 </div>
               </div>
               <div className="h-[387px] flex-col pt-[70px]">
                 <div className={textClass}>
                   <div className={textCategoryClass}>나에 대해서</div>
-                  <div className={textContentClass}>{infoData.aboutMe}</div>
+                  <MemoField
+                    type={'aboutInfoView'}
+                    placeholderText="경력을 입력하세요."
+                    value={infoData.aboutMe}
+                    name="aboutMe"
+                  />
                 </div>
               </div>
             </div>
