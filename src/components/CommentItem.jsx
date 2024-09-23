@@ -1,5 +1,5 @@
 // CommentItem.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DEFAULT_PROFILE_IMAGE from '/images/기본프로필.png';
 import { calculateTimeAge } from '../utils/calculateTimeAge';
 import { FiMoreHorizontal } from 'react-icons/fi';
@@ -12,8 +12,7 @@ const CommentItem = ({
 	fetchReplies,
 	handleDeleteComment,
 	handleDeleteReply,
-	handleLikeComment,
-	handleReplySubmit,
+	id,
 }) => {
 	const userData = {
 		nickname: sessionStorage.getItem('nickname'),
@@ -27,6 +26,9 @@ const CommentItem = ({
 	const [replyList, setReplyList] = useState([]);
 	const [replyContent, setReplyContent] = useState('');
 
+	const [commentLike, setCommentLike] = useState([]);
+	const [commentLikeCount, setCommentLikeCount] = useState(com.likeCount); // 좋아요 수
+
 	const openHamburger = (commentId) => {
 		setActiveHamburgerMenu((prev) => (prev === commentId ? null : commentId));
 	};
@@ -35,6 +37,54 @@ const CommentItem = ({
 		setOpenReplies((prev) => !prev);
 		if (!openReplies && !replyList.length) {
 			fetchReplies(com.commentId);
+		}
+	};
+
+	const handleReplySubmit = async (commentId) => {
+		const content = replyContent[commentId];
+		if (!content) {
+			alert('대댓글 내용을 입력하세요.');
+			return;
+		}
+
+		const postData = {
+			content: content,
+		};
+
+		try {
+			const response = await instance.post(`/api/reply-comment?postId=${id}&commentId=${commentId}`, postData);
+			if (response.status === 201) {
+				console.log('대댓글 작성 성공:', response.data);
+				fetchReplies(commentId); // 대댓글을 다시 가져오는 함수 호출
+				setReplyContent({ ...replyContent, [commentId]: '' }); // 대댓글 입력 필드 비우기
+				// onCommentCountChange(); // 댓글 개수 업데이트
+			}
+		} catch (error) {
+			console.error('대댓글 작성 오류:', error);
+			alert('대댓글 작성에 실패했습니다. 다시 시도해 주세요.');
+		}
+	};
+
+	const handleLikeComment = async (commentId) => {
+		try {
+			if (com.commentLike) {
+				// commentLike가 해당 댓글의 현재 상태를 추적하는지 확인
+				const response = await instance.delete(`/api/comment/likes/${commentId}`);
+				if (response.status === 200) {
+					setCommentLike(false);
+					setCommentLikeCount((prevCount) => prevCount - 1);
+				}
+			} else {
+				const response = await instance.post(`/api/comment/likes/${commentId}`);
+				if (response.status === 200) {
+					setCommentLike(true);
+					setCommentLikeCount((prevCount) => prevCount + 1);
+				}
+			}
+			window.location.reload();
+		} catch (error) {
+			console.error('댓글 좋아요 처리 오류:', error);
+			alert('댓글 좋아요 처리에 문제가 생겼습니다.');
 		}
 	};
 
@@ -149,7 +199,7 @@ const CommentItem = ({
 							</span>
 							<MemoField
 								type={'communityCocoment'}
-								placeholderText={'댓글을 남기세요'}
+								placeholderText={'답글을 남기세요'}
 								onChange={(e) => setReplyContent(e.target.value)}
 								value={replyContent}
 								onIconClick={() => handleReplySubmit(com.commentId)}
