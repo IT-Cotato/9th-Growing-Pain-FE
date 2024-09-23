@@ -9,10 +9,8 @@ import MemoField from './MemoField';
 
 const CommentItem = ({
 	com, // 댓글 정보
-	fetchReplies,
-	handleDeleteComment,
-	handleDeleteReply,
 	id,
+	handleDeleteComment,
 }) => {
 	const userData = {
 		nickname: sessionStorage.getItem('nickname'),
@@ -26,13 +24,14 @@ const CommentItem = ({
 	const [replyList, setReplyList] = useState([]);
 	const [replyContent, setReplyContent] = useState('');
 
-	const [commentLike, setCommentLike] = useState([]);
+	const [commentLike, setCommentLike] = useState(com.commentLike);
 	const [commentLikeCount, setCommentLikeCount] = useState(com.likeCount); // 좋아요 수
 
 	const openHamburger = (commentId) => {
 		setActiveHamburgerMenu((prev) => (prev === commentId ? null : commentId));
 	};
 
+	// 답글 보기/숨기기 토글
 	const toggleReply = () => {
 		setOpenReplies((prev) => !prev);
 		if (!openReplies && !replyList.length) {
@@ -40,15 +39,15 @@ const CommentItem = ({
 		}
 	};
 
+	// 답글 쓰기
 	const handleReplySubmit = async (commentId) => {
-		const content = replyContent[commentId];
-		if (!content) {
+		if (!replyContent) {
 			alert('대댓글 내용을 입력하세요.');
 			return;
 		}
 
 		const postData = {
-			content: content,
+			content: replyContent,
 		};
 
 		try {
@@ -56,7 +55,7 @@ const CommentItem = ({
 			if (response.status === 201) {
 				console.log('대댓글 작성 성공:', response.data);
 				fetchReplies(commentId); // 대댓글을 다시 가져오는 함수 호출
-				setReplyContent({ ...replyContent, [commentId]: '' }); // 대댓글 입력 필드 비우기
+				setReplyContent(''); // 대댓글 입력 필드 비우기
 				// onCommentCountChange(); // 댓글 개수 업데이트
 			}
 		} catch (error) {
@@ -65,6 +64,7 @@ const CommentItem = ({
 		}
 	};
 
+	// 댓글 좋아요/취소
 	const handleLikeComment = async (commentId) => {
 		try {
 			if (com.commentLike) {
@@ -84,9 +84,98 @@ const CommentItem = ({
 			window.location.reload();
 		} catch (error) {
 			console.error('댓글 좋아요 처리 오류:', error);
-			alert('댓글 좋아요 처리에 문제가 생겼습니다.');
+			alert('자신이 작성한 댓글엔 좋아요를 누를 수 없습니다.');
 		}
 	};
+
+	// 답글 불러오기
+	const fetchReplies = async (commentId) => {
+		try {
+			const response = await instance.get(`/api/reply-comment/${commentId}`);
+			if (response.status === 200) {
+				const updatedReplies = response.data.data.replyCommentList.map((reply) => ({
+					...reply,
+				}));
+				setReplyList(updatedReplies);
+			}
+		} catch (error) {
+			console.error('대댓글 가져오기 오류:', error);
+			alert('대댓글을 가져오는 데 실패했습니다. 다시 시도해 주세요.');
+		}
+	};
+
+	// 답글 삭제
+	const handleDeleteReply = async (replyId) => {
+		try {
+			const response = await instance.delete(`/api/reply-comment/${replyId}`);
+			if (response.status === 200) {
+				// 대댓글 삭제 성공 시 상태 업데이트
+				setReplyList((prevReplyList) => {
+					const updatedReplyList = Object.keys(prevReplyList).reduce((acc) => {
+						acc = prevReplyList.filter((reply) => reply.replyCommentId !== replyId);
+						return acc;
+					}, {});
+					return updatedReplyList;
+				});
+			}
+		} catch (error) {
+			console.error('대댓글 삭제 오류:', error);
+			alert('대댓글 삭제에 실패했습니다. 다시 시도해 주세요.');
+		}
+	};
+
+	// 답글 좋아요 불러오기
+	// useEffect(() => {
+	// 	const fetchLikeRepies = async () => {
+	// 		try {
+	// 			const response = await instance.get(`/api/comment/likes/${userData.memId}/list`);
+	// 			if (response.status === 200) {
+	// 				const likeComments = response.data.data.commentList;
+	// 				setLikedComments(likeComments); // Save the liked comments
+	// 			}
+	// 		} catch (error) {
+	// 			console.error('Failed to fetch liked comments:', error);
+	// 		}
+	// 	};
+	// 	fetchLikePosts();
+	// }, [userData.memId]);
+
+	// 답글 좋아요/취소
+	// const handleLikeReply = async (replyId) => {
+	// 	try {
+	// 		// 서버에서 대댓글 상태를 확인하고 처리
+	// 		const selectedReply = replyList[
+	// 			Object.keys(replyList).find((id) => replyList[id].some((reply) => reply.replyCommentId === replyId))
+	// 		].find((reply) => reply.replyCommentId === replyId);
+
+	// 		if (selectedReply.replyLike) {
+	// 			await instance.delete(`/api/reply-comment/likes/${replyId}`);
+	// 		} else {
+	// 			await instance.post(`/api/reply-comment/likes/${replyId}`);
+	// 		}
+
+	// 		// 클라이언트에서 UI 업데이트
+	// 		setReplyList((prevReplyList) => {
+	// 			const updatedReplyList = { ...prevReplyList };
+	// 			Object.keys(updatedReplyList).forEach((commentId) => {
+	// 				updatedReplyList[commentId] = updatedReplyList[commentId].map((reply) => {
+	// 					if (reply.replyCommentId === replyId) {
+	// 						return {
+	// 							...reply,
+	// 							replyLike: !reply.replyLike,
+	// 							likeCount: reply.replyLike ? reply.likeCount - 1 : reply.likeCount + 1,
+	// 						};
+	// 					}
+	// 					return reply;
+	// 				});
+	// 			});
+	// 			return updatedReplyList;
+	// 		});
+	// 	} catch (error) {
+	// 		console.error('대댓글 좋아요 처리 오류:', error);
+	// 		alert('대댓글 좋아요 처리에 문제가 생겼습니다.');
+	// 	}
+	// };
 
 	return (
 		<div>
@@ -134,7 +223,7 @@ const CommentItem = ({
 					{com.likeCount}
 				</span>
 				<h1 className="text-[15px] text-gray-800 cursor-pointer" onClick={toggleReply}>
-					{openReplies ? '댓글 숨기기' : '댓글 보기'}
+					{openReplies ? '답글 숨기기' : '답글 보기'}
 				</h1>
 			</div>
 			{openReplies && (
@@ -187,8 +276,15 @@ const CommentItem = ({
 										</div>
 									)}
 								</div>
-								<span className="flex items-center gap-[10px] text-[14px] font-medium cursor-pointer ml-[50px]">
-									<FaRegHeart className="w-[21px] h-[21px]" />
+								<span
+									className="flex items-center gap-[10px] text-[14px] font-medium cursor-pointer ml-[50px]"
+									// onClick={() => handleLikeReply(reply.replyCommentId)}
+								>
+									{reply.replyLike ? (
+										<FaHeart className="w-[20px] h-[20px] fill-red-500" />
+									) : (
+										<FaRegHeart className="w-[20px] h-[20px]" />
+									)}
 									{reply.likeCount}
 								</span>
 							</div>
