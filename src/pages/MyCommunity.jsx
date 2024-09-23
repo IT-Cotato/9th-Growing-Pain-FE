@@ -105,10 +105,12 @@ const MyCommunity = () => {
                     <MyCommunityItem
                       key={index}
                       id={item.postId}
+                      commentId={item.commentId ? item.commentId : null}
                       category={item.parentCategory || item.subCategory || "카테고리 없음"}
                       title={item.title || item.content}
                       writer={item.memberNickname || "작성자 없음"}
                       date={item.createdAt ? new Date(item.createdAt) : new Date()}
+                      menu={selectedMenu}
                     />
                   ))
                 ) : (
