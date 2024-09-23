@@ -1,11 +1,5 @@
 import { IoCloseOutline } from 'react-icons/io5';
-import { FaRegCommentAlt, FaRegHeart, FaHeart } from 'react-icons/fa';
-import MemoField from './MemoField';
 import { useState, useEffect } from 'react';
-import { FiMoreHorizontal, FiNavigation } from 'react-icons/fi';
-import instance from '../api/instance';
-import DEFAULT_PROFILE_IMAGE from '/images/기본프로필.png';
-import { calculateTimeAge } from '../utils/calculateTimeAge';
 import CommentForm from './CommentForm';
 import PostText from './PostText';
 import CommentList from './CommentList';
@@ -16,7 +10,6 @@ const CommentModal = ({
 	onClose,
 	nickname,
 	createdTime,
-	onCommentCountChange,
 	position,
 	postTitle,
 	content,
@@ -41,32 +34,6 @@ const CommentModal = ({
 	}, [isOpen]);
 
 	if (!isOpen) return null;
-
-	// 대댓글 좋아요
-
-	// 댓긅 좋아요 삭제 및 추가
-	// 이게 진짜 코드인데... get이 없어서 안됨...
-	// const handleLikeComment = async (commentId) => {
-	// 	try {
-	// 		if (commentLike) {
-	// 			// commentLike가 해당 댓글의 현재 상태를 추적하는지 확인
-	// 			const response = await instance.delete(`/api/comment/likes/${commentId}`);
-	// 			if (response.status === 200) {
-	// 				setCommentLike(false);
-	// 				setCommentLikeCount((prevCount) => prevCount - 1);
-	// 			}
-	// 		} else {
-	// 			const response = await instance.post(`/api/comment/likes/${commentId}`);
-	// 			if (response.status === 200) {
-	// 				setCommentLike(true);
-	// 				setCommentLikeCount((prevCount) => prevCount + 1);
-	// 			}
-	// 		}
-	// 	} catch (error) {
-	// 		console.error('댓글 좋아요 처리 오류:', error);
-	// 		alert('댓글 좋아요 처리에 문제가 생겼습니다.');
-	// 	}
-	// };
 
 	//대댓글 좋아요
 	// const handleLikeReply = async (replyId) => {

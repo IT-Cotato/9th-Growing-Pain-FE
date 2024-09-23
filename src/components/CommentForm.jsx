@@ -5,6 +5,7 @@ import instance from '../api/instance';
 const CommentForm = ({ id }) => {
 	const [wordCount, setWordCount] = useState(0);
 	const [comment, setComment] = useState('');
+	const [commentList, setCommentList] = useState([]);
 
 	const userData = {
 		nickname: sessionStorage.getItem('nickname'),
@@ -35,6 +36,7 @@ const CommentForm = ({ id }) => {
 			console.error('포스트 작성 오류:', error);
 			alert('댓글 작성에 실패했습니다. 다시 시도해 주세요.');
 		}
+		window.location.reload();
 	};
 
 	return (
